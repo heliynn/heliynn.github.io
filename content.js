@@ -21,10 +21,16 @@ window.SITE = {
     { label: "offsets", value: "offsets.json", href: "offsets.json" }
   ],
 
+  /* The button under the rows. */
+  server: {
+    label: "join the sources server",
+    href: "https://discord.gg/zJGbBw3yep"
+  },
+
   /* The two pictures at the edges. Delete a line to hide one.
      Update width and height if you swap in a different image. */
   art: {
-    left: { src: "assets/art-left.png?v=10", width: 656, height: 1164 },
-    right: { src: "assets/art-right.png?v=10", width: 790, height: 1166 }
+    left: { src: "assets/art-left.png?v=11", width: 564, height: 1000 },
+    right: { src: "assets/art-right.png?v=11", width: 678, height: 1000 }
   }
 };

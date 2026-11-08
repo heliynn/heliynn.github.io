@@ -101,7 +101,29 @@
   };
 
   const notes = q('[data-notes]');
-  if (notes) (S.notes || []).forEach((item) => notes.append(noteRow(item)));
+  if (notes) {
+    (S.notes || []).forEach((item) => notes.append(noteRow(item)));
+
+    if (S.server && S.server.href) {
+      const cta = document.createElement('a');
+      cta.className = 'panel__cta';
+      cta.href = S.server.href;
+      cta.target = '_blank';
+      cta.rel = 'noreferrer';
+
+      const ctaLabel = document.createElement('span');
+      ctaLabel.textContent = S.server.label || 'join the discord';
+
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('class', 'panel__cta-icon');
+      icon.setAttribute('viewBox', '0 0 16 16');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = '<path d="M5.3 10.7 10.7 5.3M6.4 5.3h4.3v4.3" />';
+
+      cta.append(ctaLabel, icon);
+      notes.after(cta);
+    }
+  }
 
   /* ---------- side art (only if the files exist) ---------- */
   const mountArt = (side) => {

@@ -29,6 +29,7 @@ The placeholders to replace:
 - `statement` — the paragraph next to the name.
 - `notes` — the rows in the details card: `discord`, `github`, `offsets`. A row with `copy`
   copies its handle on click, and a row with `href` is a link.
+- `server` — the button under the rows. `label` is its wording and `href` is the invite.
 
 The name is lowercase on purpose: `display: "servyy"`.
 

@@ -238,6 +238,53 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 
 .panel__row.is-copied .panel__value { color: #fff; }
 
+.panel__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 10px;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: .8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .15s var(--ease), border-color .15s var(--ease), background-color .15s var(--ease);
+}
+
+.panel__cta:hover,
+.panel__cta:focus-visible {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .28);
+  background: rgba(255, 255, 255, .045);
+}
+
+.panel__cta:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, .55);
+  outline-offset: 2px;
+}
+
+.panel__cta-icon {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  opacity: .65;
+  transition: opacity .15s var(--ease);
+}
+
+.panel__cta:hover .panel__cta-icon,
+.panel__cta:focus-visible .panel__cta-icon { opacity: 1; }
+
+.panel__cta-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ---------------- fallback ---------------- */
 
 .noscript {
