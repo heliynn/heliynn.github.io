@@ -1,8 +1,9 @@
 # servyy
 
-A small personal page and two offset files, served by GitHub Pages. A terminal-style intro
-sits under the wordmark, with glass contact tiles below. Plain HTML, CSS and JavaScript —
-no build step, no framework, no dependencies.
+A small personal page and two offset files, served by GitHub Pages. One screen: an
+oversized name and short statement on the left, a glass details card in the right margin,
+and the two pictures faded into the edges. Plain HTML, CSS and JavaScript — no build step,
+no framework, no dependencies.
 
 ## Files
 
@@ -25,12 +26,11 @@ Open `content.js`, change the text between the quotes, save, refresh.
 
 The placeholders to replace:
 
-- `contacts[0]` — your Discord handle (`@servfur`). Clicking the tile copies it; change
-  `value` and `copy` together.
 - `eyebrow` — the small line above the name.
-- `terminal` — the prompt block: `user` and `host` build `servfur@web ~$`, while `whoami`,
-  `about` and `now` are the printed lines. Delete one to drop that line.
-- `footerLinks` — currently the offsets file and your GitHub profile.
+- `statement` — the paragraph under the name.
+- `notes` — the rows in the details card: `now`, `discord`, `github`, `data`. A row with
+  `copy` copies its handle on click, `href` makes it a link, and `dot` adds the status light.
+- `footerLinks` — currently just a link to the repository.
 
 The name is lowercase on purpose: `display: "servyy"`.
 
