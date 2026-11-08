@@ -31,6 +31,6 @@ window.SITE = {
      Update width and height if you swap in a different image. */
   art: {
     left: { src: "assets/art-left.png?v=11", width: 564, height: 1000 },
-    right: { src: "assets/art-right.png?v=11", width: 678, height: 1000 }
+    right: { src: "assets/art-right.png?v=12", width: 395, height: 583 }
   }
 };
