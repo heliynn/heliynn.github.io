@@ -28,7 +28,7 @@ The placeholders to replace:
 
 - `eyebrow` — the small line above the name.
 - `statement` — the paragraph under the name.
-- `notes` — the rows in the details card: `now`, `discord`, `github`, `data`. A row with
+- `notes` — the rows in the details card: `now`, `discord`, `github`, `offsets`. A row with
   `copy` copies its handle on click, `href` makes it a link, and `dot` adds the status light.
 - `footerLinks` — currently just a link to the repository.
 

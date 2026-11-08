@@ -7,21 +7,21 @@ window.SITE = {
 
   display: "servyy",
   name: "heliynn",
-  eyebrow: "software developer",
+  eyebrow: "heliynn",
 
   statement:
-    "I'm heliynn, servyy online. I build small tools and websites, mostly " +
-    "for myself or people I know.",
+    "I make small tools and websites with AI, mostly for myself or " +
+    "people I know.",
 
   /* The card in the right margin. Order matters.
      - `copy` turns the row into a button that copies the handle.
      - `href` makes it a link.
      - `dot` adds the small status light. */
   notes: [
-    { label: "now", value: "learning C++", dot: true },
+    { label: "now", value: "making things", dot: true },
     { label: "discord", value: "@servfur", copy: "@servfur" },
     { label: "github", value: "@heliynn", href: "https://github.com/heliynn" },
-    { label: "data", value: "offsets.json", href: "offsets.json" }
+    { label: "offsets", value: "offsets.json", href: "offsets.json" }
   ],
 
   /* The two pictures sit at the left and right edges. Delete a line to hide it. */

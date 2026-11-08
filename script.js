@@ -19,7 +19,7 @@
   document.title = S.display || document.title;
   if (S.statement) {
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', `${S.display} — ${S.name}. Software developer.`);
+    if (desc) desc.setAttribute('content', S.statement);
   }
 
   /* ---------- detail rows ---------- */
