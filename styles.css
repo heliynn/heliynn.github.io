@@ -312,6 +312,7 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+  filter: brightness(.68) saturate(.9);
 }
 
 .art--left {
