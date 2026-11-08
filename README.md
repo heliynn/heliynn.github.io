@@ -10,7 +10,7 @@ no framework, no dependencies.
 | File | What it is |
 | --- | --- |
 | `index.html` | The page shell. You normally don't touch this. |
-| `content.js` | **Everything the site says** — name, intro, contact tiles, links. |
+| `content.js` | **Everything the site says** — name, statement, details card, links. |
 | `styles.css` | The grey backdrop, glass cards, type and spacing. |
 | `script.js` | Renders `content.js` into the page. Leave it alone. |
 | `assets/` | Optional side pictures (`art-left.png`, `art-right.png`). |
