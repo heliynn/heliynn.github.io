@@ -178,6 +178,7 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 }
 
 .panel__value {
+  position: relative;
   display: inline-flex;
   align-items: center;
   margin-left: auto;
@@ -185,22 +186,49 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   transition: color .15s var(--ease);
 }
 
-.panel__hint {
-  margin-left: 8px;
-  color: var(--muted);
-  font-size: .75rem;
-  line-height: 1;
-  opacity: .9;
-  transition: color .15s var(--ease), opacity .15s var(--ease);
-}
-
-button.panel__row:hover .panel__hint,
-button.panel__row:focus-visible .panel__hint {
+.panel__check {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 5px);
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
   color: var(--ink);
-  opacity: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(4px) scale(.8);
+  transition: opacity .16s var(--ease), transform .28s var(--ease);
 }
 
-.panel__row.is-copied .panel__hint { opacity: 0; }
+.panel__check path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset .3s var(--ease);
+}
+
+.panel__row.is-copied .panel__check {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.panel__row.is-copied .panel__check path { stroke-dashoffset: 0; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .panel__text {
   white-space: nowrap;

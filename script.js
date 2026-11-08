@@ -40,6 +40,12 @@
     }
   };
 
+  const copyStatus = document.createElement('span');
+  copyStatus.className = 'sr-only';
+  copyStatus.setAttribute('role', 'status');
+  copyStatus.setAttribute('aria-live', 'polite');
+  document.body.append(copyStatus);
+
   const noteRow = (item) => {
     const copies = Boolean(item.copy);
     const node = document.createElement(copies ? 'button' : item.href ? 'a' : 'div');
@@ -71,23 +77,23 @@
     node.append(label, value);
 
     if (copies) {
-      const hint = document.createElement('span');
-      hint.className = 'panel__hint';
-      hint.textContent = 'copy';
-      hint.setAttribute('aria-hidden', 'true');
-      node.append(hint);
+      const check = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      check.setAttribute('class', 'panel__check');
+      check.setAttribute('viewBox', '0 0 16 16');
+      check.setAttribute('aria-hidden', 'true');
+      check.innerHTML = '<path d="M3.2 8.4 6.6 11.8 12.8 4.6" />';
+      value.append(check);
 
       node.addEventListener('click', async () => {
         const ok = await copyText(item.copy);
         if (!ok) return;
-        const original = item.value || item.copy;
-        text.textContent = 'copied';
         node.classList.add('is-copied');
+        copyStatus.textContent = `Copied ${item.copy}`;
         clearTimeout(node.copyTimer);
         node.copyTimer = setTimeout(() => {
-          text.textContent = original;
           node.classList.remove('is-copied');
-        }, 1400);
+          copyStatus.textContent = '';
+        }, 1500);
       });
     }
 

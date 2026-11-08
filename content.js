@@ -9,8 +9,8 @@ window.SITE = {
   name: "heliynn",
 
   statement:
-    "use AI to make small tools and websites, usually for myself " +
-    "which i then share publicly :)",
+    "I'm heliynn. I use AI to make small tools and websites, usually " +
+    "for myself which i then share publicly :)",
 
   /* The card in the right margin. Order matters.
      - `copy` turns the row into a button that copies the handle.
