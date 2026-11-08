@@ -29,7 +29,6 @@
   /* ---------- text ---------- */
   setText('[data-wordmark]', S.display);
   setText('[data-eyebrow]', S.eyebrow);
-  setText('[data-lede]', S.intro);
   setText('[data-contact-label]', S.contactHeading);
   setText('[data-contact-note]', S.contactNote);
   setText('[data-footer-left]', S.footer);
@@ -38,6 +37,54 @@
   if (S.eyebrow) {
     const desc = document.querySelector('meta[name="description"]');
     if (desc) desc.setAttribute('content', `${S.display} — ${S.name}. Software developer.`);
+  }
+
+  /* ---------- terminal ---------- */
+  const terminal = q('[data-terminal]');
+  if (terminal) {
+    const t = S.terminal || {};
+    const prompt = `${t.user || 'serv'}@${t.host || 'web'} ~$`;
+
+    const rows = [
+      { cmd: 'whoami', out: t.whoami },
+      { cmd: 'cat about.txt', out: t.about },
+      { cmd: 'cat now.txt', out: t.now }
+    ].filter((row) => row.out);
+
+    rows.forEach((row) => {
+      const line = document.createElement('div');
+      line.className = 'term__line';
+
+      const promptNode = document.createElement('span');
+      promptNode.className = 'term__prompt';
+      promptNode.textContent = prompt;
+
+      const cmdNode = document.createElement('span');
+      cmdNode.className = 'term__cmd';
+      cmdNode.textContent = row.cmd;
+
+      line.append(promptNode, cmdNode);
+
+      const out = document.createElement('p');
+      out.className = 'term__out';
+      out.textContent = row.out;
+
+      terminal.append(line, out);
+    });
+
+    const cursorLine = document.createElement('div');
+    cursorLine.className = 'term__line term__line--cursor';
+
+    const promptNode = document.createElement('span');
+    promptNode.className = 'term__prompt';
+    promptNode.textContent = prompt;
+
+    const cursor = document.createElement('span');
+    cursor.className = 'term__cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+
+    cursorLine.append(promptNode, cursor);
+    terminal.append(cursorLine);
   }
 
   /* ---------- contact tiles ---------- */

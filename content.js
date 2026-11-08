@@ -9,10 +9,15 @@ window.SITE = {
   name: "heliynn",
   eyebrow: "heliynn — software developer",
 
-  intro:
-    "I'm heliynn, servyy online. I build small tools and websites, mostly for " +
-    "myself or people I know. I'm learning C++ at the moment, and I like making " +
-    "things I'll actually use.",
+  /* The terminal block in the hero. Each line is one command + its output;
+     remove an output to drop that line. */
+  terminal: {
+    user: "servfur",
+    host: "web",
+    whoami: "heliynn — servyy online",
+    about: "Self-taught developer. I build small tools and websites, mostly for myself or people I know.",
+    now: "Learning C++."
+  },
 
   contactHeading: "contact",
   contactNote: "Discord is the quickest way to reach me — click the handle to copy it. GitHub works too.",
@@ -31,8 +36,7 @@ window.SITE = {
     }
   ],
 
-  /* Drop your two pictures in the assets folder with these names
-     and they appear at the left and right edges. Delete a line to hide it. */
+  /* The two pictures sit at the left and right edges. Delete a line to hide it. */
   art: {
     left: "assets/art-left.png",
     right: "assets/art-right.png"

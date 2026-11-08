@@ -14,7 +14,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #26272b;
+  background: #1a1b1e;
   color: var(--ink);
   font-family: var(--body);
   font-size: 16px;
@@ -25,13 +25,13 @@ body {
 }
 
 :root {
-  --ink: #f3f3f5;
-  --ink-soft: #d2d2d7;
-  --muted: #a7a7ae;
-  --dim: #808087;
-  --line: rgba(255, 255, 255, .14);
-  --glass: rgba(255, 255, 255, .065);
-  --glass-hi: rgba(255, 255, 255, .105);
+  --ink: #f2f2f4;
+  --ink-soft: #c9c9d0;
+  --muted: #97979f;
+  --dim: #6d6d76;
+  --line: rgba(255, 255, 255, .13);
+  --glass: rgba(255, 255, 255, .055);
+  --glass-hi: rgba(255, 255, 255, .1);
   --display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -57,7 +57,7 @@ h1, p { margin: 0; }
   inset: 0;
   z-index: -1;
   overflow: hidden;
-  background: #2a2b2f;
+  background: #1a1b1e;
 }
 
 .backdrop__art {
@@ -67,11 +67,18 @@ h1, p { margin: 0; }
   animation: drift 90s ease-in-out infinite alternate;
 }
 
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(46% 38% at 50% 22%, rgba(255, 255, 255, .075), transparent 72%);
+}
+
 .backdrop::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(82% 62% at 50% 34%, transparent 34%, rgba(16, 17, 20, .38) 100%);
+  background: radial-gradient(86% 66% at 50% 34%, transparent 24%, rgba(6, 7, 8, .62) 100%);
 }
 
 .backdrop__grain {
@@ -98,7 +105,7 @@ h1, p { margin: 0; }
   padding: 10px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(30, 31, 35, .9);
+  background: rgba(26, 27, 30, .92);
   font-size: .8rem;
   transition: transform .2s var(--ease);
 }
@@ -142,8 +149,8 @@ main { position: relative; z-index: 1; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 92vh;
-  padding: 140px var(--pad) 90px;
+  min-height: 94vh;
+  padding: 132px var(--pad) 80px;
   text-align: center;
 }
 
@@ -157,11 +164,11 @@ main { position: relative; z-index: 1; }
 }
 
 .wordmark {
-  margin: .22em 0 .3em;
+  margin: .2em 0 .16em;
   padding-bottom: .06em;
   font-family: var(--display);
   font-weight: 500;
-  font-size: clamp(4.2rem, 13.5vw, 9.6rem);
+  font-size: clamp(4rem, 12.5vw, 8.8rem);
   line-height: .86;
   letter-spacing: -.055em;
   background: linear-gradient(178deg, #fdfdfe 4%, #e2e2e7 42%, #aeadb6 78%, #8d8c95 100%);
@@ -171,13 +178,60 @@ main { position: relative; z-index: 1; }
   animation: rise 1.1s .06s var(--ease) both;
 }
 
-.lede {
-  max-width: 46ch;
+/* ---------------- terminal ---------------- */
+
+.terminal {
+  width: min(680px, 100%);
+  margin: 26px auto 0;
+  padding: 24px 28px 22px;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: .82rem;
+  line-height: 1.9;
   color: var(--ink-soft);
-  font-size: 1.01rem;
-  line-height: 1.8;
-  text-wrap: pretty;
+  border: 1px solid rgba(255, 255, 255, .085);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .035);
+  backdrop-filter: blur(26px) saturate(115%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 40px 80px -60px rgba(0, 0, 0, .9);
   animation: rise 1.1s .12s var(--ease) both;
+}
+
+.term__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .55em;
+}
+
+.term__prompt { color: var(--dim); }
+.term__cmd { color: var(--ink); font-weight: 500; }
+
+.term__out {
+  margin: 3px 0 15px;
+  padding-left: 1.15rem;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.term__out:last-of-type { margin-bottom: 8px; }
+
+.term__line--cursor { gap: .5em; }
+
+.term__cursor {
+  display: inline-block;
+  width: .5em;
+  height: 1.02em;
+  transform: translateY(.16em);
+  background: var(--ink-soft);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 @keyframes rise {
@@ -188,7 +242,7 @@ main { position: relative; z-index: 1; }
 /* ---------------- contact ---------------- */
 
 .section {
-  padding: 40px var(--pad) 0;
+  padding: 34px var(--pad) 0;
   scroll-margin-top: 90px;
 }
 
@@ -308,7 +362,7 @@ main { position: relative; z-index: 1; }
   gap: 16px;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 120px var(--pad) 34px;
+  padding: 110px var(--pad) 34px;
   font-family: var(--mono);
   font-size: .68rem;
   letter-spacing: .05em;
@@ -336,14 +390,14 @@ main { position: relative; z-index: 1; }
   position: fixed;
   bottom: -2vh;
   z-index: 0;
-  height: min(62vh, 470px);
+  height: min(66vh, 520px);
   width: auto;
   max-width: 30vw;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  opacity: .42;
-  filter: saturate(.8) brightness(.96) contrast(.98);
+  opacity: .45;
+  filter: saturate(.8) brightness(.94) contrast(.98);
   -webkit-mask-image: radial-gradient(ellipse 62% 60% at 50% 44%, #000 34%, rgba(0, 0, 0, .55) 58%, transparent 78%);
   mask-image: radial-gradient(ellipse 62% 60% at 50% 44%, #000 34%, rgba(0, 0, 0, .55) 58%, transparent 78%);
 }
@@ -366,16 +420,17 @@ main { position: relative; z-index: 1; }
   :root { --pad: 20px; }
   .top { padding: 20px var(--pad); }
   .top__nav { gap: 16px; }
-  .hero { min-height: 88vh; padding-top: 120px; }
-  .wordmark { margin: .26em 0 .34em; }
-  .lede { font-size: .95rem; }
+  .hero { min-height: 90vh; padding-top: 112px; padding-bottom: 60px; }
+  .wordmark { margin: .24em 0 .12em; }
+  .terminal { margin-top: 20px; padding: 18px 16px; font-size: .74rem; line-height: 1.85; }
+  .term__out { padding-left: .9rem; }
   .tiles { grid-template-columns: 1fr; }
-  .footer { flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 90px; }
+  .footer { flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 84px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .eyebrow, .wordmark, .lede { opacity: 1; transform: none; }
+  .eyebrow, .wordmark, .terminal { opacity: 1; transform: none; }
   .backdrop__art { animation: none; }
 }

@@ -1,7 +1,8 @@
 # servyy
 
-A small personal page and two offset files, served by GitHub Pages. Plain HTML, CSS and
-JavaScript — no build step, no framework, no dependencies.
+A small personal page and two offset files, served by GitHub Pages. A terminal-style intro
+sits under the wordmark, with glass contact tiles below. Plain HTML, CSS and JavaScript —
+no build step, no framework, no dependencies.
 
 ## Files
 
@@ -27,7 +28,8 @@ The placeholders to replace:
 - `contacts[0]` — your Discord handle (`@servfur`). Clicking the tile copies it; change
   `value` and `copy` together.
 - `eyebrow` — the small line above the name.
-- `intro` — the paragraph under it. Keep it short; it reads better.
+- `terminal` — the prompt block: `user` and `host` build `servfur@web ~$`, while `whoami`,
+  `about` and `now` are the printed lines. Delete one to drop that line.
 - `footerLinks` — currently the offsets file and your GitHub profile.
 
 The name is lowercase on purpose: `display: "servyy"`.
