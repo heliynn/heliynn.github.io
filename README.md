@@ -39,8 +39,8 @@ Save them as:
 - `assets/art-left.png` — left edge
 - `assets/art-right.png` — right edge
 
-They fade toward the bottom, sit behind the content, and disappear under 1260px wide so
-they never cover text. Missing files are ignored, so there are no broken images.
+They sit behind the content at full opacity and disappear under 1260px wide so they never
+cover text. Missing files are ignored, so there are no broken images.
 
 `content.js` also stores each picture's width and height, which lets the page reserve
 space before the file loads. Update those numbers if you swap in a different image.

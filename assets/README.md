@@ -6,8 +6,8 @@ These two files are already placed and shown at the page edges:
 - `art-right.png`: the red-dress picture (217×320, flat black background)
 - `share.png`: the 1200×630 social preview, built from `art-left.png`
 
-They render at 42% opacity, feathered into the backdrop, and hide below 1260px wide so they
-never sit under the text. If a file is missing, the slot is simply skipped.
+They sit behind the content at full opacity and hide below 1260px wide so they never sit
+under the text. If a file is missing, the slot is simply skipped.
 
 To swap sides, rename the files or change the paths in `content.js`:
 
