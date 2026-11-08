@@ -24,7 +24,7 @@ window.SITE = {
   /* The two pictures at the edges. Delete a line to hide one.
      Update width and height if you swap in a different image. */
   art: {
-    left: { src: "assets/art-left.png", width: 328, height: 582 },
-    right: { src: "assets/art-right.png", width: 217, height: 320 }
+    left: { src: "assets/art-left.png?v=10", width: 656, height: 1164 },
+    right: { src: "assets/art-right.png?v=10", width: 790, height: 1166 }
   }
 };

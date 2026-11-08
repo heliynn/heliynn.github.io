@@ -40,7 +40,8 @@ Save them as:
 - `assets/art-right.png` — right edge
 
 They sit behind the content at full opacity and disappear under 1260px wide so they never
-cover text. Missing files are ignored, so there are no broken images.
+cover text. Both should have transparent backgrounds. Missing files are ignored, so there
+are no broken images.
 
 `content.js` also stores each picture's width and height, which lets the page reserve
 space before the file loads. Update those numbers if you swap in a different image.
