@@ -57,30 +57,27 @@ Two files mirror each other:
 From GitHub's web editor that's one pencil click per file. Files ending in `.hpp` download
 instead of displaying; apps don't care about the content type, they read the bytes.
 
-## Publishing to GitHub Pages
+## Publishing
 
-The URL comes from your **username** and the **repository name**:
+The site is live at **https://servfur.github.io/**.
 
-| Wanted URL | What it needs |
-| --- | --- |
-| `https://heliynn.github.io/` | Repo named exactly `heliynn.github.io` under the account `heliynn` |
-| `https://servfur.github.io/` | The GitHub **account** renamed to `servfur`, plus a repo named `servfur.github.io` |
-| `https://heliynn.github.io/website/` | Any repo name — the site lives in a subfolder |
+It is served from the public repository `servfur/servfur.github.io`. GitHub treats a repo
+named `<username>.github.io` as that account's root site, published from `main` at
+`/ (root)` — that is why the URL has no subfolder.
 
-`servfur.github.io` cannot be reached by renaming a repository: the `*.github.io` domain
-follows the account username. Renaming the account (Settings → Account → Change username)
-works and GitHub redirects old links, but it changes your profile URL too.
+To update it:
 
-All paths here are relative, so the site works in any of those positions unchanged.
+```bash
+git add -A
+git commit -m "what changed"
+git push
+```
 
-Once the files are pushed to the default branch:
+Pages rebuilds on every push to `main`, usually in about 30 seconds. Progress shows under
+the repository's **Actions** tab, or under **Settings → Pages**.
 
-1. Repository → **Settings** → **Pages**.
-2. Source: *Deploy from a branch*.
-3. Branch `main`, folder `/ (root)` → **Save**.
-4. Wait a minute; the URL appears on that page.
-
-Every push updates the live site afterwards.
+The URL only stays `servfur.github.io` while the repository has exactly that name. Renaming
+the repo, or renaming the account, changes the address.
 
 ## Previewing locally
 
