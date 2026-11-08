@@ -1,256 +1,150 @@
-/* Renders content.js into the page and handles the small interactions.
-   You shouldn't need to edit this file. */
+/* Renders content.js into index.html. You shouldn't need to edit this file. */
+(() => {
+  const S = window.SITE || {};
+  const q = (sel) => document.querySelector(sel);
 
-(function () {
-  "use strict";
-
-  const S = window.SITE;
-  if (!S) return;
-
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const el = (tag, className, text) => {
-    const node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text != null) node.textContent = text;
-    return node;
-  };
-
-  /* ------------------------------------------------------------------ text */
   const setText = (sel, value) => {
-    const node = $(sel);
+    const node = q(sel);
     if (node && value) node.textContent = value;
   };
 
-  setText("#mark-text", S.name);
-  setText("#hero-name", S.name);
-  setText("#hero-role", S.role);
-  setText("#hero-tagline", S.tagline);
-  setText("#hero-intro", S.intro);
-  setText("#about-heading", S.aboutHeading);
-  setText("#work-heading", S.workHeading);
-  setText("#work-intro", S.workIntro);
-  setText("#notes-heading", S.notesHeading);
-  setText("#notes-intro", S.notesIntro);
-  setText("#contact-heading", S.contactHeading);
-  setText("#contact-blurb", S.contactBlurb);
-  setText("#footer-note", S.footerNote);
-  setText("#footer-location", S.location);
-  setText("#footer-year", "© " + new Date().getFullYear());
+  const isExternal = (href) => /^https?:/i.test(href || '');
 
-  /* Browser tab + link preview title */
-  if (S.name && S.role) document.title = S.name + " — " + S.role;
+  /* ---------- icons ---------- */
+  const PATHS = {
+    mail: '<rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m4 7.5 8 5.5 8-5.5"/>',
+    github: '<path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.12-.3-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.7.82.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5Z"/>',
+    discord: '<path d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.37-.44.86-.61 1.25a18.3 18.3 0 0 0-5.48 0c-.16-.39-.41-.88-.62-1.25a.08.08 0 0 0-.08-.04 19.7 19.7 0 0 0-4.88 1.52.07.07 0 0 0-.04.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.05 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.02c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13c.13-.09.25-.19.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01c.12.1.25.2.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.02 19.8 19.8 0 0 0 6-3.03.08.08 0 0 0 .03-.05c.5-5.18-.84-9.68-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/>',
+    link: '<path d="M10 13.5a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.3"/><path d="M14 10.5a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/>'
+  };
 
-  /* ---------------------------------------------------------- availability */
-  const avail = $("#availability");
-  if (S.available === false) {
-    avail.hidden = true;
-  } else if (S.availabilityText) {
-    setText("#availability-text", S.availabilityText);
+  const icon = (name, size = 17) => {
+    const d = PATHS[name] || PATHS.link;
+    const paint = (name === 'github' || name === 'discord')
+      ? 'fill="currentColor"'
+      : 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"';
+    return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" focusable="false" ${paint}>${d}</svg>`;
+  };
+
+  /* ---------- text ---------- */
+  setText('[data-wordmark]', S.display);
+  setText('[data-eyebrow]', S.eyebrow);
+  setText('[data-lede]', S.intro);
+  setText('[data-contact-label]', S.contactHeading);
+  setText('[data-contact-note]', S.contactNote);
+  setText('[data-footer-left]', S.footer);
+
+  document.title = S.display || document.title;
+  if (S.eyebrow) {
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', `${S.display} — ${S.name}. Software developer.`);
   }
 
-  /* ----------------------------------------------------------- email links */
-  if (S.email) {
-    ["#hero-email", "#contact-email"].forEach((sel) => {
-      const link = $(sel);
-      if (link) link.href = "mailto:" + S.email;
-    });
-    const contactText = $("#contact-email .contact__text");
-    if (contactText) contactText.textContent = S.email;
-  }
-
-  /* ------------------------------------------------------------- socials */
-  const socials = $("#socials");
-  (S.socials || []).forEach((item) => {
-    const li = el("li");
-    const a = el("a", "socials__link", item.label);
-    a.href = item.href;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    li.appendChild(a);
-    socials.appendChild(li);
-  });
-
-  /* ------------------------------------------------------------- marquee */
-  const track = $("#marquee-track");
-  const words = S.marquee || [];
-  if (words.length) {
-    // Duplicate the list so the loop is seamless.
-    for (let pass = 0; pass < 2; pass++) {
-      words.forEach((word) => {
-        const span = el("span", "marquee__item", word);
-        span.appendChild(el("span", "marquee__spark", "✦"));
-        track.appendChild(span);
-      });
-    }
-  } else {
-    track.parentElement.hidden = true;
-  }
-
-  /* --------------------------------------------------------------- about */
-  const aboutWrap = $("#about-paragraphs");
-  (S.about || []).forEach((paragraph) => aboutWrap.appendChild(el("p", null, paragraph)));
-
-  const facts = $("#about-facts");
-  (S.facts || []).forEach((fact) => {
-    const row = el("div", "fact");
-    row.appendChild(el("dt", "fact__label", fact.label));
-    row.appendChild(el("dd", "fact__value", fact.value));
-    facts.appendChild(row);
-  });
-
-  /* ------------------------------------------------------------- projects */
-  const cards = $("#projects");
-  (S.projects || []).forEach((project, index) => {
-    const card = el("a", "card reveal");
-    card.href = project.href || "#";
-    if (!project.href || project.href === "#") card.removeAttribute("target");
-    else {
-      card.target = "_blank";
-      card.rel = "noopener noreferrer";
-    }
-    card.style.transitionDelay = index * 70 + "ms";
-
-    const top = el("div", "card__top");
-    top.appendChild(el("span", "card__index", String(index + 1).padStart(2, "0")));
-    top.appendChild(el("span", "card__year", project.year || ""));
-    card.appendChild(top);
-
-    card.appendChild(el("h3", "card__title", project.title));
-    card.appendChild(el("p", "card__blurb", project.blurb));
-
-    const bottom = el("div", "card__bottom");
-    const tags = el("ul", "tags");
-    (project.tags || []).forEach((tag) => {
-      const li = el("li", "tag", tag);
-      tags.appendChild(li);
-    });
-    bottom.appendChild(tags);
-
-    const arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    arrow.setAttribute("viewBox", "0 0 24 24");
-    arrow.setAttribute("class", "card__arrow");
-    arrow.setAttribute("aria-hidden", "true");
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", "M7 17 17 7M9 7h8v8");
-    arrow.appendChild(path);
-    bottom.appendChild(arrow);
-
-    card.appendChild(bottom);
-    cards.appendChild(card);
-  });
-
-  /* ---------------------------------------------------------------- notes */
-  const noteList = $("#notes-list");
-  (S.notes || []).forEach((note) => {
-    const li = el("li", "note");
-    const a = el("a", "note__link");
-    a.href = note.href || "#";
-    a.appendChild(el("span", "note__date", note.date || ""));
-    a.appendChild(el("span", "note__title", note.title));
-
-    const arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    arrow.setAttribute("viewBox", "0 0 24 24");
-    arrow.setAttribute("aria-hidden", "true");
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", "M7 17 17 7M9 7h8v8");
-    arrow.appendChild(path);
-    a.appendChild(arrow);
-
-    li.appendChild(a);
-    noteList.appendChild(li);
-  });
-
-  /* ---------------------------------------------------------------- theme */
-  const root = document.documentElement;
-  const toggle = $("#theme-toggle");
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-  function paintTheme() {
-    const dark = root.getAttribute("data-theme") === "dark";
-    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
-    if (themeMeta) themeMeta.setAttribute("content", dark ? "#0f0e0d" : "#f6f3ee");
-  }
-
-  toggle.addEventListener("click", function () {
-    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
+  /* ---------- contact tiles ---------- */
+  const copyText = async (value) => {
     try {
-      localStorage.setItem("theme", next);
-    } catch (e) {}
-    paintTheme();
-  });
-
-  paintTheme();
-
-  /* --------------------------------------------------- scroll progress bar */
-  const bar = $("#progress-bar");
-  let ticking = false;
-  function updateProgress() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = max > 0 ? window.scrollY / max : 0;
-    bar.style.transform = "scaleX(" + Math.min(1, Math.max(0, ratio)) + ")";
-    ticking = false;
-  }
-  window.addEventListener("scroll", function () {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(updateProgress);
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      const field = document.createElement('textarea');
+      field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.append(field);
+      field.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { ok = false; }
+      field.remove();
+      return ok;
     }
-  }, { passive: true });
-  updateProgress();
+  };
 
-  /* --------------------------------------------------------- reveal on view */
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const revealables = document.querySelectorAll(".reveal");
+  const tile = (item) => {
+    const copies = Boolean(item.copy);
+    const node = document.createElement(copies ? 'button' : 'a');
+    node.className = copies ? 'tile tile--copy' : 'tile';
 
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealables.forEach((node) => node.classList.add("in"));
-  } else {
-    const io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-    );
-    revealables.forEach((node) => io.observe(node));
-  }
+    if (copies) {
+      node.type = 'button';
+      node.setAttribute('aria-label', `Copy ${item.label || 'handle'} ${item.copy}`.replace(/\s+/g, ' ').trim());
+    } else {
+      node.href = item.href || '#';
+      if (isExternal(item.href)) {
+        node.target = '_blank';
+        node.rel = 'noreferrer';
+      }
+    }
 
-  /* --------------------------------------------------- active section link */
-  const links = Array.from(document.querySelectorAll(".nav a"));
-  const sections = links
-    .map((link) => document.querySelector(link.getAttribute("href")))
-    .filter(Boolean);
+    const box = document.createElement('span');
+    box.className = 'tile__icon';
+    box.innerHTML = icon(item.icon);
 
-  if (sections.length && "IntersectionObserver" in window) {
-    const spy = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          links.forEach(function (link) {
-            const active = link.getAttribute("href") === "#" + entry.target.id;
-            if (active) link.setAttribute("aria-current", "true");
-            else link.removeAttribute("aria-current");
-          });
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" }
-    );
-    sections.forEach((section) => spy.observe(section));
-  }
+    const text = document.createElement('span');
+    text.className = 'tile__text';
 
-  /* ------------------------------------------- pointer spotlight on cards */
-  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-    document.querySelectorAll(".card").forEach(function (card) {
-      card.addEventListener("pointermove", function (event) {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty("--mx", event.clientX - rect.left + "px");
-        card.style.setProperty("--my", event.clientY - rect.top + "px");
+    const label = document.createElement('span');
+    label.className = 'tile__label';
+    label.textContent = item.label || '';
+
+    const value = document.createElement('span');
+    value.className = 'tile__value';
+    value.textContent = item.value || '';
+
+    text.append(label, value);
+    node.append(box, text);
+
+    if (copies) {
+      node.addEventListener('click', async () => {
+        const ok = await copyText(item.copy);
+        if (!ok) return;
+        const original = item.value || item.copy;
+        value.textContent = 'copied';
+        node.classList.add('is-copied');
+        clearTimeout(node.copyTimer);
+        node.copyTimer = setTimeout(() => {
+          value.textContent = original;
+          node.classList.remove('is-copied');
+        }, 1500);
       });
+    }
+
+    return node;
+  };
+
+  const contacts = q('[data-contacts]');
+  if (contacts) (S.contacts || []).forEach((item) => contacts.append(tile(item)));
+
+  /* ---------- footer links ---------- */
+  const links = q('[data-footer-links]');
+  if (links) {
+    (S.footerLinks || []).forEach((item) => {
+      const a = document.createElement('a');
+      a.href = item.href || '#';
+      a.textContent = item.label || '';
+      if (isExternal(item.href)) {
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+      }
+      links.append(a);
     });
   }
+
+  /* ---------- side art (only if the files exist) ---------- */
+  const mountArt = (side) => {
+    const src = S.art && S.art[side];
+    if (!src) return;
+
+    const img = document.createElement('img');
+    img.className = `art art--${side}`;
+    img.src = src;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.decoding = 'async';
+    img.addEventListener('error', () => img.remove());
+    document.body.append(img);
+  };
+
+  mountArt('left');
+  mountArt('right');
 })();

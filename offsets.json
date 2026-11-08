@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-08",
+  "offsets": {
+    "PlayerBase": "0x0",
+    "PlayerHealth": "0x0",
+    "PlayerTeam": "0x0"
+  }
+}

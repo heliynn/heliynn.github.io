@@ -1,203 +1,65 @@
-<!doctype html>
-<html lang="en" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>servyy</title>
+  <meta name="description" content="heliynn — software developer. Small tools and websites." />
+  <meta name="theme-color" content="#2a2b2f" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="servyy" />
+  <meta property="og:description" content="heliynn — software developer. Small tools and websites." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop__art"></div>
+    <div class="backdrop__grain"></div>
+  </div>
 
-    <title>LF — Designer &amp; developer</title>
-    <meta
-      name="description"
-      content="Personal site of LF — designer and developer. Selected work, notes, and how to get in touch."
-    />
+  <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Open Graph / link previews -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="LF — Designer &amp; developer" />
-    <meta
-      property="og:description"
-      content="Personal site of LF — designer and developer. Selected work, notes, and how to get in touch."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+  <header class="top">
+    <a class="top__mark" href="#main">servyy</a>
+    <nav class="top__nav">
+      <a href="#contact">contact</a>
+      <a href="offsets.json">offsets</a>
+    </nav>
+  </header>
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow" data-eyebrow></p>
+      <h1 class="wordmark" data-wordmark>servyy</h1>
+      <p class="lede" data-lede></p>
+    </section>
 
-    <link rel="stylesheet" href="styles.css" />
-
-    <!-- Set the theme before first paint so there is no white flash in dark mode. -->
-    <script>
-      (function () {
-        try {
-          var saved = localStorage.getItem("theme");
-          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          document.documentElement.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
-        } catch (e) {}
-      })();
-    </script>
-  </head>
-
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
-
-    <header class="topbar">
-      <a class="mark" href="#top" aria-label="Back to top">
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark__text" id="mark-text">LF</span>
-      </a>
-
-      <nav class="nav" aria-label="Sections">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#notes">Notes</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="topbar__end">
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
-          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="4.2" />
-            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
-          </svg>
-          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z" />
-          </svg>
-        </button>
+    <section class="section" id="contact">
+      <div class="contact">
+        <div class="label-row">
+          <span class="label" data-contact-label>contact</span>
+          <span class="rule" aria-hidden="true"></span>
+        </div>
+        <p class="note" data-contact-note></p>
+        <div class="tiles" data-contacts></div>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <main id="main">
-      <!-- ─────────────────────────── HERO ─────────────────────────── -->
-      <section class="hero" id="top">
-        <div class="aura" aria-hidden="true">
-          <span class="aura__blob aura__blob--1"></span>
-          <span class="aura__blob aura__blob--2"></span>
-        </div>
+  <footer class="footer">
+    <span data-footer-left></span>
+    <span class="footer__links" data-footer-links></span>
+  </footer>
 
-        <div class="wrap">
-          <p class="eyebrow reveal" id="availability">
-            <span class="pulse" aria-hidden="true"></span>
-            <span id="availability-text">Open to new work</span>
-          </p>
+  <noscript>
+    <p class="noscript">heliynn — software developer. Plain files: <a href="content.js">content</a>, <a href="offsets.json">offsets</a>.</p>
+  </noscript>
 
-          <h1 class="hero__name reveal" id="hero-name">LF</h1>
-
-          <p class="hero__role reveal">
-            <em id="hero-role">Designer &amp; developer</em>
-          </p>
-
-          <p class="hero__tagline reveal" id="hero-tagline">
-            I make calm, useful things for the web.
-          </p>
-
-          <p class="hero__intro reveal" id="hero-intro"></p>
-
-          <div class="hero__actions reveal">
-            <a class="btn btn--primary" id="hero-email" href="mailto:hello@example.com">
-              <span>Say hello</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
-            </a>
-            <ul class="socials" id="socials"></ul>
-          </div>
-        </div>
-
-        <div class="scroll-hint" aria-hidden="true">
-          <span></span>
-        </div>
-      </section>
-
-      <!-- ─────────────────────────── MARQUEE ─────────────────────────── -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track" id="marquee-track"></div>
-      </div>
-
-      <!-- ─────────────────────────── ABOUT ─────────────────────────── -->
-      <section class="section" id="about">
-        <div class="wrap section__grid">
-          <div class="section__head reveal">
-            <p class="eyebrow"><span class="num">01</span> About</p>
-            <h2 class="section__title" id="about-heading">A little about me</h2>
-          </div>
-
-          <div class="about__body reveal">
-            <div class="prose" id="about-paragraphs"></div>
-            <dl class="facts" id="about-facts"></dl>
-          </div>
-        </div>
-      </section>
-
-      <!-- ─────────────────────────── WORK ─────────────────────────── -->
-      <section class="section" id="work">
-        <div class="wrap">
-          <div class="section__head section__head--row reveal">
-            <div>
-              <p class="eyebrow"><span class="num">02</span> Selected work</p>
-              <h2 class="section__title" id="work-heading">Things I've made</h2>
-            </div>
-            <p class="section__lede" id="work-intro"></p>
-          </div>
-
-          <div class="cards" id="projects"></div>
-        </div>
-      </section>
-
-      <!-- ─────────────────────────── NOTES ─────────────────────────── -->
-      <section class="section" id="notes">
-        <div class="wrap section__grid">
-          <div class="section__head reveal">
-            <p class="eyebrow"><span class="num">03</span> Notes</p>
-            <h2 class="section__title" id="notes-heading">Thinking out loud</h2>
-          </div>
-
-          <div class="reveal">
-            <p class="section__lede" id="notes-intro"></p>
-            <ul class="notes" id="notes-list"></ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- ─────────────────────────── CONTACT ─────────────────────────── -->
-      <section class="section section--contact" id="contact">
-        <div class="wrap">
-          <p class="eyebrow reveal"><span class="num">04</span> Contact</p>
-          <h2 class="contact__heading reveal" id="contact-heading">
-            Let's make something good.
-          </h2>
-          <p class="section__lede contact__blurb reveal" id="contact-blurb"></p>
-          <p class="contact__mail reveal">
-            <a id="contact-email" href="mailto:hello@example.com">
-              <span class="contact__text">hello@example.com</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
-            </a>
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="wrap footer__inner">
-        <p id="footer-note">Built by hand. Hosted on GitHub Pages.</p>
-        <p class="footer__meta">
-          <span id="footer-year"></span>
-          <span class="footer__sep" aria-hidden="true">/</span>
-          <span id="footer-location"></span>
-        </p>
-      </div>
-    </footer>
-
-    <noscript>
-      <p style="padding: 24px; font-family: system-ui, sans-serif">
-        This page needs JavaScript to display its content. Please enable it and reload.
-      </p>
-    </noscript>
-
-    <script src="content.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
