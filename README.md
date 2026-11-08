@@ -1,9 +1,9 @@
 # servyy
 
 A small personal page and two offset files, served by GitHub Pages. One screen: an
-oversized name and short statement on the left, a glass details card in the right margin,
-and the two pictures faded into the edges. Plain HTML, CSS and JavaScript — no build step,
-no framework, no dependencies.
+oversized name and a short statement on the left, a details card in the right margin, and
+the two pictures set into the edges. Plain HTML, CSS and JavaScript, with no build step,
+no framework and no dependencies.
 
 ## Files
 
@@ -11,7 +11,7 @@ no framework, no dependencies.
 | --- | --- |
 | `index.html` | The page shell. You normally don't touch this. |
 | `content.js` | **Everything the site says** — name, statement, details card, links. |
-| `styles.css` | The grey backdrop, glass cards, type and spacing. |
+| `styles.css` | The backdrop, details card, type and spacing. |
 | `script.js` | Renders `content.js` into the page. Leave it alone. |
 | `assets/` | Optional side pictures (`art-left.png`, `art-right.png`). |
 | `backdrop.svg` | The marbled grey background. |
@@ -26,11 +26,9 @@ Open `content.js`, change the text between the quotes, save, refresh.
 
 The placeholders to replace:
 
-- `eyebrow` — the small line above the name.
-- `statement` — the paragraph under the name.
-- `notes` — the rows in the details card: `now`, `discord`, `github`, `offsets`. A row with
-  `copy` copies its handle on click, `href` makes it a link, and `dot` adds the status light.
-- `footerLinks` — currently just a link to the repository.
+- `statement` — the paragraph next to the name.
+- `notes` — the rows in the details card: `discord`, `github`, `offsets`. A row with `copy`
+  copies its handle on click, and a row with `href` is a link.
 
 The name is lowercase on purpose: `display: "servyy"`.
 
@@ -41,8 +39,11 @@ Save them as:
 - `assets/art-left.png` — left edge
 - `assets/art-right.png` — right edge
 
-They fade toward the bottom, sit behind the content, and disappear under 1100px wide so
-they never cover text. Missing files are ignored — no broken images.
+They fade toward the bottom, sit behind the content, and disappear under 1260px wide so
+they never cover text. Missing files are ignored, so there are no broken images.
+
+`content.js` also stores each picture's width and height, which lets the page reserve
+space before the file loads. Update those numbers if you swap in a different image.
 
 To swap sides, either rename the files or swap the paths in `content.js`. Delete a line to
 remove that side.

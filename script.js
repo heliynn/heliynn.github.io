@@ -12,9 +12,7 @@
 
   /* ---------- text ---------- */
   setText('[data-wordmark]', S.display);
-  setText('[data-eyebrow]', S.eyebrow);
   setText('[data-statement]', S.statement);
-  setText('[data-footer-left]', S.footer);
 
   document.title = S.display || document.title;
   if (S.statement) {
@@ -65,13 +63,6 @@
     const value = document.createElement('span');
     value.className = 'panel__value';
 
-    if (item.dot) {
-      const dot = document.createElement('span');
-      dot.className = 'dot';
-      dot.setAttribute('aria-hidden', 'true');
-      value.append(dot);
-    }
-
     const text = document.createElement('span');
     text.className = 'panel__text';
     text.textContent = item.value || '';
@@ -100,24 +91,12 @@
   const notes = q('[data-notes]');
   if (notes) (S.notes || []).forEach((item) => notes.append(noteRow(item)));
 
-  /* ---------- footer links ---------- */
-  const links = q('[data-footer-links]');
-  if (links) {
-    (S.footerLinks || []).forEach((item) => {
-      const a = document.createElement('a');
-      a.href = item.href || '#';
-      a.textContent = item.label || '';
-      if (isExternal(item.href)) {
-        a.target = '_blank';
-        a.rel = 'noreferrer';
-      }
-      links.append(a);
-    });
-  }
-
   /* ---------- side art (only if the files exist) ---------- */
   const mountArt = (side) => {
-    const src = S.art && S.art[side];
+    const art = S.art && S.art[side];
+    if (!art) return;
+
+    const src = typeof art === 'string' ? art : art.src;
     if (!src) return;
 
     const img = document.createElement('img');
@@ -126,6 +105,10 @@
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     img.decoding = 'async';
+    if (typeof art === 'object' && art.width && art.height) {
+      img.width = art.width;
+      img.height = art.height;
+    }
     img.addEventListener('error', () => img.remove());
     document.body.append(img);
   };
