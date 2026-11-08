@@ -48,6 +48,15 @@ space before the file loads. Update those numbers if you swap in a different ima
 To swap sides, either rename the files or swap the paths in `content.js`. Delete a line to
 remove that side.
 
+## Share preview
+
+`assets/share.png` is the 1200×630 image shown when the link is posted, built from the left
+picture. If you replace that picture, replace this file too with another 1200×630 PNG.
+
+The `og:image` and `twitter:image` tags in `index.html` point at
+`https://servfur.github.io/assets/share.png`. Update those two URLs if the site moves to
+another domain.
+
 ## Updating the offsets
 
 Two files mirror each other:
