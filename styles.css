@@ -180,9 +180,27 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 .panel__value {
   display: inline-flex;
   align-items: center;
+  margin-left: auto;
   color: var(--ink);
   transition: color .15s var(--ease);
 }
+
+.panel__hint {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1;
+  opacity: .9;
+  transition: color .15s var(--ease), opacity .15s var(--ease);
+}
+
+button.panel__row:hover .panel__hint,
+button.panel__row:focus-visible .panel__hint {
+  color: var(--ink);
+  opacity: 1;
+}
+
+.panel__row.is-copied .panel__hint { opacity: 0; }
 
 .panel__text {
   white-space: nowrap;

@@ -71,6 +71,12 @@
     node.append(label, value);
 
     if (copies) {
+      const hint = document.createElement('span');
+      hint.className = 'panel__hint';
+      hint.textContent = 'copy';
+      hint.setAttribute('aria-hidden', 'true');
+      node.append(hint);
+
       node.addEventListener('click', async () => {
         const ok = await copyText(item.copy);
         if (!ok) return;
