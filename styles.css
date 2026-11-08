@@ -277,6 +277,7 @@ button.panel__row:hover .panel__label { color: var(--muted); }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 var(--pad) 26px;
