@@ -44,6 +44,12 @@ window.SITE = {
       invite: "flashcards-discord",
       role: "Student",
       image: "https://i.imgur.com/example3.png"
+    },
+    {
+      name: "Sources.gg",
+      invite: "sourcesgg",
+      role: "Master Poster",
+      image: "https://i.imgur.com/example4.png"
     }
   ],
 
