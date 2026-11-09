@@ -62,14 +62,43 @@ h1, p { margin: 0; }
 .backdrop__art {
   position: absolute;
   inset: -6%;
+  z-index: 0;
   background: url("backdrop.svg") center / cover no-repeat;
+  transform-origin: 50% 52%;
+  will-change: transform;
+  animation: backdrop-drift 34s ease-in-out infinite;
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 32% 40%, rgba(255, 255, 255, .05), transparent 72%),
+    radial-gradient(44% 38% at 68% 62%, rgba(255, 255, 255, .035), transparent 70%);
+  opacity: .55;
+  will-change: transform, opacity;
+  animation: backdrop-wave 26s ease-in-out infinite;
 }
 
 .backdrop::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: radial-gradient(86% 66% at 50% 34%, transparent 24%, rgba(6, 7, 8, .62) 100%);
+}
+
+@keyframes backdrop-drift {
+  0%, 100% { transform: scale(1.06) translate3d(-1%, 0, 0) skewY(.1deg); }
+  50% { transform: scale(1.085) translate3d(1%, -1%, 0) skewY(-.1deg); }
+}
+
+@keyframes backdrop-wave {
+  0%, 100% { transform: translate3d(-2%, -1%, 0) scale(1.02); opacity: .45; }
+  50% { transform: translate3d(2%, 1%, 0) scale(1.07); opacity: .72; }
 }
 
 /* ---------------- skip link ---------------- */
@@ -160,9 +189,13 @@ main {
   background: none;
   border-radius: 0;
   text-align: left;
+  transition: opacity .15s var(--ease);
 }
 
 .panel__row:last-child { border-bottom: 0; }
+
+a.panel__row:active,
+button.panel__row:active { opacity: .72; }
 
 a.panel__row, button.panel__row { cursor: pointer; }
 
@@ -259,8 +292,10 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
-  transition: color .15s var(--ease), border-color .15s var(--ease), background-color .15s var(--ease);
+  transition: color .15s var(--ease), border-color .15s var(--ease), background-color .15s var(--ease), transform .18s var(--ease);
 }
+
+.panel__cta:active { transform: scale(.985); }
 
 .panel__cta:hover,
 .panel__cta:focus-visible {
@@ -279,11 +314,14 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   width: 13px;
   height: 13px;
   opacity: .65;
-  transition: opacity .15s var(--ease);
+  transition: opacity .15s var(--ease), transform .18s var(--ease);
 }
 
 .panel__cta:hover .panel__cta-icon,
-.panel__cta:focus-visible .panel__cta-icon { opacity: 1; }
+.panel__cta:focus-visible .panel__cta-icon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
 
 .panel__cta-icon path {
   fill: none;
@@ -306,7 +344,7 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   place-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .2s ease, visibility .2s ease;
+  transition: opacity .24s var(--ease), visibility .24s var(--ease);
 }
 
 .modal[aria-hidden="false"] {
@@ -328,12 +366,15 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   width: 90%;
   max-width: 480px;
   color: var(--ink);
-  transform: scale(.9);
-  transition: transform .2s var(--ease);
+  opacity: 0;
+  transform: translateY(10px) scale(.97);
+  transition: opacity .22s var(--ease), transform .3s var(--ease);
+  will-change: opacity, transform;
 }
 
 .modal[aria-hidden="false"] .modal__content {
-  transform: scale(1);
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .modal__close {
@@ -348,13 +389,14 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   line-height: 1;
   padding: 4px 8px;
   border-radius: 8px;
-  transition: background .15s var(--ease), color .15s var(--ease);
+  transition: background .15s var(--ease), color .15s var(--ease), transform .22s var(--ease);
 }
 
 .modal__close:hover,
 .modal__close:focus-visible {
   color: var(--ink);
   background: rgba(255, 255, 255, .08);
+  transform: rotate(90deg);
 }
 
 .modal__servers {
@@ -495,7 +537,7 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 
 /* ---------------- modal details ---------------- */
@@ -529,8 +571,10 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 .modal__server {
   color: inherit;
   text-decoration: none;
-  transition: background-color .15s var(--ease), border-color .15s var(--ease);
+  transition: background-color .15s var(--ease), border-color .15s var(--ease), transform .16s var(--ease);
 }
+
+.modal__server:active { transform: scale(.99); }
 
 .modal__server:hover,
 .modal__server:focus-visible {
@@ -543,7 +587,12 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   outline-offset: 2px;
 }
 
-.modal__server-image { border: 1px solid var(--line); }
+.modal__server-image {
+  border: 1px solid var(--line);
+  transition: transform .2s var(--ease);
+}
+
+.modal__server:hover .modal__server-image { transform: scale(1.04); }
 
 .modal__server-role { line-height: 1.35; }
 
