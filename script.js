@@ -78,6 +78,13 @@
       node.append(label, value);
 
       if (copies) {
+        const copyIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        copyIcon.setAttribute('class', 'panel__copy');
+        copyIcon.setAttribute('viewBox', '0 0 16 16');
+        copyIcon.setAttribute('aria-hidden', 'true');
+        copyIcon.innerHTML = '<rect x="5.5" y="5.5" width="7" height="7" rx="1.5" /><path d="M10.5 5.5v-1a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1" />';
+        value.append(copyIcon);
+
         const check = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         check.setAttribute('class', 'panel__check');
         check.setAttribute('viewBox', '0 0 16 16');
@@ -85,14 +92,18 @@
         check.innerHTML = '<path d="M3.2 8.4 6.6 11.8 12.8 4.6" />';
         value.append(check);
 
+        const valueText = item.value || '';
+
         node.addEventListener('click', async () => {
           const ok = await copyText(item.copy);
           if (!ok) return;
-          node.classList.add('is-copied');
-          copyStatus.textContent = `Copied ${item.copy}`;
           clearTimeout(node.copyTimer);
+          node.classList.add('is-copied');
+          text.textContent = 'Copied';
+          copyStatus.textContent = `Copied ${item.copy}`;
           node.copyTimer = setTimeout(() => {
             node.classList.remove('is-copied');
+            text.textContent = valueText;
             copyStatus.textContent = '';
           }, 1500);
         });
@@ -126,6 +137,63 @@
 
       cta.append(ctaLabel, icon);
       notes.after(cta);
+
+      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      const showRing = (x, y) => {
+        if (!motionOK) return;
+        const rect = cta.getBoundingClientRect();
+        cta.style.setProperty('--ring-x', `${x == null ? rect.width / 2 : x - rect.left}px`);
+        cta.style.setProperty('--ring-y', `${y == null ? rect.height / 2 : y - rect.top}px`);
+        cta.classList.remove('is-rippling');
+        void cta.offsetWidth;
+        cta.classList.add('is-rippling');
+      };
+
+      cta.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        showRing(event.clientX, event.clientY);
+      });
+
+      cta.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') showRing();
+      });
+
+      cta.addEventListener('animationend', (event) => {
+        if (event.animationName === 'cta-ring') cta.classList.remove('is-rippling');
+      });
+
+      if (motionOK && finePointer) {
+        let frame = 0;
+        let point = null;
+
+        const magnetize = () => {
+          frame = 0;
+          if (!point) return;
+
+          const rect = cta.getBoundingClientRect();
+          const x = ((point.x - rect.left) / rect.width - .5) * 8;
+          const y = ((point.y - rect.top) / rect.height - .5) * 4;
+
+          cta.style.setProperty('--cta-x', `${Math.max(-4, Math.min(4, x)).toFixed(2)}px`);
+          cta.style.setProperty('--cta-y', `${Math.max(-2, Math.min(2, y)).toFixed(2)}px`);
+        };
+
+        cta.addEventListener('pointerenter', () => cta.classList.add('is-magnetized'));
+        cta.addEventListener('pointermove', (event) => {
+          point = { x: event.clientX, y: event.clientY };
+          if (!frame) frame = requestAnimationFrame(magnetize);
+        });
+        cta.addEventListener('pointerleave', () => {
+          point = null;
+          if (frame) cancelAnimationFrame(frame);
+          frame = 0;
+          cta.classList.remove('is-magnetized');
+          cta.style.setProperty('--cta-x', '0px');
+          cta.style.setProperty('--cta-y', '0px');
+        });
+      }
 
       const modal = document.getElementById('serverModal');
       const overlay = document.getElementById('modalOverlay');
