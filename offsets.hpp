@@ -1,6 +1,7 @@
 #pragma once
 /* -------------------------------------------------------------
-/*                       nulls offsets                         
+/*                       servyy's offsets                         
+/*                        by servyy <3                           
 /* -------------------------------------------------------------
 #include <cstdint>
 #include <string>
