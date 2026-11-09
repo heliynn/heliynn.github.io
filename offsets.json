@@ -3,10 +3,10 @@
     "Roblox Version": "version-f0ea5da9412f4e35",
     "Dumper Version": "2.2.5",
     "Dumped With": "RbxDumperV2",
-    "Dumped At": "21:24 09/11/2026",
+    "Dumped At": "20:59 09/11/2026",
     "Source Code": "https://git.imtheo.lol/theo/RbxDumperV2",
     "Discord": "https://offsets.imtheo.lol/discord",
-    "Total Offsets": 522,
+    "Total Offsets": 521,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 149215160,
@@ -35,7 +35,7 @@
         "ModuleScript": {
             "IsCoreScript": 147,
             "GUID": 184,
-            "Hash": 840,
+            "Hash": 0,
             "ByteCode": 288
         },
         "Instance": {
@@ -54,7 +54,7 @@
             "StringLength": 16,
             "Adornee": 216,
             "Value": 160,
-            "AnimationId": 0
+            "AnimationId": 168
         },
         "HandleAdornment": {
             "CFrame": 256
@@ -139,7 +139,7 @@
             "PlaybackSpeed": 268,
             "Volume": 288,
             "SoundGroup": 208,
-            "IsPlaying": 0,
+            "IsPlaying": 304,
             "Looped": 301
         },
         "SpawnLocation": {
@@ -266,9 +266,9 @@
             "TextureId": 840,
             "Grip": 1172,
             "Enabled": 1185,
-            "CanBeDropped": 869,
+            "CanBeDropped": 1184,
             "ManualActivationOnly": 1186,
-            "RequiresHandle": 1029,
+            "RequiresHandle": 1187,
             "Activate": 50883600,
             "Deactivate": 50883776
         },
@@ -430,9 +430,7 @@
             "SunTextureId": 512,
             "MoonTextureId": 176,
             "SkyboxOrientation": 544,
-            "StarCount": 560,
-            "DrawAdv": 59728138,
-            "DrawCubeCallB": 58459407
+            "StarCount": 560
         },
         "Atmosphere": {
             "Density": 184,
@@ -502,12 +500,15 @@
             "Responsiveness": 648
         },
         "AnimationTrack": {
-            "Animation": 0,
-            "Animator": 0,
-            "Speed": 0,
-            "TimePosition": 4,
-            "Looped": 0,
-            "IsPlaying": 0
+            "Animation": 160,
+            "Animator": 248,
+            "Speed": 188,
+            "TimePosition": 192,
+            "Looped": 204,
+            "IsPlaying": 2576
+        },
+        "Animator": {
+            "ActiveAnimations": 2304
         },
         "LocalScript": {
             "GUID": 184,
@@ -598,8 +599,8 @@
             "LRUCache": 32,
             "Cache": 192,
             "AssetID": 16,
-            "MeshData": 64,
-            "ToMeshData": 64
+            "MeshData": 40,
+            "ToMeshData": 40
         },
         "LRUHolder": {
             "MemEnforcedLRUCache": 32
@@ -610,10 +611,10 @@
         "LRUNode": {
             "Next": 0,
             "AssetID": 16,
-            "CachedItem": 64
+            "CachedItem": 56
         },
         "CachedItem": {
-            "FileMeshData": 64
+            "FileMeshData": 40
         },
         "FileMeshData": {
             "AABBMin": 384,

@@ -13,12 +13,16 @@ namespace Offsets {
     }
 
     namespace AnimationTrack {
-         inline constexpr uintptr_t Animation = 0x0;
-         inline constexpr uintptr_t Animator = 0x0;
-         inline constexpr uintptr_t IsPlaying = 0x0;
-         inline constexpr uintptr_t Looped = 0x0;
-         inline constexpr uintptr_t Speed = 0x0;
-         inline constexpr uintptr_t TimePosition = 0x4;
+         inline constexpr uintptr_t Animation = 0xa0;
+         inline constexpr uintptr_t Animator = 0xf8;
+         inline constexpr uintptr_t IsPlaying = 0xa10;
+         inline constexpr uintptr_t Looped = 0xcc;
+         inline constexpr uintptr_t Speed = 0xbc;
+         inline constexpr uintptr_t TimePosition = 0xc0;
+    }
+
+    namespace Animator {
+         inline constexpr uintptr_t ActiveAnimations = 0x900;
     }
 
     namespace Atmosphere {
@@ -80,7 +84,7 @@ namespace Offsets {
     }
 
     namespace CachedItem {
-         inline constexpr uintptr_t FileMeshData = 0x40;
+         inline constexpr uintptr_t FileMeshData = 0x28;
     }
 
     namespace Camera {
@@ -352,7 +356,7 @@ namespace Offsets {
 
     namespace LRUNode {
          inline constexpr uintptr_t AssetID = 0x10;
-         inline constexpr uintptr_t CachedItem = 0x40;
+         inline constexpr uintptr_t CachedItem = 0x38;
          inline constexpr uintptr_t Next = 0x0;
     }
 
@@ -438,8 +442,8 @@ namespace Offsets {
          inline constexpr uintptr_t Cache = 0xc0;
          inline constexpr uintptr_t LRUCache = 0x20;
          inline constexpr uintptr_t LRUHolder = 0xc0;
-         inline constexpr uintptr_t MeshData = 0x40;
-         inline constexpr uintptr_t ToMeshData = 0x40;
+         inline constexpr uintptr_t MeshData = 0x28;
+         inline constexpr uintptr_t ToMeshData = 0x28;
     }
 
     namespace MeshData {
@@ -457,7 +461,7 @@ namespace Offsets {
 
     namespace Misc {
          inline constexpr uintptr_t Adornee = 0xd8;
-         inline constexpr uintptr_t AnimationId = 0x0;
+         inline constexpr uintptr_t AnimationId = 0xa8;
          inline constexpr uintptr_t StringLength = 0x10;
          inline constexpr uintptr_t Value = 0xa0;
     }
@@ -470,7 +474,7 @@ namespace Offsets {
     namespace ModuleScript {
          inline constexpr uintptr_t ByteCode = 0x120;
          inline constexpr uintptr_t GUID = 0xb8;
-         inline constexpr uintptr_t Hash = 0x348;
+         inline constexpr uintptr_t Hash = 0x0;
          inline constexpr uintptr_t IsCoreScript = 0x93;
     }
 
@@ -620,8 +624,6 @@ namespace Offsets {
     }
 
     namespace Sky {
-         inline constexpr uintptr_t DrawAdv = 0x38f610a;
-         inline constexpr uintptr_t DrawCubeCallB = 0x37c050f;
          inline constexpr uintptr_t MoonAngularSize = 0x22c;
          inline constexpr uintptr_t MoonTextureId = 0xb0;
          inline constexpr uintptr_t SkyboxBk = 0xe0;
@@ -643,7 +645,7 @@ namespace Offsets {
     }
 
     namespace Sound {
-         inline constexpr uintptr_t IsPlaying = 0x0;
+         inline constexpr uintptr_t IsPlaying = 0x130;
          inline constexpr uintptr_t Looped = 0x12d;
          inline constexpr uintptr_t PlaybackSpeed = 0x10c;
          inline constexpr uintptr_t RollOffMaxDistance = 0x110;
@@ -742,12 +744,12 @@ namespace Offsets {
 
     namespace Tool {
          inline constexpr uintptr_t Activate = 0x3086c10;
-         inline constexpr uintptr_t CanBeDropped = 0x365;
+         inline constexpr uintptr_t CanBeDropped = 0x4a0;
          inline constexpr uintptr_t Deactivate = 0x3086cc0;
          inline constexpr uintptr_t Enabled = 0x4a1;
          inline constexpr uintptr_t Grip = 0x494;
          inline constexpr uintptr_t ManualActivationOnly = 0x4a2;
-         inline constexpr uintptr_t RequiresHandle = 0x405;
+         inline constexpr uintptr_t RequiresHandle = 0x4a3;
          inline constexpr uintptr_t TextureId = 0x348;
          inline constexpr uintptr_t Tooltip = 0x450;
     }
