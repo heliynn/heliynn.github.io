@@ -536,6 +536,25 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   .skip { top: 6px; left: 6px; }
 }
 
+/* ---------------- entrance ---------------- */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes art-rise-in {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wordmark { animation: rise-in .75s var(--ease) .05s both; }
+  .statement { animation: rise-in .75s var(--ease) .12s both; }
+  .panel { animation: rise-in .8s var(--ease) .18s both; }
+  .art { animation: art-rise-in .9s var(--ease) .26s both; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
