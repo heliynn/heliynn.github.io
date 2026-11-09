@@ -285,6 +285,121 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   stroke-linejoin: round;
 }
 
+/* ---------------- discord server modal ---------------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, .7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: grid;
+  place-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.modal[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.modal__content {
+  position: relative;
+  background: #1a1b1e;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  color: var(--ink);
+  transform: scale(.9);
+  transition: transform .2s var(--ease);
+}
+
+.modal[aria-hidden="false"] .modal__content {
+  transform: scale(1);
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background .15s var(--ease), color .15s var(--ease);
+}
+
+.modal__close:hover,
+.modal__close:focus-visible {
+  color: var(--ink);
+  background: var(--muted);
+}
+
+.modal__servers {
+  display: grid;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.modal__server {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, .04);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.modal__server-image {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #000;
+}
+
+.modal__server-info {
+  display: grid;
+  gap: 4px;
+}
+
+.modal__server-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: .85rem;
+}
+
+.modal__server-role {
+  color: var(--muted);
+  font-size: .75rem;
+}
+
+.modal__server-invite {
+  justify-self: end;
+  align-self: center;
+  color: var(--ink-soft);
+  font-size: .75rem;
+  text-decoration: none;
+}
+
+.modal__server-invite:hover { color: var(--ink); }
+
 /* ---------------- fallback ---------------- */
 
 .noscript {

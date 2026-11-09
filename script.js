@@ -104,15 +104,16 @@
   if (notes) {
     (S.notes || []).forEach((item) => notes.append(noteRow(item)));
 
-    if (S.server && S.server.href) {
-      const cta = document.createElement('a');
-      cta.className = 'panel__cta';
-      cta.href = S.server.href;
-      cta.target = '_blank';
-      cta.rel = 'noreferrer';
+    // CTA button that opens the server modal
+    if (S.server && S.server.label) {
+      const ctaBtn = document.createElement('button');
+      ctaBtn.type = 'button';
+      ctaBtn.className = 'panel__cta';
+      ctaBtn.setAttribute('aria-label', S.server.label);
+      ctaBtn.setAttribute('data-modal', 'server');
 
       const ctaLabel = document.createElement('span');
-      ctaLabel.textContent = S.server.label || 'join the discord';
+      ctaLabel.textContent = S.server.label || 'join the sources server';
 
       const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       icon.setAttribute('class', 'panel__cta-icon');
@@ -120,8 +121,64 @@
       icon.setAttribute('aria-hidden', 'true');
       icon.innerHTML = '<path d="M5.3 10.7 10.7 5.3M6.4 5.3h4.3v4.3" />';
 
-      cta.append(ctaLabel, icon);
-      notes.after(cta);
+      ctaBtn.append(ctaLabel, icon);
+      notes.after(ctaBtn);
+    }
+
+    // Render the server modal with multiple server invites
+    if (S.servers && S.servers.length) {
+      const modal = document.getElementById('serverModal');
+      const overlay = document.getElementById('modalOverlay');
+      const modalContent = document.getElementById('modalContent');
+      const modalServers = document.getElementById('modalServers');
+      const modalClose = document.getElementById('modalClose');
+
+      // Open modal
+      const openModal = () => {
+        modal.setAttribute('aria-hidden', 'false');
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      };
+
+      // Close modal
+      const closeModal = () => {
+        modal.setAttribute('aria-hidden', 'true');
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      };
+
+      // Open on CTA button click
+      const ctaBtn = document.querySelector('[data-modal="server"]');
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', openModal);
+      }
+
+      // Close on overlay click, esc, or close button
+      overlay.addEventListener('click', closeModal);
+      modalClose.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Render server cards
+      const renderServers = () => {
+        modalServers.innerHTML = '';
+        (S.servers || []).forEach((s) => {
+          const card = document.createElement('div');
+          card.className = 'modal__server';
+          card.innerHTML = `
+            <img class="modal__server-image" src="${s.image || 'https://i.imgur.com/placeholder.png'}" alt="${s.name}">
+            <div class="modal__server-info">
+              <div class="modal__server-name">${s.name}</div>
+              <div class="modal__server-role">Role: ${s.role}</div>
+            </div>
+            <a class="modal__server-invite" href="https://discord.gg/${s.invite}" target="_blank" rel="noreferrer">Join ${s.invite}</a>
+          `;
+          modalServers.append(card);
+        });
+      };
+
+      renderServers();
     }
   }
 

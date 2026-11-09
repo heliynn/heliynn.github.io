@@ -26,6 +26,26 @@ window.SITE = {
     label: "join the sources server",
     href: "https://discord.gg/zJGbBw3yep"
   },
+  servers: [
+    {
+      name: "Sources",
+      invite: "zJGbBw3yep",
+      role: "Member",
+      image: "https://i.imgur.com/example1.png"
+    },
+    {
+      name: "AI Tools",
+      invite: "ai-tools-discord",
+      role: "Developer",
+      image: "https://i.imgur.com/example2.png"
+    },
+    {
+      name: "Flashcards",
+      invite: "flashcards-discord",
+      role: "Student",
+      image: "https://i.imgur.com/example3.png"
+    }
+  ],
 
   /* The two pictures at the edges. Delete a line to hide one.
      Update width and height if you swap in a different image. */
