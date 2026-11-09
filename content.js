@@ -21,42 +21,34 @@ window.SITE = {
     { label: "offsets", value: "offsets.json", href: "offsets.json" }
   ],
 
-  /* The button under the rows. */
+  /* The button under the rows. It opens the server list. */
   server: {
-    label: "join the sources server",
-    href: "https://discord.gg/zJGbBw3yep"
+    label: "join the servers"
   },
+
+  /* The Discord servers shown in the popup.
+     `invite` is the part after https://discord.gg/
+     `role` is shown under the server name.
+     `image` is the server icon. */
   servers: [
     {
-      name: "Sources",
+      name: "servyy's archive",
       invite: "zJGbBw3yep",
-      role: "Member",
-      image: "https://i.imgur.com/example1.png"
-    },
-    {
-      name: "AI Tools",
-      invite: "ai-tools-discord",
-      role: "Developer",
-      image: "https://i.imgur.com/example2.png"
-    },
-    {
-      name: "Flashcards",
-      invite: "flashcards-discord",
-      role: "Student",
-      image: "https://i.imgur.com/example3.png"
+      role: "Owner",
+      image: "assets/server-archive.png?v=15"
     },
     {
       name: "Sources.gg",
       invite: "sourcesgg",
       role: "Master Poster",
-      image: "https://i.imgur.com/example4.png"
+      image: "assets/server-sourcesgg.png?v=15"
     }
   ],
 
   /* The two pictures at the edges. Delete a line to hide one.
      Update width and height if you swap in a different image. */
   art: {
-    left: { src: "assets/art-left.png?v=14", width: 217, height: 320 },
-    right: { src: "assets/art-right.png?v=14", width: 228, height: 340 }
+    left: { src: "assets/art-left.png?v=15", width: 217, height: 320 },
+    right: { src: "assets/art-right.png?v=15", width: 228, height: 340 }
   }
 };
