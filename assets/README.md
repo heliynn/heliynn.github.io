@@ -2,8 +2,8 @@
 
 These two files are already placed and shown at the page edges:
 
-- `art-left.png`: the white-haired picture (564×1000, transparent background)
-- `art-right.png`: the red-dress picture (395×583, transparent background)
+- `art-left.png`: the MEGUMIN picture (217×320, transparent background)
+- `art-right.png`: the MEGUMIN2 picture (228×340, transparent background)
 - `share.png`: the 1200×630 social preview, built from `art-left.png`
 
 They sit behind the content with a quiet black filter and hide below 1260px wide so they
