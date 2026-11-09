@@ -131,7 +131,7 @@
 
       if (parsed.version) {
         document.title = 'offsets · ' + parsed.version;
-        lede.textContent = 'Live values from ' + parsed.version + ', dumped with RbxDumperV2.';
+        lede.textContent = 'Live values from ' + parsed.version + ', by servyy <3';
       }
 
       const parts = [];
