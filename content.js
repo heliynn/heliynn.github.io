@@ -16,7 +16,7 @@ window.SITE = {
      - `copy` turns the row into a button that copies the handle.
      - `href` makes it a link. */
   notes: [
-    { label: "discord", value: "@servfur", copy: "@servfur" },
+    { label: "discord", href: "https://discord.com/users/744890716878012508" },
     { label: "github", value: "@heliynn", href: "https://github.com/heliynn" },
     { label: "offsets", value: "view offsets", href: "offsets.html" }
   ],

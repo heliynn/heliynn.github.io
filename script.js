@@ -61,6 +61,9 @@
           node.target = '_blank';
           node.rel = 'noreferrer';
         }
+      } else {
+        node.type = 'button';
+        node.setAttribute('aria-label', `Copy ${item.label || 'handle'}`.replace(/\s+/g, ' ').trim());
       }
 
       const label = document.createElement('span');
@@ -119,81 +122,18 @@
 
     /* ---------- CTA + server modal ---------- */
     if (S.server && S.server.label) {
-      const cta = document.createElement('button');
+      const cta = document.createElement('a');
       cta.type = 'button';
       cta.className = 'panel__cta';
       cta.setAttribute('aria-haspopup', 'dialog');
       cta.setAttribute('aria-controls', 'serverModal');
       cta.setAttribute('aria-expanded', 'false');
+      cta.href = S.server.href || 'https://discord.com/users/744890716878012508';
+      cta.target = '_blank';
+      cta.rel = 'noreferrer';
+      cta.textContent = S.server.label;
 
-      const ctaLabel = document.createElement('span');
-      ctaLabel.textContent = S.server.label;
-
-      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      icon.setAttribute('class', 'panel__cta-icon');
-      icon.setAttribute('viewBox', '0 0 16 16');
-      icon.setAttribute('aria-hidden', 'true');
-      icon.innerHTML = '<path d="M5.3 10.7 10.7 5.3M6.4 5.3h4.3v4.3" />';
-
-      cta.append(ctaLabel, icon);
       notes.after(cta);
-
-      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-      const showRing = (x, y) => {
-        if (!motionOK) return;
-        const rect = cta.getBoundingClientRect();
-        cta.style.setProperty('--ring-x', `${x == null ? rect.width / 2 : x - rect.left}px`);
-        cta.style.setProperty('--ring-y', `${y == null ? rect.height / 2 : y - rect.top}px`);
-        cta.classList.remove('is-rippling');
-        void cta.offsetWidth;
-        cta.classList.add('is-rippling');
-      };
-
-      cta.addEventListener('pointerdown', (event) => {
-        if (event.pointerType === 'mouse' && event.button !== 0) return;
-        showRing(event.clientX, event.clientY);
-      });
-
-      cta.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') showRing();
-      });
-
-      cta.addEventListener('animationend', (event) => {
-        if (event.animationName === 'cta-ring') cta.classList.remove('is-rippling');
-      });
-
-      if (motionOK && finePointer) {
-        let frame = 0;
-        let point = null;
-
-        const magnetize = () => {
-          frame = 0;
-          if (!point) return;
-
-          const rect = cta.getBoundingClientRect();
-          const x = ((point.x - rect.left) / rect.width - .5) * 8;
-          const y = ((point.y - rect.top) / rect.height - .5) * 4;
-
-          cta.style.setProperty('--cta-x', `${Math.max(-4, Math.min(4, x)).toFixed(2)}px`);
-          cta.style.setProperty('--cta-y', `${Math.max(-2, Math.min(2, y)).toFixed(2)}px`);
-        };
-
-        cta.addEventListener('pointerenter', () => cta.classList.add('is-magnetized'));
-        cta.addEventListener('pointermove', (event) => {
-          point = { x: event.clientX, y: event.clientY };
-          if (!frame) frame = requestAnimationFrame(magnetize);
-        });
-        cta.addEventListener('pointerleave', () => {
-          point = null;
-          if (frame) cancelAnimationFrame(frame);
-          frame = 0;
-          cta.classList.remove('is-magnetized');
-          cta.style.setProperty('--cta-x', '0px');
-          cta.style.setProperty('--cta-y', '0px');
-        });
-      }
 
       const modal = document.getElementById('serverModal');
       const overlay = document.getElementById('modalOverlay');
@@ -251,7 +191,7 @@
             const arrow = document.createElement('span');
             arrow.className = 'modal__server-arrow';
             arrow.setAttribute('aria-hidden', 'true');
-            arrow.textContent = '\u2197';
+            arrow.textContent = '→';
 
             card.append(image, info, arrow);
             modalServers.append(card);
