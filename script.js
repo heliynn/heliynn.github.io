@@ -198,7 +198,10 @@
 
         renderServers();
 
-        cta.addEventListener('click', openModal);
+        cta.addEventListener('click', (event) => {
+        event.preventDefault();
+        openModal();
+      });
         overlay.addEventListener('click', closeModal);
         modalClose.addEventListener('click', closeModal);
 
