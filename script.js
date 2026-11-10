@@ -129,8 +129,6 @@
       cta.setAttribute('aria-controls', 'serverModal');
       cta.setAttribute('aria-expanded', 'false');
       cta.href = S.server.href || 'https://discord.com/users/744890716878012508';
-      cta.target = '_blank';
-      cta.rel = 'noreferrer';
       cta.textContent = S.server.label;
 
       notes.after(cta);
