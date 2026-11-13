@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "21:36 13/11/2026",
+    "Dumped At": "22:18 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
     "Total Offsets": 710,
@@ -66,7 +66,7 @@
             "JobId": 264,
             "Workspace": 360,
             "ScriptContext": 1088,
-            "PlaceVersion": 52,
+            "PlaceVersion": 444,
             "ServerIP": 1440,
             "ToRenderView1": 472,
             "ToRenderView2": 8,
@@ -359,7 +359,7 @@
         "GuiObject": {
             "Position": 680,
             "Size": 712,
-            "Visible": 1933,
+            "Visible": 3725,
             "Image": 1648,
             "Text": 2608,
             "RichText": 1992,
@@ -399,6 +399,15 @@
         "Textures": {
             "Decal_Texture": 456,
             "Texture_Texture": 456
+        },
+        "Highlight": {
+            "FillColor": 176,
+            "OutlineColor": 188,
+            "FillTransparency": 204,
+            "OutlineTransparency": 212,
+            "Adornee": 168,
+            "DepthMode": 200,
+            "Enabled": 220
         },
         "Lighting": {
             "ClockTime": 176,
@@ -547,6 +556,7 @@
             "StateBase": 104,
             "TValueSize": 16,
             "StateGlobal": 96,
+            "GlobalMainThread": 96,
             "StateCI": 120,
             "luaB_assert": 95086848,
             "luaB_error": 95064912,
@@ -584,8 +594,7 @@
             "Table_lsizenode": 12,
             "Node_Size": 32,
             "Node_Key": 16,
-            "Node_KeyTag": 28,
-            "GlobalMainThread": 96
+            "Node_KeyTag": 28
         },
         "Closure": {
             "isC": 6
@@ -607,6 +616,12 @@
             "Tt": 0,
             "Stack": 88,
             "StackLast": 72
+        },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
         },
         "LuaB": {
             "LuaBAssert": 95086848,
@@ -740,8 +755,8 @@
             "LRUCache": 32,
             "Cache": 192,
             "AssetID": 16,
-            "MeshData": 64,
-            "ToMeshData": 64
+            "MeshData": 40,
+            "ToMeshData": 40
         },
         "LRUHolder": {
             "MemEnforcedLRUCache": 32
@@ -752,10 +767,10 @@
         "LRUNode": {
             "Next": 0,
             "AssetID": 16,
-            "CachedItem": 64
+            "CachedItem": 56
         },
         "CachedItem": {
-            "FileMeshData": 64
+            "FileMeshData": 40
         },
         "FileMeshData": {
             "AABBMin": 384,
@@ -913,12 +928,6 @@
             "NodeValue": 48,
             "ValueOffset": 32
         },
-        "LuauGlobal": {
-            "mainthread": 96
-        },
-        "global_State": {
-            "mainthread": 96
-        },
         "VmWrapper": {
             "LuaState": 40
         },
@@ -936,15 +945,6 @@
             "RenderFastClusterOcclusionCulling4": 0,
             "SecondsBetweenDynamicVariableReloading": 136478280
         },
-        "Highlight": {
-            "Adornee": 168,
-            "DepthMode": 200,
-            "Enabled": 220,
-            "FillColor": 176,
-            "FillTransparency": 204,
-            "OutlineColor": 188,
-            "OutlineTransparency": 212
-        },
         "StatsItem": {
             "Value": 5641
         },
@@ -953,7 +953,18 @@
             "Part1": 272
         }
     },
-    "Inherited": {},
+    "Inherited": {
+        "Weld.Part1": [
+            "GuiObject.ScreenGui_Enabled",
+            "Instance.GetAttribute",
+            "Lighting.ShadowSoftness",
+            "Luau.Node_Key",
+            "Luau.Node_KeyTag",
+            "Luau.Node_Size",
+            "ScriptContext.VmWrapper",
+            "VmWrapper.LuaState"
+        ]
+    },
     "Carried": {
         "Source": "OriginExternal/util/offsets.h",
         "Rows": [
@@ -983,10 +994,6 @@
             "Highlight.Adornee",
             "Highlight.DepthMode",
             "Highlight.Enabled",
-            "Highlight.FillColor",
-            "Highlight.FillTransparency",
-            "Highlight.OutlineColor",
-            "Highlight.OutlineTransparency",
             "RenderView.LightingValid",
             "StatsItem.Value",
             "TextButton.AutoButtonColor",

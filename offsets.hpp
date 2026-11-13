@@ -90,7 +90,7 @@ namespace Offsets {
     }
 
     namespace CachedItem {
-         inline constexpr uintptr_t FileMeshData = 0x40;
+         inline constexpr uintptr_t FileMeshData = 0x28;
     }
 
     namespace Camera {
@@ -174,7 +174,7 @@ namespace Offsets {
          inline constexpr uintptr_t GameLoaded = 0x5b8;
          inline constexpr uintptr_t JobId = 0x108;
          inline constexpr uintptr_t PlaceId = 0x1a0;
-         inline constexpr uintptr_t PlaceVersion = 0x34;
+         inline constexpr uintptr_t PlaceVersion = 0x1bc;
          inline constexpr uintptr_t PrimitiveCount = 0x1a5;
          inline constexpr uintptr_t ScriptContext = 0x440;
          inline constexpr uintptr_t ServerIP = 0x5a0;
@@ -326,9 +326,8 @@ namespace Offsets {
          inline constexpr uintptr_t Size = 0x2c8;
          inline constexpr uintptr_t Text = 0xa30;
          inline constexpr uintptr_t TextColor3 = 0xae0;
-         inline constexpr uintptr_t Visible = 0x78d;
+         inline constexpr uintptr_t Visible = 0xe8d;
          inline constexpr uintptr_t ZIndex = 0x33c;
-         inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
          inline constexpr uintptr_t Active = 0x570;
          inline constexpr uintptr_t AnchorPoint = 0x520;
          inline constexpr uintptr_t AutomaticSize = 0x528;
@@ -337,6 +336,7 @@ namespace Offsets {
          inline constexpr uintptr_t ClipsDescendants = 0x571;
          inline constexpr uintptr_t GuiState = 0x540;
          inline constexpr uintptr_t Interactable = 0x573;
+         inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
          inline constexpr uintptr_t Selectable = 0x574;
          inline constexpr uintptr_t SelectionOrder = 0x560;
          inline constexpr uintptr_t SizeConstraint = 0x568;
@@ -344,6 +344,16 @@ namespace Offsets {
 
     namespace HandleAdornment {
          inline constexpr uintptr_t CFrame = 0x100;
+    }
+
+    namespace Highlight {
+         inline constexpr uintptr_t FillColor = 0xb0;
+         inline constexpr uintptr_t FillTransparency = 0xcc;
+         inline constexpr uintptr_t OutlineColor = 0xbc;
+         inline constexpr uintptr_t OutlineTransparency = 0xd4;
+         inline constexpr uintptr_t Adornee = 0xA8;
+         inline constexpr uintptr_t DepthMode = 0xC8;
+         inline constexpr uintptr_t Enabled = 0xDC;
     }
 
     namespace Humanoid {
@@ -413,7 +423,7 @@ namespace Offsets {
 
     namespace LRUNode {
          inline constexpr uintptr_t AssetID = 0x10;
-         inline constexpr uintptr_t CachedItem = 0x40;
+         inline constexpr uintptr_t CachedItem = 0x38;
          inline constexpr uintptr_t Next = 0x0;
     }
 
@@ -493,6 +503,7 @@ namespace Offsets {
 
     namespace Luau {
          inline constexpr uintptr_t ClosureIsC = 0x6;
+         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t StateBase = 0x68;
          inline constexpr uintptr_t StateCI = 0x78;
          inline constexpr uintptr_t StateGlobal = 0x60;
@@ -532,10 +543,13 @@ namespace Offsets {
          inline constexpr uintptr_t luaB_tostring = 0x5aaf490;
          inline constexpr uintptr_t luaB_type = 0x5aac7a0;
          inline constexpr uintptr_t luaB_typeof = 0x5aad300;
-         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t Node_Key = 0x10;
          inline constexpr uintptr_t Node_KeyTag = 0x1C;
          inline constexpr uintptr_t Node_Size = 0x20;
+    }
+
+    namespace LuauGlobal {
+         inline constexpr uintptr_t mainthread = 0x60;
     }
 
     namespace MaterialColors {
@@ -581,8 +595,8 @@ namespace Offsets {
          inline constexpr uintptr_t Cache = 0xc0;
          inline constexpr uintptr_t LRUCache = 0x20;
          inline constexpr uintptr_t LRUHolder = 0xc0;
-         inline constexpr uintptr_t MeshData = 0x40;
-         inline constexpr uintptr_t ToMeshData = 0x40;
+         inline constexpr uintptr_t MeshData = 0x28;
+         inline constexpr uintptr_t ToMeshData = 0x28;
     }
 
     namespace MeshData {
@@ -1016,6 +1030,10 @@ namespace Offsets {
          inline constexpr uintptr_t HullsEnd = 0x38;
     }
 
+    namespace global_State {
+         inline constexpr uintptr_t mainthread = 0x60;
+    }
+
     namespace lua_State {
          inline constexpr uintptr_t Base = 0x68;
          inline constexpr uintptr_t Ci = 0x78;
@@ -1024,18 +1042,6 @@ namespace Offsets {
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
          inline constexpr uintptr_t Tt = 0x0;
-    }
-
-    namespace LuauGlobal {
-         inline constexpr uintptr_t mainthread = 0x60;
-    }
-
-    namespace VmWrapper {
-         inline constexpr uintptr_t LuaState = 0x28;
-    }
-
-    namespace global_State {
-         inline constexpr uintptr_t mainthread = 0x60;
     }
 
     namespace Descriptor {
@@ -1054,18 +1060,12 @@ namespace Offsets {
          inline constexpr uintptr_t SecondsBetweenDynamicVariableReloading = 0x8227E48;
     }
 
-    namespace Highlight {
-         inline constexpr uintptr_t Adornee = 0xA8;
-         inline constexpr uintptr_t DepthMode = 0xC8;
-         inline constexpr uintptr_t Enabled = 0xDC;
-         inline constexpr uintptr_t FillColor = 0xB0;
-         inline constexpr uintptr_t FillTransparency = 0xCC;
-         inline constexpr uintptr_t OutlineColor = 0xBC;
-         inline constexpr uintptr_t OutlineTransparency = 0xD4;
-    }
-
     namespace StatsItem {
          inline constexpr uintptr_t Value = 0x1609;
+    }
+
+    namespace VmWrapper {
+         inline constexpr uintptr_t LuaState = 0x28;
     }
 
     namespace Weld {
