@@ -205,30 +205,13 @@ a { color: inherit; }
 }
 
 .cat {
-  position: relative;
   border: 1px solid var(--line);
   border-radius: 5px;
   background: rgba(9, 9, 11, .78);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   overflow: hidden;
-  transition: border-color .3s ease;
 }
-
-.cat::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(142deg, rgba(255, 63, 44, .2) 0%, rgba(255, 63, 44, .06) 40%, rgba(255, 63, 44, 0) 76%);
-  opacity: 0;
-  transition: opacity .35s ease;
-}
-
-.cat:hover { border-color: rgba(255, 90, 68, .3); }
-.cat:hover::before { opacity: 1; }
-
-.cat > * { position: relative; z-index: 1; }
 
 .cat__head {
   display: flex;
