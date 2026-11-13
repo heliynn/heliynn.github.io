@@ -39,20 +39,20 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle, rgba(255, 74, 52, .5) 0 1.25px, transparent 1.5px) 0 0 / 8px 8px,
-    radial-gradient(52% 42% at 84% 2%, rgba(224, 32, 20, .38), transparent 70%),
-    radial-gradient(42% 34% at 8% 10%, rgba(130, 16, 10, .18), transparent 72%),
-    linear-gradient(#0c0c0e 0%, #0a0a0c 55%, #060607 100%);
-  -webkit-mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, rgba(0, 0, 0, .55) 48%, transparent 76%);
-  mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, rgba(0, 0, 0, .55) 48%, transparent 76%);
+    radial-gradient(circle, rgba(248, 54, 34, .42) 0 2.3px, rgba(248, 54, 34, 0) 2.6px) 0 0 / 5.6px 5.6px,
+    radial-gradient(50% 38% at 86% 0%, rgba(226, 32, 20, .34), transparent 72%),
+    linear-gradient(118deg, transparent 40%, rgba(150, 16, 9, .14) 64%, transparent 88%),
+    linear-gradient(#0b0b0d 0%, #09090b 55%, #060607 100%);
+  -webkit-mask-image: radial-gradient(96% 68% at 88% -4%, rgba(0, 0, 0, .95) 0%, rgba(0, 0, 0, .45) 42%, rgba(0, 0, 0, .12) 68%, transparent 86%);
+  mask-image: radial-gradient(96% 68% at 88% -4%, rgba(0, 0, 0, .95) 0%, rgba(0, 0, 0, .45) 42%, rgba(0, 0, 0, .12) 68%, transparent 86%);
   will-change: background-position;
-  animation: halftone-drift 34s linear infinite;
+  animation: halftone-drift 38s linear infinite;
 }
 
 @keyframes halftone-drift {
   0% { background-position: 0 0, 0 0, 0 0, 0 0; }
-  50% { background-position: 4px 4px, 0 0, 0 0, 0 0; }
-  100% { background-position: 8px 8px, 0 0, 0 0, 0 0; }
+  50% { background-position: -2.8px 1.4px, 0 0, 0 0, 0 0; }
+  100% { background-position: -5.6px 2.8px, 0 0, 0 0, 0 0; }
 }
 
 /* header unit — top bar + search join into one pinned header */
@@ -208,7 +208,9 @@ a { color: inherit; }
   position: relative;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: var(--raised);
+  background: rgba(9, 9, 11, .78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   overflow: hidden;
   transition: border-color .3s ease;
 }

@@ -64,58 +64,64 @@ h1, p { margin: 0; }
   background: #08080a;
 }
 
-/* soft red bloom the dot field sits inside */
+/* red bloom the dot field is cut out of */
 .backdrop::before {
   content: "";
   position: absolute;
-  inset: -20%;
+  inset: -25%;
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(46% 42% at 88% 6%, rgba(240, 48, 32, .78), transparent 70%),
-    radial-gradient(38% 34% at 64% 38%, rgba(170, 20, 12, .46), transparent 74%),
-    radial-gradient(46% 44% at 8% 86%, rgba(124, 14, 9, .3), transparent 76%);
+    radial-gradient(34% 46% at 86% -12%, rgba(255, 46, 24, .8), transparent 70%),
+    linear-gradient(118deg, transparent 30%, rgba(196, 22, 12, .3) 56%, transparent 84%),
+    radial-gradient(30% 28% at 22% 74%, rgba(118, 14, 8, .18), transparent 78%);
   will-change: transform, opacity;
-  animation: halftone-glow 28s ease-in-out infinite;
+  animation: halftone-bloom 30s ease-in-out infinite;
 }
 
-/* dot field — small red dots, larger toward the top right */
+/* dense dot grid — dots almost touch, like a printed halftone */
 .backdrop__art {
   position: absolute;
-  inset: 0;
+  inset: -2px;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(255, 82, 60, .85) 0 1.5px, transparent 1.8px);
-  background-size: 8px 8px;
-  -webkit-mask-image: radial-gradient(118% 100% at 76% 14%, #000 0%, rgba(0, 0, 0, .7) 38%, rgba(0, 0, 0, .28) 66%, transparent 88%);
-  mask-image: radial-gradient(118% 100% at 76% 14%, #000 0%, rgba(0, 0, 0, .7) 38%, rgba(0, 0, 0, .28) 66%, transparent 88%);
-  will-change: background-position, transform;
-  animation: halftone-drift 32s linear infinite;
+  background-image: radial-gradient(circle, rgba(248, 54, 34, .88) 0 2.4px, rgba(248, 54, 34, 0) 2.7px);
+  background-size: 5.6px 5.6px;
+  background-position: 0 0;
+  /* one soft diagonal ramp: dots crowd in from the top right, gone bottom left */
+  -webkit-mask-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, .16) 24%, rgba(0, 0, 0, .58) 44%, #000 60%, #000 100%);
+  mask-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, .16) 24%, rgba(0, 0, 0, .58) 44%, #000 60%, #000 100%);
+  will-change: transform;
+  animation: halftone-breathe 44s ease-in-out infinite;
 }
 
-/* cool dots bleeding in bottom left so the field is not one flat red */
+/* second, finer field crossing the first — gives the wave its interference */
 .backdrop__art::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(236, 238, 244, .3) 0 1px, transparent 1.25px);
-  background-size: 6px 6px;
-  -webkit-mask-image: radial-gradient(90% 80% at 14% 86%, #000 0%, rgba(0, 0, 0, .38) 46%, transparent 74%);
-  mask-image: radial-gradient(90% 80% at 14% 86%, #000 0%, rgba(0, 0, 0, .38) 46%, transparent 74%);
-  animation: halftone-drift 38s linear infinite reverse;
+  inset: 0 -1140px 0 0;
+  background-image: radial-gradient(circle, rgba(255, 96, 62, .95) 0 2.4px, rgba(255, 96, 62, 0) 2.7px);
+  background-size: 5.6px 5.6px;
+  -webkit-mask-image: repeating-linear-gradient(118deg, rgba(0, 0, 0, 0) 0 130px, rgba(0, 0, 0, .38) 220px, rgba(0, 0, 0, .8) 300px, rgba(0, 0, 0, .3) 400px, rgba(0, 0, 0, 0) 500px);
+  mask-image: repeating-linear-gradient(118deg, rgba(0, 0, 0, 0) 0 130px, rgba(0, 0, 0, .38) 220px, rgba(0, 0, 0, .8) 300px, rgba(0, 0, 0, .3) 400px, rgba(0, 0, 0, 0) 500px);
+  will-change: transform;
+  animation: halftone-crest-a 52s linear infinite;
 }
 
-/* coarse dots in the brightest corner */
+/* second crest, finer dots crossing the first the other way */
 .backdrop__art::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(245, 40, 24, .9) 0 2.6px, transparent 3px);
-  background-size: 14px 14px;
-  -webkit-mask-image: radial-gradient(46% 42% at 94% 0%, #000 0%, rgba(0, 0, 0, .38) 52%, transparent 78%);
-  mask-image: radial-gradient(46% 42% at 94% 0%, #000 0%, rgba(0, 0, 0, .38) 52%, transparent 78%);
-  animation: halftone-drift-lg 46s linear infinite reverse;
+  inset: 0 0 0 -840px;
+  background-image: radial-gradient(circle, rgba(255, 96, 70, .85) 0 1.45px, rgba(255, 96, 70, 0) 1.7px);
+  background-size: 4.2px 4.2px;
+  -webkit-mask-image: repeating-linear-gradient(62deg, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .3) 210px, rgba(0, 0, 0, .62) 290px, rgba(0, 0, 0, 0) 400px);
+  mask-image: repeating-linear-gradient(62deg, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .3) 210px, rgba(0, 0, 0, .62) 290px, rgba(0, 0, 0, 0) 400px);
+  will-change: transform;
+  animation: halftone-crest-b 68s linear infinite;
 }
 
+/* black ink the dots dissolve into */
 .backdrop::after {
   content: "";
   position: absolute;
@@ -123,25 +129,35 @@ h1, p { margin: 0; }
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(88% 68% at 46% 38%, transparent 18%, rgba(5, 5, 7, .8) 100%),
-    linear-gradient(180deg, transparent 55%, rgba(5, 5, 7, .55) 100%);
+    radial-gradient(58% 52% at 0% 88%, rgba(5, 5, 7, .995) 0%, rgba(5, 5, 7, .92) 40%, rgba(5, 5, 7, 0) 76%),
+    radial-gradient(44% 66% at -8% 14%, rgba(5, 5, 7, .97) 0%, rgba(5, 5, 7, .68) 44%, rgba(5, 5, 7, 0) 80%),
+    radial-gradient(48% 44% at 32% 110%, rgba(5, 5, 7, .95) 0%, rgba(5, 5, 7, .48) 52%, rgba(5, 5, 7, 0) 84%),
+    radial-gradient(122% 90% at 60% 34%, transparent 42%, rgba(5, 5, 7, .7) 100%),
+    radial-gradient(46% 40% at 100% 96%, rgba(5, 5, 7, .8) 0%, rgba(5, 5, 7, .35) 50%, rgba(5, 5, 7, 0) 82%);
 }
 
-@keyframes halftone-drift {
-  0% { background-position: 0 0; transform: translate3d(0, 0, 0); }
-  50% { background-position: 4px 4px; transform: translate3d(-1%, .8%, 0); }
-  100% { background-position: 8px 8px; transform: translate3d(0, 0, 0); }
+/* shifts are whole multiples of both the dot grid and the band period,
+   so the loop never snaps */
+@keyframes halftone-crest-a {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-1120px, 0, 0); }
 }
 
-@keyframes halftone-drift-lg {
-  0% { background-position: 0 0; transform: translate3d(0, 0, 0); }
-  50% { background-position: 7px 7px; transform: translate3d(.8%, -.6%, 0); }
-  100% { background-position: 14px 14px; transform: translate3d(0, 0, 0); }
+@keyframes halftone-crest-b {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(840px, 0, 0); }
 }
 
-@keyframes halftone-glow {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .92; }
-  50% { transform: translate3d(-2%, 1.4%, 0) scale(1.06); opacity: 1; }
+@keyframes halftone-breathe {
+  0%,
+  100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-1.2%, .8%, 0); }
+}
+
+@keyframes halftone-bloom {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: .95; }
+  50% { transform: translate3d(-2.2%, 1.8%, 0) scale(1.05); opacity: 1; }
 }
 
 /* ---------------- skip link ---------------- */
