@@ -72,8 +72,8 @@ h1, p { margin: 0; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(32% 36% at 96% -6%, rgba(224, 34, 16, .55), transparent 74%),
-    linear-gradient(118deg, rgba(60, 7, 5, .48) 0%, rgba(112, 13, 7, .36) 46%, rgba(46, 5, 4, .48) 100%);
+    radial-gradient(32% 36% at 96% -6%, rgba(206, 30, 14, .3), transparent 74%),
+    linear-gradient(118deg, rgba(46, 6, 4, .4) 0%, rgba(76, 9, 5, .24) 46%, rgba(34, 4, 3, .4) 100%);
   will-change: transform, opacity;
   animation: halftone-bloom 30s ease-in-out infinite;
 }
@@ -83,7 +83,7 @@ h1, p { margin: 0; }
   position: absolute;
   inset: -2px;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(206, 34, 18, .56) 0 2.4px, rgba(206, 34, 18, 0) 2.9px);
+  background-image: radial-gradient(circle, rgba(190, 32, 17, .3) 0 2.4px, rgba(190, 32, 17, 0) 2.9px);
   background-size: 5.6px 5.6px;
   background-position: 0 0;
   /* dots cover the whole field; the dark patches are cut over them */
@@ -97,7 +97,7 @@ h1, p { margin: 0; }
   position: absolute;
   inset: 0;
   inset: 0 -1120px 0 0;
-  background-image: radial-gradient(circle, rgba(206, 78, 54, .34) 0 2.4px, rgba(206, 78, 54, 0) 2.9px);
+  background-image: radial-gradient(circle, rgba(198, 70, 48, .24) 0 2.4px, rgba(198, 70, 48, 0) 2.9px);
   background-size: 5.6px 5.6px;
   -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
@@ -126,9 +126,10 @@ h1, p { margin: 0; }
   z-index: 2;
   pointer-events: none;
   background:
+    linear-gradient(rgba(6, 6, 8, .5), rgba(6, 6, 8, .5)),
     radial-gradient(46% 46% at 4% 96%, rgba(5, 5, 7, .9) 0%, rgba(5, 5, 7, .45) 46%, rgba(5, 5, 7, 0) 80%),
     radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .72) 0%, rgba(5, 5, 7, .22) 50%, rgba(5, 5, 7, 0) 84%),
-    radial-gradient(120% 96% at 54% 34%, transparent 54%, rgba(5, 5, 7, .7) 100%),
+    radial-gradient(120% 96% at 54% 34%, transparent 44%, rgba(5, 5, 7, .84) 100%),
     linear-gradient(90deg, rgba(5, 5, 7, .45) 0%, rgba(5, 5, 7, 0) 12%),
     linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
 }
