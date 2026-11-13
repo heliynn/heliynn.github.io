@@ -4,7 +4,7 @@
     "Dumped At": "21:36 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
-    "Total Offsets": 642,
+    "Total Offsets": 710,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 150070280,
@@ -371,7 +371,18 @@
             "BackgroundTransparency": 764,
             "Rotation": 208,
             "ImageRectOffset": 1988,
-            "ScreenGui_Enabled": 608
+            "ScreenGui_Enabled": 608,
+            "Active": 1392,
+            "AnchorPoint": 1312,
+            "AutomaticSize": 1320,
+            "BorderMode": 1328,
+            "BorderSizePixel": 1332,
+            "ClipsDescendants": 1393,
+            "GuiState": 1344,
+            "Interactable": 1395,
+            "Selectable": 1396,
+            "SelectionOrder": 1376,
+            "SizeConstraint": 1384
         },
         "GuiBase2D": {
             "AbsoluteSize": 252,
@@ -799,7 +810,9 @@
             "BBoxMaxY": 168,
             "BBoxMaxZ": 172,
             "RenderQueueId": 16,
-            "AlphaByte": 20
+            "AlphaByte": 20,
+            "NextEntity": 40,
+            "Stride": 40
         },
         "Signals": {
             "IsLegalSendEvent": 63742352
@@ -812,7 +825,8 @@
         },
         "RenderView": {
             "VisualEngine": 32,
-            "DeviceD3D11": 16
+            "DeviceD3D11": 16,
+            "LightingValid": 0
         },
         "FastClusterMeshGenerator": {
             "VTableRva": 119560248
@@ -824,10 +838,44 @@
         },
         "TextLabel": {
             "TextXAlignment": 2836,
-            "TextTruncate": 2832
+            "TextTruncate": 2832,
+            "ContentText": 3592,
+            "LineHeight": 3256,
+            "LocalizedText": 3688,
+            "MaxVisibleGraphemes": 3796,
+            "RichText": 3829,
+            "Text": 3720,
+            "TextColor3": 3768,
+            "TextDirection": 3416,
+            "TextScaled": 3831,
+            "TextSize": 3804,
+            "TextStrokeColor3": 3780,
+            "TextStrokeTransparency": 3808,
+            "TextTransparency": 3812,
+            "TextWrapped": 3832,
+            "TextYAlignment": 3824
         },
         "TextButton": {
-            "Selected": 1710
+            "Selected": 1710,
+            "AutoButtonColor": 2532,
+            "ContentText": 4232,
+            "LineHeight": 4432,
+            "LocalizedText": 4328,
+            "MaxVisibleGraphemes": 4436,
+            "Modal": 2533,
+            "RichText": 4469,
+            "Text": 4360,
+            "TextColor3": 4408,
+            "TextDirection": 4440,
+            "TextScaled": 4471,
+            "TextSize": 4444,
+            "TextStrokeColor3": 4420,
+            "TextStrokeTransparency": 4448,
+            "TextTransparency": 4452,
+            "TextTruncate": 4456,
+            "TextWrapped": 4472,
+            "TextXAlignment": 4460,
+            "TextYAlignment": 4464
         },
         "ByteCode": {
             "Pointer": 24,
@@ -873,29 +921,110 @@
         },
         "VmWrapper": {
             "LuaState": 40
+        },
+        "Descriptor": {
+            "Invoke": 16,
+            "Name": 8,
+            "VTable": 0
+        },
+        "FFlags": {
+            "DataSenderRate": 136791752,
+            "NextGenReplicatorEnabledWrite4": 136529472,
+            "PhysicsSenderMaxBandwidthBps": 136791208,
+            "PhysicsSenderMaxBandwidthBpsScaling": 136791184,
+            "RenderFastClusterOcclusionCulling": 0,
+            "RenderFastClusterOcclusionCulling4": 0,
+            "SecondsBetweenDynamicVariableReloading": 136478280
+        },
+        "Highlight": {
+            "Adornee": 168,
+            "DepthMode": 200,
+            "Enabled": 220,
+            "FillColor": 176,
+            "FillTransparency": 204,
+            "OutlineColor": 188,
+            "OutlineTransparency": 212
+        },
+        "StatsItem": {
+            "Value": 5641
+        },
+        "Weld": {
+            "Part0": 256,
+            "Part1": 272
         }
     },
-    "Inherited": {
-        "final_verify2_20261113": [
-            "VmWrapper.LuaState"
-        ],
-        "node_proof1": [
-            "GuiObject.ScreenGui_Enabled",
-            "Instance.GetAttribute",
-            "ScriptContext.VmWrapper"
-        ],
-        "ui_verify2": [
-            "Luau.GlobalMainThread",
-            "LuauGlobal.mainthread",
-            "global_State.mainthread"
-        ],
-        "wrapper_proof5": [
-            "Luau.Node_Key",
-            "Luau.Node_KeyTag",
-            "Luau.Node_Size"
-        ],
-        "wrapper_proof7": [
-            "Lighting.ShadowSoftness"
+    "Inherited": {},
+    "Carried": {
+        "Source": "OriginExternal/util/offsets.h",
+        "Rows": [
+            "Descriptor.Invoke",
+            "Descriptor.Name",
+            "Descriptor.VTable",
+            "FFlags.DataSenderRate",
+            "FFlags.NextGenReplicatorEnabledWrite4",
+            "FFlags.PhysicsSenderMaxBandwidthBps",
+            "FFlags.PhysicsSenderMaxBandwidthBpsScaling",
+            "FFlags.RenderFastClusterOcclusionCulling",
+            "FFlags.RenderFastClusterOcclusionCulling4",
+            "FFlags.SecondsBetweenDynamicVariableReloading",
+            "FastClusterEntity.NextEntity",
+            "FastClusterEntity.Stride",
+            "GuiObject.Active",
+            "GuiObject.AnchorPoint",
+            "GuiObject.AutomaticSize",
+            "GuiObject.BorderMode",
+            "GuiObject.BorderSizePixel",
+            "GuiObject.ClipsDescendants",
+            "GuiObject.GuiState",
+            "GuiObject.Interactable",
+            "GuiObject.Selectable",
+            "GuiObject.SelectionOrder",
+            "GuiObject.SizeConstraint",
+            "Highlight.Adornee",
+            "Highlight.DepthMode",
+            "Highlight.Enabled",
+            "Highlight.FillColor",
+            "Highlight.FillTransparency",
+            "Highlight.OutlineColor",
+            "Highlight.OutlineTransparency",
+            "RenderView.LightingValid",
+            "StatsItem.Value",
+            "TextButton.AutoButtonColor",
+            "TextButton.ContentText",
+            "TextButton.LineHeight",
+            "TextButton.LocalizedText",
+            "TextButton.MaxVisibleGraphemes",
+            "TextButton.Modal",
+            "TextButton.RichText",
+            "TextButton.Text",
+            "TextButton.TextColor3",
+            "TextButton.TextDirection",
+            "TextButton.TextScaled",
+            "TextButton.TextSize",
+            "TextButton.TextStrokeColor3",
+            "TextButton.TextStrokeTransparency",
+            "TextButton.TextTransparency",
+            "TextButton.TextTruncate",
+            "TextButton.TextWrapped",
+            "TextButton.TextXAlignment",
+            "TextButton.TextYAlignment",
+            "TextLabel.ContentText",
+            "TextLabel.LineHeight",
+            "TextLabel.LocalizedText",
+            "TextLabel.MaxVisibleGraphemes",
+            "TextLabel.RichText",
+            "TextLabel.Text",
+            "TextLabel.TextColor3",
+            "TextLabel.TextDirection",
+            "TextLabel.TextScaled",
+            "TextLabel.TextSize",
+            "TextLabel.TextStrokeColor3",
+            "TextLabel.TextStrokeTransparency",
+            "TextLabel.TextTransparency",
+            "TextLabel.TextWrapped",
+            "TextLabel.TextYAlignment",
+            "Weld.Part0",
+            "Weld.Part1"
         ]
     }
 }

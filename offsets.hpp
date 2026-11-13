@@ -260,6 +260,8 @@ namespace Offsets {
          inline constexpr uintptr_t TechniqueArrayPtr = 0x70;
          inline constexpr uintptr_t VTableRva = 0x72057f0;
          inline constexpr uintptr_t VertexBuffer = 0x50;
+         inline constexpr uintptr_t NextEntity = 0x28;
+         inline constexpr uintptr_t Stride = 0x28;
     }
 
     namespace FastClusterMeshGenerator {
@@ -327,6 +329,17 @@ namespace Offsets {
          inline constexpr uintptr_t Visible = 0x78d;
          inline constexpr uintptr_t ZIndex = 0x33c;
          inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
+         inline constexpr uintptr_t Active = 0x570;
+         inline constexpr uintptr_t AnchorPoint = 0x520;
+         inline constexpr uintptr_t AutomaticSize = 0x528;
+         inline constexpr uintptr_t BorderMode = 0x530;
+         inline constexpr uintptr_t BorderSizePixel = 0x534;
+         inline constexpr uintptr_t ClipsDescendants = 0x571;
+         inline constexpr uintptr_t GuiState = 0x540;
+         inline constexpr uintptr_t Interactable = 0x573;
+         inline constexpr uintptr_t Selectable = 0x574;
+         inline constexpr uintptr_t SelectionOrder = 0x560;
+         inline constexpr uintptr_t SizeConstraint = 0x568;
     }
 
     namespace HandleAdornment {
@@ -735,6 +748,7 @@ namespace Offsets {
     namespace RenderView {
          inline constexpr uintptr_t DeviceD3D11 = 0x10;
          inline constexpr uintptr_t VisualEngine = 0x20;
+         inline constexpr uintptr_t LightingValid = 0x0;
     }
 
     namespace RunService {
@@ -870,11 +884,45 @@ namespace Offsets {
 
     namespace TextButton {
          inline constexpr uintptr_t Selected = 0x6ae;
+         inline constexpr uintptr_t AutoButtonColor = 0x9E4;
+         inline constexpr uintptr_t ContentText = 0x1088;
+         inline constexpr uintptr_t LineHeight = 0x1150;
+         inline constexpr uintptr_t LocalizedText = 0x10E8;
+         inline constexpr uintptr_t MaxVisibleGraphemes = 0x1154;
+         inline constexpr uintptr_t Modal = 0x9E5;
+         inline constexpr uintptr_t RichText = 0x1175;
+         inline constexpr uintptr_t Text = 0x1108;
+         inline constexpr uintptr_t TextColor3 = 0x1138;
+         inline constexpr uintptr_t TextDirection = 0x1158;
+         inline constexpr uintptr_t TextScaled = 0x1177;
+         inline constexpr uintptr_t TextSize = 0x115C;
+         inline constexpr uintptr_t TextStrokeColor3 = 0x1144;
+         inline constexpr uintptr_t TextStrokeTransparency = 0x1160;
+         inline constexpr uintptr_t TextTransparency = 0x1164;
+         inline constexpr uintptr_t TextTruncate = 0x1168;
+         inline constexpr uintptr_t TextWrapped = 0x1178;
+         inline constexpr uintptr_t TextXAlignment = 0x116C;
+         inline constexpr uintptr_t TextYAlignment = 0x1170;
     }
 
     namespace TextLabel {
          inline constexpr uintptr_t TextTruncate = 0xb10;
          inline constexpr uintptr_t TextXAlignment = 0xb14;
+         inline constexpr uintptr_t ContentText = 0xE08;
+         inline constexpr uintptr_t LineHeight = 0xCB8;
+         inline constexpr uintptr_t LocalizedText = 0xE68;
+         inline constexpr uintptr_t MaxVisibleGraphemes = 0xED4;
+         inline constexpr uintptr_t RichText = 0xEF5;
+         inline constexpr uintptr_t Text = 0xE88;
+         inline constexpr uintptr_t TextColor3 = 0xEB8;
+         inline constexpr uintptr_t TextDirection = 0xD58;
+         inline constexpr uintptr_t TextScaled = 0xEF7;
+         inline constexpr uintptr_t TextSize = 0xEDC;
+         inline constexpr uintptr_t TextStrokeColor3 = 0xEC4;
+         inline constexpr uintptr_t TextStrokeTransparency = 0xEE0;
+         inline constexpr uintptr_t TextTransparency = 0xEE4;
+         inline constexpr uintptr_t TextWrapped = 0xEF8;
+         inline constexpr uintptr_t TextYAlignment = 0xEF0;
     }
 
     namespace Textures {
@@ -988,6 +1036,41 @@ namespace Offsets {
 
     namespace global_State {
          inline constexpr uintptr_t mainthread = 0x60;
+    }
+
+    namespace Descriptor {
+         inline constexpr uintptr_t Invoke = 0x10;
+         inline constexpr uintptr_t Name = 0x8;
+         inline constexpr uintptr_t VTable = 0x0;
+    }
+
+    namespace FFlags {
+         inline constexpr uintptr_t DataSenderRate = 0x82746C8;
+         inline constexpr uintptr_t NextGenReplicatorEnabledWrite4 = 0x8234640;
+         inline constexpr uintptr_t PhysicsSenderMaxBandwidthBps = 0x82744A8;
+         inline constexpr uintptr_t PhysicsSenderMaxBandwidthBpsScaling = 0x8274490;
+         inline constexpr uintptr_t RenderFastClusterOcclusionCulling = 0x0;
+         inline constexpr uintptr_t RenderFastClusterOcclusionCulling4 = 0x0;
+         inline constexpr uintptr_t SecondsBetweenDynamicVariableReloading = 0x8227E48;
+    }
+
+    namespace Highlight {
+         inline constexpr uintptr_t Adornee = 0xA8;
+         inline constexpr uintptr_t DepthMode = 0xC8;
+         inline constexpr uintptr_t Enabled = 0xDC;
+         inline constexpr uintptr_t FillColor = 0xB0;
+         inline constexpr uintptr_t FillTransparency = 0xCC;
+         inline constexpr uintptr_t OutlineColor = 0xBC;
+         inline constexpr uintptr_t OutlineTransparency = 0xD4;
+    }
+
+    namespace StatsItem {
+         inline constexpr uintptr_t Value = 0x1609;
+    }
+
+    namespace Weld {
+         inline constexpr uintptr_t Part0 = 0x100;
+         inline constexpr uintptr_t Part1 = 0x110;
     }
 
 }
