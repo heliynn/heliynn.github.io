@@ -278,7 +278,7 @@ button.panel__row:focus-visible .panel__label {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: text-sheen 7s linear infinite;
+  animation: text-sheen 2s linear infinite;
 }
 
 @keyframes text-sheen {
@@ -477,7 +477,7 @@ button.panel__row:focus-visible .panel__label {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: text-sheen 7s linear infinite;
+  animation: text-sheen 2s linear infinite;
 }
 
 .panel__cta:focus-visible {
