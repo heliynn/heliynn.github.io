@@ -73,8 +73,9 @@ It remembers where you dropped it in `localStorage` under `mascot-position`, so 
 back to the same spot on the next visit. Clearing site data (or a different browser)
 resets it to the top right corner.
 
-Tap it (rather than drag) and it meows — `assets/meow.mp3` at low volume. The meow stays
-silent while the music pill is muted.
+Tap it (rather than drag) and it meows — one of three clips in `assets/`, picked at random
+and never the same twice in a row, at low volume. The meow stays silent while the music pill
+is muted.
 
 ```js
 mascot: {

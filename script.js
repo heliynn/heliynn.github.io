@@ -277,10 +277,15 @@
       let downX = 0;
       let downY = 0;
 
-      /* Preloaded so the first tap is not late. */
-      const meow = new Audio('assets/meow.mp3');
-      meow.preload = 'auto';
-      meow.volume = .22;
+      /* A few meows, preloaded so the first tap is not late. */
+      const MEOWS = ['assets/meow-1.mp3', 'assets/meow-2.mp3', 'assets/meow-3.mp3'];
+      const meows = MEOWS.map((src) => {
+        const clip = new Audio(src);
+        clip.preload = 'auto';
+        clip.volume = .16;
+        return clip;
+      });
+      let lastMeow = -1;
       let spot = null; /* where it sits, in pixels from the top left */
 
       const place = (x, y) => {
@@ -322,9 +327,15 @@
         try {
           if (localStorage.getItem('pill-muted') === '1') return;
         } catch (error) { /* storage blocked: treat as unmuted */ }
+        /* never the same meow twice in a row */
+        let index = Math.floor(Math.random() * meows.length);
+        if (meows.length > 1 && index === lastMeow) index = (index + 1) % meows.length;
+        lastMeow = index;
+
+        const clip = meows[index];
         try {
-          meow.currentTime = 0;
-          const played = meow.play();
+          clip.currentTime = 0;
+          const played = clip.play();
           if (played && played.catch) played.catch(() => { /* browser said no */ });
         } catch (error) { /* no audio support: stay quiet */ }
       };
