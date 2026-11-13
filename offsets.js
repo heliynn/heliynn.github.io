@@ -6,7 +6,6 @@
   const status = $('#status');
   const list = $('#categories');
   const search = $('#search');
-  const count = $('#count');
   const lede = $('#lede');
 
   const state = { categories: [], query: '', total: 0 };
@@ -142,7 +141,6 @@
       render();
     } catch (error) {
       status.textContent = 'Could not load offsets.json (' + error.message + ').';
-      count.textContent = '';
     }
   };
 

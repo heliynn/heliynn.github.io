@@ -718,3 +718,111 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
   color: var(--ink);
   transform: translate(1px, -1px);
 }
+
+/* ---------------- bottom pill (prototype) ---------------- */
+
+.pill {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(1160px, calc(100% - 40px));
+  height: 60px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(20, 21, 24, .82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateX(-50%);
+}
+
+.pill__play {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .05);
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pill__viz {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  width: 104px;
+  height: 24px;
+}
+
+.pill__viz span {
+  flex: 1;
+  height: 30%;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, .32);
+}
+
+.pill__viz span:nth-child(2n) { height: 55%; }
+.pill__viz span:nth-child(3n) { height: 80%; }
+.pill__viz span:nth-child(5n) { height: 42%; }
+
+.pill__track {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.pill__title {
+  font-size: .8rem;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pill__sub {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: .64rem;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.pill__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: .66rem;
+  color: var(--muted);
+}
+
+.pill__link {
+  color: var(--muted);
+  transition: color .15s var(--ease);
+}
+
+.pill__link:hover { color: var(--ink); }
+
+@media (max-width: 640px) {
+  .pill {
+    gap: 12px;
+    height: 54px;
+    padding: 0 14px;
+  }
+
+  .pill__viz { width: 64px; }
+  .pill__meta { display: none; }
+}

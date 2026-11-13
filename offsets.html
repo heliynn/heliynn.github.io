@@ -15,9 +15,14 @@
 <body>
   <div class="backdrop" aria-hidden="true"></div>
 
-  <header class="top">
-    <a class="back" href="index.html">← servyy</a>
-    <span class="top__meta" id="meta">loading…</span>
+  <header class="header">
+    <div class="top">
+      <a class="back" href="index.html">← servyy</a>
+      <span class="top__meta" id="meta">loading…</span>
+    </div>
+    <div class="toolbar">
+      <input class="search__field" id="search" type="search" placeholder="search category or name…" autocomplete="off" spellcheck="false" aria-label="Search offsets" />
+    </div>
   </header>
 
   <main class="page">
@@ -29,11 +34,6 @@
         <a class="btn" href="offsets.hpp" download>offsets.hpp</a>
       </div>
     </section>
-
-    <div class="toolbar">
-      <input class="search__field" id="search" type="search" placeholder="search category or name…" autocomplete="off" spellcheck="false" aria-label="Search offsets" />
-      <span class="search__hint" title="Press / to focus, Escape to clear"><kbd>/</kbd> search</span>
-    </div>
 
     <p class="status" id="status" role="status" aria-live="polite"></p>
     <div class="categories" id="categories"></div>
