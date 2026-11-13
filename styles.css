@@ -646,7 +646,9 @@ button.panel__row:focus-visible .panel__label {
 
 .art {
   position: fixed;
-  bottom: -2vh;
+  /* lifted clear of the bottom pill; kept here rather than in transform so the
+     entrance animation can own transform without cancelling the lift */
+  bottom: calc(-2vh + 140px);
   z-index: 0;
   height: min(58vh, 460px);
   width: auto;
@@ -659,12 +661,10 @@ button.panel__row:focus-visible .panel__label {
 
 .art--left {
   left: clamp(-120px, calc(50% - 760px), 0px);
-  transform: translateY(-140px);
 }
 
 .art--right {
   right: clamp(-120px, calc(50% - 760px), 0px);
-  transform: translateY(-140px);
 }
 
 /* ---------------- responsive ---------------- */
