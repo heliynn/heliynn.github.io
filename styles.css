@@ -72,8 +72,8 @@ h1, p { margin: 0; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(30% 34% at 96% -6%, rgba(206, 38, 20, .45), transparent 72%),
-    linear-gradient(118deg, rgba(56, 7, 5, .52) 0%, rgba(82, 11, 6, .34) 46%, rgba(42, 5, 4, .52) 100%);
+    radial-gradient(32% 36% at 96% -6%, rgba(198, 40, 22, .5), transparent 74%),
+    linear-gradient(118deg, rgba(58, 8, 6, .5) 0%, rgba(94, 13, 8, .38) 46%, rgba(44, 6, 5, .5) 100%);
   will-change: transform, opacity;
   animation: halftone-bloom 30s ease-in-out infinite;
 }
@@ -83,7 +83,7 @@ h1, p { margin: 0; }
   position: absolute;
   inset: -2px;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(210, 44, 27, .5) 0 2.4px, rgba(210, 44, 27, 0) 2.7px);
+  background-image: radial-gradient(circle, rgba(184, 44, 31, .5) 0 2.4px, rgba(184, 44, 31, 0) 2.9px);
   background-size: 5.6px 5.6px;
   background-position: 0 0;
   /* dots cover the whole field; the dark patches are cut over them */
@@ -97,10 +97,10 @@ h1, p { margin: 0; }
   position: absolute;
   inset: 0;
   inset: 0 -1120px 0 0;
-  background-image: radial-gradient(circle, rgba(255, 96, 62, .5) 0 2.4px, rgba(255, 96, 62, 0) 2.7px);
+  background-image: radial-gradient(circle, rgba(206, 78, 54, .34) 0 2.4px, rgba(206, 78, 54, 0) 2.9px);
   background-size: 5.6px 5.6px;
-  -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .22) 210px, rgba(0, 0, 0, .34) 290px, rgba(0, 0, 0, 0) 390px);
-  mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .22) 210px, rgba(0, 0, 0, .34) 290px, rgba(0, 0, 0, 0) 390px);
+  -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
+  mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   will-change: transform;
   animation: halftone-crest-a 52s linear infinite;
 }
@@ -109,12 +109,13 @@ h1, p { margin: 0; }
 .backdrop__art::after {
   content: "";
   position: absolute;
-  inset: -260px -260px -260px -260px;
+  inset: -320px;
   background: #07070a;
-  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .5) 260px, #000 380px 520px, rgba(0, 0, 0, .5) 640px, rgba(0, 0, 0, 0) 780px);
-  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .5) 260px, #000 380px 520px, rgba(0, 0, 0, .5) 640px, rgba(0, 0, 0, 0) 780px);
+  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
+  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
+  filter: blur(26px);
   will-change: transform;
-  animation: halftone-arcs 90s ease-in-out infinite;
+  animation: halftone-arcs 120s ease-in-out infinite;
 }
 
 /* black ink the dots dissolve into */
@@ -272,10 +273,17 @@ a.panel__row:hover .panel__label,
 button.panel__row:hover .panel__label,
 a.panel__row:focus-visible .panel__label,
 button.panel__row:focus-visible .panel__label {
-  background-image: linear-gradient(96deg, var(--red) 0%, #ff6a5a 24%, #fff 58%);
+  background-image: linear-gradient(96deg, #bf3a28 0%, #d97662 18%, #f2f2f4 40%, #d97662 62%, #bf3a28 82%, #bf3a28 100%);
+  background-size: 280% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: text-sheen 7s linear infinite;
+}
+
+@keyframes text-sheen {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
 }
 
 .panel__label {
@@ -464,10 +472,12 @@ button.panel__row:focus-visible .panel__label {
 
 .panel__cta:hover > span,
 .panel__cta:focus-visible > span {
-  background-image: linear-gradient(96deg, var(--red) 0%, #ff6a5a 24%, #fff 58%);
+  background-image: linear-gradient(96deg, #bf3a28 0%, #d97662 18%, #f2f2f4 40%, #d97662 62%, #bf3a28 82%, #bf3a28 100%);
+  background-size: 280% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: text-sheen 7s linear infinite;
 }
 
 .panel__cta:focus-visible {
