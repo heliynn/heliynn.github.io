@@ -134,6 +134,10 @@ python -m http.server 4173
 
 Opening `index.html` directly works too, though Google Fonts need a connection.
 
+One catch: `python -m http.server` cannot serve byte ranges, so clicking the waveform will not
+seek locally (the track is not seekable without them). GitHub Pages does support ranges, so it
+works live. To test seeking offline, serve with something that does, e.g. `npx serve`.
+
 ## Custom domain (optional)
 
 Settings → Pages → *Custom domain*, plus a `CNAME` record pointing at

@@ -254,6 +254,8 @@
   const viz = document.querySelector('.pill__viz');
   if (!audio || !button || !viz) return;
 
+  let dragging = false;
+
   const VOLUME = .3;
   const MUTE_KEY = 'pill-muted';
 
@@ -312,6 +314,11 @@
     const played = Math.round(progress * bars.length);
     bars.forEach((bar, i) => bar.classList.toggle('is-played', i < played));
 
+    if (Number.isFinite(audio.duration)) {
+      viz.setAttribute('aria-valuemax', String(Math.round(audio.duration)));
+      viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
+    }
+
     if (analyser && data && !audio.paused) {
       analyser.getByteFrequencyData(data);
       bars.forEach((bar, i) => {
@@ -330,6 +337,56 @@
     if (raf) return;
     raf = requestAnimationFrame(loop);
   };
+
+  const seek = (clientX) => {
+    if (!Number.isFinite(audio.duration) || !audio.duration) return;
+    const rect = viz.getBoundingClientRect();
+    if (!rect.width) return;
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+    paint();
+  };
+
+  viz.addEventListener('pointerdown', (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
+    dragging = true;
+    seek(event.clientX);
+    try {
+      viz.setPointerCapture(event.pointerId);
+    } catch (error) { /* capture is a nicety, dragging still works without it */ }
+    event.preventDefault();
+  });
+
+  viz.addEventListener('pointermove', (event) => {
+    if (dragging) seek(event.clientX);
+  });
+
+  const endDrag = (event) => {
+    if (!dragging) return;
+    dragging = false;
+    try {
+      if (viz.hasPointerCapture(event.pointerId)) viz.releasePointerCapture(event.pointerId);
+    } catch (error) { /* already released */ }
+  };
+
+  viz.addEventListener('pointerup', endDrag);
+  viz.addEventListener('pointercancel', endDrag);
+
+  viz.addEventListener('keydown', (event) => {
+    if (!Number.isFinite(audio.duration)) return;
+    const step = event.key === 'ArrowRight' ? 5 : event.key === 'ArrowLeft' ? -5 : 0;
+    if (event.key === 'Home') {
+      audio.currentTime = 0;
+    } else if (event.key === 'End') {
+      audio.currentTime = Math.max(0, audio.duration - .25);
+    } else if (step) {
+      audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + step));
+    } else {
+      return;
+    }
+    event.preventDefault();
+    paint();
+  });
 
   const ensureGraph = () => {
     if (ctx) return;
