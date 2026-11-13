@@ -1,10 +1,10 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "22:45 13/11/2026",
+    "Dumped At": "23:01 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
-    "Total Offsets": 706,
+    "Total Offsets": 702,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 150070280,
@@ -71,7 +71,7 @@
             "ToRenderView1": 472,
             "ToRenderView2": 8,
             "ToRenderView3": 40,
-            "PrimitiveCount": 421
+            "PrimitiveCount": 1072
         },
         "RenderJob": {
             "RenderView": 480,
@@ -240,12 +240,12 @@
             "WalkTimer": 1008,
             "HumanoidState": 2224,
             "HumanoidStateID": 32,
-            "FloorMaterial": 376,
             "TargetPoint": 320,
             "HipHeight": 392,
             "RigType": 440,
             "WalkToPoint": 344,
-            "PlatformStatePointer": 2224
+            "PlatformStatePointer": 2224,
+            "FloorMaterial": 376
         },
         "Seat": {
             "Occupant": 512
@@ -359,7 +359,7 @@
         "GuiObject": {
             "Position": 680,
             "Size": 712,
-            "Visible": 3725,
+            "Visible": 1824,
             "Image": 1648,
             "Text": 2608,
             "RichText": 1992,
@@ -402,6 +402,8 @@
         },
         "TextLabel": {
             "TextColor3": 2784,
+            "TextStrokeColor3": 2796,
+            "TextStrokeTransparency": 2824,
             "TextTransparency": 2828,
             "TextXAlignment": 2836,
             "TextTruncate": 2832,
@@ -412,13 +414,13 @@
             "TextDirection": 3416,
             "TextScaled": 3831,
             "TextSize": 3804,
-            "TextStrokeColor3": 3780,
-            "TextStrokeTransparency": 3808,
             "TextWrapped": 3832,
             "TextYAlignment": 3824
         },
         "TextButton": {
             "TextColor3": 3424,
+            "TextStrokeColor3": 3436,
+            "TextStrokeTransparency": 3464,
             "TextTransparency": 3468,
             "Selected": 1710,
             "AutoButtonColor": 2532,
@@ -430,8 +432,6 @@
             "TextDirection": 4440,
             "TextScaled": 4471,
             "TextSize": 4444,
-            "TextStrokeColor3": 4420,
-            "TextStrokeTransparency": 4448,
             "TextTruncate": 4456,
             "TextWrapped": 4472,
             "TextXAlignment": 4460,
@@ -439,12 +439,16 @@
         },
         "Highlight": {
             "FillColor": 176,
+            "Adornee": 160,
             "OutlineColor": 188,
             "FillTransparency": 204,
             "OutlineTransparency": 212,
-            "Adornee": 168,
             "DepthMode": 200,
             "Enabled": 220
+        },
+        "Weld": {
+            "Part0": 256,
+            "Part1": 272
         },
         "Lighting": {
             "ClockTime": 176,
@@ -593,7 +597,6 @@
             "StateBase": 104,
             "TValueSize": 16,
             "StateGlobal": 96,
-            "GlobalMainThread": 96,
             "StateCI": 120,
             "luaB_assert": 95086848,
             "luaB_error": 95064912,
@@ -629,6 +632,7 @@
             "Table_Array": 32,
             "Table_NodeArray": 40,
             "Table_lsizenode": 12,
+            "GlobalMainThread": 96,
             "Node_Size": 32,
             "Node_Key": 16,
             "Node_KeyTag": 28
@@ -653,12 +657,6 @@
             "Tt": 0,
             "Stack": 88,
             "StackLast": 72
-        },
-        "LuauGlobal": {
-            "mainthread": 96
-        },
-        "global_State": {
-            "mainthread": 96
         },
         "LuaB": {
             "LuaBAssert": 95086848,
@@ -792,8 +790,8 @@
             "LRUCache": 32,
             "Cache": 192,
             "AssetID": 16,
-            "MeshData": 40,
-            "ToMeshData": 40
+            "MeshData": 64,
+            "ToMeshData": 64
         },
         "LRUHolder": {
             "MemEnforcedLRUCache": 32
@@ -804,10 +802,10 @@
         "LRUNode": {
             "Next": 0,
             "AssetID": 16,
-            "CachedItem": 56
+            "CachedItem": 64
         },
         "CachedItem": {
-            "FileMeshData": 40
+            "FileMeshData": 64
         },
         "FileMeshData": {
             "AABBMin": 384,
@@ -877,8 +875,7 @@
         },
         "RenderView": {
             "VisualEngine": 32,
-            "DeviceD3D11": 16,
-            "LightingValid": 0
+            "DeviceD3D11": 16
         },
         "FastClusterMeshGenerator": {
             "VTableRva": 119560248
@@ -924,41 +921,47 @@
             "NodeValue": 48,
             "ValueOffset": 32
         },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
+        },
         "VmWrapper": {
             "LuaState": 40
         },
         "Descriptor": {
             "Invoke": 16,
-            "Name": 8,
-            "VTable": 0
+            "Name": 8
         },
         "FFlags": {
             "DataSenderRate": 136791752,
             "NextGenReplicatorEnabledWrite4": 136529472,
             "PhysicsSenderMaxBandwidthBps": 136791208,
             "PhysicsSenderMaxBandwidthBpsScaling": 136791184,
-            "RenderFastClusterOcclusionCulling": 0,
-            "RenderFastClusterOcclusionCulling4": 0,
             "SecondsBetweenDynamicVariableReloading": 136478280
         },
         "StatsItem": {
             "Value": 5641
-        },
-        "Weld": {
-            "Part0": 256,
-            "Part1": 272
         }
     },
     "Inherited": {
         "Weld.Part1": [
             "GuiObject.ScreenGui_Enabled",
+            "Highlight.FillTransparency",
+            "Highlight.OutlineColor",
+            "Highlight.OutlineTransparency",
+            "Humanoid.FloorMaterial",
             "Instance.GetAttribute",
             "Lighting.ShadowSoftness",
+            "Luau.GlobalMainThread",
             "Luau.Node_Key",
             "Luau.Node_KeyTag",
             "Luau.Node_Size",
+            "LuauGlobal.mainthread",
             "ScriptContext.VmWrapper",
-            "VmWrapper.LuaState"
+            "VmWrapper.LuaState",
+            "global_State.mainthread"
         ]
     },
     "Carried": {
@@ -966,13 +969,10 @@
         "Rows": [
             "Descriptor.Invoke",
             "Descriptor.Name",
-            "Descriptor.VTable",
             "FFlags.DataSenderRate",
             "FFlags.NextGenReplicatorEnabledWrite4",
             "FFlags.PhysicsSenderMaxBandwidthBps",
             "FFlags.PhysicsSenderMaxBandwidthBpsScaling",
-            "FFlags.RenderFastClusterOcclusionCulling",
-            "FFlags.RenderFastClusterOcclusionCulling4",
             "FFlags.SecondsBetweenDynamicVariableReloading",
             "FastClusterEntity.NextEntity",
             "FastClusterEntity.Stride",
@@ -985,10 +985,8 @@
             "GuiObject.Interactable",
             "GuiObject.Selectable",
             "GuiObject.SizeConstraint",
-            "Highlight.Adornee",
             "Highlight.DepthMode",
             "Highlight.Enabled",
-            "RenderView.LightingValid",
             "StatsItem.Value",
             "TextButton.AutoButtonColor",
             "TextButton.ContentText",
@@ -999,8 +997,6 @@
             "TextButton.TextDirection",
             "TextButton.TextScaled",
             "TextButton.TextSize",
-            "TextButton.TextStrokeColor3",
-            "TextButton.TextStrokeTransparency",
             "TextButton.TextTruncate",
             "TextButton.TextWrapped",
             "TextButton.TextXAlignment",
@@ -1012,12 +1008,8 @@
             "TextLabel.TextDirection",
             "TextLabel.TextScaled",
             "TextLabel.TextSize",
-            "TextLabel.TextStrokeColor3",
-            "TextLabel.TextStrokeTransparency",
             "TextLabel.TextWrapped",
-            "TextLabel.TextYAlignment",
-            "Weld.Part0",
-            "Weld.Part1"
+            "TextLabel.TextYAlignment"
         ]
     }
 }

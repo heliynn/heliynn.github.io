@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "22:45 13/11/2026",
+    "Dumped At": "23:01 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
     "Types": {
@@ -238,7 +238,6 @@
             "WalkTimer": "double",
             "HumanoidState": "unsigned __int64",
             "HumanoidStateID": "int",
-            "FloorMaterial": "int",
             "TargetPoint": "Vector3",
             "HipHeight": "unknown",
             "RigType": "unknown",
@@ -390,20 +389,26 @@
         },
         "TextLabel": {
             "TextColor3": "Color3",
+            "TextStrokeColor3": "Color3",
+            "TextStrokeTransparency": "float",
             "TextTransparency": "float",
             "TextXAlignment": "unknown",
             "TextTruncate": "unknown"
         },
         "TextButton": {
             "TextColor3": "Color3",
+            "TextStrokeColor3": "Color3",
+            "TextStrokeTransparency": "float",
             "TextTransparency": "float",
             "Selected": "unknown"
         },
         "Highlight": {
             "FillColor": "Color3",
-            "OutlineColor": "Color3",
-            "FillTransparency": "float",
-            "OutlineTransparency": "float"
+            "Adornee": "unsigned __int64"
+        },
+        "Weld": {
+            "Part0": "unsigned __int64",
+            "Part1": "unsigned __int64"
         },
         "Lighting": {
             "ClockTime": "float",
@@ -551,7 +556,6 @@
             "StateBase": "unsigned __int64",
             "TValueSize": "unsigned __int64",
             "StateGlobal": "unsigned __int64",
-            "GlobalMainThread": "unsigned __int64",
             "StateCI": "unsigned __int64",
             "luaB_assert": "unsigned __int64",
             "luaB_error": "unsigned __int64",
@@ -608,12 +612,6 @@
             "Tt": "unsigned char",
             "Stack": "unsigned __int64",
             "StackLast": "unsigned __int64"
-        },
-        "LuauGlobal": {
-            "mainthread": "unsigned __int64"
-        },
-        "global_State": {
-            "mainthread": "unsigned __int64"
         },
         "LuaB": {
             "LuaBAssert": "unsigned __int64",

@@ -6,7 +6,7 @@
 /*  Site            : https://servfur.github.io                  
 /*  Roblox Version  : version-4ea8e85481e34f46
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 22:45 13/11/2026 (GMT)
+/*  Dumped At       : 23:01 13/11/2026 (GMT)
 /*  Total Offsets   : 32535
 /* -------------------------------------------------------------
 /*  by servyy <3                                                

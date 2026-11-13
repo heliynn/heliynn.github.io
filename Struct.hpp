@@ -7,7 +7,7 @@
 /*  Site            : https://servfur.github.io                  
 /*  Roblox Version  : version-4ea8e85481e34f46
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 22:45 13/11/2026 (GMT)
+/*  Dumped At       : 23:01 13/11/2026 (GMT)
 /*  Total Offsets   : 645
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
@@ -133,9 +133,9 @@ namespace Structs {
     }; // sizeof = 38
 
     struct CachedItem {
-        char pad_0[0x28];
-        unknown FileMeshData; // 0x28
-    }; // sizeof = 28
+        char pad_0[0x40];
+        unknown FileMeshData; // 0x40
+    }; // sizeof = 40
 
     struct Camera {
         char pad_0[0xb0];
@@ -258,16 +258,17 @@ namespace Structs {
         uintptr_t CreatorId; // 0x190
         uintptr_t GameId; // 0x198
         uintptr_t PlaceId; // 0x1a0
-        int PrimitiveCount; // 0x1a5
-        char pad_5[0x10];
+        char pad_5[0x14];
         int PlaceVersion; // 0x1bc
         char pad_6[0x18];
         uintptr_t ToRenderView1; // 0x1d8
-        char pad_7[0x260];
+        char pad_7[0x250];
+        int PrimitiveCount; // 0x430
+        char pad_8[0xc];
         uintptr_t ScriptContext; // 0x440
-        char pad_8[0x158];
+        char pad_9[0x158];
         string ServerIP; // 0x5a0
-        char pad_9[0x18];
+        char pad_10[0x18];
         uintptr_t GameLoaded; // 0x5b8
     }; // sizeof = 5c0
 
@@ -480,17 +481,17 @@ namespace Structs {
         int ZIndex; // 0x33c
         char pad_9[0x330];
         string Image; // 0x670
-        char pad_10[0x154];
+        char pad_10[0xb0];
+        bool Visible; // 0x720
+        char pad_11[0xa3];
         unknown ImageRectOffset; // 0x7c4
-        char pad_11[0x4];
+        char pad_12[0x4];
         string RichText; // 0x7c8
-        char pad_12[0x268];
+        char pad_13[0x268];
         string Text; // 0xa30
-        char pad_13[0xb0];
+        char pad_14[0xb0];
         Color3 TextColor3; // 0xae0
-        char pad_14[0x3ad];
-        bool Visible; // 0xe8d
-    }; // sizeof = e8e
+    }; // sizeof = ae0
 
     struct HandleAdornment {
         char pad_0[0x100];
@@ -498,15 +499,11 @@ namespace Structs {
     }; // sizeof = 100
 
     struct Highlight {
-        char pad_0[0xb0];
+        char pad_0[0xa0];
+        uintptr_t Adornee; // 0xa0
+        char pad_1[0x8];
         Color3 FillColor; // 0xb0
-        char pad_1[0xc];
-        Color3 OutlineColor; // 0xbc
-        char pad_2[0x10];
-        float FillTransparency; // 0xcc
-        char pad_3[0x4];
-        float OutlineTransparency; // 0xd4
-    }; // sizeof = d8
+    }; // sizeof = b0
 
     struct Humanoid {
         char pad_0[0x20];
@@ -527,46 +524,46 @@ namespace Structs {
         unknown WalkToPoint; // 0x158
         char pad_7[0x10];
         int DisplayDistanceType; // 0x174
-        int FloorMaterial; // 0x178
+        char pad_8[0x4];
         float HealthDisplayDistance; // 0x17c
         int HealthDisplayType; // 0x180
         float Health; // 0x184
         unknown HipHeight; // 0x188
-        char pad_8[0x10];
+        char pad_9[0x10];
         float JumpHeight; // 0x198
         float JumpPower; // 0x19c
         float MaxHealth; // 0x1a0
         float MaxSlopeAngle; // 0x1a4
         float NameDisplayDistance; // 0x1a8
         int NameOcclusion; // 0x1ac
-        char pad_9[0x8];
+        char pad_10[0x8];
         unknown RigType; // 0x1b8
-        char pad_10[0x10];
+        char pad_11[0x10];
         float Walkspeed; // 0x1c8
         bool AutoJumpEnabled; // 0x1cc
         bool AutoRotate; // 0x1cd
         bool AutomaticScalingEnabled; // 0x1ce
-        char pad_11[0x1];
+        char pad_12[0x1];
         bool BreakJointsOnDeath; // 0x1d0
         bool EvaluateStateMachine; // 0x1d1
-        char pad_12[0x2];
+        char pad_13[0x2];
         bool Jump; // 0x1d4
-        char pad_13[0x1];
+        char pad_14[0x1];
         bool PlatformStand; // 0x1d6
         bool RequiresNeck; // 0x1d7
         bool Sit; // 0x1d8
-        char pad_14[0x1];
+        char pad_15[0x1];
         bool UseJumpPower; // 0x1da
-        char pad_15[0x1c9];
+        char pad_16[0x1c9];
         float WalkspeedCheck; // 0x3a4
-        char pad_16[0x48];
+        char pad_17[0x48];
         double WalkTimer; // 0x3f0
-        char pad_17[0x70];
+        char pad_18[0x70];
         uintptr_t HumanoidRootPart; // 0x468
-        char pad_18[0x440];
+        char pad_19[0x440];
         uintptr_t HumanoidState; // 0x8b0
         uintptr_t PlatformStatePointer; // 0x8b0
-        char pad_19[0x186];
+        char pad_20[0x186];
         bool IsWalking; // 0xa46
     }; // sizeof = a47
 
@@ -602,9 +599,9 @@ namespace Structs {
         unknown Next; // 0x0
         char pad_0[0x10];
         unknown AssetID; // 0x10
-        char pad_1[0x28];
-        unknown CachedItem; // 0x38
-    }; // sizeof = 38
+        char pad_1[0x30];
+        unknown CachedItem; // 0x40
+    }; // sizeof = 40
 
     struct Lighting {
         char pad_0[0xb0];
@@ -742,11 +739,10 @@ namespace Structs {
         uintptr_t Table_Array; // 0x20
         uintptr_t Table_NodeArray; // 0x28
         uintptr_t StateGlobal; // 0x60
-        uintptr_t GlobalMainThread; // 0x60
         uintptr_t StateBase; // 0x68
         uintptr_t StateTop; // 0x70
         uintptr_t StateCI; // 0x78
-        char pad_0[0x5aa8e63];
+        char pad_0[0x5aa8e6b];
         uintptr_t luaB_print; // 0x5aa8f00
         char pad_1[0xb8];
         uintptr_t luaB_tonumber; // 0x5aa8fc0
@@ -785,11 +781,6 @@ namespace Structs {
         char pad_18[0x58];
         uintptr_t luaB_newproxy; // 0x5aaf4f0
     }; // sizeof = 5aaf4f8
-
-    struct LuauGlobal {
-        char pad_0[0x60];
-        uintptr_t mainthread; // 0x60
-    }; // sizeof = 68
 
     struct MaterialColors {
         char pad_0[0x6];
@@ -859,9 +850,10 @@ namespace Structs {
         uintptr_t AssetID; // 0x10
         char pad_1[0x8];
         uintptr_t LRUCache; // 0x20
-        uintptr_t MeshData; // 0x28
-        uintptr_t ToMeshData; // 0x28
-        char pad_2[0x88];
+        char pad_2[0x18];
+        uintptr_t MeshData; // 0x40
+        uintptr_t ToMeshData; // 0x40
+        char pad_3[0x70];
         unknown LRUHolder; // 0xc0
         uintptr_t Cache; // 0xc0
     }; // sizeof = c8
@@ -1301,17 +1293,23 @@ namespace Structs {
         unknown Selected; // 0x6ae
         char pad_1[0x6b2];
         Color3 TextColor3; // 0xd60
-        char pad_2[0x2c];
+        char pad_2[0xc];
+        Color3 TextStrokeColor3; // 0xd6c
+        char pad_3[0x1c];
+        float TextStrokeTransparency; // 0xd88
         float TextTransparency; // 0xd8c
     }; // sizeof = d90
 
     struct TextLabel {
         char pad_0[0xae0];
         Color3 TextColor3; // 0xae0
-        char pad_1[0x2c];
+        char pad_1[0xc];
+        Color3 TextStrokeColor3; // 0xaec
+        char pad_2[0x1c];
+        float TextStrokeTransparency; // 0xb08
         float TextTransparency; // 0xb0c
         unknown TextTruncate; // 0xb10
-        char pad_2[0x4];
+        char pad_3[0x4];
         unknown TextXAlignment; // 0xb14
     }; // sizeof = b14
 
@@ -1390,6 +1388,13 @@ namespace Structs {
         uintptr_t Pointer; // 0x8a11808
     }; // sizeof = 8a11810
 
+    struct Weld {
+        char pad_0[0x100];
+        uintptr_t Part0; // 0x100
+        char pad_1[0x8];
+        uintptr_t Part1; // 0x110
+    }; // sizeof = 118
+
     struct WeldConstraint {
         char pad_0[0xa0];
         uintptr_t Part0; // 0xa0
@@ -1442,11 +1447,6 @@ namespace Structs {
         char pad_1[0x40];
         uintptr_t HullStride; // 0x80
     }; // sizeof = 88
-
-    struct global_State {
-        char pad_0[0x60];
-        uintptr_t mainthread; // 0x60
-    }; // sizeof = 68
 
     struct lua_State {
         unsigned char Tt; // 0x0

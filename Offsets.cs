@@ -6,7 +6,7 @@
 /*  Site            : https://servfur.github.io                  
 /*  Roblox Version  : version-4ea8e85481e34f46
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 22:45 13/11/2026 (GMT)
+/*  Dumped At       : 23:01 13/11/2026 (GMT)
 /*  Total Offsets   : 645
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
@@ -101,7 +101,7 @@ namespace Offsets {
     }
 
     public static class CachedItem {
-         public const long FileMeshData = 0x28;
+         public const long FileMeshData = 0x40;
     }
 
     public static class Camera {
@@ -186,7 +186,7 @@ namespace Offsets {
          public const long JobId = 0x108;
          public const long PlaceId = 0x1a0;
          public const long PlaceVersion = 0x1bc;
-         public const long PrimitiveCount = 0x1a5;
+         public const long PrimitiveCount = 0x430;
          public const long ScriptContext = 0x440;
          public const long ServerIP = 0x5a0;
          public const long ToRenderView1 = 0x1d8;
@@ -337,7 +337,7 @@ namespace Offsets {
          public const long Size = 0x2c8;
          public const long Text = 0xa30;
          public const long TextColor3 = 0xae0;
-         public const long Visible = 0xe8d;
+         public const long Visible = 0x720;
          public const long ZIndex = 0x33c;
     }
 
@@ -346,10 +346,8 @@ namespace Offsets {
     }
 
     public static class Highlight {
+         public const long Adornee = 0xa0;
          public const long FillColor = 0xb0;
-         public const long FillTransparency = 0xcc;
-         public const long OutlineColor = 0xbc;
-         public const long OutlineTransparency = 0xd4;
     }
 
     public static class Humanoid {
@@ -361,7 +359,6 @@ namespace Offsets {
          public const long DisplayDistanceType = 0x174;
          public const long DisplayName = 0xa0;
          public const long EvaluateStateMachine = 0x1d1;
-         public const long FloorMaterial = 0x178;
          public const long Health = 0x184;
          public const long HealthDisplayDistance = 0x17c;
          public const long HealthDisplayType = 0x180;
@@ -418,7 +415,7 @@ namespace Offsets {
 
     public static class LRUNode {
          public const long AssetID = 0x10;
-         public const long CachedItem = 0x38;
+         public const long CachedItem = 0x40;
          public const long Next = 0x0;
     }
 
@@ -497,7 +494,6 @@ namespace Offsets {
 
     public static class Luau {
          public const long ClosureIsC = 0x6;
-         public const long GlobalMainThread = 0x60;
          public const long StateBase = 0x68;
          public const long StateCI = 0x78;
          public const long StateGlobal = 0x60;
@@ -537,10 +533,6 @@ namespace Offsets {
          public const long luaB_tostring = 0x5aaf490;
          public const long luaB_type = 0x5aac7a0;
          public const long luaB_typeof = 0x5aad300;
-    }
-
-    public static class LuauGlobal {
-         public const long mainthread = 0x60;
     }
 
     public static class MaterialColors {
@@ -586,8 +578,8 @@ namespace Offsets {
          public const long Cache = 0xc0;
          public const long LRUCache = 0x20;
          public const long LRUHolder = 0xc0;
-         public const long MeshData = 0x28;
-         public const long ToMeshData = 0x28;
+         public const long MeshData = 0x40;
+         public const long ToMeshData = 0x40;
     }
 
     public static class MeshData {
@@ -888,11 +880,15 @@ namespace Offsets {
     public static class TextButton {
          public const long Selected = 0x6ae;
          public const long TextColor3 = 0xd60;
+         public const long TextStrokeColor3 = 0xd6c;
+         public const long TextStrokeTransparency = 0xd88;
          public const long TextTransparency = 0xd8c;
     }
 
     public static class TextLabel {
          public const long TextColor3 = 0xae0;
+         public const long TextStrokeColor3 = 0xaec;
+         public const long TextStrokeTransparency = 0xb08;
          public const long TextTransparency = 0xb0c;
          public const long TextTruncate = 0xb10;
          public const long TextXAlignment = 0xb14;
@@ -953,6 +949,11 @@ namespace Offsets {
          public const long ViewMatrix = 0x1b0;
     }
 
+    public static class Weld {
+         public const long Part0 = 0x100;
+         public const long Part1 = 0x110;
+    }
+
     public static class WeldConstraint {
          public const long Part0 = 0xa0;
          public const long Part1 = 0xb0;
@@ -987,10 +988,6 @@ namespace Offsets {
          public const long HullStride = 0x80;
          public const long HullsBegin = 0x30;
          public const long HullsEnd = 0x38;
-    }
-
-    public static class global_State {
-         public const long mainthread = 0x60;
     }
 
     public static class lua_State {
