@@ -9,6 +9,11 @@ Side art (the pool in `content.js`, two different ones picked per visit):
 - `megumin-6.png`: Megumin standing with her staff
 - `share.png`: the 1200×630 social preview, built from the old left art
 
+Mascot (the draggable cat in the top right, one picked at random per visit):
+
+- `chomusuke-1.png`: Chomusuke sitting
+- `chomusuke-2.png`: Chomusuke asleep under Megumin's hat
+
 Discord popup icons:
 
 - `server-archive.png`: the servyy's archive server icon (128×128)

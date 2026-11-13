@@ -63,6 +63,23 @@ They sit behind the content with a quiet black filter and disappear under 1260px
 they never cover text. All of them should have transparent backgrounds. Missing files are
 ignored, so there are no broken images.
 
+## The little cat
+
+A Chomusuke sits in the top right corner. It picks one picture at random from
+`mascot.pool` in `content.js` on each visit, and you can drag it anywhere on the page
+(it stays inside the window, and snaps back into view if the window shrinks).
+
+```js
+mascot: {
+  pool: [
+    "assets/chomusuke-1.png?v=1",
+    "assets/chomusuke-2.png?v=1"
+  ]
+}
+```
+
+Add paths to give it more moods. Size lives in `styles.css` under `.mascot`.
+
 ## Share preview
 
 `assets/share.png` is the 1200×630 image shown when the link is posted, built from the left

@@ -668,6 +668,36 @@ button.panel__row:focus-visible .panel__label {
   right: clamp(-120px, calc(50% - 760px), 0px);
 }
 
+/* ---------------- draggable mascot ---------------- */
+
+.mascot {
+  position: fixed;
+  top: clamp(12px, 2.5vh, 26px);
+  right: clamp(12px, 2vw, 26px);
+  z-index: 20;
+  height: clamp(64px, 11vh, 100px);
+  width: auto;
+  max-width: 24vw;
+  object-fit: contain;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45));
+  /* opacity only: a transform keyframe would keep overriding the drag scale */
+  animation: mascot-in .9s var(--ease) .4s both;
+}
+
+.mascot.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.06);
+}
+
+@keyframes mascot-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ---------------- responsive ---------------- */
 
 @media (max-width: 1260px) {

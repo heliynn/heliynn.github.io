@@ -56,5 +56,15 @@ window.SITE = {
       "assets/megumin-5.png?v=1",
       "assets/megumin-6.png?v=1"
     ]
+  },
+
+  /* The little Chomusuke in the top right corner. One is picked at random each
+     visit, and you can drag it anywhere on the page. Add more lines to the pool
+     to give it more moods. */
+  mascot: {
+    pool: [
+      "assets/chomusuke-1.png?v=1",
+      "assets/chomusuke-2.png?v=1"
+    ]
   }
 };

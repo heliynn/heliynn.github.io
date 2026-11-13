@@ -251,6 +251,74 @@
     const choice = pickArt();
     mountArt('left', choice.left);
     mountArt('right', choice.right);
+
+    /* ---------- draggable mascot ---------- */
+    const mountMascot = () => {
+      const config = S.mascot || {};
+      const pool = Array.isArray(config.pool) ? config.pool.filter(Boolean) : [];
+      if (!pool.length) return;
+
+      const img = document.createElement('img');
+      img.className = 'mascot';
+      img.src = pool[Math.floor(Math.random() * pool.length)];
+      img.alt = '';
+      img.setAttribute('aria-hidden', 'true');
+      img.draggable = false;
+      img.decoding = 'async';
+      img.addEventListener('error', () => img.remove());
+      document.body.append(img);
+
+      let grabX = 0;
+      let grabY = 0;
+      let dragging = false;
+
+      const place = (x, y) => {
+        img.style.right = 'auto';
+        const maxX = Math.max(0, innerWidth - img.offsetWidth);
+        const maxY = Math.max(0, innerHeight - img.offsetHeight);
+        img.style.left = Math.min(Math.max(0, x), maxX) + 'px';
+        img.style.top = Math.min(Math.max(0, y), maxY) + 'px';
+      };
+
+      img.addEventListener('pointerdown', (event) => {
+        if (event.button !== undefined && event.button !== 0) return;
+        const rect = img.getBoundingClientRect();
+        grabX = event.clientX - rect.left;
+        grabY = event.clientY - rect.top;
+        dragging = true;
+        img.classList.add('is-dragging');
+        place(rect.left, rect.top);
+        try {
+          img.setPointerCapture(event.pointerId);
+        } catch (error) { /* capture is a nicety, dragging works without it */ }
+        event.preventDefault();
+      });
+
+      img.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        place(event.clientX - grabX, event.clientY - grabY);
+      });
+
+      const drop = (event) => {
+        if (!dragging) return;
+        dragging = false;
+        img.classList.remove('is-dragging');
+        try {
+          if (img.hasPointerCapture(event.pointerId)) img.releasePointerCapture(event.pointerId);
+        } catch (error) { /* already released */ }
+      };
+
+      img.addEventListener('pointerup', drop);
+      img.addEventListener('pointercancel', drop);
+
+      /* keep it on screen when the window shrinks */
+      addEventListener('resize', () => {
+        if (!img.style.left) return;
+        place(parseFloat(img.style.left), parseFloat(img.style.top));
+      });
+    };
+
+    mountMascot();
   };
 
   if (document.readyState === 'loading') {
