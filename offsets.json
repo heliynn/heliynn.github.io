@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "22:18 13/11/2026",
+    "Dumped At": "22:26 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
     "Total Offsets": 710,
@@ -370,18 +370,18 @@
             "ZIndex": 828,
             "BackgroundTransparency": 764,
             "Rotation": 208,
+            "BorderSizePixel": 772,
+            "SelectionOrder": 816,
             "ImageRectOffset": 1988,
             "ScreenGui_Enabled": 608,
             "Active": 1392,
             "AnchorPoint": 1312,
             "AutomaticSize": 1320,
             "BorderMode": 1328,
-            "BorderSizePixel": 1332,
             "ClipsDescendants": 1393,
             "GuiState": 1344,
             "Interactable": 1395,
             "Selectable": 1396,
-            "SelectionOrder": 1376,
             "SizeConstraint": 1384
         },
         "GuiBase2D": {
@@ -399,6 +399,47 @@
         "Textures": {
             "Decal_Texture": 456,
             "Texture_Texture": 456
+        },
+        "TextLabel": {
+            "Text": 1992,
+            "TextColor3": 2784,
+            "MaxVisibleGraphemes": 1900,
+            "TextTransparency": 2828,
+            "TextXAlignment": 2836,
+            "TextTruncate": 2832,
+            "ContentText": 3592,
+            "LineHeight": 3256,
+            "LocalizedText": 3688,
+            "RichText": 3829,
+            "TextDirection": 3416,
+            "TextScaled": 3831,
+            "TextSize": 3804,
+            "TextStrokeColor3": 3780,
+            "TextStrokeTransparency": 3808,
+            "TextWrapped": 3832,
+            "TextYAlignment": 3824
+        },
+        "TextButton": {
+            "Text": 2632,
+            "TextColor3": 3424,
+            "MaxVisibleGraphemes": 2556,
+            "TextTransparency": 3468,
+            "Selected": 1710,
+            "AutoButtonColor": 2532,
+            "ContentText": 4232,
+            "LineHeight": 4432,
+            "LocalizedText": 4328,
+            "Modal": 2533,
+            "RichText": 4469,
+            "TextDirection": 4440,
+            "TextScaled": 4471,
+            "TextSize": 4444,
+            "TextStrokeColor3": 4420,
+            "TextStrokeTransparency": 4448,
+            "TextTruncate": 4456,
+            "TextWrapped": 4472,
+            "TextXAlignment": 4460,
+            "TextYAlignment": 4464
         },
         "Highlight": {
             "FillColor": 176,
@@ -556,7 +597,6 @@
             "StateBase": 104,
             "TValueSize": 16,
             "StateGlobal": 96,
-            "GlobalMainThread": 96,
             "StateCI": 120,
             "luaB_assert": 95086848,
             "luaB_error": 95064912,
@@ -592,6 +632,7 @@
             "Table_Array": 32,
             "Table_NodeArray": 40,
             "Table_lsizenode": 12,
+            "GlobalMainThread": 96,
             "Node_Size": 32,
             "Node_Key": 16,
             "Node_KeyTag": 28
@@ -616,12 +657,6 @@
             "Tt": 0,
             "Stack": 88,
             "StackLast": 72
-        },
-        "LuauGlobal": {
-            "mainthread": 96
-        },
-        "global_State": {
-            "mainthread": 96
         },
         "LuaB": {
             "LuaBAssert": 95086848,
@@ -851,47 +886,6 @@
             "EndOffset": 8,
             "EntryStride": 136
         },
-        "TextLabel": {
-            "TextXAlignment": 2836,
-            "TextTruncate": 2832,
-            "ContentText": 3592,
-            "LineHeight": 3256,
-            "LocalizedText": 3688,
-            "MaxVisibleGraphemes": 3796,
-            "RichText": 3829,
-            "Text": 3720,
-            "TextColor3": 3768,
-            "TextDirection": 3416,
-            "TextScaled": 3831,
-            "TextSize": 3804,
-            "TextStrokeColor3": 3780,
-            "TextStrokeTransparency": 3808,
-            "TextTransparency": 3812,
-            "TextWrapped": 3832,
-            "TextYAlignment": 3824
-        },
-        "TextButton": {
-            "Selected": 1710,
-            "AutoButtonColor": 2532,
-            "ContentText": 4232,
-            "LineHeight": 4432,
-            "LocalizedText": 4328,
-            "MaxVisibleGraphemes": 4436,
-            "Modal": 2533,
-            "RichText": 4469,
-            "Text": 4360,
-            "TextColor3": 4408,
-            "TextDirection": 4440,
-            "TextScaled": 4471,
-            "TextSize": 4444,
-            "TextStrokeColor3": 4420,
-            "TextStrokeTransparency": 4448,
-            "TextTransparency": 4452,
-            "TextTruncate": 4456,
-            "TextWrapped": 4472,
-            "TextXAlignment": 4460,
-            "TextYAlignment": 4464
-        },
         "ByteCode": {
             "Pointer": 24,
             "Size": 48
@@ -928,6 +922,12 @@
             "NodeValue": 48,
             "ValueOffset": 32
         },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
+        },
         "VmWrapper": {
             "LuaState": 40
         },
@@ -958,11 +958,14 @@
             "GuiObject.ScreenGui_Enabled",
             "Instance.GetAttribute",
             "Lighting.ShadowSoftness",
+            "Luau.GlobalMainThread",
             "Luau.Node_Key",
             "Luau.Node_KeyTag",
             "Luau.Node_Size",
+            "LuauGlobal.mainthread",
             "ScriptContext.VmWrapper",
-            "VmWrapper.LuaState"
+            "VmWrapper.LuaState",
+            "global_State.mainthread"
         ]
     },
     "Carried": {
@@ -984,12 +987,10 @@
             "GuiObject.AnchorPoint",
             "GuiObject.AutomaticSize",
             "GuiObject.BorderMode",
-            "GuiObject.BorderSizePixel",
             "GuiObject.ClipsDescendants",
             "GuiObject.GuiState",
             "GuiObject.Interactable",
             "GuiObject.Selectable",
-            "GuiObject.SelectionOrder",
             "GuiObject.SizeConstraint",
             "Highlight.Adornee",
             "Highlight.DepthMode",
@@ -1000,17 +1001,13 @@
             "TextButton.ContentText",
             "TextButton.LineHeight",
             "TextButton.LocalizedText",
-            "TextButton.MaxVisibleGraphemes",
             "TextButton.Modal",
             "TextButton.RichText",
-            "TextButton.Text",
-            "TextButton.TextColor3",
             "TextButton.TextDirection",
             "TextButton.TextScaled",
             "TextButton.TextSize",
             "TextButton.TextStrokeColor3",
             "TextButton.TextStrokeTransparency",
-            "TextButton.TextTransparency",
             "TextButton.TextTruncate",
             "TextButton.TextWrapped",
             "TextButton.TextXAlignment",
@@ -1018,16 +1015,12 @@
             "TextLabel.ContentText",
             "TextLabel.LineHeight",
             "TextLabel.LocalizedText",
-            "TextLabel.MaxVisibleGraphemes",
             "TextLabel.RichText",
-            "TextLabel.Text",
-            "TextLabel.TextColor3",
             "TextLabel.TextDirection",
             "TextLabel.TextScaled",
             "TextLabel.TextSize",
             "TextLabel.TextStrokeColor3",
             "TextLabel.TextStrokeTransparency",
-            "TextLabel.TextTransparency",
             "TextLabel.TextWrapped",
             "TextLabel.TextYAlignment",
             "Weld.Part0",

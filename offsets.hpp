@@ -317,12 +317,14 @@ namespace Offsets {
          inline constexpr uintptr_t BackgroundColor3 = 0x2d8;
          inline constexpr uintptr_t BackgroundTransparency = 0x2fc;
          inline constexpr uintptr_t BorderColor3 = 0x2e4;
+         inline constexpr uintptr_t BorderSizePixel = 0x304;
          inline constexpr uintptr_t Image = 0x670;
          inline constexpr uintptr_t ImageRectOffset = 0x7c4;
          inline constexpr uintptr_t LayoutOrder = 0x314;
          inline constexpr uintptr_t Position = 0x2a8;
          inline constexpr uintptr_t RichText = 0x7c8;
          inline constexpr uintptr_t Rotation = 0xd0;
+         inline constexpr uintptr_t SelectionOrder = 0x330;
          inline constexpr uintptr_t Size = 0x2c8;
          inline constexpr uintptr_t Text = 0xa30;
          inline constexpr uintptr_t TextColor3 = 0xae0;
@@ -332,13 +334,11 @@ namespace Offsets {
          inline constexpr uintptr_t AnchorPoint = 0x520;
          inline constexpr uintptr_t AutomaticSize = 0x528;
          inline constexpr uintptr_t BorderMode = 0x530;
-         inline constexpr uintptr_t BorderSizePixel = 0x534;
          inline constexpr uintptr_t ClipsDescendants = 0x571;
          inline constexpr uintptr_t GuiState = 0x540;
          inline constexpr uintptr_t Interactable = 0x573;
          inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
          inline constexpr uintptr_t Selectable = 0x574;
-         inline constexpr uintptr_t SelectionOrder = 0x560;
          inline constexpr uintptr_t SizeConstraint = 0x568;
     }
 
@@ -503,7 +503,6 @@ namespace Offsets {
 
     namespace Luau {
          inline constexpr uintptr_t ClosureIsC = 0x6;
-         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t StateBase = 0x68;
          inline constexpr uintptr_t StateCI = 0x78;
          inline constexpr uintptr_t StateGlobal = 0x60;
@@ -543,13 +542,10 @@ namespace Offsets {
          inline constexpr uintptr_t luaB_tostring = 0x5aaf490;
          inline constexpr uintptr_t luaB_type = 0x5aac7a0;
          inline constexpr uintptr_t luaB_typeof = 0x5aad300;
+         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t Node_Key = 0x10;
          inline constexpr uintptr_t Node_KeyTag = 0x1C;
          inline constexpr uintptr_t Node_Size = 0x20;
-    }
-
-    namespace LuauGlobal {
-         inline constexpr uintptr_t mainthread = 0x60;
     }
 
     namespace MaterialColors {
@@ -897,22 +893,22 @@ namespace Offsets {
     }
 
     namespace TextButton {
+         inline constexpr uintptr_t MaxVisibleGraphemes = 0x9fc;
          inline constexpr uintptr_t Selected = 0x6ae;
+         inline constexpr uintptr_t Text = 0xa48;
+         inline constexpr uintptr_t TextColor3 = 0xd60;
+         inline constexpr uintptr_t TextTransparency = 0xd8c;
          inline constexpr uintptr_t AutoButtonColor = 0x9E4;
          inline constexpr uintptr_t ContentText = 0x1088;
          inline constexpr uintptr_t LineHeight = 0x1150;
          inline constexpr uintptr_t LocalizedText = 0x10E8;
-         inline constexpr uintptr_t MaxVisibleGraphemes = 0x1154;
          inline constexpr uintptr_t Modal = 0x9E5;
          inline constexpr uintptr_t RichText = 0x1175;
-         inline constexpr uintptr_t Text = 0x1108;
-         inline constexpr uintptr_t TextColor3 = 0x1138;
          inline constexpr uintptr_t TextDirection = 0x1158;
          inline constexpr uintptr_t TextScaled = 0x1177;
          inline constexpr uintptr_t TextSize = 0x115C;
          inline constexpr uintptr_t TextStrokeColor3 = 0x1144;
          inline constexpr uintptr_t TextStrokeTransparency = 0x1160;
-         inline constexpr uintptr_t TextTransparency = 0x1164;
          inline constexpr uintptr_t TextTruncate = 0x1168;
          inline constexpr uintptr_t TextWrapped = 0x1178;
          inline constexpr uintptr_t TextXAlignment = 0x116C;
@@ -920,21 +916,21 @@ namespace Offsets {
     }
 
     namespace TextLabel {
+         inline constexpr uintptr_t MaxVisibleGraphemes = 0x76c;
+         inline constexpr uintptr_t Text = 0x7c8;
+         inline constexpr uintptr_t TextColor3 = 0xae0;
+         inline constexpr uintptr_t TextTransparency = 0xb0c;
          inline constexpr uintptr_t TextTruncate = 0xb10;
          inline constexpr uintptr_t TextXAlignment = 0xb14;
          inline constexpr uintptr_t ContentText = 0xE08;
          inline constexpr uintptr_t LineHeight = 0xCB8;
          inline constexpr uintptr_t LocalizedText = 0xE68;
-         inline constexpr uintptr_t MaxVisibleGraphemes = 0xED4;
          inline constexpr uintptr_t RichText = 0xEF5;
-         inline constexpr uintptr_t Text = 0xE88;
-         inline constexpr uintptr_t TextColor3 = 0xEB8;
          inline constexpr uintptr_t TextDirection = 0xD58;
          inline constexpr uintptr_t TextScaled = 0xEF7;
          inline constexpr uintptr_t TextSize = 0xEDC;
          inline constexpr uintptr_t TextStrokeColor3 = 0xEC4;
          inline constexpr uintptr_t TextStrokeTransparency = 0xEE0;
-         inline constexpr uintptr_t TextTransparency = 0xEE4;
          inline constexpr uintptr_t TextWrapped = 0xEF8;
          inline constexpr uintptr_t TextYAlignment = 0xEF0;
     }
@@ -1030,10 +1026,6 @@ namespace Offsets {
          inline constexpr uintptr_t HullsEnd = 0x38;
     }
 
-    namespace global_State {
-         inline constexpr uintptr_t mainthread = 0x60;
-    }
-
     namespace lua_State {
          inline constexpr uintptr_t Base = 0x68;
          inline constexpr uintptr_t Ci = 0x78;
@@ -1060,6 +1052,10 @@ namespace Offsets {
          inline constexpr uintptr_t SecondsBetweenDynamicVariableReloading = 0x8227E48;
     }
 
+    namespace LuauGlobal {
+         inline constexpr uintptr_t mainthread = 0x60;
+    }
+
     namespace StatsItem {
          inline constexpr uintptr_t Value = 0x1609;
     }
@@ -1071,6 +1067,10 @@ namespace Offsets {
     namespace Weld {
          inline constexpr uintptr_t Part0 = 0x100;
          inline constexpr uintptr_t Part1 = 0x110;
+    }
+
+    namespace global_State {
+         inline constexpr uintptr_t mainthread = 0x60;
     }
 
 }
