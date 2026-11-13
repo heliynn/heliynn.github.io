@@ -75,7 +75,7 @@ h1, p { margin: 0; }
     radial-gradient(32% 36% at 96% -6%, rgba(214, 44, 30, .5), transparent 74%),
     linear-gradient(118deg, rgba(54, 8, 6, .5) 0%, rgba(104, 14, 8, .36) 46%, rgba(40, 5, 4, .5) 100%);
   will-change: transform;
-  animation: halftone-field 46s ease-in-out infinite;
+  animation: halftone-field 24s ease-in-out infinite;
 }
 
 /* dense dot grid — dots almost touch, like a printed halftone.
@@ -110,7 +110,7 @@ h1, p { margin: 0; }
   mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
   filter: blur(26px);
   will-change: transform;
-  animation: halftone-arcs 130s ease-in-out infinite;
+  animation: halftone-arcs 54s ease-in-out infinite;
 }
 
 /* black ink the dots dissolve into */
@@ -133,15 +133,15 @@ h1, p { margin: 0; }
 @keyframes halftone-field {
   0%,
   100% { transform: translate3d(0, 0, 0); }
-  35% { transform: translate3d(3.6%, -3%, 0); }
-  70% { transform: translate3d(-3%, 2.4%, 0); }
+  35% { transform: translate3d(6.5%, -5.2%, 0); }
+  70% { transform: translate3d(-5.6%, 4.4%, 0); }
 }
 
 
 @keyframes halftone-arcs {
   0%,
   100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-64px, 48px, 0); }
+  50% { transform: translate3d(-236px, 168px, 0); }
 }
 
 /* ---------------- skip link ---------------- */
