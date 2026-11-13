@@ -83,7 +83,7 @@ h1, p { margin: 0; }
   position: absolute;
   inset: -2px;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(172, 52, 54, .84) 0 2.4px, rgba(172, 52, 54, 0) 2.9px);
+  background-image: radial-gradient(circle, rgba(150, 45, 47, .84) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
   background-size: 5.6px 5.6px;
   background-position: 0 0;
   /* dots cover the whole field; the dark patches are cut over them */
@@ -97,7 +97,7 @@ h1, p { margin: 0; }
   position: absolute;
   inset: 0;
   inset: 0 -1120px 0 0;
-  background-image: radial-gradient(circle, rgba(206, 70, 72, .4) 0 2.4px, rgba(206, 70, 72, 0) 2.9px);
+  background-image: radial-gradient(circle, rgba(179, 61, 63, .4) 0 2.4px, rgba(179, 61, 63, 0) 2.9px);
   background-size: 5.6px 5.6px;
   -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
