@@ -424,10 +424,10 @@ namespace Offsets {
          inline constexpr uintptr_t LightDirection = 0x150;
          inline constexpr uintptr_t MoonPosition = 0x16c;
          inline constexpr uintptr_t OutdoorAmbient = 0xe8;
-         inline constexpr uintptr_t ShadowSoftness = 0x124;
          inline constexpr uintptr_t Sky = 0x1b0;
          inline constexpr uintptr_t Source = 0x15c;
          inline constexpr uintptr_t SunPosition = 0x160;
+         inline constexpr uintptr_t ShadowSoftness = 0x124;
     }
 
     namespace LocalScript {
@@ -474,8 +474,8 @@ namespace Offsets {
          inline constexpr uintptr_t Stack = 0x58;
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
-         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Tt = 0x0;
+         inline constexpr uintptr_t Ci = 0x78;
     }
 
     namespace Luau {
@@ -982,8 +982,8 @@ namespace Offsets {
          inline constexpr uintptr_t Stack = 0x58;
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
-         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Tt = 0x0;
+         inline constexpr uintptr_t Ci = 0x78;
     }
 
     namespace VmWrapper {

@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.5",
-    "Dumped At": "20:37 13/11/2026",
+    "Dumped At": "20:50 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
     "Total Offsets": 642,
@@ -583,18 +583,18 @@
             "Global": 96,
             "Base": 104,
             "Top": 112,
+            "Tt": 0,
             "Stack": 88,
             "StackLast": 72,
-            "Tt": 0,
             "Ci": 120
         },
         "lua_State": {
             "Global": 96,
             "Base": 104,
             "Top": 112,
+            "Tt": 0,
             "Stack": 88,
             "StackLast": 72,
-            "Tt": 0,
             "Ci": 120
         },
         "LuauGlobal": {
@@ -876,16 +876,15 @@
         }
     },
     "Inherited": {
-        "node_proof1": [
+        "merge_verify1": [
             "GuiObject.ScreenGui_Enabled",
             "Instance.GetAttribute",
+            "Lighting.ShadowSoftness",
             "LuaState.Ci",
-            "LuaState.Tt",
             "Luau.StateCI",
             "ScriptContext.VmWrapper",
             "VmWrapper.LuaState",
-            "lua_State.Ci",
-            "lua_State.Tt"
+            "lua_State.Ci"
         ]
     }
 }
