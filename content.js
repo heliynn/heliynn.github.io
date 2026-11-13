@@ -1,7 +1,4 @@
-/* =========================================================
-   EDIT THIS FILE: everything the page says lives here.
-   After changing something, refresh the page to see it.
-   ========================================================= */
+/* Everything the page says lives here. */
 
 window.SITE = {
 
@@ -12,9 +9,7 @@ window.SITE = {
     "I'm heliynn. I use AI to make small tools and websites, usually " +
     "for myself which i then share publicly :3",
 
-  /* The card in the right margin. Order matters.
-     - `copy` turns the row into a button that copies the handle.
-     - `href` makes it a link. */
+  /* `copy` makes the row a copy button, `href` a link. Order matters. */
   notes: [
     { label: "discord", value: "@servfur", href: "https://discord.com/users/744890716878012508" },
     { label: "github", value: "@heliynn", href: "https://github.com/heliynn" },
@@ -45,9 +40,7 @@ window.SITE = {
     }
   ],
 
-  /* The pictures at the edges. Each visit picks two different ones from this
-     pool — left and right are never the same picture. Add a PNG to assets/ and
-     paste its path on a new line to grow the pool. */
+  /* Two different pictures are picked per visit, one per edge. Add a path to grow the pool. */
   art: {
     pool: [
       "assets/art-left.png?v=16",
@@ -58,9 +51,7 @@ window.SITE = {
     ]
   },
 
-  /* The little Chomusuke in the top right corner. One is picked at random each
-     visit, and you can drag it anywhere on the page. Add more lines to the pool
-     to give it more moods. */
+  /* One is picked per visit and can be dragged anywhere. Add a path for more moods. */
   mascot: {
     pool: [
       "assets/chomusuke-1.png?v=1",

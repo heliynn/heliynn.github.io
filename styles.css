@@ -1,7 +1,3 @@
-/* =========================================================
-   servyy
-   ========================================================= */
-
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -52,10 +48,6 @@ h1, p { margin: 0; }
   border-radius: 6px;
 }
 
-/* ---------------- backdrop ---------------- */
-
-/* ---------------- backdrop: red halftone ---------------- */
-
 .backdrop {
   position: fixed;
   inset: 0;
@@ -64,7 +56,7 @@ h1, p { margin: 0; }
   background: #08080a;
 }
 
-/* the red bloom — one of the two layers that moves */
+/* drifts; the dot grid above it never does */
 .backdrop::before {
   content: "";
   position: absolute;
@@ -78,8 +70,7 @@ h1, p { margin: 0; }
   animation: halftone-field 48s ease-in-out infinite;
 }
 
-/* dense dot grid — dots almost touch, like a printed halftone.
-   Static on purpose: the screen itself never moves, only the colour under it. */
+/* static: the printed screen the colour moves under */
 .backdrop__art {
   position: absolute;
   inset: -240px;
@@ -89,7 +80,7 @@ h1, p { margin: 0; }
   background-position: 0 0;
 }
 
-/* second, finer field crossing the first — gives the wave its interference */
+/* finer grid at a slight offset, so the two interfere */
 .backdrop__art::before {
   content: "";
   position: absolute;
@@ -100,7 +91,7 @@ h1, p { margin: 0; }
   mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
 }
 
-/* the black waves the dots dissolve into — the other layer that moves */
+/* the other moving layer: the black waves dots dissolve into */
 .backdrop__art::after {
   content: "";
   position: absolute;
@@ -113,7 +104,7 @@ h1, p { margin: 0; }
   animation: halftone-arcs 108s ease-in-out infinite;
 }
 
-/* black ink the dots dissolve into */
+/* vignette, so text stays legible */
 .backdrop::after {
   content: "";
   position: absolute;
@@ -130,7 +121,7 @@ h1, p { margin: 0; }
     linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
 }
 
-/* Everything that moves drifts out and comes back, so no loop ever snaps. */
+/* both layers return to origin, so neither loop snaps */
 @keyframes halftone-field {
   0%,
   100% { transform: translate3d(0, 0, 0); }
@@ -138,14 +129,11 @@ h1, p { margin: 0; }
   70% { transform: translate3d(-5.6%, 4.4%, 0); }
 }
 
-
 @keyframes halftone-arcs {
   0%,
   100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(-236px, 168px, 0); }
 }
-
-/* ---------------- skip link ---------------- */
 
 .skip {
   position: fixed;
@@ -161,8 +149,6 @@ h1, p { margin: 0; }
 }
 
 .skip:focus { transform: none; }
-
-/* ---------------- hero ---------------- */
 
 main {
   position: relative;
@@ -211,8 +197,6 @@ main {
   letter-spacing: .04em;
 }
 
-/* ---------------- details card ---------------- */
-
 .panel {
   align-self: center;
   padding: 2px 18px;
@@ -251,7 +235,7 @@ button.panel__row:active { opacity: .72; }
 
 a.panel__row, button.panel__row { cursor: pointer; }
 
-/* hover accent lives in the type itself: red into white, clipped to the text */
+/* the hover accent goes through the type, not around it */
 a.panel__row:hover .panel__text,
 button.panel__row:hover .panel__text,
 a.panel__row:focus-visible .panel__text,
@@ -382,7 +366,7 @@ button.panel__row:focus-visible .panel__label {
 
 .panel__row.is-copied .panel__value { color: #fff; }
 
-/* keep the copy affordances visible when the value is clipped to a gradient */
+/* icons stay visible when the value is gradient-clipped */
 .panel__row:hover .panel__copy,
 .panel__row:hover .panel__check { color: var(--ink-soft); }
 
@@ -493,8 +477,6 @@ button.panel__row:focus-visible .panel__label {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
-/* ---------------- discord server modal ---------------- */
 
 .modal {
   position: fixed;
@@ -613,8 +595,6 @@ button.panel__row:focus-visible .panel__label {
 
 .modal__server-invite:hover { color: var(--ink); }
 
-/* ---------------- fallback ---------------- */
-
 .noscript {
   position: fixed;
   inset: 0;
@@ -628,12 +608,9 @@ button.panel__row:focus-visible .panel__label {
   font-size: .9rem;
 }
 
-/* ---------------- side art ---------------- */
-
 .art {
   position: fixed;
-  /* lifted clear of the bottom pill; kept here rather than in transform so the
-     entrance animation can own transform without cancelling the lift */
+  /* on bottom, not transform: the entrance animation owns transform */
   bottom: calc(-2vh + 140px);
   z-index: 0;
   height: min(58vh, 460px);
@@ -654,8 +631,6 @@ button.panel__row:focus-visible .panel__label {
   right: clamp(-120px, calc(50% - 760px), 0px);
 }
 
-/* ---------------- draggable mascot ---------------- */
-
 .mascot {
   position: fixed;
   top: clamp(12px, 2.5vh, 26px);
@@ -670,7 +645,7 @@ button.panel__row:focus-visible .panel__label {
   user-select: none;
   -webkit-user-drag: none;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45));
-  /* opacity only: a transform keyframe would keep overriding the drag scale */
+  /* opacity only: a transform keyframe would fight the drag scale */
   animation: mascot-in .9s var(--ease) .4s both;
 }
 
@@ -683,8 +658,6 @@ button.panel__row:focus-visible .panel__label {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-/* ---------------- responsive ---------------- */
 
 @media (max-width: 1260px) {
   .art { display: none; }
@@ -732,9 +705,6 @@ button.panel__row:focus-visible .panel__label {
   .skip { top: 6px; left: 6px; }
 }
 
-/* ---------------- entrance ---------------- */
-/* rebuild marker */
-
 @keyframes rise-in {
   from { opacity: 0; transform: translate3d(0, 14px, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -745,13 +715,11 @@ button.panel__row:focus-visible .panel__label {
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-/* animation runs regardless of the OS "reduce motion" setting */
+/* runs even when the OS asks for reduced motion */
 .wordmark { animation: rise-in .75s var(--ease) .05s both; }
 .statement { animation: rise-in .75s var(--ease) .12s both; }
 .panel { animation: rise-in .8s var(--ease) .18s both; }
 .art { animation: art-rise-in .9s var(--ease) .26s both; }
-
-/* ---------------- modal details ---------------- */
 
 .modal__content {
   width: min(90vw, 480px);
@@ -818,8 +786,6 @@ button.panel__row:focus-visible .panel__label {
   color: var(--ink);
   transform: translate(1px, -1px);
 }
-
-/* ---------------- bottom pill (prototype) ---------------- */
 
 .pill {
   position: fixed;

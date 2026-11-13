@@ -1,4 +1,4 @@
-/* Renders content.js into index.html. You shouldn't need to edit this file. */
+/* Renders content.js into index.html. */
 (() => {
   const S = window.SITE || {};
   const q = (sel) => document.querySelector(sel);
@@ -11,7 +11,6 @@
   const isExternal = (href) => /^https?:/i.test(href || '');
 
   const init = () => {
-    /* ---------- text ---------- */
     setText('[data-wordmark]', S.display);
     setText('[data-statement]', S.statement);
 
@@ -21,7 +20,6 @@
       if (desc) desc.setAttribute('content', S.statement);
     }
 
-    /* ---------- detail rows ---------- */
     const copyText = async (value) => {
       try {
         await navigator.clipboard.writeText(value);
@@ -120,7 +118,6 @@
 
     (S.notes || []).forEach((item) => notes.append(noteRow(item)));
 
-    /* ---------- CTA + server modal ---------- */
     if (S.server && S.server.label) {
       const cta = document.createElement('a');
       cta.type = 'button';
@@ -213,7 +210,6 @@
       }
     }
 
-    /* ---------- side art ---------- */
     const mountArt = (side, art) => {
       if (!art) return;
 
@@ -234,7 +230,6 @@
       document.body.append(img);
     };
 
-    /* Draw two different pictures from the pool, one per edge. */
     const pickArt = () => {
       const config = S.art || {};
       const pool = Array.isArray(config.pool) ? config.pool.filter(Boolean) : [];
@@ -252,7 +247,6 @@
     mountArt('left', choice.left);
     mountArt('right', choice.right);
 
-    /* ---------- draggable mascot ---------- */
     const MASCOT_KEY = 'mascot-position';
 
     const mountMascot = () => {
@@ -277,7 +271,7 @@
       let downX = 0;
       let downY = 0;
 
-      /* A few meows, preloaded so the first tap is not late. */
+      /* preloaded so the first tap is not late */
       const MEOWS = ['assets/meow-1.mp3', 'assets/meow-2.mp3', 'assets/meow-3.mp3'];
       const meows = MEOWS.map((src) => {
         const clip = new Audio(src);
@@ -286,7 +280,7 @@
         return clip;
       });
       let lastMeow = -1;
-      let spot = null; /* where it sits, in pixels from the top left */
+      let spot = null;
 
       const place = (x, y) => {
         img.style.right = 'auto';
@@ -299,8 +293,7 @@
         spot = { x: Math.round(left), y: Math.round(top) };
       };
 
-      /* Remembered in pixels and clamped on the way back in, so a reload puts
-         it exactly where you dropped it and a smaller window keeps it on screen. */
+      /* pixels, clamped on restore so a small window keeps it on screen */
       const remember = () => {
         if (!spot) return;
         try {
@@ -317,17 +310,15 @@
         place(saved.x, saved.y);
       };
 
-      /* width is only known once the picture has loaded */
+      /* width is unknown until the image loads */
       if (img.complete) restore();
       else img.addEventListener('load', restore, { once: true });
 
-      /* A tap (not a drag) gets a soft meow. It follows the pill's mute button,
-         and the volume is deliberately low so it never startles anyone. */
+      /* tap, not drag; quiet, and silent while the pill is muted */
       const playMeow = () => {
         try {
           if (localStorage.getItem('pill-muted') === '1') return;
         } catch (error) { /* storage blocked: treat as unmuted */ }
-        /* never the same meow twice in a row */
         let index = Math.floor(Math.random() * meows.length);
         if (meows.length > 1 && index === lastMeow) index = (index + 1) % meows.length;
         lastMeow = index;
@@ -393,8 +384,6 @@
     init();
   }
 })();
-/* ---------------- bottom pill player ---------------- */
-
 (() => {
   const audio = document.getElementById('pillAudio');
   const button = document.getElementById('pillPlay');

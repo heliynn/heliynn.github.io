@@ -1,9 +1,6 @@
 /* Renders one dumper output.
-   <body data-kind="json" data-source="FFlags.json" data-title="fflags">
-   json: category -> { name: value } tables (or a flat list, or an array)
-   text: any .hpp / .cs / .txt dump, shown as numbered lines
-   data-source takes a comma separated list; the first file that exists wins,
-   so Offsets.json and the older offsets.json both keep working. */
+   data-kind="json"|"text", data-source="FFlags.json" (comma separated, first that exists wins),
+   data-title="fflags". */
 (() => {
   const body = document.body;
   const kind = body.dataset.kind || 'json';
@@ -81,14 +78,12 @@
     };
   };
 
-  /* The download buttons follow whatever file actually loaded: the dumper's
-     filename casing has changed before (Offsets.json vs offsets.json), and GitHub
-     Pages is case sensitive, so a hardcoded link silently 404s. */
+  /* Pages is case sensitive and the dumper has changed filename casing before,
+     so the download links follow whichever file loaded rather than a hardcoded path. */
   const setDownloads = (href) => {
     for (const link of document.querySelectorAll('a[download], a[data-download]')) {
       if (!href) {
-        /* drop the href only: the download attribute stays so this selector still
-           finds the button if another load tries to enable it */
+        /* href only: keeping download lets the selector find this again */
         link.removeAttribute('href');
         link.setAttribute('aria-disabled', 'true');
         link.classList.add('is-disabled');
@@ -155,8 +150,7 @@
     return row;
   };
 
-  /* A flag dump has tens of thousands of rows, so nothing is built up front:
-     rows go in CHUNK at a time and the next batch loads as you near the bottom. */
+  /* flag dumps run to tens of thousands of rows, so they go in CHUNK at a time */
   const CHUNK = 120;
   let queue = [];      /* what is left to put on the page */
   let cursor = 0;
@@ -192,14 +186,12 @@
     }
   };
 
-  /* Once the spacer gets close to the bottom of the window, add the next batch.
-     A plain scroll check is used rather than IntersectionObserver: it behaves the
-     same in every browser and cannot silently stop firing. */
+  /* a scroll check rather than IntersectionObserver: it cannot silently stop firing */
   const nudge = () => {
     if (!sentinel) return;
     if (sentinel.getBoundingClientRect().top > innerHeight + 600) return;
     flush(CHUNK);
-    setTimeout(nudge, 0); /* still on screen? add the next batch */
+    setTimeout(nudge, 0);
   };
 
   const watch = () => {
@@ -255,8 +247,7 @@
       return;
     }
 
-    /* small dumps go in whole; big ones start with the first screenful and the
-       rest follows the scroll */
+    /* small dumps in whole, big ones by the screenful */
     flush(queue.length <= 1500 ? Infinity : CHUNK * 2);
   };
 
@@ -315,7 +306,7 @@
 
   if (search) {
     search.addEventListener('input', () => {
-      /* a big dump filters slowly, so wait for a pause instead of every key */
+      /* a big dump filters slowly: wait for a pause, not every key */
       clearTimeout(typing);
       typing = setTimeout(() => {
         state.query = search.value.trim().toLowerCase();
