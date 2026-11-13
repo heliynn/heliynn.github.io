@@ -245,3 +245,130 @@
     init();
   }
 })();
+/* ---------------- bottom pill player ---------------- */
+
+(() => {
+  const audio = document.getElementById('pillAudio');
+  const button = document.getElementById('pillPlay');
+  const viz = document.querySelector('.pill__viz');
+  if (!audio || !button || !viz) return;
+
+  const bars = Array.from(viz.querySelectorAll('span'));
+  const titleEl = document.getElementById('pillTitle');
+  const subEl = document.getElementById('pillSub');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let ctx = null;
+  let analyser = null;
+  let data = null;
+  let raf = 0;
+
+  const fmt = (seconds) => {
+    if (!Number.isFinite(seconds)) return '0:00';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ':' + String(s).padStart(2, '0');
+  };
+
+  const setTime = () => {
+    if (!subEl) return;
+    const total = audio.duration;
+    subEl.textContent = Number.isFinite(total)
+      ? fmt(audio.currentTime) + ' / ' + fmt(total)
+      : 'background music';
+  };
+
+  const paint = () => {
+    const progress = audio.duration ? audio.currentTime / audio.duration : 0;
+    const played = Math.round(progress * bars.length);
+    bars.forEach((bar, i) => bar.classList.toggle('is-played', i < played));
+
+    if (analyser && data && !audio.paused && !reduced.matches) {
+      analyser.getByteFrequencyData(data);
+      bars.forEach((bar, i) => {
+        const band = data[Math.floor(Math.pow(i / bars.length, 1.4) * data.length)] / 255;
+        bar.style.height = (4 + Math.pow(band, .72) * 30).toFixed(1) + 'px';
+      });
+    }
+  };
+
+  const loop = () => {
+    paint();
+    raf = requestAnimationFrame(loop);
+  };
+
+  const start = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(loop);
+  };
+
+  const ensureGraph = () => {
+    if (ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try {
+      ctx = new AC();
+      const source = ctx.createMediaElementSource(audio);
+      analyser = ctx.createAnalyser();
+      analyser.fftSize = 512;
+      analyser.smoothingTimeConstant = .82;
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+    } catch (error) {
+      ctx = null;
+      analyser = null;
+    }
+  };
+
+  const fail = () => {
+    button.disabled = true;
+    button.textContent = '▶';
+    button.setAttribute('aria-label', 'No track loaded');
+    if (titleEl) titleEl.textContent = 'no track loaded';
+    if (subEl) subEl.textContent = 'drop a song at assets/music.mp3';
+  };
+
+  audio.addEventListener('loadedmetadata', () => {
+    button.disabled = false;
+    if (titleEl) {
+      titleEl.textContent = audio.dataset.title
+        || decodeURIComponent((audio.currentSrc || '').split('/').pop() || '').replace(/\.[^.]+$/, '')
+        || 'untitled';
+    }
+    setTime();
+  });
+
+  audio.addEventListener('error', fail);
+  audio.addEventListener('timeupdate', () => {
+    setTime();
+    paint();
+  });
+  audio.addEventListener('ended', setTime);
+
+  button.addEventListener('click', async () => {
+    ensureGraph();
+    if (ctx && ctx.state === 'suspended') await ctx.resume();
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+      } catch (error) {
+        fail();
+        return;
+      }
+      button.textContent = '❚❚';
+      button.setAttribute('aria-label', 'Pause');
+      button.setAttribute('aria-pressed', 'true');
+      start();
+    } else {
+      audio.pause();
+      button.textContent = '▶';
+      button.setAttribute('aria-label', 'Play');
+      button.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  audio.addEventListener('play', start);
+  audio.addEventListener('pause', paint);
+})();

@@ -48,57 +48,58 @@
     <p class="noscript">I'm heliynn. I use AI to make small tools and websites. Plain files: <a href="content.js">content</a>, <a href="offsets.json">offsets</a>.</p>
   </noscript>
 
-  <!-- bottom pill prototype — placeholder content for sizing -->
-  <div class="pill" role="region" aria-label="Bottom bar prototype">
-    <button class="pill__play" type="button" aria-label="Play">▶</button>
+  <!-- bottom pill — player -->
+  <div class="pill" role="region" aria-label="Music player">
+    <audio id="pillAudio" src="assets/music.mp3" preload="metadata" loop></audio>
+    <button class="pill__play" id="pillPlay" type="button" aria-label="Play" aria-pressed="false">▶</button>
 
     <div class="pill__viz" aria-hidden="true">
-      <span class="is-played" style="height:15px"></span>
-      <span class="is-played" style="height:20px"></span>
-      <span class="is-played" style="height:16px"></span>
-      <span class="is-played" style="height:19px"></span>
-      <span class="is-played" style="height:17px"></span>
-      <span class="is-played" style="height:22px"></span>
-      <span class="is-played" style="height:23px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:15px"></span>
-      <span class="is-played" style="height:19px"></span>
-      <span class="is-played" style="height:14px"></span>
-      <span class="is-played" style="height:21px"></span>
-      <span class="is-played" style="height:19px"></span>
-      <span class="is-played" style="height:20px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:19px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:23px"></span>
-      <span class="is-played" style="height:15px"></span>
-      <span class="is-played" style="height:16px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:24px"></span>
-      <span class="is-played" style="height:22px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:27px"></span>
-      <span class="is-played" style="height:16px"></span>
-      <span class="is-played" style="height:22px"></span>
-      <span class="is-played" style="height:25px"></span>
-      <span class="is-played" style="height:22px"></span>
-      <span class="is-played" style="height:20px"></span>
-      <span class="is-played" style="height:17px"></span>
-      <span class="is-played" style="height:28px"></span>
-      <span class="is-played" style="height:20px"></span>
-      <span class="is-played" style="height:22px"></span>
-      <span class="is-played" style="height:23px"></span>
-      <span class="is-played" style="height:21px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:24px"></span>
-      <span class="is-played" style="height:24px"></span>
-      <span class="is-played" style="height:25px"></span>
-      <span class="is-played" style="height:25px"></span>
-      <span class="is-played" style="height:18px"></span>
-      <span class="is-played" style="height:25px"></span>
-      <span class="is-played" style="height:16px"></span>
-      <span class="is-played" style="height:15px"></span>
+      <span class="" style="height:15px"></span>
+      <span class="" style="height:20px"></span>
+      <span class="" style="height:16px"></span>
+      <span class="" style="height:19px"></span>
+      <span class="" style="height:17px"></span>
+      <span class="" style="height:22px"></span>
+      <span class="" style="height:23px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:15px"></span>
+      <span class="" style="height:19px"></span>
+      <span class="" style="height:14px"></span>
+      <span class="" style="height:21px"></span>
+      <span class="" style="height:19px"></span>
+      <span class="" style="height:20px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:19px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:23px"></span>
+      <span class="" style="height:15px"></span>
+      <span class="" style="height:16px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:24px"></span>
+      <span class="" style="height:22px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:27px"></span>
+      <span class="" style="height:16px"></span>
+      <span class="" style="height:22px"></span>
+      <span class="" style="height:25px"></span>
+      <span class="" style="height:22px"></span>
+      <span class="" style="height:20px"></span>
+      <span class="" style="height:17px"></span>
+      <span class="" style="height:28px"></span>
+      <span class="" style="height:20px"></span>
+      <span class="" style="height:22px"></span>
+      <span class="" style="height:23px"></span>
+      <span class="" style="height:21px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:24px"></span>
+      <span class="" style="height:24px"></span>
+      <span class="" style="height:25px"></span>
+      <span class="" style="height:25px"></span>
+      <span class="" style="height:18px"></span>
+      <span class="" style="height:25px"></span>
+      <span class="" style="height:16px"></span>
+      <span class="" style="height:15px"></span>
       <span class="" style="height:16px"></span>
       <span class="" style="height:15px"></span>
       <span class="" style="height:19px"></span>
@@ -196,14 +197,10 @@
     </div>
 
     <div class="pill__track">
-      <span class="pill__title">placeholder track</span>
-      <span class="pill__sub">background music</span>
+      <span class="pill__title" id="pillTitle">no track loaded</span>
+      <span class="pill__sub" id="pillSub">add assets/music.mp3</span>
     </div>
 
-    <div class="pill__meta">
-      <a class="pill__link" href="offsets.html">offsets</a>
-      <a class="pill__link" href="https://github.com/heliynn">github</a>
-    </div>
   </div>
 
   <!-- Discord server modal -->
@@ -220,6 +217,6 @@
   </div>
 
   <script src="content.js?v=15"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
