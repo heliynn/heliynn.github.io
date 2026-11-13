@@ -64,8 +64,7 @@ h1, p { margin: 0; }
   background: #08080a;
 }
 
-/* The red and the black it fades into. This layer is the one that moves: the dot
-   screen above it never does, so the colour slides around under a still grid. */
+/* the red bloom — one of the two layers that moves */
 .backdrop::before {
   content: "";
   position: absolute;
@@ -73,19 +72,21 @@ h1, p { margin: 0; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(58% 64% at 10% 92%, rgba(5, 5, 7, .95) 0%, rgba(5, 5, 7, .5) 52%, rgba(5, 5, 7, 0) 82%),
-    radial-gradient(44% 50% at 104% 66%, rgba(5, 5, 7, .82) 0%, rgba(5, 5, 7, .24) 58%, rgba(5, 5, 7, 0) 86%),
     radial-gradient(32% 36% at 96% -6%, rgba(214, 44, 30, .5), transparent 74%),
     linear-gradient(118deg, rgba(54, 8, 6, .5) 0%, rgba(104, 14, 8, .36) 46%, rgba(40, 5, 4, .5) 100%);
   will-change: transform;
   animation: halftone-field 46s ease-in-out infinite;
 }
 
-/* holder for the still dot screen and the black that drifts behind it */
+/* dense dot grid — dots almost touch, like a printed halftone.
+   Static on purpose: the screen itself never moves, only the colour under it. */
 .backdrop__art {
   position: absolute;
-  inset: 0;
+  inset: -240px;
   z-index: 1;
+  background-image: radial-gradient(circle, rgba(150, 45, 47, .84) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
+  background-size: 5.6px 5.6px;
+  background-position: 0 0;
 }
 
 /* second, finer field crossing the first — gives the wave its interference */
@@ -93,37 +94,23 @@ h1, p { margin: 0; }
   content: "";
   position: absolute;
   inset: -90px;
-  z-index: 0;
   background-image: radial-gradient(circle, rgba(179, 61, 63, .4) 0 2.4px, rgba(179, 61, 63, 0) 2.9px);
   background-size: 5.6px 5.6px;
   -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
-  z-index: 2;
 }
 
-/* the black patches, wandering behind the dots */
-.backdrop__arcs {
+/* the black waves the dots dissolve into — the other layer that moves */
+.backdrop__art::after {
+  content: "";
   position: absolute;
   inset: -320px;
-  z-index: 1;
   background: #07070a;
   -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
   mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
   filter: blur(26px);
   will-change: transform;
   animation: halftone-arcs 130s ease-in-out infinite;
-}
-
-/* dense dot grid — dots almost touch, like a printed halftone.
-   Static on purpose: it is the screen the moving colour is seen through. */
-.backdrop__art::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  background-image: radial-gradient(circle, rgba(150, 45, 47, .84) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
-  background-size: 5.6px 5.6px;
-  background-position: 0 0;
 }
 
 /* black ink the dots dissolve into */
