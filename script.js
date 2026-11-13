@@ -273,6 +273,14 @@
       let grabX = 0;
       let grabY = 0;
       let dragging = false;
+      let moved = false;
+      let downX = 0;
+      let downY = 0;
+
+      /* Preloaded so the first tap is not late. */
+      const meow = new Audio('assets/meow.mp3');
+      meow.preload = 'auto';
+      meow.volume = .22;
       let spot = null; /* where it sits, in pixels from the top left */
 
       const place = (x, y) => {
@@ -308,12 +316,28 @@
       if (img.complete) restore();
       else img.addEventListener('load', restore, { once: true });
 
+      /* A tap (not a drag) gets a soft meow. It follows the pill's mute button,
+         and the volume is deliberately low so it never startles anyone. */
+      const playMeow = () => {
+        try {
+          if (localStorage.getItem('pill-muted') === '1') return;
+        } catch (error) { /* storage blocked: treat as unmuted */ }
+        try {
+          meow.currentTime = 0;
+          const played = meow.play();
+          if (played && played.catch) played.catch(() => { /* browser said no */ });
+        } catch (error) { /* no audio support: stay quiet */ }
+      };
+
       img.addEventListener('pointerdown', (event) => {
         if (event.button !== undefined && event.button !== 0) return;
         const rect = img.getBoundingClientRect();
         grabX = event.clientX - rect.left;
         grabY = event.clientY - rect.top;
         dragging = true;
+        moved = false;
+        downX = event.clientX;
+        downY = event.clientY;
         img.classList.add('is-dragging');
         place(rect.left, rect.top);
         try {
@@ -324,6 +348,7 @@
 
       img.addEventListener('pointermove', (event) => {
         if (!dragging) return;
+        if (Math.abs(event.clientX - downX) > 5 || Math.abs(event.clientY - downY) > 5) moved = true;
         place(event.clientX - grabX, event.clientY - grabY);
       });
 
@@ -332,6 +357,7 @@
         dragging = false;
         img.classList.remove('is-dragging');
         remember();
+        if (!moved) playMeow();
         try {
           if (img.hasPointerCapture(event.pointerId)) img.releasePointerCapture(event.pointerId);
         } catch (error) { /* already released */ }

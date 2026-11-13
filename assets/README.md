@@ -13,6 +13,11 @@ Mascot (the draggable cat in the top right, one picked at random per visit):
 
 - `chomusuke-1.png`: Chomusuke sitting
 - `chomusuke-2.png`: Chomusuke asleep under Megumin's hat
+- `meow.mp3`: the little meow when you tap the cat (0.5s, CC0)
+
+`meow.mp3` is "Little Meow of a Cat #1" by Joseph Sardin, released CC0 (public domain) on
+bigsoundbank.com, so no credit is required. It plays at 22% volume and stays silent while
+the bottom pill is muted. Swap in any short MP3 to change it.
 
 Discord popup icons:
 
