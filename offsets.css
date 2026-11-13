@@ -287,7 +287,7 @@ button.btn {
 .row__val:hover:not(.is-copied),
 .row__val:focus-visible:not(.is-copied) {
   background-image: linear-gradient(96deg, #bf3a28 0%, #d97662 18%, #f2f2f4 40%, #d97662 62%, #bf3a28 82%, #bf3a28 100%);
-  background-size: 280% 100%;
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -296,7 +296,7 @@ button.btn {
 
 @keyframes text-sheen {
   from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
+  to { background-position: 150% 50%; }
 }
 
 .row__name {
