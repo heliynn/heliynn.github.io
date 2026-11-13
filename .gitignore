@@ -1,3 +1,9 @@
 # local preview server artifacts
 .server.pid
 .server.log
+
+# throwaway screenshots from local work (real site images live in assets/)
+/*.png
+# local builds and package tarballs
+.sharp-build/
+/*.tgz
