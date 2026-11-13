@@ -4,7 +4,7 @@
     "Dumped At": "21:36 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
-    "Total Offsets": 632,
+    "Total Offsets": 642,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 150070280,
@@ -46,7 +46,8 @@
             "ClassDescriptor": 24,
             "ClassName": 8,
             "ClassBase": 432,
-            "SetParent": 30572128
+            "SetParent": 30572128,
+            "GetAttribute": 30603872
         },
         "Misc": {
             "StringLength": 16,
@@ -369,7 +370,8 @@
             "ZIndex": 828,
             "BackgroundTransparency": 764,
             "Rotation": 208,
-            "ImageRectOffset": 1988
+            "ImageRectOffset": 1988,
+            "ScreenGui_Enabled": 608
         },
         "GuiBase2D": {
             "AbsoluteSize": 252,
@@ -409,7 +411,8 @@
             "MoonPosition": 364,
             "SunPosition": 352,
             "Source": 348,
-            "Sky": 432
+            "Sky": 432,
+            "ShadowSoftness": 292
         },
         "Sky": {
             "SkyboxBk": 224,
@@ -567,7 +570,11 @@
             "Table_SizeArray": 8,
             "Table_Array": 32,
             "Table_NodeArray": 40,
-            "Table_lsizenode": 12
+            "Table_lsizenode": 12,
+            "Node_Size": 32,
+            "Node_Key": 16,
+            "Node_KeyTag": 28,
+            "GlobalMainThread": 96
         },
         "Closure": {
             "isC": 6
@@ -651,7 +658,8 @@
             "GlobalSetFenv": 70793936
         },
         "ScriptContext": {
-            "VTable": 119971736
+            "VTable": 119971736,
+            "VmWrapper": 664
         },
         "SmoothClusterGeometry": {
             "GridOld": 72,
@@ -856,6 +864,38 @@
             "NodeName": 16,
             "NodeValue": 48,
             "ValueOffset": 32
+        },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
+        },
+        "VmWrapper": {
+            "LuaState": 40
         }
+    },
+    "Inherited": {
+        "final_verify2_20261113": [
+            "VmWrapper.LuaState"
+        ],
+        "node_proof1": [
+            "GuiObject.ScreenGui_Enabled",
+            "Instance.GetAttribute",
+            "ScriptContext.VmWrapper"
+        ],
+        "ui_verify2": [
+            "Luau.GlobalMainThread",
+            "LuauGlobal.mainthread",
+            "global_State.mainthread"
+        ],
+        "wrapper_proof5": [
+            "Luau.Node_Key",
+            "Luau.Node_KeyTag",
+            "Luau.Node_Size"
+        ],
+        "wrapper_proof7": [
+            "Lighting.ShadowSoftness"
+        ]
     }
 }

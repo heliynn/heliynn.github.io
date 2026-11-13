@@ -326,6 +326,7 @@ namespace Offsets {
          inline constexpr uintptr_t TextColor3 = 0xae0;
          inline constexpr uintptr_t Visible = 0x78d;
          inline constexpr uintptr_t ZIndex = 0x33c;
+         inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
     }
 
     namespace HandleAdornment {
@@ -385,6 +386,7 @@ namespace Offsets {
          inline constexpr uintptr_t Parent = 0x60;
          inline constexpr uintptr_t SetParent = 0x1d27e60;
          inline constexpr uintptr_t This = 0x8;
+         inline constexpr uintptr_t GetAttribute = 0x1D2FA60;
     }
 
     namespace JointInstance {
@@ -425,6 +427,7 @@ namespace Offsets {
          inline constexpr uintptr_t Sky = 0x1b0;
          inline constexpr uintptr_t Source = 0x15c;
          inline constexpr uintptr_t SunPosition = 0x160;
+         inline constexpr uintptr_t ShadowSoftness = 0x124;
     }
 
     namespace LocalScript {
@@ -516,6 +519,10 @@ namespace Offsets {
          inline constexpr uintptr_t luaB_tostring = 0x5aaf490;
          inline constexpr uintptr_t luaB_type = 0x5aac7a0;
          inline constexpr uintptr_t luaB_typeof = 0x5aad300;
+         inline constexpr uintptr_t GlobalMainThread = 0x60;
+         inline constexpr uintptr_t Node_Key = 0x10;
+         inline constexpr uintptr_t Node_KeyTag = 0x1C;
+         inline constexpr uintptr_t Node_Size = 0x20;
     }
 
     namespace MaterialColors {
@@ -743,6 +750,7 @@ namespace Offsets {
 
     namespace ScriptContext {
          inline constexpr uintptr_t VTable = 0x7269f98;
+         inline constexpr uintptr_t VmWrapper = 0x298;
     }
 
     namespace Seat {
@@ -968,6 +976,18 @@ namespace Offsets {
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
          inline constexpr uintptr_t Tt = 0x0;
+    }
+
+    namespace LuauGlobal {
+         inline constexpr uintptr_t mainthread = 0x60;
+    }
+
+    namespace VmWrapper {
+         inline constexpr uintptr_t LuaState = 0x28;
+    }
+
+    namespace global_State {
+         inline constexpr uintptr_t mainthread = 0x60;
     }
 
 }
