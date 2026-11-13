@@ -766,8 +766,8 @@ namespace Offsets {
     }
 
     namespace RunService {
+         inline constexpr uintptr_t HeartbeatFPS = 0xc8;
          inline constexpr uintptr_t HeartbeatTask = 0xd8;
-         inline constexpr uintptr_t HeartbeatFPS = 0xC8;
     }
 
     namespace Script {

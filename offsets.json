@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "22:38 13/11/2026",
+    "Dumped At": "22:45 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
     "Total Offsets": 706,
@@ -957,7 +957,6 @@
             "Luau.Node_Key",
             "Luau.Node_KeyTag",
             "Luau.Node_Size",
-            "RunService.HeartbeatFPS",
             "ScriptContext.VmWrapper",
             "VmWrapper.LuaState"
         ]
