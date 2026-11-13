@@ -72,9 +72,8 @@ h1, p { margin: 0; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(34% 46% at 86% -12%, rgba(255, 46, 24, .8), transparent 70%),
-    linear-gradient(118deg, transparent 30%, rgba(196, 22, 12, .3) 56%, transparent 84%),
-    radial-gradient(30% 28% at 22% 74%, rgba(118, 14, 8, .18), transparent 78%);
+    radial-gradient(30% 34% at 96% -6%, rgba(206, 38, 20, .45), transparent 72%),
+    linear-gradient(118deg, rgba(56, 7, 5, .52) 0%, rgba(82, 11, 6, .34) 46%, rgba(42, 5, 4, .52) 100%);
   will-change: transform, opacity;
   animation: halftone-bloom 30s ease-in-out infinite;
 }
@@ -84,12 +83,10 @@ h1, p { margin: 0; }
   position: absolute;
   inset: -2px;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(248, 54, 34, .88) 0 2.4px, rgba(248, 54, 34, 0) 2.7px);
+  background-image: radial-gradient(circle, rgba(210, 44, 27, .5) 0 2.4px, rgba(210, 44, 27, 0) 2.7px);
   background-size: 5.6px 5.6px;
   background-position: 0 0;
-  /* one soft diagonal ramp: dots crowd in from the top right, gone bottom left */
-  -webkit-mask-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, .16) 24%, rgba(0, 0, 0, .58) 44%, #000 60%, #000 100%);
-  mask-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, .16) 24%, rgba(0, 0, 0, .58) 44%, #000 60%, #000 100%);
+  /* dots cover the whole field; the dark patches are cut over them */
   will-change: transform;
   animation: halftone-breathe 44s ease-in-out infinite;
 }
@@ -99,11 +96,11 @@ h1, p { margin: 0; }
   content: "";
   position: absolute;
   inset: 0;
-  inset: 0 -1140px 0 0;
-  background-image: radial-gradient(circle, rgba(255, 96, 62, .95) 0 2.4px, rgba(255, 96, 62, 0) 2.7px);
+  inset: 0 -1120px 0 0;
+  background-image: radial-gradient(circle, rgba(255, 96, 62, .5) 0 2.4px, rgba(255, 96, 62, 0) 2.7px);
   background-size: 5.6px 5.6px;
-  -webkit-mask-image: repeating-linear-gradient(118deg, rgba(0, 0, 0, 0) 0 130px, rgba(0, 0, 0, .38) 220px, rgba(0, 0, 0, .8) 300px, rgba(0, 0, 0, .3) 400px, rgba(0, 0, 0, 0) 500px);
-  mask-image: repeating-linear-gradient(118deg, rgba(0, 0, 0, 0) 0 130px, rgba(0, 0, 0, .38) 220px, rgba(0, 0, 0, .8) 300px, rgba(0, 0, 0, .3) 400px, rgba(0, 0, 0, 0) 500px);
+  -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .22) 210px, rgba(0, 0, 0, .34) 290px, rgba(0, 0, 0, 0) 390px);
+  mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .22) 210px, rgba(0, 0, 0, .34) 290px, rgba(0, 0, 0, 0) 390px);
   will-change: transform;
   animation: halftone-crest-a 52s linear infinite;
 }
@@ -112,13 +109,12 @@ h1, p { margin: 0; }
 .backdrop__art::after {
   content: "";
   position: absolute;
-  inset: 0 0 0 -840px;
-  background-image: radial-gradient(circle, rgba(255, 96, 70, .85) 0 1.45px, rgba(255, 96, 70, 0) 1.7px);
-  background-size: 4.2px 4.2px;
-  -webkit-mask-image: repeating-linear-gradient(62deg, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .3) 210px, rgba(0, 0, 0, .62) 290px, rgba(0, 0, 0, 0) 400px);
-  mask-image: repeating-linear-gradient(62deg, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .3) 210px, rgba(0, 0, 0, .62) 290px, rgba(0, 0, 0, 0) 400px);
+  inset: -260px -260px -260px -260px;
+  background: #07070a;
+  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .5) 260px, #000 380px 520px, rgba(0, 0, 0, .5) 640px, rgba(0, 0, 0, 0) 780px);
+  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .5) 260px, #000 380px 520px, rgba(0, 0, 0, .5) 640px, rgba(0, 0, 0, 0) 780px);
   will-change: transform;
-  animation: halftone-crest-b 68s linear infinite;
+  animation: halftone-arcs 90s ease-in-out infinite;
 }
 
 /* black ink the dots dissolve into */
@@ -129,11 +125,11 @@ h1, p { margin: 0; }
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(58% 52% at 0% 88%, rgba(5, 5, 7, .995) 0%, rgba(5, 5, 7, .92) 40%, rgba(5, 5, 7, 0) 76%),
-    radial-gradient(44% 66% at -8% 14%, rgba(5, 5, 7, .97) 0%, rgba(5, 5, 7, .68) 44%, rgba(5, 5, 7, 0) 80%),
-    radial-gradient(48% 44% at 32% 110%, rgba(5, 5, 7, .95) 0%, rgba(5, 5, 7, .48) 52%, rgba(5, 5, 7, 0) 84%),
-    radial-gradient(122% 90% at 60% 34%, transparent 42%, rgba(5, 5, 7, .7) 100%),
-    radial-gradient(46% 40% at 100% 96%, rgba(5, 5, 7, .8) 0%, rgba(5, 5, 7, .35) 50%, rgba(5, 5, 7, 0) 82%);
+    radial-gradient(46% 46% at 4% 96%, rgba(5, 5, 7, .9) 0%, rgba(5, 5, 7, .45) 46%, rgba(5, 5, 7, 0) 80%),
+    radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .72) 0%, rgba(5, 5, 7, .22) 50%, rgba(5, 5, 7, 0) 84%),
+    radial-gradient(120% 96% at 54% 34%, transparent 54%, rgba(5, 5, 7, .7) 100%),
+    linear-gradient(90deg, rgba(5, 5, 7, .45) 0%, rgba(5, 5, 7, 0) 12%),
+    linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
 }
 
 /* shifts are whole multiples of both the dot grid and the band period,
@@ -143,9 +139,10 @@ h1, p { margin: 0; }
   to { transform: translate3d(-1120px, 0, 0); }
 }
 
-@keyframes halftone-crest-b {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(840px, 0, 0); }
+@keyframes halftone-arcs {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-40px, 30px, 0) scale(1.06); }
 }
 
 @keyframes halftone-breathe {
