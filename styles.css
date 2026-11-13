@@ -571,10 +571,12 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 
 .art--left {
   left: clamp(-120px, calc(50% - 760px), 0px);
+  transform: translateY(-40px);
 }
 
 .art--right {
   right: clamp(-120px, calc(50% - 760px), 0px);
+  transform: translateY(-40px);
 }
 
 /* ---------------- responsive ---------------- */
@@ -626,6 +628,7 @@ button.panel__row:hover .panel__label { color: var(--ink-soft); }
 }
 
 /* ---------------- entrance ---------------- */
+/* rebuild marker */
 
 @keyframes rise-in {
   from { opacity: 0; transform: translate3d(0, 14px, 0); }
