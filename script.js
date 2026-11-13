@@ -256,7 +256,6 @@
   const bars = Array.from(viz.querySelectorAll('span'));
   const titleEl = document.getElementById('pillTitle');
   const subEl = document.getElementById('pillSub');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let ctx = null;
   let analyser = null;
@@ -283,7 +282,7 @@
     const played = Math.round(progress * bars.length);
     bars.forEach((bar, i) => bar.classList.toggle('is-played', i < played));
 
-    if (analyser && data && !audio.paused && !reduced.matches) {
+    if (analyser && data && !audio.paused) {
       analyser.getByteFrequencyData(data);
       bars.forEach((bar, i) => {
         const band = data[Math.floor(Math.pow(i / bars.length, 1.4) * data.length)] / 255;

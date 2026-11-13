@@ -320,10 +320,3 @@ a { color: inherit; }
   .rows { grid-template-columns: minmax(0, 1fr); }
   .row { font-size: .74rem; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}

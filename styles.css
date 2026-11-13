@@ -727,16 +727,11 @@ button.panel__row:focus-visible .panel__label {
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .wordmark { animation: rise-in .75s var(--ease) .05s both; }
-  .statement { animation: rise-in .75s var(--ease) .12s both; }
-  .panel { animation: rise-in .8s var(--ease) .18s both; }
-  .art { animation: art-rise-in .9s var(--ease) .26s both; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
-}
+/* animation runs regardless of the OS "reduce motion" setting */
+.wordmark { animation: rise-in .75s var(--ease) .05s both; }
+.statement { animation: rise-in .75s var(--ease) .12s both; }
+.panel { animation: rise-in .8s var(--ease) .18s both; }
+.art { animation: art-rise-in .9s var(--ease) .26s both; }
 
 /* ---------------- modal details ---------------- */
 
