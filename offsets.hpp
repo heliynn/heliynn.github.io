@@ -326,6 +326,7 @@ namespace Offsets {
          inline constexpr uintptr_t TextColor3 = 0xae0;
          inline constexpr uintptr_t Visible = 0x78d;
          inline constexpr uintptr_t ZIndex = 0x33c;
+         inline constexpr uintptr_t ScreenGui_Enabled = 0x260;
     }
 
     namespace HandleAdornment {
@@ -385,6 +386,7 @@ namespace Offsets {
          inline constexpr uintptr_t Parent = 0x60;
          inline constexpr uintptr_t SetParent = 0x1d27e60;
          inline constexpr uintptr_t This = 0x8;
+         inline constexpr uintptr_t GetAttribute = 0x1D2FA60;
     }
 
     namespace JointInstance {
@@ -468,21 +470,21 @@ namespace Offsets {
 
     namespace LuaState {
          inline constexpr uintptr_t Base = 0x68;
-         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Global = 0x60;
          inline constexpr uintptr_t Stack = 0x58;
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
+         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Tt = 0x0;
     }
 
     namespace Luau {
          inline constexpr uintptr_t ClosureIsC = 0x6;
+         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t Node_Key = 0x10;
          inline constexpr uintptr_t Node_KeyTag = 0x1c;
          inline constexpr uintptr_t Node_Size = 0x20;
          inline constexpr uintptr_t StateBase = 0x68;
-         inline constexpr uintptr_t StateCI = 0x78;
          inline constexpr uintptr_t StateGlobal = 0x60;
          inline constexpr uintptr_t StateTop = 0x70;
          inline constexpr uintptr_t TString_Data = 0x18;
@@ -520,6 +522,11 @@ namespace Offsets {
          inline constexpr uintptr_t luaB_tostring = 0x5aaf490;
          inline constexpr uintptr_t luaB_type = 0x5aac7a0;
          inline constexpr uintptr_t luaB_typeof = 0x5aad300;
+         inline constexpr uintptr_t StateCI = 0x78;
+    }
+
+    namespace LuauGlobal {
+         inline constexpr uintptr_t mainthread = 0x60;
     }
 
     namespace MaterialColors {
@@ -929,10 +936,6 @@ namespace Offsets {
          inline constexpr uintptr_t ViewMatrix = 0x1b0;
     }
 
-    namespace VmWrapper {
-         inline constexpr uintptr_t LuaState = 0xc8;
-    }
-
     namespace WeldConstraint {
          inline constexpr uintptr_t Part0 = 0xa0;
          inline constexpr uintptr_t Part1 = 0xb0;
@@ -969,14 +972,22 @@ namespace Offsets {
          inline constexpr uintptr_t HullsEnd = 0x38;
     }
 
+    namespace global_State {
+         inline constexpr uintptr_t mainthread = 0x60;
+    }
+
     namespace lua_State {
          inline constexpr uintptr_t Base = 0x68;
-         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Global = 0x60;
          inline constexpr uintptr_t Stack = 0x58;
          inline constexpr uintptr_t StackLast = 0x48;
          inline constexpr uintptr_t Top = 0x70;
+         inline constexpr uintptr_t Ci = 0x78;
          inline constexpr uintptr_t Tt = 0x0;
+    }
+
+    namespace VmWrapper {
+         inline constexpr uintptr_t LuaState = 0xC8;
     }
 
 }

@@ -1,10 +1,10 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.5",
-    "Dumped At": "17:37 13/11/2026",
+    "Dumped At": "20:37 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
-    "Total Offsets": 638,
+    "Total Offsets": 642,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 150070280,
@@ -46,7 +46,8 @@
             "ClassDescriptor": 24,
             "ClassName": 8,
             "ClassBase": 432,
-            "SetParent": 30572128
+            "SetParent": 30572128,
+            "GetAttribute": 30603872
         },
         "Misc": {
             "StringLength": 16,
@@ -369,7 +370,8 @@
             "ZIndex": 828,
             "BackgroundTransparency": 764,
             "Rotation": 208,
-            "ImageRectOffset": 1988
+            "ImageRectOffset": 1988,
+            "ScreenGui_Enabled": 608
         },
         "GuiBase2D": {
             "AbsoluteSize": 252,
@@ -534,7 +536,7 @@
             "StateBase": 104,
             "TValueSize": 16,
             "StateGlobal": 96,
-            "StateCI": 120,
+            "GlobalMainThread": 96,
             "luaB_assert": 95086848,
             "luaB_error": 95064912,
             "luaB_gcinfo": 95078272,
@@ -571,28 +573,35 @@
             "Table_lsizenode": 12,
             "Node_Size": 32,
             "Node_Key": 16,
-            "Node_KeyTag": 28
+            "Node_KeyTag": 28,
+            "StateCI": 120
         },
         "Closure": {
             "isC": 6
         },
         "LuaState": {
             "Global": 96,
-            "Ci": 120,
             "Base": 104,
             "Top": 112,
-            "Tt": 0,
             "Stack": 88,
-            "StackLast": 72
+            "StackLast": 72,
+            "Tt": 0,
+            "Ci": 120
         },
         "lua_State": {
             "Global": 96,
-            "Ci": 120,
             "Base": 104,
             "Top": 112,
-            "Tt": 0,
             "Stack": 88,
-            "StackLast": 72
+            "StackLast": 72,
+            "Tt": 0,
+            "Ci": 120
+        },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
         },
         "LuaB": {
             "LuaBAssert": 95086848,
@@ -657,9 +666,6 @@
         "ScriptContext": {
             "VTable": 119971736,
             "VmWrapper": 664
-        },
-        "VmWrapper": {
-            "LuaState": 200
         },
         "SmoothClusterGeometry": {
             "GridOld": 72,
@@ -864,6 +870,22 @@
             "NodeName": 16,
             "NodeValue": 48,
             "ValueOffset": 32
+        },
+        "VmWrapper": {
+            "LuaState": 200
         }
+    },
+    "Inherited": {
+        "node_proof1": [
+            "GuiObject.ScreenGui_Enabled",
+            "Instance.GetAttribute",
+            "LuaState.Ci",
+            "LuaState.Tt",
+            "Luau.StateCI",
+            "ScriptContext.VmWrapper",
+            "VmWrapper.LuaState",
+            "lua_State.Ci",
+            "lua_State.Tt"
+        ]
     }
 }
