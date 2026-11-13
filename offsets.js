@@ -111,10 +111,6 @@
       list.append(card);
     }
 
-    count.textContent = state.query
-      ? shown + ' / ' + state.total + ' offsets'
-      : state.total + ' offsets';
-
     if (!shown) list.append(el('p', 'empty', 'No offsets match that search.'));
   };
 

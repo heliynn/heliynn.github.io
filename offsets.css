@@ -166,11 +166,7 @@ a { color: inherit; }
 }
 
 .count {
-  flex: none;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: .68rem;
-  white-space: nowrap;
+  display: none;
 }
 
 .status {
