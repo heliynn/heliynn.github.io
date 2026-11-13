@@ -78,31 +78,33 @@ h1, p { margin: 0; }
   animation: halftone-bloom 30s ease-in-out infinite;
 }
 
-/* dense dot grid — dots almost touch, like a printed halftone */
+/* dense dot grid — dots almost touch, like a printed halftone.
+   The layer is oversized by 240px on every side and drifts by whole dots, so the
+   red slides around while the edges stay covered and the loop has no seam. */
 .backdrop__art {
   position: absolute;
-  inset: -2px;
+  inset: -240px;
   z-index: 1;
   background-image: radial-gradient(circle, rgba(150, 45, 47, .84) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
   background-size: 5.6px 5.6px;
   background-position: 0 0;
   /* dots cover the whole field; the dark patches are cut over them */
   will-change: transform;
-  animation: halftone-breathe 44s ease-in-out infinite;
+  animation: halftone-drift-dots 40s linear infinite;
 }
 
 /* second, finer field crossing the first — gives the wave its interference */
 .backdrop__art::before {
   content: "";
   position: absolute;
-  inset: 0;
-  inset: 0 -1120px 0 0;
+  inset: -90px;
   background-image: radial-gradient(circle, rgba(179, 61, 63, .4) 0 2.4px, rgba(179, 61, 63, 0) 2.9px);
   background-size: 5.6px 5.6px;
   -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
   will-change: transform;
-  animation: halftone-crest-a 52s linear infinite;
+  /* slow back-and-forth drift: the bright bands wander instead of scrolling */
+  animation: halftone-crest 46s ease-in-out infinite;
 }
 
 /* second crest, finer dots crossing the first the other way */
@@ -115,7 +117,7 @@ h1, p { margin: 0; }
   mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
   filter: blur(26px);
   will-change: transform;
-  animation: halftone-arcs 120s ease-in-out infinite;
+  animation: halftone-arcs 130s ease-in-out infinite;
 }
 
 /* black ink the dots dissolve into */
@@ -134,29 +136,30 @@ h1, p { margin: 0; }
     linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
 }
 
-/* shifts are whole multiples of both the dot grid and the band period,
-   so the loop never snaps */
-@keyframes halftone-crest-a {
+/* The dot field slides by a whole number of dots (20 across, 30 down), so the
+   pattern is identical at the end of the loop and there is no seam. The other
+   layers drift and return, which loops just as cleanly without a snap. */
+@keyframes halftone-drift-dots {
   from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-1120px, 0, 0); }
+  to { transform: translate3d(112px, 168px, 0); }
+}
+
+@keyframes halftone-crest {
+  0%,
+  100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-46px, 34px, 0); }
 }
 
 @keyframes halftone-arcs {
   0%,
-  100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-40px, 30px, 0) scale(1.06); }
-}
-
-@keyframes halftone-breathe {
-  0%,
   100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-1.2%, .8%, 0); }
+  50% { transform: translate3d(-64px, 48px, 0); }
 }
 
 @keyframes halftone-bloom {
   0%,
-  100% { transform: translate3d(0, 0, 0) scale(1); opacity: .95; }
-  50% { transform: translate3d(-2.2%, 1.8%, 0) scale(1.05); opacity: 1; }
+  100% { transform: translate3d(0, 0, 0); opacity: .95; }
+  50% { transform: translate3d(-2.4%, 2%, 0); opacity: 1; }
 }
 
 /* ---------------- skip link ---------------- */
