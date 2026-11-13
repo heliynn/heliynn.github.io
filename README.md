@@ -14,7 +14,7 @@ no framework and no dependencies.
 | `styles.css` | The backdrop, details card, type and spacing. |
 | `script.js` | Renders `content.js` into the page. Leave it alone. |
 | `assets/` | Optional side pictures (`art-left.png`, `art-right.png`). |
-| `backdrop.svg` | The marbled grey background. |
+| `styles.css` (`.backdrop`) | The animated red halftone background, drawn in CSS. |
 | `offsets.json` | Offsets for the app, as JSON. |
 | `offsets.hpp` | The same offsets as a C++ header. |
 | `favicon.svg` | Browser tab icon. |

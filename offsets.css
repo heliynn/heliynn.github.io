@@ -10,7 +10,9 @@
   --muted: #7a8296;
   --line: rgba(238, 240, 245, .08);
   --raised: rgba(255, 255, 255, .04);
-  --accent: #a8f0bd;
+  --red: #ff3f2c;
+  --red-soft: #ff6a5a;
+  --accent: #ff6a5a;
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -20,7 +22,7 @@ html { height: 100%; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   min-height: 100%;
-  background: #16171a;
+  background: #0a0a0c;
   color: var(--ink);
   font-family: var(--display);
   font-size: 14px;
@@ -29,6 +31,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* red halftone wash, kept quiet so the offset values stay readable */
 body::before {
   content: "";
   position: fixed;
@@ -36,9 +39,20 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(55% 40% at 18% 0%, rgba(255, 255, 255, .05), transparent 70%),
-    radial-gradient(45% 35% at 92% 12%, rgba(255, 255, 255, .03), transparent 70%),
-    linear-gradient(#1a1b1e 0%, #16171a 55%, #101114 100%);
+    radial-gradient(circle, rgba(255, 74, 52, .5) 0 1.25px, transparent 1.5px) 0 0 / 8px 8px,
+    radial-gradient(52% 42% at 84% 2%, rgba(224, 32, 20, .38), transparent 70%),
+    radial-gradient(42% 34% at 8% 10%, rgba(130, 16, 10, .18), transparent 72%),
+    linear-gradient(#0c0c0e 0%, #0a0a0c 55%, #060607 100%);
+  -webkit-mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, rgba(0, 0, 0, .55) 48%, transparent 76%);
+  mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, rgba(0, 0, 0, .55) 48%, transparent 76%);
+  will-change: background-position;
+  animation: halftone-drift 34s linear infinite;
+}
+
+@keyframes halftone-drift {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  50% { background-position: 4px 4px, 0 0, 0 0, 0 0; }
+  100% { background-position: 8px 8px, 0 0, 0 0, 0 0; }
 }
 
 /* header unit — top bar + search join into one pinned header */
@@ -47,7 +61,7 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(22, 23, 26, .94);
+  background: rgba(10, 10, 12, .94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -155,7 +169,7 @@ a { color: inherit; }
 .btn {
   padding: 7px 11px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   color: var(--ink-soft);
   font-family: var(--mono);
   font-size: .72rem;
@@ -165,49 +179,10 @@ a { color: inherit; }
 
 .btn:hover,
 .btn:focus-visible {
-  color: #fff;
-  border-color: rgba(255, 255, 255, .22);
-  background: var(--raised);
+  color: var(--red-soft);
+  border-color: rgba(255, 90, 68, .45);
+  background: linear-gradient(110deg, rgba(255, 63, 44, .16), rgba(255, 63, 44, .03));
 }
-
-.toolbar {
-  position: sticky;
-  top: 53px;
-  z-index: 9;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-  padding: 8px 0;
-  background: rgba(22, 23, 26, .92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-}
-
-#search {
-  flex: 1;
-  min-width: 0;
-  padding: 9px 11px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--raised);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: .76rem;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-#search::placeholder { color: var(--muted); }
-
-#search:focus {
-  border-color: rgba(255, 255, 255, .25);
-  background: rgba(255, 255, 255, .06);
-}
-
-.count { display: none; }
 
 @media (max-width: 640px) {
   .top__meta { display: none; }
@@ -230,11 +205,28 @@ a { color: inherit; }
 }
 
 .cat {
+  position: relative;
   border: 1px solid var(--line);
-  border-radius: 11px;
+  border-radius: 5px;
   background: var(--raised);
   overflow: hidden;
+  transition: border-color .3s ease;
 }
+
+.cat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(142deg, rgba(255, 63, 44, .2) 0%, rgba(255, 63, 44, .06) 40%, rgba(255, 63, 44, 0) 76%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.cat:hover { border-color: rgba(255, 90, 68, .3); }
+.cat:hover::before { opacity: 1; }
+
+.cat > * { position: relative; z-index: 1; }
 
 .cat__head {
   display: flex;
@@ -289,7 +281,7 @@ a { color: inherit; }
   flex: none;
   padding: 2px 6px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 3px;
   background: none;
   color: #fff;
   font-family: var(--mono);
