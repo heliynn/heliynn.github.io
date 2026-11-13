@@ -75,7 +75,7 @@ h1, p { margin: 0; }
     radial-gradient(32% 36% at 96% -6%, rgba(214, 44, 30, .5), transparent 74%),
     linear-gradient(118deg, rgba(54, 8, 6, .5) 0%, rgba(104, 14, 8, .36) 46%, rgba(40, 5, 4, .5) 100%);
   will-change: transform;
-  animation: halftone-field 24s ease-in-out infinite;
+  animation: halftone-field 48s ease-in-out infinite;
 }
 
 /* dense dot grid — dots almost touch, like a printed halftone.
@@ -106,11 +106,11 @@ h1, p { margin: 0; }
   position: absolute;
   inset: -320px;
   background: #07070a;
-  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
-  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .38) 380px, rgba(0, 0, 0, .62) 520px, rgba(0, 0, 0, .8) 640px, rgba(0, 0, 0, .62) 760px, rgba(0, 0, 0, .34) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
+  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .48) 380px, rgba(0, 0, 0, .74) 520px, rgba(0, 0, 0, .92) 640px, rgba(0, 0, 0, .74) 760px, rgba(0, 0, 0, .42) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
+  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .48) 380px, rgba(0, 0, 0, .74) 520px, rgba(0, 0, 0, .92) 640px, rgba(0, 0, 0, .74) 760px, rgba(0, 0, 0, .42) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
   filter: blur(26px);
   will-change: transform;
-  animation: halftone-arcs 54s ease-in-out infinite;
+  animation: halftone-arcs 108s ease-in-out infinite;
 }
 
 /* black ink the dots dissolve into */
@@ -123,7 +123,8 @@ h1, p { margin: 0; }
   background:
     linear-gradient(rgba(6, 6, 8, .08), rgba(6, 6, 8, .08)),
     radial-gradient(46% 46% at 4% 96%, rgba(5, 5, 7, .9) 0%, rgba(5, 5, 7, .45) 46%, rgba(5, 5, 7, 0) 80%),
-    radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .72) 0%, rgba(5, 5, 7, .22) 50%, rgba(5, 5, 7, 0) 84%),
+    radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .86) 0%, rgba(5, 5, 7, .38) 50%, rgba(5, 5, 7, 0) 88%),
+    linear-gradient(270deg, rgba(5, 5, 7, .42) 0%, rgba(5, 5, 7, .18) 14%, rgba(5, 5, 7, 0) 34%),
     radial-gradient(120% 96% at 54% 34%, transparent 44%, rgba(5, 5, 7, .84) 100%),
     linear-gradient(90deg, rgba(5, 5, 7, .45) 0%, rgba(5, 5, 7, 0) 12%),
     linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
