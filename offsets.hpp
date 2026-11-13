@@ -503,6 +503,7 @@ namespace Offsets {
 
     namespace Luau {
          inline constexpr uintptr_t ClosureIsC = 0x6;
+         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t StateBase = 0x68;
          inline constexpr uintptr_t StateCI = 0x78;
          inline constexpr uintptr_t StateGlobal = 0x60;
@@ -542,10 +543,13 @@ namespace Offsets {
          inline constexpr uintptr_t luaB_tostring = 0x5aaf490;
          inline constexpr uintptr_t luaB_type = 0x5aac7a0;
          inline constexpr uintptr_t luaB_typeof = 0x5aad300;
-         inline constexpr uintptr_t GlobalMainThread = 0x60;
          inline constexpr uintptr_t Node_Key = 0x10;
          inline constexpr uintptr_t Node_KeyTag = 0x1C;
          inline constexpr uintptr_t Node_Size = 0x20;
+    }
+
+    namespace LuauGlobal {
+         inline constexpr uintptr_t mainthread = 0x60;
     }
 
     namespace MaterialColors {
@@ -762,8 +766,8 @@ namespace Offsets {
     }
 
     namespace RunService {
-         inline constexpr uintptr_t HeartbeatFPS = 0xc8;
          inline constexpr uintptr_t HeartbeatTask = 0xd8;
+         inline constexpr uintptr_t HeartbeatFPS = 0xC8;
     }
 
     namespace Script {
@@ -893,9 +897,7 @@ namespace Offsets {
     }
 
     namespace TextButton {
-         inline constexpr uintptr_t MaxVisibleGraphemes = 0x9fc;
          inline constexpr uintptr_t Selected = 0x6ae;
-         inline constexpr uintptr_t Text = 0xa48;
          inline constexpr uintptr_t TextColor3 = 0xd60;
          inline constexpr uintptr_t TextTransparency = 0xd8c;
          inline constexpr uintptr_t AutoButtonColor = 0x9E4;
@@ -916,8 +918,6 @@ namespace Offsets {
     }
 
     namespace TextLabel {
-         inline constexpr uintptr_t MaxVisibleGraphemes = 0x76c;
-         inline constexpr uintptr_t Text = 0x7c8;
          inline constexpr uintptr_t TextColor3 = 0xae0;
          inline constexpr uintptr_t TextTransparency = 0xb0c;
          inline constexpr uintptr_t TextTruncate = 0xb10;
@@ -1026,6 +1026,10 @@ namespace Offsets {
          inline constexpr uintptr_t HullsEnd = 0x38;
     }
 
+    namespace global_State {
+         inline constexpr uintptr_t mainthread = 0x60;
+    }
+
     namespace lua_State {
          inline constexpr uintptr_t Base = 0x68;
          inline constexpr uintptr_t Ci = 0x78;
@@ -1052,10 +1056,6 @@ namespace Offsets {
          inline constexpr uintptr_t SecondsBetweenDynamicVariableReloading = 0x8227E48;
     }
 
-    namespace LuauGlobal {
-         inline constexpr uintptr_t mainthread = 0x60;
-    }
-
     namespace StatsItem {
          inline constexpr uintptr_t Value = 0x1609;
     }
@@ -1067,10 +1067,6 @@ namespace Offsets {
     namespace Weld {
          inline constexpr uintptr_t Part0 = 0x100;
          inline constexpr uintptr_t Part1 = 0x110;
-    }
-
-    namespace global_State {
-         inline constexpr uintptr_t mainthread = 0x60;
     }
 
 }

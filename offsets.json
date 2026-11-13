@@ -1,10 +1,10 @@
 {
     "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.6",
-    "Dumped At": "22:26 13/11/2026",
+    "Dumped At": "22:38 13/11/2026",
     "Source Code": "https://servfur.github.io",
     "Discord": "https://servfur.github.io",
-    "Total Offsets": 710,
+    "Total Offsets": 706,
     "Offsets": {
         "TaskScheduler": {
             "Pointer": 150070280,
@@ -401,9 +401,7 @@
             "Texture_Texture": 456
         },
         "TextLabel": {
-            "Text": 1992,
             "TextColor3": 2784,
-            "MaxVisibleGraphemes": 1900,
             "TextTransparency": 2828,
             "TextXAlignment": 2836,
             "TextTruncate": 2832,
@@ -420,9 +418,7 @@
             "TextYAlignment": 3824
         },
         "TextButton": {
-            "Text": 2632,
             "TextColor3": 3424,
-            "MaxVisibleGraphemes": 2556,
             "TextTransparency": 3468,
             "Selected": 1710,
             "AutoButtonColor": 2532,
@@ -597,6 +593,7 @@
             "StateBase": 104,
             "TValueSize": 16,
             "StateGlobal": 96,
+            "GlobalMainThread": 96,
             "StateCI": 120,
             "luaB_assert": 95086848,
             "luaB_error": 95064912,
@@ -632,7 +629,6 @@
             "Table_Array": 32,
             "Table_NodeArray": 40,
             "Table_lsizenode": 12,
-            "GlobalMainThread": 96,
             "Node_Size": 32,
             "Node_Key": 16,
             "Node_KeyTag": 28
@@ -657,6 +653,12 @@
             "Tt": 0,
             "Stack": 88,
             "StackLast": 72
+        },
+        "LuauGlobal": {
+            "mainthread": 96
+        },
+        "global_State": {
+            "mainthread": 96
         },
         "LuaB": {
             "LuaBAssert": 95086848,
@@ -922,12 +924,6 @@
             "NodeValue": 48,
             "ValueOffset": 32
         },
-        "LuauGlobal": {
-            "mainthread": 96
-        },
-        "global_State": {
-            "mainthread": 96
-        },
         "VmWrapper": {
             "LuaState": 40
         },
@@ -958,14 +954,12 @@
             "GuiObject.ScreenGui_Enabled",
             "Instance.GetAttribute",
             "Lighting.ShadowSoftness",
-            "Luau.GlobalMainThread",
             "Luau.Node_Key",
             "Luau.Node_KeyTag",
             "Luau.Node_Size",
-            "LuauGlobal.mainthread",
+            "RunService.HeartbeatFPS",
             "ScriptContext.VmWrapper",
-            "VmWrapper.LuaState",
-            "global_State.mainthread"
+            "VmWrapper.LuaState"
         ]
     },
     "Carried": {
