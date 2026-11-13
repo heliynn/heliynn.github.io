@@ -95,6 +95,25 @@ a { color: inherit; }
 .back { color: var(--ink-soft); text-decoration: none; }
 .back:hover { color: #fff; }
 
+.top__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-left: auto;
+  margin-right: 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.top__links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease;
+}
+
+.top__links a:hover { color: var(--ink); }
+.top__links a[aria-current="page"] { color: var(--red-soft); }
+
 .top__meta {
   color: var(--muted);
   font-family: var(--mono);
@@ -177,6 +196,11 @@ a { color: inherit; }
   transition: color .14s, border-color .14s, background-color .14s;
 }
 
+button.btn {
+  background: none;
+  cursor: pointer;
+}
+
 .btn:hover,
 .btn:focus-visible {
   color: var(--red-soft);
@@ -186,6 +210,9 @@ a { color: inherit; }
 
 @media (max-width: 640px) {
   .top__meta { display: none; }
+  .top__links { gap: 10px; margin-right: 10px; font-size: 10px; }
+  .code { font-size: .68rem; }
+  .code__line { grid-template-columns: 2.4rem minmax(0, 1fr); gap: 8px; padding: 0 10px; }
   .rows { grid-template-columns: minmax(0, 1fr); }
   .row { font-size: .74rem; }
 }
@@ -308,15 +335,48 @@ a { color: inherit; }
   background: rgba(168, 240, 189, .08);
 }
 
+/* formatted dumps (.hpp / .cs / .txt) */
+
+.code {
+  width: 100%;
+  padding: 14px 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: rgba(9, 9, 11, .78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--mono);
+  font-size: .74rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.code__line {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding: 0 16px;
+  white-space: pre;
+}
+
+.code__line:hover { background: rgba(255, 255, 255, .025); }
+
+.code__n {
+  color: rgba(122, 130, 150, .7);
+  text-align: right;
+  user-select: none;
+}
+
+.code code { color: var(--ink-soft); }
+
+.actions .btn.is-copied {
+  color: var(--accent);
+  border-color: rgba(255, 106, 90, .45);
+}
+
 .empty {
   padding: 36px 0;
   color: var(--muted);
   text-align: center;
   font-size: .78rem;
-}
-
-@media (max-width: 640px) {
-  .top__meta { display: none; }
-  .rows { grid-template-columns: minmax(0, 1fr); }
-  .row { font-size: .74rem; }
 }

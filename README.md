@@ -17,6 +17,9 @@ no framework and no dependencies.
 | `styles.css` (`.backdrop`) | The animated red halftone background, drawn in CSS. |
 | `offsets.json` | Offsets for the app, as JSON. |
 | `offsets.hpp` | The same offsets as a C++ header. |
+| `offsets.html` | Offsets table, rendered from the JSON dump. |
+| `fflags.html`, `types.html`, `struct.html` | One page per dumper output. |
+| `viewer.js` | Shared renderer for every dump page. |
 | `favicon.svg` | Browser tab icon. |
 | `.nojekyll` | Tells Pages to serve the files exactly as they are. |
 
@@ -58,6 +61,32 @@ picture. If you replace that picture, replace this file too with another 1200×6
 The `og:image` and `twitter:image` tags in `index.html` point at
 `https://heliynn.github.io/assets/share.png`. Update those two URLs if the site moves to
 another domain.
+
+## Dumper outputs
+
+Every page in the dumper's folder has a page here. Each one fetches its file from the repo
+root and renders it; if the file is missing the page says so instead of breaking.
+
+| Output | Page |
+| --- | --- |
+| `Offsets.json` (or `offsets.json`) | `offsets.html` |
+| `Offsets.hpp` / `Offsets.cs` / `Offsets.txt` | `offsets-hpp.html`, `offsets-cs.html`, `offsets-txt.html` |
+| `FFlags.json` | `fflags.html` |
+| `FFlags.hpp` / `FFlags.cs` / `FFlags.txt` | `fflags-hpp.html`, `fflags-cs.html`, `fflags-txt.html` |
+| `Types.json` | `types.html` |
+| `Struct.hpp` | `struct.html` |
+| `OffsetsHex.json`, `FFlagsHex.json`, `run_dumper*.log` | not shown |
+
+The pages are linked from the header of every dump page (offsets · fflags · types · struct),
+and each page has buttons for its other formats plus a download link.
+
+JSON pages read the dump's own `Roblox Version`, `Dumper Version`, `Dumped At` and
+`Total Offsets` fields when they exist, then fall back to counting entries. Text pages just
+show numbered lines, with search and a copy-all button.
+
+To add another output, copy one of the pages and change `data-kind`, `data-source`,
+`data-title` and the heading. `data-source` accepts a comma separated list, so
+`Offsets.json,offsets.json` tries the first and falls back to the second.
 
 ## Updating the offsets
 

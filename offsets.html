@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>offsets · heliynn</title>
-  <meta name="description" content="Live Roblox memory offsets for the current client, by heliynn." />
+  <meta name="description" content="Live values from the client, by heliynn <3." />
   <meta name="theme-color" content="#0a0a0c" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,12 +12,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="offsets.css" />
 </head>
-<body>
+<body data-kind="json" data-source="Offsets.json,offsets.json" data-title="offsets" data-key="Offsets">
   <div class="backdrop" aria-hidden="true"></div>
 
   <header class="header">
     <div class="top">
       <a class="back" href="index.html">← servyy</a>
+      <nav class="top__links" aria-label="Dumper outputs">
+        <a href="offsets.html" aria-current="page">offsets</a>
+        <a href="fflags.html">fflags</a>
+        <a href="types.html">types</a>
+        <a href="struct.html">struct</a>
+      </nav>
       <span class="top__meta" id="meta">loading…</span>
     </div>
     <div class="toolbar">
@@ -30,8 +36,11 @@
       <h1>offsets</h1>
       <p class="lede" id="lede">Live values from the client, by heliynn <3.</p>
       <div class="actions">
-        <a class="btn" href="offsets.json" download>offsets.json</a>
-        <a class="btn" href="offsets.hpp" download>offsets.hpp</a>
+        <a class="btn" href="offsets.html" aria-current="page">json</a>
+        <a class="btn" href="offsets-hpp.html">hpp</a>
+        <a class="btn" href="offsets-cs.html">cs</a>
+        <a class="btn" href="offsets-txt.html">txt</a>
+        <a class="btn" href="Offsets.json" download>download</a>
       </div>
     </section>
 
@@ -39,10 +48,10 @@
     <div class="categories" id="categories"></div>
 
     <noscript>
-      <p class="status">This page needs JavaScript. The raw files are <a href="offsets.json">offsets.json</a> and <a href="offsets.hpp">offsets.hpp</a>.</p>
+      <p class="status">This page needs JavaScript. Download <a href="Offsets.json,offsets.json">Offsets.json,offsets.json</a> instead.</p>
     </noscript>
   </main>
 
-  <script src="offsets.js"></script>
+  <script src="viewer.js"></script>
 </body>
 </html>
