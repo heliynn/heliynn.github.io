@@ -90,7 +90,7 @@
         const value = el('button', 'row__val', entry.value);
         value.type = 'button';
         value.title = 'Copy ' + entry.value;
-        value.setAttribute('aria-label', 'Copy ' + entry.name + ' ' + entry.value);
+        value.setAttribute('aria-label', 'Copy ' + entry.name + ' value');
 
         value.addEventListener('click', async () => {
           await copy(entry.value);
@@ -131,7 +131,7 @@
 
       if (parsed.version) {
         document.title = 'offsets · ' + parsed.version;
-        lede.textContent = 'Live values from ' + parsed.version + ', by servyy <3';
+        lede.textContent = 'Live values from ' + parsed.version + ', by heliynn <3';
       }
 
       const parts = [];
@@ -147,7 +147,6 @@
     } catch (error) {
       status.textContent = 'Could not load offsets.json (' + error.message + ').';
       count.textContent = '';
-      console.error(error);
     }
   };
 

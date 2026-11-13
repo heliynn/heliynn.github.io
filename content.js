@@ -18,7 +18,7 @@ window.SITE = {
   notes: [
     { label: "discord", value: "@servfur", href: "https://discord.com/users/744890716878012508" },
     { label: "github", value: "@heliynn", href: "https://github.com/heliynn" },
-    { label: "offsets", value: "offsets.json", href: "offsets.json" }
+    { label: "offsets", value: "offsets", href: "offsets.html" }
   ],
 
   /* The button under the rows. It opens the server list. */

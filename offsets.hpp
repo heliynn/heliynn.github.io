@@ -1,12 +1,14 @@
 #pragma once
 /* -------------------------------------------------------------
-/*                       servyy's offsets                         
-/*                        by servyy <3                           
+/*                       heliynn's offsets
+/*                        by heliynn <3
 /* -------------------------------------------------------------
 #include <cstdint>
 #include <string>
 namespace Offsets {
     inline std::string ClientVersion = "version-f0ea5da9412f4e35";
+
+
 
     namespace AirProperties {
          inline constexpr uintptr_t AirDensity = 0x18;
