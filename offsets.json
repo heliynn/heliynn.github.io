@@ -1,22 +1,20 @@
 {
-    "Source": "https://heliynn.github.io",
-    "Roblox Version": "version-f0ea5da9412f4e35",
+    "Roblox Version": "version-4ea8e85481e34f46",
     "Dumper Version": "2.2.5",
-    "Dumped With": "heliynn <3",
-    "Dumped At": "21:00 13/11/2026",
-    "Source Code": "https://heliynn.github.io",
-    "Discord": "https://discord.com/users/744890716878012508",
-    "Total Offsets": 521,
+    "Dumped At": "17:37 13/11/2026",
+    "Source Code": "https://servfur.github.io",
+    "Discord": "https://servfur.github.io",
+    "Total Offsets": 638,
     "Offsets": {
         "TaskScheduler": {
-            "Pointer": 149215160,
+            "Pointer": 150070280,
             "JobStart": 200,
             "JobEnd": 208,
             "JobName": 24,
             "MaxFPS": 176
         },
         "VisualEngine": {
-            "Pointer": 143928888,
+            "Pointer": 144775176,
             "Dimensions": 2832,
             "ViewMatrix": 432,
             "RenderView": 3152,
@@ -26,16 +24,16 @@
             "SceneUpdater": 2880,
             "TechniqueVec": 0,
             "ShaderProgram": 40,
-            "EntityManager": 2048
+            "EntityManager": 1984
         },
         "FakeDataModel": {
-            "Pointer": 149645664,
+            "Pointer": 150530408,
             "RealDataModel": 504
         },
         "ModuleScript": {
             "IsCoreScript": 147,
             "GUID": 184,
-            "Hash": 0,
+            "Hash": 840,
             "ByteCode": 288
         },
         "Instance": {
@@ -48,7 +46,7 @@
             "ClassDescriptor": 24,
             "ClassName": 8,
             "ClassBase": 432,
-            "SetParent": 30380912
+            "SetParent": 30572128
         },
         "Misc": {
             "StringLength": 16,
@@ -60,23 +58,19 @@
             "CFrame": 256
         },
         "DataModel": {
-            "PlaceId": 384,
-            "GameId": 376,
-            "CreatorId": 368,
-            "GameLoaded": 1416,
+            "PlaceId": 416,
+            "GameId": 408,
+            "CreatorId": 400,
+            "GameLoaded": 1464,
             "JobId": 264,
-            "Workspace": 328,
+            "Workspace": 360,
             "ScriptContext": 1088,
-            "PlaceVersion": 412,
-            "ServerIP": 1392,
-            "ToRenderView1": 440,
+            "PlaceVersion": 52,
+            "ServerIP": 1440,
+            "ToRenderView1": 472,
             "ToRenderView2": 8,
             "ToRenderView3": 40,
-            "PrimitiveCount": 1040
-        },
-        "RunService": {
-            "HeartbeatTask": 216,
-            "HeartbeatFPS": 200
+            "PrimitiveCount": 421
         },
         "RenderJob": {
             "RenderView": 480,
@@ -85,7 +79,7 @@
         },
         "Workspace": {
             "World": 1016,
-            "ReadOnlyGravity": 2512,
+            "ReadOnlyGravity": 2504,
             "DistributedGameTime": 1216,
             "CurrentCamera": 1184
         },
@@ -201,55 +195,56 @@
             "ModelInstance": 672,
             "Team": 736,
             "TeamColor": 952,
-            "LocaleId": 1856,
             "AccountAge": 868,
             "MinZoomDistance": 884,
             "MaxZoomDistance": 880,
             "CameraMode": 888,
-            "Mouse": 4592
+            "Mouse": 4592,
+            "LocaleId": 1856
         },
         "Team": {
             "BrickColor": 160
         },
         "Humanoid": {
             "Health": 388,
-            "MaxHealth": 412,
-            "Walkspeed": 452,
-            "WalkspeedCheck": 924,
-            "JumpPower": 408,
-            "JumpHeight": 404,
-            "HipHeight": 392,
-            "MaxSlopeAngle": 416,
+            "MaxHealth": 416,
+            "Walkspeed": 456,
+            "WalkspeedCheck": 932,
+            "JumpPower": 412,
+            "JumpHeight": 408,
+            "MaxSlopeAngle": 420,
             "SeatPart": 240,
-            "HumanoidRootPart": 1120,
+            "HumanoidRootPart": 1128,
             "CameraOffset": 272,
             "HealthDisplayDistance": 380,
-            "NameDisplayDistance": 420,
+            "NameDisplayDistance": 424,
             "DisplayDistanceType": 372,
             "HealthDisplayType": 384,
-            "NameOcclusion": 424,
+            "NameOcclusion": 428,
             "DisplayName": 160,
             "MoveDirection": 308,
-            "RigType": 436,
-            "Jump": 464,
-            "Sit": 468,
-            "PlatformStand": 466,
-            "UseJumpPower": 470,
-            "AutomaticScalingEnabled": 458,
-            "BreakJointsOnDeath": 460,
-            "EvaluateStateMachine": 461,
-            "RequiresNeck": 467,
-            "AutoJumpEnabled": 456,
-            "AutoRotate": 457,
-            "IsWalking": 2606,
+            "Jump": 468,
+            "Sit": 472,
+            "PlatformStand": 470,
+            "UseJumpPower": 474,
+            "AutomaticScalingEnabled": 462,
+            "BreakJointsOnDeath": 464,
+            "EvaluateStateMachine": 465,
+            "RequiresNeck": 471,
+            "AutoJumpEnabled": 460,
+            "AutoRotate": 461,
+            "IsWalking": 2630,
             "MoveToPoint": 344,
             "MoveToPart": 256,
-            "HumanoidState": 2216,
+            "WalkTimer": 1008,
+            "HumanoidState": 2224,
             "HumanoidStateID": 32,
             "FloorMaterial": 376,
             "TargetPoint": 320,
+            "HipHeight": 392,
+            "RigType": 440,
             "WalkToPoint": 344,
-            "PlatformStatePointer": 2216
+            "PlatformStatePointer": 2224
         },
         "Seat": {
             "Occupant": 512
@@ -269,8 +264,8 @@
             "CanBeDropped": 1184,
             "ManualActivationOnly": 1186,
             "RequiresHandle": 1187,
-            "Activate": 50883600,
-            "Deactivate": 50883776
+            "Activate": 51062864,
+            "Deactivate": 51063040
         },
         "Clothing": {
             "Template": 232,
@@ -361,21 +356,20 @@
             "Icon": 176
         },
         "GuiObject": {
-            "ScreenGui_Enabled": 1168,
-            "Position": 1240,
-            "Size": 1272,
-            "Visible": 1397,
-            "Image": 2472,
-            "Text": 3592,
-            "RichText": 2976,
-            "BackgroundColor3": 1288,
-            "BorderColor3": 1300,
-            "TextColor3": 3768,
-            "LayoutOrder": 1348,
-            "ZIndex": 1388,
-            "BackgroundTransparency": 1324,
+            "Position": 680,
+            "Size": 712,
+            "Visible": 1933,
+            "Image": 1648,
+            "Text": 2608,
+            "RichText": 1992,
+            "BackgroundColor3": 728,
+            "BorderColor3": 740,
+            "TextColor3": 2784,
+            "LayoutOrder": 788,
+            "ZIndex": 828,
+            "BackgroundTransparency": 764,
             "Rotation": 208,
-            "ImageRectOffset": 2812
+            "ImageRectOffset": 1988
         },
         "GuiBase2D": {
             "AbsoluteSize": 252,
@@ -430,7 +424,9 @@
             "SunTextureId": 512,
             "MoonTextureId": 176,
             "SkyboxOrientation": 544,
-            "StarCount": 560
+            "StarCount": 560,
+            "DrawAdv": 59951044,
+            "DrawCubeCallB": 58683071
         },
         "Atmosphere": {
             "Density": 184,
@@ -508,7 +504,7 @@
             "IsPlaying": 2576
         },
         "Animator": {
-            "ActiveAnimations": 2304
+            "ActiveAnimations": 2336
         },
         "LocalScript": {
             "GUID": 184,
@@ -530,13 +526,140 @@
             "NodeRows": 40,
             "NodeStride": 48,
             "NodeOctMask": 140,
-            "SharedRowsRva": 144790096
+            "SharedRowsRva": 145637232
         },
         "Luau": {
-            "ClosureIsC": 5,
-            "StateTop": 96,
-            "StateBase": 88,
-            "TValueSize": 16
+            "ClosureIsC": 6,
+            "StateTop": 112,
+            "StateBase": 104,
+            "TValueSize": 16,
+            "StateGlobal": 96,
+            "StateCI": 120,
+            "luaB_assert": 95086848,
+            "luaB_error": 95064912,
+            "luaB_gcinfo": 95078272,
+            "luaB_getfenv": 95071744,
+            "luaB_getmetatable": 95068816,
+            "luaB_next": 95084128,
+            "luaB_newproxy": 95089904,
+            "luaB_print": 95063808,
+            "luaB_rawequal": 95072496,
+            "luaB_rawget": 95072768,
+            "luaB_rawset": 95075184,
+            "luaB_rawlen": 95078112,
+            "luaB_select": 95087024,
+            "luaB_setfenv": 95071936,
+            "luaB_setmetatable": 95069216,
+            "luaB_tonumber": 95064000,
+            "luaB_tostring": 95089808,
+            "luaB_type": 95078304,
+            "luaB_typeof": 95081216,
+            "TValue_Value": 0,
+            "TValue_Tag": 12,
+            "TValue_Size": 16,
+            "TValue_TagNumber": 3,
+            "TValue_TagString": 5,
+            "TValue_TagTable": 6,
+            "TString_Tag": 0,
+            "TString_Length": 20,
+            "TString_Data": 24,
+            "TString_Hash": 16,
+            "Table_Tag": 0,
+            "Table_SizeArray": 8,
+            "Table_Array": 32,
+            "Table_NodeArray": 40,
+            "Table_lsizenode": 12,
+            "Node_Size": 32,
+            "Node_Key": 16,
+            "Node_KeyTag": 28
+        },
+        "Closure": {
+            "isC": 6
+        },
+        "LuaState": {
+            "Global": 96,
+            "Ci": 120,
+            "Base": 104,
+            "Top": 112,
+            "Tt": 0,
+            "Stack": 88,
+            "StackLast": 72
+        },
+        "lua_State": {
+            "Global": 96,
+            "Ci": 120,
+            "Base": 104,
+            "Top": 112,
+            "Tt": 0,
+            "Stack": 88,
+            "StackLast": 72
+        },
+        "LuaB": {
+            "LuaBAssert": 95086848,
+            "LuaBError": 95064912,
+            "LuaBGcinfo": 95078272,
+            "LuaBGetFenv": 95071744,
+            "LuaBGetMetatable": 95068816,
+            "LuaBNext": 95084128,
+            "LuaBNewProxy": 95089904,
+            "LuaBPrint": 95063808,
+            "LuaBRawEqual": 95072496,
+            "LuaBRawGet": 95072768,
+            "LuaBRawSet": 95075184,
+            "LuaBRawLen": 95078112,
+            "LuaBSelect": 95087024,
+            "LuaBSetFenv": 95071936,
+            "LuaBSetMetatable": 95069216,
+            "LuaBTonumber": 95064000,
+            "LuaBTostring": 95089808,
+            "LuaBType": 95078304,
+            "LuaBTypeof": 95081216
+        },
+        "Coroutine": {
+            "Create": 95281008,
+            "Running": 95283248,
+            "Status": 95271584,
+            "Wrap": 95282448,
+            "Yield": 95283152,
+            "IsYieldable": 95283360,
+            "Finally": 95293616
+        },
+        "LuaCoroutine": {
+            "Create": 95281008,
+            "Running": 95283248,
+            "Status": 95271584,
+            "Wrap": 95282448,
+            "Yield": 95283152,
+            "IsYieldable": 95283360,
+            "Finally": 95293616
+        },
+        "Functions": {
+            "GlobalPrint": 70782896,
+            "GlobalTick": 70789104,
+            "GlobalTime": 70789232,
+            "GlobalElapsedTime": 70779792,
+            "GlobalWait": 70791056,
+            "GlobalDelay": 70777872,
+            "GlobalSpawn": 70785856,
+            "GlobalPrintIdentity": 70782928,
+            "GlobalLoadstring": 70779920,
+            "GlobalSettings": 70784672,
+            "GlobalUserSettings": 70789760,
+            "GlobalPluginManager": 70781648,
+            "GlobalWarn": 70791568,
+            "GlobalRequire": 70783184,
+            "GlobalStats": 70787776,
+            "GlobalVersion": 70790816,
+            "GlobalCollectGarbage": 70775680,
+            "GlobalGetFenv": 70793616,
+            "GlobalSetFenv": 70793936
+        },
+        "ScriptContext": {
+            "VTable": 119971736,
+            "VmWrapper": 664
+        },
+        "VmWrapper": {
+            "LuaState": 200
         },
         "SmoothClusterGeometry": {
             "GridOld": 72,
@@ -594,13 +717,20 @@
             "FunctionDescriptors": 208,
             "Name": 8
         },
+        "FunctionDescriptor": {
+            "Function": 176
+        },
+        "BoundFuncDescriptor": {
+            "Function": 176,
+            "Name": 8
+        },
         "MeshContentProvider": {
             "LRUHolder": 192,
             "LRUCache": 32,
             "Cache": 192,
             "AssetID": 16,
-            "MeshData": 40,
-            "ToMeshData": 40
+            "MeshData": 64,
+            "ToMeshData": 64
         },
         "LRUHolder": {
             "MemEnforcedLRUCache": 32
@@ -611,10 +741,10 @@
         "LRUNode": {
             "Next": 0,
             "AssetID": 16,
-            "CachedItem": 56
+            "CachedItem": 64
         },
         "CachedItem": {
-            "FileMeshData": 40
+            "FileMeshData": 64
         },
         "FileMeshData": {
             "AABBMin": 384,
@@ -625,35 +755,35 @@
             "FacesEnd": 56
         },
         "DeviceD3D11": {
-            "VTableRva": 118389152,
-            "SwapChainPtr": 128,
-            "DevicePtr": 376,
-            "ContextPtr": 384,
-            "Context": 384,
-            "ContextObj": 432
+            "VTableRva": 119143128,
+            "SwapChainPtr": 144,
+            "DevicePtr": 392,
+            "ContextPtr": 400,
+            "Context": 400,
+            "ContextObj": 448
         },
         "GeometryD3D11": {
-            "VTableRva": 118390464
+            "VTableRva": 119144456
         },
         "RakNet": {
-            "VTableRva": 118391992,
-            "Startup": 42362736,
-            "Connect": 42371968,
-            "Shutdown": 42373968,
-            "Send": 42378448,
-            "Receive": 42380224,
-            "DeallocatePacket": 42382016
+            "VTableRva": 119146040,
+            "Startup": 42507936,
+            "Connect": 42517168,
+            "Shutdown": 42519168,
+            "Send": 42523648,
+            "Receive": 42525424,
+            "DeallocatePacket": 42527216
         },
         "FastCluster": {
-            "VTableRva": 118798400,
-            "VTableRvaSub": 118798432,
+            "VTableRva": 119555728,
+            "VTableRvaSub": 119555416,
             "BindingSubobject": 144,
             "EntityBegin": 72,
             "EntityEnd": 80
         },
         "FastClusterEntity": {
-            "VTableRva": 118803184,
-            "MeshVTableRva": 118803256,
+            "VTableRva": 119560176,
+            "MeshVTableRva": 119560248,
             "ContextPtr": 8,
             "PrimitivePtr": 8,
             "MaterialPtr": 32,
@@ -672,7 +802,7 @@
             "AlphaByte": 20
         },
         "Signals": {
-            "IsLegalSendEvent": 63370672
+            "IsLegalSendEvent": 63742352
         },
         "MeshData": {
             "VertexStart": 0,
@@ -685,7 +815,7 @@
             "DeviceD3D11": 16
         },
         "FastClusterMeshGenerator": {
-            "VTableRva": 118803256
+            "VTableRva": 119560248
         },
         "TechniqueArray": {
             "BeginOffset": 0,
@@ -693,40 +823,47 @@
             "EntryStride": 136
         },
         "TextLabel": {
-            "TextXAlignment": 3820,
-            "TextTruncate": 3816
+            "TextXAlignment": 2836,
+            "TextTruncate": 2832
         },
         "TextButton": {
-            "Selected": 2534
+            "Selected": 1710
         },
         "ByteCode": {
-            "Pointer": 16,
-            "Size": 40
+            "Pointer": 24,
+            "Size": 48
+        },
+        "RunService": {
+            "HeartbeatTask": 216,
+            "HeartbeatFPS": 200
+        },
+        "Raycast": {
+            "RaycastBoundDesc": 141602880,
+            "RaycastBoundFn": 176,
+            "RaycastBoundFnRva": 13845536,
+            "RaycastDescriptorRva": 141602880
         },
         "RemoteEvent": {
-            "OnClientEvent": 55222784,
-            "OnServerEvent": 55222704,
-            "FireServer": 55226640,
-            "InstanceArgumentMeta0": 149102928,
-            "InstanceArgumentMeta1": 148278272
+            "OnClientEvent": 55439728,
+            "OnServerEvent": 55439648,
+            "FireServer": 55443584,
+            "InstanceArgumentMeta0": 149957952,
+            "InstanceArgumentMeta1": 149126976
         },
         "RemoteFunction": {
-            "InvokeServer": 56111552,
-            "OnClientInvoke": 56113424
+            "InvokeServer": 56334720,
+            "OnClientInvoke": 56336592
         },
         "RemoteSpy": {
-            "RemoteEventVTableRva": 118765912
+            "RemoteEventVTableRva": 119523568
         },
         "FFlagList": {
-            "Pointer": 140048616,
+            "Pointer": 140896360,
             "Head": 8,
             "NodeNext": 0,
             "NodeName": 16,
             "NodeValue": 48,
             "ValueOffset": 32
-        },
-        "FFlags": {
-            "RenderFastClusterOcclusionCulling4": 135825904
         }
     }
 }
