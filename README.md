@@ -69,6 +69,10 @@ A Chomusuke sits in the top right corner. It picks one picture at random from
 `mascot.pool` in `content.js` on each visit, and you can drag it anywhere on the page
 (it stays inside the window, and snaps back into view if the window shrinks).
 
+It remembers where you dropped it in `localStorage` under `mascot-position`, so it comes
+back to the same spot on the next visit. Clearing site data (or a different browser)
+resets it to the top right corner.
+
 ```js
 mascot: {
   pool: [

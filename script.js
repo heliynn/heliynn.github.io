@@ -253,6 +253,8 @@
     mountArt('right', choice.right);
 
     /* ---------- draggable mascot ---------- */
+    const MASCOT_KEY = 'mascot-position';
+
     const mountMascot = () => {
       const config = S.mascot || {};
       const pool = Array.isArray(config.pool) ? config.pool.filter(Boolean) : [];
@@ -271,14 +273,40 @@
       let grabX = 0;
       let grabY = 0;
       let dragging = false;
+      let spot = null; /* where it sits, in pixels from the top left */
 
       const place = (x, y) => {
         img.style.right = 'auto';
         const maxX = Math.max(0, innerWidth - img.offsetWidth);
         const maxY = Math.max(0, innerHeight - img.offsetHeight);
-        img.style.left = Math.min(Math.max(0, x), maxX) + 'px';
-        img.style.top = Math.min(Math.max(0, y), maxY) + 'px';
+        const left = Math.min(Math.max(0, x), maxX);
+        const top = Math.min(Math.max(0, y), maxY);
+        img.style.left = left + 'px';
+        img.style.top = top + 'px';
+        spot = { x: Math.round(left), y: Math.round(top) };
       };
+
+      /* Remembered in pixels and clamped on the way back in, so a reload puts
+         it exactly where you dropped it and a smaller window keeps it on screen. */
+      const remember = () => {
+        if (!spot) return;
+        try {
+          localStorage.setItem(MASCOT_KEY, JSON.stringify(spot));
+        } catch (error) { /* private mode or storage disabled: just forget it */ }
+      };
+
+      const restore = () => {
+        let saved = null;
+        try {
+          saved = JSON.parse(localStorage.getItem(MASCOT_KEY) || 'null');
+        } catch (error) { saved = null; }
+        if (!saved || !Number.isFinite(saved.x) || !Number.isFinite(saved.y)) return;
+        place(saved.x, saved.y);
+      };
+
+      /* width is only known once the picture has loaded */
+      if (img.complete) restore();
+      else img.addEventListener('load', restore, { once: true });
 
       img.addEventListener('pointerdown', (event) => {
         if (event.button !== undefined && event.button !== 0) return;
@@ -303,6 +331,7 @@
         if (!dragging) return;
         dragging = false;
         img.classList.remove('is-dragging');
+        remember();
         try {
           if (img.hasPointerCapture(event.pointerId)) img.releasePointerCapture(event.pointerId);
         } catch (error) { /* already released */ }
