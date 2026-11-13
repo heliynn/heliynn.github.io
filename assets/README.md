@@ -1,9 +1,12 @@
 # Assets
 
-Side art:
+Side art (the pool in `content.js`, two different ones picked per visit):
 
-- `art-left.png`: the MEGUMIN picture (217×320, transparent background)
-- `art-right.png`: the MEGUMIN2 picture (228×340, transparent background)
+- `art-left.png`: the MEGUMIN picture (transparent background)
+- `art-right.png`: the MEGUMIN2 picture (transparent background)
+- `megumin-4.png`: Megumin lying down with Chomusuke
+- `megumin-5.png`: Megumin sitting, smiling
+- `megumin-6.png`: Megumin standing with her staff
 - `share.png`: the 1200×630 social preview, built from the old left art
 
 Discord popup icons:
@@ -14,18 +17,21 @@ Discord popup icons:
 The side art sits behind the content with a quiet black filter and hides below 1260px wide
 so it never sits under the text. If a file is missing, the slot is simply skipped.
 
-To swap sides, rename the files or change the paths in `content.js`:
+To add or remove a picture, edit the pool list in `content.js`:
 
 ```js
 art: {
-  left: { src: "assets/art-left.png?v=15", width: 217, height: 320 },
-  right: { src: "assets/art-right.png?v=15", width: 228, height: 340 }
+  pool: [
+    "assets/art-left.png?v=16",
+    "assets/megumin-4.png?v=1"
+  ]
 }
 ```
 
-Remove a line to drop that side. The width and height let the page reserve space before
-the file loads. The version query on each path is a cache-buster; raise it when you replace
-a picture so browsers fetch the new one.
+The pool is shuffled on every load and the first two entries are used, so the two edges
+never show the same picture. Remove a line to take that picture out of rotation. The version
+query on each path is a cache-buster; raise it when you replace a picture so browsers fetch
+the new one.
 
 The popup list also lives in `content.js` under `servers`. Each entry has a `name`, the
 `invite` code (the part after `https://discord.gg/`), your `role`, and an `image` path.

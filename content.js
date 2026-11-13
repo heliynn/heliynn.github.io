@@ -45,10 +45,16 @@ window.SITE = {
     }
   ],
 
-  /* The two pictures at the edges. Delete a line to hide one.
-     Update width and height if you swap in a different image. */
+  /* The pictures at the edges. Each visit picks two different ones from this
+     pool — left and right are never the same picture. Add a PNG to assets/ and
+     paste its path on a new line to grow the pool. */
   art: {
-    left: { src: "assets/art-left.png?v=15", width: 217, height: 320 },
-    right: { src: "assets/art-right.png?v=15", width: 228, height: 340 }
+    pool: [
+      "assets/art-left.png?v=16",
+      "assets/art-right.png?v=16",
+      "assets/megumin-4.png?v=1",
+      "assets/megumin-5.png?v=1",
+      "assets/megumin-6.png?v=1"
+    ]
   }
 };

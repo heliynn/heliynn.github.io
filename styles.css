@@ -654,6 +654,7 @@ button.panel__row:focus-visible .panel__label {
   width: auto;
   max-width: 28vw;
   object-fit: contain;
+  object-position: center bottom;
   pointer-events: none;
   user-select: none;
   filter: brightness(.65) saturate(.9);

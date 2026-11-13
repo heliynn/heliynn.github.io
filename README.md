@@ -36,22 +36,32 @@ The placeholders to replace:
 
 The name is lowercase on purpose: `display: "servyy"`.
 
-## The two side pictures
+## The side pictures
 
-Save them as:
+The pictures live in `assets/` and are listed in a pool in `content.js`:
 
-- `assets/art-left.png` — left edge
-- `assets/art-right.png` — right edge
+```js
+art: {
+  pool: [
+    "assets/art-left.png?v=16",
+    "assets/art-right.png?v=16",
+    "assets/megumin-4.png?v=1",
+    "assets/megumin-5.png?v=1",
+    "assets/megumin-6.png?v=1"
+  ]
+}
+```
+
+Each visit picks two *different* pictures from the pool and puts one on each edge, so the
+left and right are never the same image. Reload to see another pair.
+
+To grow the pool, drop a PNG into `assets/` and add its path on a new line. Raise the `?v=`
+number when you replace a file so browsers fetch the new one. Remove a line to take that
+picture out of rotation.
 
 They sit behind the content with a quiet black filter and disappear under 1260px wide so
-they never cover text. Both should have transparent backgrounds. Missing files are ignored,
-so there are no broken images.
-
-`content.js` also stores each picture's width and height, which lets the page reserve
-space before the file loads. Update those numbers if you swap in a different image.
-
-To swap sides, either rename the files or swap the paths in `content.js`. Delete a line to
-remove that side.
+they never cover text. All of them should have transparent backgrounds. Missing files are
+ignored, so there are no broken images.
 
 ## Share preview
 

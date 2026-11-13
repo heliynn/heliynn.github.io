@@ -214,8 +214,7 @@
     }
 
     /* ---------- side art ---------- */
-    const mountArt = (side) => {
-      const art = S.art && S.art[side];
+    const mountArt = (side, art) => {
       if (!art) return;
 
       const src = typeof art === 'string' ? art : art.src;
@@ -235,8 +234,23 @@
       document.body.append(img);
     };
 
-    mountArt('left');
-    mountArt('right');
+    /* Draw two different pictures from the pool, one per edge. */
+    const pickArt = () => {
+      const config = S.art || {};
+      const pool = Array.isArray(config.pool) ? config.pool.filter(Boolean) : [];
+      if (!pool.length) return { left: config.left, right: config.right };
+
+      const bag = pool.slice();
+      for (let i = bag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [bag[i], bag[j]] = [bag[j], bag[i]];
+      }
+      return { left: bag[0], right: bag[1] };
+    };
+
+    const choice = pickArt();
+    mountArt('left', choice.left);
+    mountArt('right', choice.right);
   };
 
   if (document.readyState === 'loading') {
