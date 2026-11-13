@@ -125,69 +125,140 @@
       entry.value.toLowerCase().includes(state.query);
   };
 
-  const renderTable = () => {
-    list.replaceChildren();
-    let shown = 0;
+  const rowNode = (entry) => {
+    const row = el('div', 'row');
+    const name = el('span', 'row__name', entry.name);
+    const value = el('button', 'row__val', entry.value);
+    value.type = 'button';
+    value.title = 'Copy ' + entry.value;
+    value.setAttribute('aria-label', 'Copy ' + entry.name + ' value');
+
+    value.addEventListener('click', async () => {
+      await copy(entry.value);
+      const previous = value.textContent;
+      value.textContent = 'copied';
+      value.classList.add('is-copied');
+      setTimeout(() => {
+        value.textContent = previous;
+        value.classList.remove('is-copied');
+      }, 900);
+    });
+
+    row.append(name, value);
+    return row;
+  };
+
+  const lineNode = (line) => {
+    const row = el('div', 'code__line');
+    row.append(el('span', 'code__n', String(line.number)));
+    row.append(el('code', null, line.text));
+    return row;
+  };
+
+  /* A flag dump has tens of thousands of rows, so nothing is built up front:
+     rows go in CHUNK at a time and the next batch loads as you near the bottom. */
+  const CHUNK = 120;
+  let queue = [];      /* what is left to put on the page */
+  let cursor = 0;
+  let openCard = null; /* the category card the next rows belong to */
+  let sentinel = null;
+
+  const container = () => (kind === 'text' ? code : list);
+
+  const wanted = () => {
+    const items = [];
+
+    if (kind === 'text') {
+      for (const line of state.lines) {
+        if (state.query && !line.text.toLowerCase().includes(state.query)) continue;
+        items.push({ kind: 'line', line });
+      }
+      return items;
+    }
 
     for (const category of state.categories) {
       const entries = category.entries.filter((entry) => matches(category, entry));
       if (!entries.length) continue;
-      shown += entries.length;
-
-      const card = el('section', 'cat');
-      const head = el('div', 'cat__head');
-      head.append(el('span', 'cat__name', category.name), el('span', 'cat__n', String(entries.length)));
-
-      const rows = el('div', 'rows');
-      for (const entry of entries) {
-        const row = el('div', 'row');
-        const name = el('span', 'row__name', entry.name);
-        const value = el('button', 'row__val', entry.value);
-        value.type = 'button';
-        value.title = 'Copy ' + entry.value;
-        value.setAttribute('aria-label', 'Copy ' + entry.name + ' value');
-
-        value.addEventListener('click', async () => {
-          await copy(entry.value);
-          const previous = value.textContent;
-          value.textContent = 'copied';
-          value.classList.add('is-copied');
-          setTimeout(() => {
-            value.textContent = previous;
-            value.classList.remove('is-copied');
-          }, 900);
-        });
-
-        row.append(name, value);
-        rows.append(row);
-      }
-
-      card.append(head, rows);
-      list.append(card);
+      items.push({ kind: 'head', category, count: entries.length });
+      for (const entry of entries) items.push({ kind: 'row', entry });
     }
-
-    if (!shown) list.append(el('p', 'empty', 'Nothing matches that search.'));
+    return items;
   };
 
-  const renderCode = () => {
-    if (!code) return;
-    code.replaceChildren();
-    const filtered = state.lines.filter((line) => !state.query || line.text.toLowerCase().includes(state.query));
-    if (!filtered.length) {
-      code.append(el('p', 'empty', 'Nothing matches that search.'));
+  const stopWatching = () => {
+    if (sentinel) {
+      sentinel.remove();
+      sentinel = null;
+    }
+  };
+
+  /* Once the spacer gets close to the bottom of the window, add the next batch.
+     A plain scroll check is used rather than IntersectionObserver: it behaves the
+     same in every browser and cannot silently stop firing. */
+  const nudge = () => {
+    if (!sentinel) return;
+    if (sentinel.getBoundingClientRect().top > innerHeight + 600) return;
+    flush(CHUNK);
+    setTimeout(nudge, 0); /* still on screen? add the next batch */
+  };
+
+  const watch = () => {
+    sentinel = el('div', 'more', 'loading more…');
+    container().append(sentinel);
+    setTimeout(nudge, 0);
+  };
+
+  let checked = 0;
+  addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - checked < 120) return; /* one check per few frames is plenty */
+    checked = now;
+    nudge();
+  }, { passive: true });
+
+  const place = (item) => {
+    if (item.kind === 'head') {
+      openCard = el('section', 'cat');
+      const head = el('div', 'cat__head');
+      head.append(el('span', 'cat__name', item.category.name), el('span', 'cat__n', String(item.count)));
+      const rows = el('div', 'rows');
+      openCard.append(head, rows);
+      openCard.rows = rows;
+      list.append(openCard);
+      return;
+    }
+    if (item.kind === 'row') {
+      if (openCard) openCard.rows.append(rowNode(item.entry));
+      return;
+    }
+    code.append(lineNode(item.line));
+  };
+
+  const flush = (limit) => {
+    stopWatching();
+    const until = Math.min(queue.length, cursor + limit);
+    for (; cursor < until; cursor++) place(queue[cursor]);
+    if (cursor < queue.length) watch();
+  };
+
+  const render = () => {
+    if (kind === 'text' && !code) return;
+
+    stopWatching();
+    container().replaceChildren();
+    openCard = null;
+    queue = wanted();
+    cursor = 0;
+
+    if (!queue.length) {
+      container().append(el('p', 'empty', 'Nothing matches that search.'));
       return;
     }
 
-    filtered.forEach((line) => {
-      const row = el('div', 'code__line');
-      row.append(el('span', 'code__n', String(line.number)));
-      const text = el('code', null, line.text);
-      row.append(text);
-      code.append(row);
-    });
+    /* small dumps go in whole; big ones start with the first screenful and the
+       rest follows the scroll */
+    flush(queue.length <= 1500 ? Infinity : CHUNK * 2);
   };
-
-  const render = () => (kind === 'text' ? renderCode() : renderTable());
 
   const load = async () => {
     let response = null;
@@ -240,10 +311,16 @@
     render();
   };
 
+  let typing = 0;
+
   if (search) {
     search.addEventListener('input', () => {
-      state.query = search.value.trim().toLowerCase();
-      render();
+      /* a big dump filters slowly, so wait for a pause instead of every key */
+      clearTimeout(typing);
+      typing = setTimeout(() => {
+        state.query = search.value.trim().toLowerCase();
+        render();
+      }, 120);
     });
 
     document.addEventListener('keydown', (event) => {
@@ -254,6 +331,7 @@
       if (event.key === 'Escape' && document.activeElement === search) {
         search.value = '';
         state.query = '';
+        clearTimeout(typing);
         render();
         search.blur();
       }

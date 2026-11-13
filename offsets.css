@@ -382,6 +382,16 @@ button.btn {
   border-color: rgba(255, 106, 90, .45);
 }
 
+/* the spacer that pulls in the next batch of rows as you scroll */
+.more {
+  padding: 26px 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .72rem;
+  text-align: center;
+  opacity: .7;
+}
+
 .empty {
   padding: 36px 0;
   color: var(--muted);
