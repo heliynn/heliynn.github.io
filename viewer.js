@@ -81,6 +81,28 @@
     };
   };
 
+  /* The download buttons follow whatever file actually loaded: the dumper's
+     filename casing has changed before (Offsets.json vs offsets.json), and GitHub
+     Pages is case sensitive, so a hardcoded link silently 404s. */
+  const setDownloads = (href) => {
+    for (const link of document.querySelectorAll('a[download], a[data-download]')) {
+      if (!href) {
+        /* drop the href only: the download attribute stays so this selector still
+           finds the button if another load tries to enable it */
+        link.removeAttribute('href');
+        link.setAttribute('aria-disabled', 'true');
+        link.classList.add('is-disabled');
+        link.title = 'This file has not been dumped yet';
+        continue;
+      }
+      link.href = href;
+      link.setAttribute('download', href);
+      link.removeAttribute('aria-disabled');
+      link.classList.remove('is-disabled');
+      link.removeAttribute('title');
+    }
+  };
+
   const copy = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -182,8 +204,11 @@
     if (!response) {
       status.textContent = 'No dump found yet. Drop ' + (sources[0] || label) + ' next to this page.';
       if (search) search.disabled = true;
+      setDownloads('');
       return;
     }
+
+    setDownloads(used);
 
     if (kind === 'text') {
       const raw = await response.text();
