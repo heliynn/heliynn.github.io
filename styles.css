@@ -852,6 +852,39 @@ button.panel__row:focus-visible .panel__label {
   cursor: default;
 }
 
+.pill__mute {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s var(--ease);
+}
+
+.pill__mute:hover { color: var(--ink); }
+
+.pill__mute svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pill__mute-body { fill: currentColor; stroke: none; }
+.pill__mute-slash { display: none; }
+
+.pill__mute[aria-pressed="true"] { color: var(--red-soft); }
+.pill__mute[aria-pressed="true"] .pill__mute-wave { display: none; }
+.pill__mute[aria-pressed="true"] .pill__mute-slash { display: block; }
+
 .pill__viz {
   flex: 1 1 auto;
   min-width: 0;

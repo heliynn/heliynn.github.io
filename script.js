@@ -250,8 +250,38 @@
 (() => {
   const audio = document.getElementById('pillAudio');
   const button = document.getElementById('pillPlay');
+  const muteButton = document.getElementById('pillMute');
   const viz = document.querySelector('.pill__viz');
   if (!audio || !button || !viz) return;
+
+  const VOLUME = .3;
+  const MUTE_KEY = 'pill-muted';
+
+  const storedMute = () => {
+    try {
+      return localStorage.getItem(MUTE_KEY) === '1';
+    } catch (error) {
+      return false;
+    }
+  };
+
+  audio.volume = VOLUME;
+  audio.muted = storedMute();
+
+  if (muteButton) {
+    const syncMute = () => {
+      muteButton.setAttribute('aria-pressed', String(audio.muted));
+      muteButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
+    };
+    syncMute();
+    muteButton.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      try {
+        localStorage.setItem(MUTE_KEY, audio.muted ? '1' : '0');
+      } catch (error) { /* storage may be blocked */ }
+      syncMute();
+    });
+  }
 
   const bars = Array.from(viz.querySelectorAll('span'));
   const titleEl = document.getElementById('pillTitle');
