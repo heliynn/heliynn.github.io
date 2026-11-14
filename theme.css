@@ -54,10 +54,22 @@ html[data-theme="xmas"] {
 /* the pill is a full-width bar along the bottom, so the button steps over it */
 body:has(.pill) .season { bottom: 104px; }
 
-.season svg {
+.season img {
   display: block;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
+  /* at rest it is a quiet grey mark; turning it on gives the picture back its
+     own colours, which are the only cold ones on the page */
+  filter: grayscale(1) brightness(1.7);
+  opacity: .55;
+  transition: opacity .2s var(--ease, ease), filter .2s var(--ease, ease);
+}
+
+.season:hover img { opacity: .85; }
+
+.season[aria-pressed="true"] img {
+  filter: none;
+  opacity: 1;
 }
 
 .season:hover {
@@ -84,17 +96,17 @@ body:has(.pill) .season { bottom: 104px; }
   right: clamp(8px, 2.4vw, 28px);
   bottom: 0;
   z-index: 0;
-  height: clamp(120px, 22vh, 208px);
+  height: clamp(132px, 26vh, 240px);
   pointer-events: none;
   opacity: 0;
   transition: opacity .5s var(--ease, ease);
 }
 
-html[data-theme="xmas"] .xmas-tree { opacity: .62; }
+html[data-theme="xmas"] .xmas-tree { opacity: .8; }
 
 body:has(.pill) .xmas-tree { bottom: 96px; }
 
-.xmas-tree svg {
+.xmas-tree img {
   display: block;
   height: 100%;
   width: auto;

@@ -25,25 +25,17 @@
     + '<circle cx="52" cy="6" r="7.5" fill="#efe9dd" />'
     + '</svg>';
 
-  const TREE = '<svg viewBox="0 0 120 160" aria-hidden="true" focusable="false">'
-    + '<rect x="55" y="126" width="10" height="26" rx="2" fill="#3a2a1d" />'
-    + '<path d="M60 8L82 54H38z" fill="#153a28" />'
-    + '<path d="M60 32L90 90H30z" fill="#123426" />'
-    + '<path d="M60 58L100 126H20z" fill="#0f2c20" />'
-    + '<circle cx="50" cy="74" r="3" fill="#d4483c" opacity=".7" />'
-    + '<circle cx="69" cy="97" r="3" fill="#e6b45c" opacity=".7" />'
-    + '<circle cx="45" cy="107" r="2.6" fill="#e6b45c" opacity=".55" />'
-    + '<circle cx="60" cy="9" r="3.6" fill="#e6b45c" opacity=".75" />'
-    + '</svg>';
+  /* this script is the only thing that knows where the season's pictures
+     live, so resolve them against its own URL: the 404 page is served from
+     whatever address was asked for, where a relative path would not hold */
+  const here = document.currentScript ? document.currentScript.src : location.href;
+  const asset = (name) => new URL('assets/' + name, here).href;
 
-  const SNOWFLAKE = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
-    + '<g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">'
-    + '<path d="M8 2.3v11.4" />'
-    + '<path d="M3.1 5.2l9.8 5.6" />'
-    + '<path d="M12.9 5.2L3.1 10.8" />'
-    + '<path d="M6.3 3.2L8 5.3l1.7-2.1" />'
-    + '<path d="M6.3 12.8L8 10.7l1.7 2.1" />'
-    + '</g></svg>';
+  const TREE = '<img src="' + asset('tree.png') + '" alt="" width="221" height="320"'
+    + ' decoding="async" />';
+
+  const SNOWFLAKE = '<img src="' + asset('snowflake.png') + '" alt="" width="126" height="128"'
+    + ' decoding="async" />';
 
   const read = () => {
     try {
