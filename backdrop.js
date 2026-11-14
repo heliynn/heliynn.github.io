@@ -77,9 +77,9 @@
       vec2 right = vec2(0.76 + 0.18 * cos(t * 0.037), 0.52 + 0.24 * sin(t * 0.031));
       vec2 dl = (uv - left) * vec2(1.15, 1.0);
       vec2 dr = (uv - right) * vec2(1.15, 1.0);
-      float light = exp(-dot(dl, dl) * 2.7) * 0.66 + exp(-dot(dr, dr) * 3.0) * 0.58;
+      float light = exp(-dot(dl, dl) * 4.0) * 0.34 + exp(-dot(dr, dr) * 4.2) * 0.34;
 
-      return clamp(0.13 + (n - 0.5) * 1.35 + light - 0.08, 0.0, 1.0);
+      return clamp(0.12 + (n - 0.5) * 1.3 + light - 0.08, 0.0, 1.0);
     }
 
     void main() {
@@ -95,7 +95,7 @@
       vec2 centre = vec2(ca * cell.x + sa * cell.y, -sa * cell.x + ca * cell.y) * uStep;
 
       /* stretch the mid tones so bright regions actually saturate */
-      float v = smoothstep(0.08, 0.86, field(centre, uTime));
+      float v = smoothstep(0.13, 0.90, field(centre, uTime));
 
       /* a late, steep curve on purpose: dots stay small across most of the
          ramp and only meet right at the top, so the run from black through
