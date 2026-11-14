@@ -73,11 +73,11 @@
       /* two lights drifting out of phase: the left side gets its own glow
          instead of only ever catching the spill from the right */
       vec2 uv = p / uRes;
-      vec2 left = vec2(0.19 + 0.15 * sin(t * 0.029), 0.48 + 0.20 * cos(t * 0.021));
+      vec2 left = vec2(0.17 + 0.10 * sin(t * 0.029), 0.48 + 0.20 * cos(t * 0.021));
       vec2 right = vec2(0.76 + 0.18 * cos(t * 0.037), 0.52 + 0.24 * sin(t * 0.031));
       vec2 dl = (uv - left) * vec2(1.15, 1.0);
       vec2 dr = (uv - right) * vec2(1.15, 1.0);
-      float light = exp(-dot(dl, dl) * 2.9) * 0.62 + exp(-dot(dr, dr) * 3.0) * 0.58;
+      float light = exp(-dot(dl, dl) * 2.7) * 0.66 + exp(-dot(dr, dr) * 3.0) * 0.58;
 
       return clamp(0.13 + (n - 0.5) * 1.35 + light - 0.08, 0.0, 1.0);
     }
