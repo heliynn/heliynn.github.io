@@ -171,23 +171,64 @@
   };
 
   const frozen = typeof window.HALFTONE_TIME === 'number' ? window.HALFTONE_TIME : null;
-  const started = performance.now();
+
+  /* the clock counts visible time only and is kept in sessionStorage, so
+     coming back to the tab (or reloading it) carries on from the same spot
+     instead of snapping the pattern back to where it started */
+  const CLOCK_KEY = 'servyy:halftone-clock';
+
+  const readClock = () => {
+    try {
+      const value = parseFloat(sessionStorage.getItem(CLOCK_KEY));
+      return Number.isFinite(value) ? value : 0;
+    } catch (err) {
+      return 0;
+    }
+  };
+
+  const saveClock = (value) => {
+    try {
+      sessionStorage.setItem(CLOCK_KEY, value.toFixed(2));
+    } catch (err) {
+      /* storage blocked: the clock simply restarts on the next visit */
+    }
+  };
+
+  let elapsed = frozen === null ? readClock() : 0;
+  let saved = elapsed;
+  let last = 0;
   let raf = 0;
 
-  const frame = () => {
-    const t = frozen === null ? (performance.now() - started) / 1000 : frozen;
-    gl.uniform1f(uTime, t);
+  const frame = (stamp) => {
+    const now = typeof stamp === 'number' ? stamp : performance.now();
+    if (last) elapsed += (now - last) / 1000;
+    last = now;
+
+    gl.uniform1f(uTime, frozen === null ? elapsed : frozen);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    if (frozen === null) raf = requestAnimationFrame(frame);
+
+    if (frozen === null) {
+      if (elapsed - saved > 2) {
+        saved = elapsed;
+        saveClock(elapsed);
+      }
+      raf = requestAnimationFrame(frame);
+    }
   };
 
   const start = () => {
     if (raf || frozen !== null) return;
+    last = 0;
     raf = requestAnimationFrame(frame);
   };
   const stop = () => {
     cancelAnimationFrame(raf);
     raf = 0;
+    last = 0;
+    if (frozen === null) {
+      saved = elapsed;
+      saveClock(elapsed);
+    }
   };
 
   resize();
@@ -206,4 +247,5 @@
     if (document.hidden) stop();
     else start();
   });
+  addEventListener('pagehide', stop);
 })();
