@@ -505,41 +505,37 @@
     });
   }
 
-  /* the visualiser reads the actual spectrum, which means the element has to
-     be routed through WebAudio. That is only safe after the context is
-     genuinely running: a suspended one would play the file at the page and
-     nowhere else, so the graph is built after resume, never before */
-  let graph = null;
+  /* the bars are the track's own spectrum, measured once from the file and
+     played back against the clock. Reading it live means routing the element
+     through WebAudio, and when that route fails the sound goes with it, which
+     is not a trade a background player should make */
+  let song = null;
 
-  const startGraph = async () => {
-    if (graph) {
-      if (graph.ctx.state === 'suspended') {
-        try { await graph.ctx.resume(); } catch (error) { /* stays suspended */ }
-      }
-      return graph;
-    }
-    try {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return null;
-      const ctx = new Ctx();
-      await ctx.resume();
-      if (ctx.state !== 'running') {
-        ctx.close();
-        return null;
-      }
-      const source = ctx.createMediaElementSource(audio);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 256;
-      analyser.smoothingTimeConstant = .72;
-      source.connect(analyser);
-      analyser.connect(ctx.destination);
-      graph = { ctx, analyser, data: new Uint8Array(analyser.frequencyBinCount) };
-      return graph;
-    } catch (error) {
-      return null;
-    }
+  fetch('assets/music-spectrum.json')
+    .then((response) => (response.ok ? response.json() : null))
+    .then((data) => {
+      if (!data || !data.data) return;
+      const raw = atob(data.data);
+      const bytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i += 1) bytes[i] = raw.charCodeAt(i);
+      song = { fps: data.fps || 10, bands: data.bands || 24, data: bytes };
+    })
+    .catch(() => { /* no data: the clock still gives the bars a shape */ });
+
+  /* the frame of the song at this second, spread across however many bars
+     are on screen */
+  const spectrumAt = (time) => {
+    const frames = Math.floor(song.data.length / song.bands);
+    const at = Math.min(frames - 1, Math.max(0, Math.floor(time * song.fps)));
+    const base = at * song.bands;
+    return bars.map((bar, index) => {
+      const pos = bars.length > 1 ? index / (bars.length - 1) * (song.bands - 1) : 0;
+      const lower = Math.floor(pos);
+      const upper = Math.min(song.bands - 1, lower + 1);
+      const value = song.data[base + lower];
+      return (value + (song.data[base + upper] - value) * (pos - lower)) / 255;
+    });
   };
-
   const bars = Array.from(viz.querySelectorAll('span'));
   const levels = bars.map(() => 0);
   const titleEl = document.getElementById('pillTitle');
@@ -681,42 +677,13 @@
 
       const time = audio.currentTime;
 
-      /* the useful part of the spectrum sits far below the file's Nyquist
-         rate, and there are more bars than bins there: the bands are read up
-         to 6 kHz, tilted up so the quiet highs still register, and then
-         resampled smoothly across however many bars are on screen */
-      let spectrum = null;
-      if (graph) {
-        graph.analyser.getByteFrequencyData(graph.data);
-        const nyquist = graph.ctx.sampleRate / 2;
-        const top = Math.max(8, Math.min(
-          graph.data.length - 1,
-          Math.round(6000 / nyquist * graph.data.length)
-        ));
-        const curve = [];
-        for (let bin = 1; bin <= top; bin += 1) {
-          curve.push(graph.data[bin] / 255 * Math.pow(2.1, (bin - 1) / top));
-        }
-        spectrum = bars.map((bar, index) => {
-          const at = bars.length > 1 ? index / (bars.length - 1) * (curve.length - 1) : 0;
-          const lower = Math.floor(at);
-          const upper = Math.min(curve.length - 1, lower + 1);
-          return curve[lower] + (curve[upper] - curve[lower]) * (at - lower);
-        });
-      }
-      /* a flat spectrum drawn flat is no better than a fake one, so each bar
-         is measured against the loudest band this moment, and the whole row
-         is scaled by how much sound there is at all: quiet parts sit low */
-      const loudest = spectrum ? Math.max.apply(null, spectrum) || .001 : 0;
-      const body = spectrum
-        ? spectrum.reduce((sum, band) => sum + band, 0) / spectrum.length
-        : 0;
-      const energy = Math.min(1, Math.pow(body / .26, .7));
-
+      const spectrum = song ? spectrumAt(audio.currentTime) : null;
       bars.forEach((bar, i) => {
         if (spectrum) {
-          const relative = Math.pow(spectrum[i] / loudest, 2);
-          const target = Math.min(1, relative * energy * (.85 + (i / bars.length) * .5));
+          /* the data is already absolute, so a quiet verse stays short instead
+             of being stretched to full height like a relative meter would */
+          const level = Math.pow(spectrum[i], 1.5);
+          const target = Math.min(1, level * (.9 + (i / bars.length) * .45));
           levels[i] += (target - levels[i]) * .35;
           bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
           return;
@@ -862,7 +829,6 @@
         syncMute();
         paintVolume();
       }
-      startGraph();
       try {
         await audio.play();
       } catch (error) {
