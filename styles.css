@@ -933,7 +933,7 @@ button.panel__row:focus-visible .panel__label {
   flex: 0 1 760px;
   min-width: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 2px;
   max-width: 760px;
   height: 40px;
@@ -948,8 +948,9 @@ button.panel__row:focus-visible .panel__label {
   outline-offset: 4px;
 }
 
-/* full height once, then scaled from the bottom: transform is composited,
-   while writing height every frame makes the browser lay the row out again */
+/* full height once, then scaled from the middle: each bar grows up and down
+   from the centre line like the old one did, and transform is still
+   composited, where writing height every frame re-lays out the row */
 .pill__viz span {
   flex: 1 1 0;
   min-width: 0;
@@ -957,7 +958,7 @@ button.panel__row:focus-visible .panel__label {
   border-radius: 1px;
   background: rgba(226, 226, 232, .38);
   transform: scaleY(.12);
-  transform-origin: 50% 100%;
+  transform-origin: 50% 50%;
 }
 
 .pill__viz span.is-played {
