@@ -424,18 +424,17 @@
 
   let dragging = false;
 
-  /* background, not a track you sit and listen to: a mastered file is loud
-     even at a few percent, so the slider is squared and the bottom of it is
-     a long way quieter than the middle */
-  const VOLUME = .05;
-  const CURVE = 2;
+  /* the level the site has always used, and half the slider sits on it: the
+     curve is derived from that one fact so the two cannot drift apart */
+  const VOLUME = .15;
+  const CURVE = Math.log(VOLUME) / Math.log(.5);
   const levelFor = (value) => Math.pow(Number(value) / 100, CURVE);
   const sliderFor = (level) => Math.round(Math.pow(Math.max(0, level), 1 / CURVE) * 100);
   const MUTE_KEY = 'pill-muted';
   /* a new key, because the old saved level was chosen against a louder
      default and a linear slider, and everyone deserves one fresh start
      at background level */
-  const VOLUME_KEY = 'pill-volume-2';
+  const VOLUME_KEY = 'pill-volume-3';
 
   const storedMute = () => {
     try {
@@ -505,6 +504,41 @@
       paintVolume();
     });
   }
+
+  /* the visualiser reads the actual spectrum, which means the element has to
+     be routed through WebAudio. That is only safe after the context is
+     genuinely running: a suspended one would play the file at the page and
+     nowhere else, so the graph is built after resume, never before */
+  let graph = null;
+
+  const startGraph = async () => {
+    if (graph) {
+      if (graph.ctx.state === 'suspended') {
+        try { await graph.ctx.resume(); } catch (error) { /* stays suspended */ }
+      }
+      return graph;
+    }
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      const ctx = new Ctx();
+      await ctx.resume();
+      if (ctx.state !== 'running') {
+        ctx.close();
+        return null;
+      }
+      const source = ctx.createMediaElementSource(audio);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = .72;
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      graph = { ctx, analyser, data: new Uint8Array(analyser.frequencyBinCount) };
+      return graph;
+    } catch (error) {
+      return null;
+    }
+  };
 
   const bars = Array.from(viz.querySelectorAll('span'));
   const levels = bars.map(() => 0);
@@ -594,6 +628,7 @@
   /* what the element believes about itself, for when it will not play */
   const diagnose = () => {
     const bits = [audio.muted ? 'muted' : 'vol ' + Math.round(audio.volume * 100) + '%'];
+    bits.push(graph ? 'analyser' : 'direct');
     bits.push('ready ' + audio.readyState + ', net ' + audio.networkState);
     if (audio.error) bits.push('error ' + audio.error.code);
     const span = audio.buffered;
@@ -662,10 +697,48 @@
       if (now !== 'playing') return;
 
       const time = audio.currentTime;
+
+      /* the useful part of the spectrum sits far below the file's Nyquist
+         rate, and there are more bars than bins there: the bands are read up
+         to 6 kHz, tilted up so the quiet highs still register, and then
+         resampled smoothly across however many bars are on screen */
+      let spectrum = null;
+      if (graph) {
+        graph.analyser.getByteFrequencyData(graph.data);
+        const nyquist = graph.ctx.sampleRate / 2;
+        const top = Math.max(8, Math.min(
+          graph.data.length - 1,
+          Math.round(6000 / nyquist * graph.data.length)
+        ));
+        const curve = [];
+        for (let bin = 1; bin <= top; bin += 1) {
+          curve.push(graph.data[bin] / 255 * Math.pow(2.1, (bin - 1) / top));
+        }
+        spectrum = bars.map((bar, index) => {
+          const at = bars.length > 1 ? index / (bars.length - 1) * (curve.length - 1) : 0;
+          const lower = Math.floor(at);
+          const upper = Math.min(curve.length - 1, lower + 1);
+          return curve[lower] + (curve[upper] - curve[lower]) * (at - lower);
+        });
+      }
+      /* a flat spectrum drawn flat is no better than a fake one, so each bar
+         is measured against the loudest band this moment, and the whole row
+         is scaled by how much sound there is at all: quiet parts sit low */
+      const loudest = spectrum ? Math.max.apply(null, spectrum) || .001 : 0;
+      const body = spectrum
+        ? spectrum.reduce((sum, band) => sum + band, 0) / spectrum.length
+        : 0;
+      const energy = Math.min(1, Math.pow(body / .26, .7));
+
       bars.forEach((bar, i) => {
-        /* the bars ride the audio clock instead of an analyser. Feeding the
-           element through WebAudio is what left the track stalled on one
-           second with no sound, and a visualiser is not worth that. */
+        if (spectrum) {
+          const relative = Math.pow(spectrum[i] / loudest, 2);
+          const target = Math.min(1, relative * energy * (.85 + (i / bars.length) * .5));
+          levels[i] += (target - levels[i]) * .35;
+          bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
+          return;
+        }
+        /* no spectrum yet: the clock still gives a shape to ride */
         const sway = Math.sin(time * (1.9 + (i % 9) * .17) + i * .8)
           + Math.sin(time * .7 + i * 2.3) * .5;
         const shape = Math.max(0, 1 - Math.abs(i / bars.length - .3) * 1.1);
@@ -806,6 +879,7 @@
         syncMute();
         paintVolume();
       }
+      startGraph();
       try {
         await audio.play();
       } catch (error) {
