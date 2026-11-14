@@ -584,6 +584,16 @@
   const FALLS_SECONDS = 6;
   const FALLS_ROWS = 5;
 
+  /* the strip's ink comes from the stylesheet, so the seasonal theme can tint
+     it; read on change rather than on every frame */
+  let stripInk = '#e2e2e8';
+  const readStripInk = () => {
+    const value = getComputedStyle(document.documentElement).getPropertyValue('--strip').trim();
+    stripInk = value || '#e2e2e8';
+  };
+  readStripInk();
+  document.addEventListener('themechange', readStripInk);
+
   const drawFalls = () => {
     if (!fallsCtx) return;
     const box = falls.getBoundingClientRect();
@@ -616,7 +626,7 @@
     const perColumn = FALLS_SECONDS / columns;
     const size = Math.max(1, Math.round(dpr));
 
-    fallsCtx.fillStyle = '#e2e2e8';
+    fallsCtx.fillStyle = stripInk;
 
     for (let column = 0; column < columns; column += 1) {
       const at = here - (column + .5) * perColumn * song.fps;

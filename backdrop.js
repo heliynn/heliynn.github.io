@@ -38,6 +38,7 @@
     uniform float uTime;
     uniform float uStep;  /* dot pitch */
     uniform float uScale; /* device pixels per css pixel */
+    uniform float uSnow;  /* 0 is the red halftone, 1 is falling snow */
 
     /* integer-style hash: sin() based ones lose precision on some GPUs and
        drift bright, which floods the screen with red */
@@ -89,6 +90,16 @@
       return clamp(0.40 + (n - 0.5) * 0.55 + light - 0.08, 0.0, 1.0);
     }
 
+    /* the same noise while it drifts downward: small flakes, no domain warp,
+       so the red field turning to snow does not look like a second pattern */
+    float snowField(vec2 p, float t) {
+      vec2 q = p + vec2(sin(p.y * 0.006 + t * 0.22) * 18.0, -t * 26.0);
+      float n = vnoise(q * (1.0 / 150.0));
+      n += 0.55 * (vnoise(q * (1.0 / 53.0) + 4.3) - 0.5);
+      n += 0.22 * (vnoise(q * (1.0 / 21.0) + 8.9) - 0.5);
+      return clamp(n, 0.0, 1.0);
+    }
+
     void main() {
       vec2 p = gl_FragCoord.xy / uScale;
       float angle = -0.34;
@@ -103,20 +114,28 @@
 
       /* stretch the mid tones so bright regions actually saturate */
       float v = smoothstep(0.13, 0.98, field(centre, uTime));
+      float vs = smoothstep(0.42, 0.95, snowField(centre, uTime));
 
       /* a late, steep curve on purpose: dots stay small across most of the
          ramp and only meet right at the top, so the run from black through
-         dots to solid red takes up space instead of snapping */
-      float radius = 0.055 + pow(v, 2.0) * 0.82;
+         dots to solid red takes up space instead of snapping. Flakes keep
+         that shape but stop well short of touching */
+      float radius = mix(
+        0.055 + pow(v, 2.0) * 0.82,
+        0.030 + pow(vs, 2.8) * 0.34,
+        uSnow
+      );
 
       float dist = length(fract(g) - 0.5) - radius;
       float aa = 0.9 / uStep;
       float cover = 1.0 - smoothstep(-aa, aa, dist);
 
-      vec3 ink = vec3(0.027, 0.027, 0.039);
-      vec3 red = mix(vec3(0.12, 0.02, 0.03), vec3(1.0, 0.17, 0.07), pow(v, 1.15));
+      vec3 ink = mix(vec3(0.027, 0.027, 0.039), vec3(0.024, 0.031, 0.050), uSnow);
+      vec3 warm = mix(vec3(0.12, 0.02, 0.03), vec3(1.0, 0.17, 0.07), pow(v, 1.15));
+      vec3 cold = mix(vec3(0.12, 0.14, 0.19), vec3(0.88, 0.92, 0.99), pow(vs, 0.9));
+      vec3 dot = mix(warm, cold, uSnow);
 
-      gl_FragColor = vec4(mix(ink, red, cover), 1.0);
+      gl_FragColor = vec4(mix(ink, dot, cover), 1.0);
     }
   `;
 
@@ -159,6 +178,14 @@
   const uTime = gl.getUniformLocation(program, 'uTime');
   const uStep = gl.getUniformLocation(program, 'uStep');
   const uScale = gl.getUniformLocation(program, 'uScale');
+
+  /* the seasonal theme turns the halftone into snow; the two are the same
+     field at different sizes, so they cross-fade instead of snapping */
+  const uSnow = gl.getUniformLocation(program, 'uSnow');
+  const themeSnow = () => (document.documentElement.dataset.theme === 'xmas' ? 1 : 0);
+  let snow = themeSnow();
+  let snowTarget = snow;
+  gl.uniform1f(uSnow, snow);
 
   gl.uniform1f(uStep, 9.0);
 
@@ -210,6 +237,13 @@
     last = now;
 
     gl.uniform1f(uTime, frozen === null ? elapsed : frozen);
+
+    if (snow !== snowTarget) {
+      snow += (snowTarget - snow) * .08;
+      if (Math.abs(snowTarget - snow) < .005) snow = snowTarget;
+      gl.uniform1f(uSnow, snow);
+    }
+
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     if (frozen === null) {
@@ -255,4 +289,16 @@
   addEventListener('pagehide', stop);
   /* back/forward cache restores a page without a visibility change */
   addEventListener('pageshow', start);
+
+  document.addEventListener('themechange', () => {
+    snowTarget = themeSnow();
+    if (frozen === null) {
+      start();
+      return;
+    }
+    /* a frozen frame is drawn once by hand, since no loop is running */
+    snow = snowTarget;
+    gl.uniform1f(uSnow, snow);
+    frame();
+  });
 })();

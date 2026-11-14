@@ -962,7 +962,7 @@ button.panel__row:focus-visible .panel__label {
 }
 
 .pill__viz span.is-played {
-  background: #ff2a12;
+  background: var(--red);
 }
 
 /* a zero basis, not auto: the canvas bitmap width would otherwise feed its own

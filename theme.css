@@ -1,0 +1,90 @@
+/* Seasonal theme.
+
+   Everything seasonal hangs off html[data-theme="xmas"], which theme.js turns
+   on from the chip in the corner, the t key, localStorage or ?theme=xmas.
+   Delete this file and theme.js and the site is exactly what it was before:
+   no colours left behind, no markup to unpick. */
+
+:root {
+  /* the waterfall strip under the bars reads its ink from here, so the theme
+     can tint it without script.js knowing anything about seasons */
+  --strip: #e2e2e8;
+}
+
+html[data-theme="xmas"] {
+  --red: #e6b45c;
+  --red-soft: #f0cd8d;
+  --red-deep: #46301a;
+  /* the dump pages call their accent by its own name */
+  --accent: #e6b45c;
+  --strip: #e6b45c;
+}
+
+/* the switch: a chip in the corner rather than one more control in the pill */
+.season {
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(12, 12, 14, .7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--muted);
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .2s var(--ease, ease), border-color .2s var(--ease, ease);
+}
+
+/* the pill is a full-width bar along the bottom, so the chip steps over it */
+body:has(.pill) .season { bottom: 104px; }
+
+.season::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .35;
+  transition: opacity .2s var(--ease, ease);
+}
+
+.season:hover,
+.season:focus-visible { color: var(--ink); }
+
+.season[aria-pressed="true"] { color: var(--red); }
+.season[aria-pressed="true"]::before { opacity: 1; }
+
+/* the hat sits on the mascot's head. theme.js gives it a left, top and width
+   from the mascot's box, so it stays put while the cat is dragged around */
+.mascot__hat {
+  position: fixed;
+  z-index: 21;
+  width: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 50% 90%;
+  transition: opacity .35s var(--ease, ease);
+}
+
+html[data-theme="xmas"] .mascot__hat { opacity: 1; }
+
+.mascot__hat svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .45));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .season,
+  .season::before,
+  .mascot__hat { transition: none; }
+}
