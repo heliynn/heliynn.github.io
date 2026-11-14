@@ -568,6 +568,33 @@
      meter that reacts from one that twitches */
   const ATTACK = .06;
 
+  /* the played bars run from one colour to another across the track. Each bar
+     is given its colour once as --bar-tint, so the class toggle that happens
+     every frame stays the only per-frame work */
+  const hex = (value, fallback) => {
+    const match = /^#([0-9a-f]{6})$/i.exec(String(value || '').trim());
+    if (!match) return fallback;
+    const n = parseInt(match[1], 16);
+    return [n >> 16 & 255, n >> 8 & 255, n & 255];
+  };
+  const blend = (a, b, t) => 'rgb('
+    + Math.round(a[0] + (b[0] - a[0]) * t) + ', '
+    + Math.round(a[1] + (b[1] - a[1]) * t) + ', '
+    + Math.round(a[2] + (b[2] - a[2]) * t) + ')';
+  const tintBars = () => {
+    const style = getComputedStyle(document.documentElement);
+    const from = hex(style.getPropertyValue('--bar-from'), [255, 63, 44]);
+    const mid = hex(style.getPropertyValue('--bar-mid'), from);
+    const to = hex(style.getPropertyValue('--bar-to'), from);
+    bars.forEach((bar, i) => {
+      const t = bars.length > 1 ? i / (bars.length - 1) : 0;
+      bar.style.setProperty('--bar-tint', t < .5 ? blend(from, mid, t * 2) : blend(mid, to, (t - .5) * 2));
+    });
+  };
+
+  tintBars();
+  document.addEventListener('themechange', tintBars);
+
   /* the bars are 29px tall in CSS and only their scale changes, so a frame
      does not force the row to be laid out again */
   const BAR_MAX = 29;

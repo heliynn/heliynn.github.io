@@ -1,7 +1,7 @@
 /* Seasonal theme.
 
    Everything seasonal hangs off html[data-theme="xmas"], which theme.js turns
-   on from the chip in the corner, the t key, localStorage or ?theme=xmas.
+   on from the snowflake button, the t key, localStorage or ?theme=xmas.
    Delete this file and theme.js and the site is exactly what it was before:
    no colours left behind, no markup to unpick. */
 
@@ -9,6 +9,11 @@
   /* the waterfall strip under the bars reads its ink from here, so the theme
      can tint it without script.js knowing anything about seasons */
   --strip: #e2e2e8;
+  /* the played bars, one colour by default and a run of colours in the theme:
+     script.js sets each bar's --bar-tint from these three stops */
+  --bar-from: #ff3f2c;
+  --bar-mid: #ff3f2c;
+  --bar-to: #ff3f2c;
 }
 
 html[data-theme="xmas"] {
@@ -18,49 +23,82 @@ html[data-theme="xmas"] {
   /* the dump pages call their accent by its own name */
   --accent: #e6b45c;
   --strip: #e6b45c;
+  /* red at the start of the track, gold through the middle, pine at the end */
+  --bar-from: #c2332b;
+  --bar-mid: #dcab55;
+  --bar-to: #2f8a52;
 }
 
-/* the switch: a chip in the corner rather than one more control in the pill */
+/* the switch: one glyph in the corner, the same weight as the pill's own
+   controls, so it reads as part of the page rather than a settings chip */
 .season {
   position: fixed;
   left: 14px;
   bottom: 14px;
   z-index: 30;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 11px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(12, 12, 14, .7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  background: rgba(12, 12, 14, .55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--muted);
-  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: 11px;
-  line-height: 1;
   cursor: pointer;
-  transition: color .2s var(--ease, ease), border-color .2s var(--ease, ease);
+  transition: color .2s var(--ease, ease), border-color .2s var(--ease, ease), background .2s var(--ease, ease);
 }
 
-/* the pill is a full-width bar along the bottom, so the chip steps over it */
+/* the pill is a full-width bar along the bottom, so the button steps over it */
 body:has(.pill) .season { bottom: 104px; }
 
-.season::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: .35;
-  transition: opacity .2s var(--ease, ease);
+.season svg {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 
-.season:hover,
-.season:focus-visible { color: var(--ink); }
+.season:hover {
+  color: var(--ink);
+  border-color: rgba(255, 255, 255, .26);
+}
 
-.season[aria-pressed="true"] { color: var(--red); }
-.season[aria-pressed="true"]::before { opacity: 1; }
+.season:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, .5);
+  outline-offset: 3px;
+  color: var(--ink);
+}
+
+.season[aria-pressed="true"] {
+  color: var(--red);
+  border-color: rgba(230, 180, 92, .5);
+  background: rgba(24, 20, 12, .6);
+}
+
+/* the tree stands in the bottom corner, behind the page and behind the cat,
+   so it is texture with a shape rather than a second illustration */
+.xmas-tree {
+  position: fixed;
+  right: clamp(8px, 2.4vw, 28px);
+  bottom: 0;
+  z-index: 0;
+  height: clamp(120px, 22vh, 208px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .5s var(--ease, ease);
+}
+
+html[data-theme="xmas"] .xmas-tree { opacity: .62; }
+
+body:has(.pill) .xmas-tree { bottom: 96px; }
+
+.xmas-tree svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
 
 /* the hat sits on the mascot's head. theme.js gives it a left, top and width
    from the mascot's box, so it stays put while the cat is dragged around */
@@ -70,6 +108,7 @@ body:has(.pill) .season { bottom: 104px; }
   width: 0;
   pointer-events: none;
   opacity: 0;
+  transform: rotate(-12deg);
   transform-origin: 50% 90%;
   transition: opacity .35s var(--ease, ease);
 }
@@ -85,6 +124,6 @@ html[data-theme="xmas"] .mascot__hat { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .season,
-  .season::before,
+  .xmas-tree,
   .mascot__hat { transition: none; }
 }
