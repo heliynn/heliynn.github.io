@@ -890,8 +890,9 @@ button.panel__row:focus-visible .panel__label {
 .pill__vol-range:hover::-moz-range-thumb,
 .pill__vol-range:focus-visible::-moz-range-thumb { background: var(--red-soft); }
 
+/* the bars keep the 760px they had, and the strip takes whatever is left over */
 .pill__viz {
-  flex: 1 1 auto;
+  flex: 0 1 760px;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -918,6 +919,15 @@ button.panel__row:focus-visible .panel__label {
 
 .pill__viz span.is-played {
   background: #ff2a12;
+}
+
+/* a zero basis, not auto: the canvas bitmap width would otherwise feed its own
+   flex basis and the strip would grow into the bars on every redraw */
+.pill__falls {
+  flex: 1 1 0;
+  min-width: 120px;
+  height: 8px;
+  pointer-events: none;
 }
 
 .pill__track {
@@ -963,6 +973,9 @@ button.panel__row:focus-visible .panel__label {
   }
 
   .pill__viz span:nth-child(n + 35) { display: none; }
+
+  /* no room for the history strip on a phone */
+  .pill__falls { display: none; }
 
   /* phones keep the slider, just a shorter one with a taller hit area, so the
      bars and the track name still have room */

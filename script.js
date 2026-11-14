@@ -538,6 +538,72 @@
   };
   const bars = Array.from(viz.querySelectorAll('span'));
   const levels = bars.map(() => 0);
+
+  /* the last few seconds behind the bars: bass at the bottom, treble at the
+     top, a scrolling field of faint dots small enough to read as texture
+     rather than as a second equalizer */
+  const falls = document.getElementById('pillFalls');
+  const fallsCtx = falls && falls.getContext ? falls.getContext('2d') : null;
+  const FALLS_SECONDS = 6;
+  const FALLS_ROWS = 5;
+
+  const drawFalls = () => {
+    if (!fallsCtx) return;
+    const box = falls.getBoundingClientRect();
+    if (!box.width) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = Math.round(box.width * dpr);
+    const height = Math.round(box.height * dpr);
+    if (falls.width !== width || falls.height !== height) {
+      falls.width = width;
+      falls.height = height;
+    }
+    fallsCtx.clearRect(0, 0, width, height);
+    if (!song) return;
+
+    const frames = Math.floor(song.data.length / song.bands);
+    const here = audio.currentTime * song.fps;
+
+    /* one band group's average level, 0 to 1, out of the measured data */
+    const read = (index, low, high) => {
+      if (index < 0 || index >= frames) return 0;
+      const base = index * song.bands;
+      let sum = 0;
+      for (let band = low; band < high; band += 1) sum += song.data[base + band];
+      return sum / (high - low);
+    };
+
+    const step = Math.max(2, Math.round(3 * dpr));
+    const columns = Math.ceil(width / step);
+    const perColumn = FALLS_SECONDS / columns;
+    const size = Math.max(1, Math.round(dpr));
+
+    fallsCtx.fillStyle = '#e2e2e8';
+
+    for (let column = 0; column < columns; column += 1) {
+      const at = here - (column + .5) * perColumn * song.fps;
+      if (at < 0) continue;
+      const index = Math.floor(at);
+      if (index >= frames) continue;
+      /* blending two frames keeps the drift smooth between 0.1 s steps */
+      const blend = at - index;
+      const next = Math.min(frames - 1, index + 1);
+      const x = width - (column + .5) * step;
+
+      for (let row = 0; row < FALLS_ROWS; row += 1) {
+        const low = Math.floor(row * song.bands / FALLS_ROWS);
+        const high = Math.max(low + 1, Math.floor((row + 1) * song.bands / FALLS_ROWS));
+        const level = (read(index, low, high) * (1 - blend) + read(next, low, high) * blend) / 255;
+        const alpha = Math.pow(level, 2.2) * .5;
+        if (alpha < .03) continue;
+        const y = height - (row + .5) * (height / FALLS_ROWS);
+        fallsCtx.globalAlpha = alpha;
+        fallsCtx.fillRect(Math.round(x - size / 2), Math.round(y - size / 2), size, size);
+      }
+    }
+    fallsCtx.globalAlpha = 1;
+  };
   const titleEl = document.getElementById('pillTitle');
   const subEl = document.getElementById('pillSub');
 
@@ -648,6 +714,8 @@
         viz.setAttribute('aria-valuemax', String(Math.round(audio.duration)));
         viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
       }
+
+      drawFalls();
 
       const now = state();
 
