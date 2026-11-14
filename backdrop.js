@@ -70,11 +70,16 @@
       n += 0.45 * (vnoise(q * 2.4 + 5.2 + t * 0.05) - 0.5);
       n += 0.20 * (vnoise(q * 5.1 + 9.7) - 0.5);
 
-      vec2 lightAt = vec2(0.58 + 0.30 * sin(t * 0.043), 0.34 + 0.22 * cos(t * 0.037));
-      vec2 d = (p / uRes - lightAt) * vec2(1.25, 1.0);
-      float light = exp(-dot(d, d) * 4.0);
+      /* two lights drifting out of phase: the left side gets its own glow
+         instead of only ever catching the spill from the right */
+      vec2 uv = p / uRes;
+      vec2 left = vec2(0.19 + 0.15 * sin(t * 0.029), 0.48 + 0.20 * cos(t * 0.021));
+      vec2 right = vec2(0.76 + 0.18 * cos(t * 0.037), 0.52 + 0.24 * sin(t * 0.031));
+      vec2 dl = (uv - left) * vec2(1.15, 1.0);
+      vec2 dr = (uv - right) * vec2(1.15, 1.0);
+      float light = exp(-dot(dl, dl) * 2.9) * 0.62 + exp(-dot(dr, dr) * 3.0) * 0.58;
 
-      return clamp(0.15 + (n - 0.5) * 1.5 + light * 0.62 - 0.10, 0.0, 1.0);
+      return clamp(0.13 + (n - 0.5) * 1.35 + light - 0.08, 0.0, 1.0);
     }
 
     void main() {
@@ -90,11 +95,12 @@
       vec2 centre = vec2(ca * cell.x + sa * cell.y, -sa * cell.x + ca * cell.y) * uStep;
 
       /* stretch the mid tones so bright regions actually saturate */
-      float v = smoothstep(0.15, 0.70, field(centre, uTime));
+      float v = smoothstep(0.08, 0.86, field(centre, uTime));
 
-      /* eased radius: a soft toe keeps small dots from popping in, and the top
-         of the curve merges neighbouring dots instead of jumping to a patch */
-      float radius = pow(v, 1.18) * 0.96;
+      /* a late, steep curve on purpose: dots stay small across most of the
+         ramp and only meet right at the top, so the run from black through
+         dots to solid red takes up space instead of snapping */
+      float radius = 0.055 + pow(v, 1.9) * 0.94;
 
       float dist = length(fract(g) - 0.5) - radius;
       float aa = 0.9 / uStep;
