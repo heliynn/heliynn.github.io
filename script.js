@@ -515,12 +515,15 @@
     return m + ':' + String(s).padStart(2, '0');
   };
 
+  /* the clock follows currentTime, not the event that happens to wake it:
+     whatever pauses or resumes the element, the time shown is the real one */
   const setTime = () => {
     if (!subEl) return;
     const total = audio.duration;
-    subEl.textContent = Number.isFinite(total)
+    const text = Number.isFinite(total)
       ? fmt(audio.currentTime) + ' / ' + fmt(total)
       : 'background music';
+    if (subEl.textContent !== text) subEl.textContent = text;
   };
 
   const paint = () => {
@@ -532,6 +535,8 @@
       viz.setAttribute('aria-valuemax', String(Math.round(audio.duration)));
       viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
     }
+
+    setTime();
 
     if (analyser && data && !audio.paused) {
       analyser.getByteFrequencyData(data);
@@ -656,6 +661,17 @@
   });
   audio.addEventListener('ended', setTime);
 
+  /* the button looks like whatever the element is actually doing: a browser
+     can pause playback on its own, and a frozen pause glyph reads as a track
+     that is playing but not moving */
+  const syncPlay = () => {
+    if (button.disabled) return;
+    const playing = !audio.paused;
+    button.textContent = playing ? '❚❚' : '▶';
+    button.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    button.setAttribute('aria-pressed', String(playing));
+  };
+
   const togglePlay = async () => {
     if (button.disabled) return;
     ensureGraph();
@@ -668,15 +684,11 @@
         fail();
         return;
       }
-      button.textContent = '❚❚';
-      button.setAttribute('aria-label', 'Pause');
-      button.setAttribute('aria-pressed', 'true');
+      syncPlay();
       start();
     } else {
       audio.pause();
-      button.textContent = '▶';
-      button.setAttribute('aria-label', 'Play');
-      button.setAttribute('aria-pressed', 'false');
+      syncPlay();
     }
   };
 
@@ -728,6 +740,14 @@
     togglePlay();
   });
 
-  audio.addEventListener('play', start);
-  audio.addEventListener('pause', paint);
+  audio.addEventListener('play', () => {
+    start();
+    syncPlay();
+  });
+  audio.addEventListener('pause', () => {
+    paint();
+    syncPlay();
+    setTime();
+  });
+  audio.addEventListener('ended', syncPlay);
 })();
