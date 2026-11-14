@@ -29,8 +29,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* same halftone as the home page: the dot screen holds still while the red
-   and the black underneath it drift */
 .backdrop {
   position: fixed;
   inset: 0;
@@ -40,46 +38,13 @@ body {
   background: #0a0a0c;
 }
 
-.backdrop::before {
-  content: "";
+/* the canvas halftone lives here; backdrop.js paints it */
+.backdrop canvas {
   position: absolute;
-  inset: -25%;
-  background:
-    radial-gradient(32% 36% at 96% -6%, rgba(214, 44, 30, .42), transparent 74%),
-    linear-gradient(118deg, rgba(54, 8, 6, .46) 0%, rgba(104, 14, 8, .32) 46%, rgba(40, 5, 4, .48) 100%);
-  will-change: transform;
-  animation: halftone-field 48s ease-in-out infinite;
-}
-
-.backdrop__art {
-  position: absolute;
-  inset: -240px;
-  z-index: 1;
-  background-image: radial-gradient(circle, rgba(150, 45, 47, .5) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
-  background-size: 5.6px 5.6px;
-  background-position: 0 0;
-}
-
-.backdrop__art::before {
-  content: "";
-  position: absolute;
-  inset: -90px;
-  background-image: radial-gradient(circle, rgba(179, 61, 63, .26) 0 2.4px, rgba(179, 61, 63, 0) 2.9px);
-  background-size: 5.6px 5.6px;
-  -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
-  mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
-}
-
-.backdrop__art::after {
-  content: "";
-  position: absolute;
-  inset: -320px;
-  background: #07070a;
-  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .34) 380px, rgba(0, 0, 0, .56) 520px, rgba(0, 0, 0, .74) 640px, rgba(0, 0, 0, .56) 760px, rgba(0, 0, 0, .3) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
-  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .34) 380px, rgba(0, 0, 0, .56) 520px, rgba(0, 0, 0, .74) 640px, rgba(0, 0, 0, .56) 760px, rgba(0, 0, 0, .3) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
-  filter: blur(26px);
-  will-change: transform;
-  animation: halftone-arcs 108s ease-in-out infinite;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ink over the dots, so a screen of values stays readable */
@@ -88,23 +53,10 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(9, 9, 11, .62), rgba(9, 9, 11, .72)),
-    radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .8) 0%, rgba(5, 5, 7, .3) 50%, rgba(5, 5, 7, 0) 88%),
+    linear-gradient(rgba(9, 9, 11, .26), rgba(9, 9, 11, .38)),
+    radial-gradient(34% 40% at 100% 80%, rgba(5, 5, 7, .6) 0%, rgba(5, 5, 7, .18) 50%, rgba(5, 5, 7, 0) 88%),
     linear-gradient(270deg, rgba(5, 5, 7, .42) 0%, rgba(5, 5, 7, .16) 16%, rgba(5, 5, 7, 0) 38%),
-    radial-gradient(120% 96% at 54% 34%, transparent 40%, rgba(5, 5, 7, .78) 100%);
-}
-
-@keyframes halftone-field {
-  0%,
-  100% { transform: translate3d(0, 0, 0); }
-  35% { transform: translate3d(6.5%, -5.2%, 0); }
-  70% { transform: translate3d(-5.6%, 4.4%, 0); }
-}
-
-@keyframes halftone-arcs {
-  0%,
-  100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-236px, 168px, 0); }
+    radial-gradient(120% 96% at 54% 34%, transparent 45%, rgba(5, 5, 7, .62) 100%);
 }
 
 /* top bar and search stick together */

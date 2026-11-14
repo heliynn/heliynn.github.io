@@ -56,52 +56,13 @@ h1, p { margin: 0; }
   background: #08080a;
 }
 
-/* drifts; the dot grid above it never does */
-.backdrop::before {
-  content: "";
+/* the canvas halftone lives here; backdrop.js paints it */
+.backdrop canvas {
   position: absolute;
-  inset: -25%;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(32% 36% at 96% -6%, rgba(214, 44, 30, .5), transparent 74%),
-    linear-gradient(118deg, rgba(54, 8, 6, .5) 0%, rgba(104, 14, 8, .36) 46%, rgba(40, 5, 4, .5) 100%);
-  will-change: transform;
-  animation: halftone-field 48s ease-in-out infinite;
-}
-
-/* static: the printed screen the colour moves under */
-.backdrop__art {
-  position: absolute;
-  inset: -240px;
-  z-index: 1;
-  background-image: radial-gradient(circle, rgba(150, 45, 47, .84) 0 2.4px, rgba(150, 45, 47, 0) 2.9px);
-  background-size: 5.6px 5.6px;
-  background-position: 0 0;
-}
-
-/* finer grid at a slight offset, so the two interfere */
-.backdrop__art::before {
-  content: "";
-  position: absolute;
-  inset: -90px;
-  background-image: radial-gradient(circle, rgba(179, 61, 63, .4) 0 2.4px, rgba(179, 61, 63, 0) 2.9px);
-  background-size: 5.6px 5.6px;
-  -webkit-mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
-  mask-image: repeating-radial-gradient(circle at 30% 86%, rgba(0, 0, 0, 0) 0 150px, rgba(0, 0, 0, .16) 250px, rgba(0, 0, 0, .26) 340px, rgba(0, 0, 0, .1) 430px, rgba(0, 0, 0, 0) 520px);
-}
-
-/* the other moving layer: the black waves dots dissolve into */
-.backdrop__art::after {
-  content: "";
-  position: absolute;
-  inset: -320px;
-  background: #07070a;
-  -webkit-mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .48) 380px, rgba(0, 0, 0, .74) 520px, rgba(0, 0, 0, .92) 640px, rgba(0, 0, 0, .74) 760px, rgba(0, 0, 0, .42) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
-  mask-image: repeating-radial-gradient(circle at 82% 4%, rgba(0, 0, 0, 0) 0 120px, rgba(0, 0, 0, .12) 240px, rgba(0, 0, 0, .48) 380px, rgba(0, 0, 0, .74) 520px, rgba(0, 0, 0, .92) 640px, rgba(0, 0, 0, .74) 760px, rgba(0, 0, 0, .42) 880px, rgba(0, 0, 0, .1) 1000px, rgba(0, 0, 0, 0) 1120px);
-  filter: blur(26px);
-  will-change: transform;
-  animation: halftone-arcs 108s ease-in-out infinite;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* vignette, so text stays legible */
@@ -119,20 +80,6 @@ h1, p { margin: 0; }
     radial-gradient(120% 96% at 54% 34%, transparent 44%, rgba(5, 5, 7, .84) 100%),
     linear-gradient(90deg, rgba(5, 5, 7, .45) 0%, rgba(5, 5, 7, 0) 12%),
     linear-gradient(0deg, rgba(5, 5, 7, .5) 0%, rgba(5, 5, 7, 0) 18%);
-}
-
-/* both layers return to origin, so neither loop snaps */
-@keyframes halftone-field {
-  0%,
-  100% { transform: translate3d(0, 0, 0); }
-  35% { transform: translate3d(6.5%, -5.2%, 0); }
-  70% { transform: translate3d(-5.6%, 4.4%, 0); }
-}
-
-@keyframes halftone-arcs {
-  0%,
-  100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-236px, 168px, 0); }
 }
 
 .skip {
