@@ -13,6 +13,9 @@
   --accent: #ff6a5a;
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* the select popup and scrollbars are drawn by the OS, and without this they
+     come back as white panels on a dark page */
+  color-scheme: dark;
 }
 
 html { height: 100%; -webkit-text-size-adjust: 100%; }
@@ -604,6 +607,14 @@ button.btn {
   font-size: 12px;
   cursor: pointer;
   transition: color .12s ease, background-color .12s ease, border-color .12s ease;
+}
+
+/* the popup list: colour-scheme handles it, and these cover the browsers that
+   still paint the options themselves */
+.diff__from option,
+.diff__from optgroup {
+  background-color: #121216;
+  color: var(--ink);
 }
 
 .diff__pick:hover,
