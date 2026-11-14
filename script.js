@@ -525,39 +525,105 @@
     if (subEl.textContent !== text) subEl.textContent = text;
   };
 
-  /* a track that claims to play while its clock stands still is stuck on
-     buffers, and saying so beats a pause glyph over a frozen second */
+  /* what the element is really doing: a paused track shows its position, a
+     playing one ticks, and a clock standing still under a pause glyph is
+     stuck, which is worth saying and worth one attempt at fixing */
   let lastTime = -1;
   let stillFrames = 0;
-  const moving = () => {
+  let fixTries = 0;
+  /* once the pill has given up it must stop repainting over its own message */
+  let gaveUp = false;
+
+  /* data is in hand but the clock will not move: the decoder or the audio
+     device is wedged, not the network, so more waiting will not help */
+  const wedged = () => audio.readyState >= 3;
+
+  const nudge = () => {
+    try {
+      audio.currentTime = audio.currentTime + .05;
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  /* and if a nudge does not free it, reload the file and put it back where
+     it was: a wedged element rarely survives a fresh load */
+  const revive = () => {
+    const was = audio.currentTime;
+    try {
+      audio.load();
+      const once = () => {
+        audio.removeEventListener('loadedmetadata', once);
+        try {
+          audio.currentTime = was;
+        } catch (error) { /* start from the top instead */ }
+        const playing = audio.play();
+        if (playing && playing.catch) playing.catch(() => {});
+      };
+      audio.addEventListener('loadedmetadata', once);
+    } catch (error) { /* nothing left to try */ }
+  };
+
+  const state = () => {
     if (audio.paused) {
       lastTime = -1;
       stillFrames = 0;
-      return false;
+      return 'paused';
     }
-    if (audio.currentTime === lastTime) {
-      stillFrames += 1;
-    } else {
+    if (audio.currentTime !== lastTime) {
       lastTime = audio.currentTime;
       stillFrames = 0;
+      fixTries = 0;
+      return 'playing';
     }
-    return stillFrames < 120;
+    /* ninety frames is about a second and a half of standing still */
+    stillFrames += 1;
+    return stillFrames > 90 ? 'stuck' : 'playing';
   };
 
+  let painting = false;
+
   const paint = () => {
-    const progress = audio.duration ? audio.currentTime / audio.duration : 0;
-    const played = Math.round(progress * bars.length);
-    bars.forEach((bar, i) => bar.classList.toggle('is-played', i < played));
+    /* timeupdate and the loop both call this, and seeking from inside it
+       fires another timeupdate */
+    if (painting || gaveUp) return;
+    painting = true;
+    try {
+      const progress = audio.duration ? audio.currentTime / audio.duration : 0;
+      const played = Math.round(progress * bars.length);
+      bars.forEach((bar, i) => bar.classList.toggle('is-played', i < played));
 
-    if (Number.isFinite(audio.duration)) {
-      viz.setAttribute('aria-valuemax', String(Math.round(audio.duration)));
-      viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
-    }
+      if (Number.isFinite(audio.duration)) {
+        viz.setAttribute('aria-valuemax', String(Math.round(audio.duration)));
+        viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
+      }
 
-    const running = moving();
-    setTime(!running);
+      const now = state();
 
-    if (running) {
+      /* stuck with the data already loaded is a wedged element, and it gets
+         two tries before the pill stops pretending it is playing */
+      if (now === 'stuck' && wedged()) {
+        if (fixTries === 0) {
+          fixTries = 1;
+          nudge();
+        } else if (fixTries === 1) {
+          fixTries = 2;
+          revive();
+        } else {
+          gaveUp = true;
+          audio.pause();
+          syncPlay();
+          if (subEl) subEl.textContent = 'sound stalled · press play again';
+          return;
+        }
+        stillFrames = 0;
+      }
+
+      setTime(now === 'stuck');
+
+      if (now !== 'playing') return;
+
       const time = audio.currentTime;
       bars.forEach((bar, i) => {
         /* the bars ride the audio clock instead of an analyser. Feeding the
@@ -570,6 +636,8 @@
         levels[i] += (target - levels[i]) * .16;
         bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
       });
+    } finally {
+      painting = false;
     }
   };
 
@@ -742,6 +810,9 @@
   });
 
   audio.addEventListener('play', () => {
+    gaveUp = false;
+    fixTries = 0;
+    stillFrames = 0;
     start();
     syncPlay();
   });
