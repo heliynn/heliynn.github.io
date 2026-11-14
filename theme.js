@@ -88,7 +88,12 @@
   const sync = () => {
     if (!root.dataset.theme) return;
     if (!mascot || !mascot.isConnected) mascot = document.querySelector('.mascot');
-    if (!mascot || !mascot.naturalWidth) return;
+    /* the picture can fail to load and remove itself: no cat, no hat */
+    if (!mascot) {
+      hat.style.width = '';
+      return;
+    }
+    if (!mascot.naturalWidth) return;
 
     const box = mascot.getBoundingClientRect();
     if (!box.width) return;

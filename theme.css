@@ -27,6 +27,9 @@ html[data-theme="xmas"] {
   --bar-from: #c2332b;
   --bar-mid: #dcab55;
   --bar-to: #2f8a52;
+  /* the dump pages' button hover would otherwise stay red under a gold accent */
+  --red-line: rgba(230, 180, 92, .45);
+  --red-wash: linear-gradient(110deg, rgba(230, 180, 92, .16), rgba(230, 180, 92, .03));
 }
 
 /* the switch: one glyph in the corner, the same weight as the pill's own
@@ -87,6 +90,20 @@ body:has(.pill) .season { bottom: 104px; }
   color: var(--red);
   border-color: rgba(230, 180, 92, .5);
   background: rgba(24, 20, 12, .6);
+}
+
+/* the play button keeps its red wash in the normal theme, which is the one
+   warm thing in the pill; in this theme the pill is already warm, so the
+   button goes back to a plain hairline and a white glyph */
+html[data-theme="xmas"] .pill__play {
+  color: var(--ink);
+  background: rgba(255, 255, 255, .05);
+}
+
+html[data-theme="xmas"] .pill__play:hover:not(:disabled) {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .32);
+  background: rgba(255, 255, 255, .1);
 }
 
 /* the tree stands in the bottom corner, behind the page and behind the cat,

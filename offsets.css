@@ -49,6 +49,10 @@
   --red: #ff3f2c;
   --red-soft: #ff6a5a;
   --accent: #ff6a5a;
+  /* the wash a button takes on hover, in the accent's own colour: kept here
+     rather than written into the rule so a theme can restate it */
+  --red-line: rgba(255, 90, 68, .45);
+  --red-wash: linear-gradient(110deg, rgba(255, 63, 44, .16), rgba(255, 63, 44, .03));
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   /* the select popup and scrollbars are drawn by the OS, and without this they
@@ -275,8 +279,8 @@ button.btn {
 .btn:hover,
 .btn:focus-visible {
   color: var(--red-soft);
-  border-color: rgba(255, 90, 68, .45);
-  background: linear-gradient(110deg, rgba(255, 63, 44, .16), rgba(255, 63, 44, .03));
+  border-color: var(--red-line);
+  background: var(--red-wash);
 }
 
 /* this file has not been dumped yet */
