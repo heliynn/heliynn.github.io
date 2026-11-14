@@ -29,6 +29,7 @@
       <a class="back" href="index.html">← servyy</a>
       <nav class="top__links" aria-label="Dumper outputs">
         <a href="dumps.html" aria-current="page">dumps</a>
+        <a href="diff.html">diff</a>
         <a href="offsets.html">offsets</a>
         <a href="fflags.html">fflags</a>
         <a href="types.html">types</a>
@@ -135,14 +136,72 @@
       </ul>
     </section>
 
+    <section class="hub__group" aria-labelledby="hub-tools">
+      <h2 class="hub__title" id="hub-tools">tools</h2>
+      <p class="hub__note">What you do with a dump after you have two of them.</p>
+      <ul class="hub__list">
+        <li>
+          <a class="hub__row" href="diff.html">
+            <span class="hub__name">diff</span>
+            <span class="hub__what">two dumps in, the values that moved out, without leaving the tab</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hub__group" id="builds" aria-labelledby="hub-builds" hidden>
+      <h2 class="hub__title" id="hub-builds">builds</h2>
+      <p class="hub__note">Every dump that was kept, so a value that moved can still be looked up in the build it moved from.</p>
+      <ul class="hub__list" id="buildList"></ul>
+    </section>
+
     <p class="hub__raw">the raw files are here too: <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>, <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>, <a href="Types.json" target="_blank" rel="noopener">Types.json</a></p>
   </main>
 
   <script src="backdrop.js?v=9"></script>
   <script>
     /* the count is read off the page itself, so it cannot drift from the list */
-    const rows = document.querySelectorAll('.hub__row').length;
-    document.getElementById('meta').textContent = rows + ' pages';
+    const meta = document.getElementById('meta');
+    meta.textContent = document.querySelectorAll('a.hub__row').length + ' pages';
+
+    /* builds come from the manifest, so a dumped build is added in one place */
+    fetch('assets/dumps/manifest.json')
+      .then((response) => (response.ok ? response.json() : null))
+      .then((manifest) => {
+        const builds = (manifest && manifest.builds) || [];
+        if (!builds.length) return;
+        const list = document.getElementById('buildList');
+
+        for (const build of builds) {
+          const row = document.createElement('div');
+          row.className = 'hub__row hub__row--plain';
+
+          const name = document.createElement('span');
+          name.className = 'hub__name';
+          name.textContent = build.version;
+
+          const what = document.createElement('span');
+          what.className = 'hub__what';
+          what.append('dumper ' + build.dumper + ' · dumped ' + build.dumped + ' · ');
+
+          Object.entries(build.files || {}).forEach(([kind, file], index) => {
+            if (index) what.append(' · ');
+            const link = document.createElement('a');
+            link.href = (build.path || './') + file;
+            link.download = file;
+            link.textContent = kind;
+            what.append(link);
+          });
+
+          row.append(name, what);
+          const cell = document.createElement('li');
+          cell.append(row);
+          list.append(cell);
+        }
+
+        document.getElementById('builds').hidden = false;
+      })
+      .catch(() => { /* the manifest is a nicety, the list above still works */ });
   </script>
 </body>
 </html>

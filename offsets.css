@@ -536,3 +536,221 @@ button.btn {
 @media (prefers-reduced-motion: reduce) {
   .hub__row { transition: none; }
 }
+
+/* ---- diff ------------------------------------------------------------
+   Two dumps in, the changes out. Same sheet as the hub: hairlines, mono
+   names, and the only colour is the value a name moved to. */
+
+.diff__sides {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.diff__side {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .015);
+  transition: border-color .12s ease, background-color .12s ease;
+}
+
+.diff__side.is-over {
+  border-color: var(--red-soft);
+  background: rgba(255, 106, 90, .05);
+}
+
+.diff__side-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.diff__tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.diff__file {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.diff__file.is-bad { color: var(--red-soft); }
+
+.diff__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.diff__pick,
+.diff__from {
+  max-width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color .12s ease, background-color .12s ease, border-color .12s ease;
+}
+
+.diff__pick:hover,
+.diff__from:hover {
+  border-color: rgba(238, 240, 245, .18);
+  background: var(--raised);
+  color: #fff;
+}
+
+.diff__pick:focus-within {
+  outline: 2px solid rgba(255, 255, 255, .55);
+  outline-offset: 2px;
+}
+
+/* kept in the tab order and labelled, out of the way of the styling */
+.diff__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.diff__out {
+  margin-top: 40px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.diff__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.diff__stat--calm { color: var(--muted); }
+
+.diff__filter {
+  width: 100%;
+  margin-top: 20px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .02);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.diff__filter::placeholder { color: var(--muted); }
+
+.diff__filter:focus {
+  border-color: rgba(238, 240, 245, .22);
+  outline: none;
+  color: #fff;
+}
+
+.diff__filter::-webkit-search-cancel-button {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.diff__title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 32px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.diff__count { color: var(--muted); }
+
+.drow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.drow__name {
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.drow__vals {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.drow__val { color: var(--muted); }
+.drow__arrow { color: var(--muted); }
+.drow__new { color: var(--accent); }
+
+.diff__more {
+  margin: 16px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.diff__empty {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+@media (max-width: 640px) {
+  .diff__sides { grid-template-columns: minmax(0, 1fr); }
+  .drow { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .drow__vals { flex-wrap: wrap; white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diff__side,
+  .diff__pick,
+  .diff__from { transition: none; }
+}
+
+/* a row that is not a link: the build listing, where the files inside it are */
+.hub__row--plain:hover { background-color: transparent; }
+.hub__row--plain .hub__name { cursor: default; }
+
+.hub__what a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: color .12s ease, border-color .12s ease;
+}
+
+.hub__what a:hover {
+  color: #fff;
+  border-color: rgba(238, 240, 245, .3);
+}

@@ -16,7 +16,7 @@
   const search = $('#search');
   const lede = $('#lede');
 
-  const state = { categories: [], query: '', total: 0, text: [], lines: [] };
+  const state = { categories: [], forms: [], total: 0, text: [], lines: [] };
 
   const el = (tag, cls, text) => {
     const node = document.createElement(tag);
@@ -113,12 +113,30 @@
     try { document.execCommand('copy'); } finally { field.remove(); }
   };
 
-  const matches = (category, entry) => {
-    if (!state.query) return true;
-    return category.name.toLowerCase().includes(state.query) ||
-      entry.name.toLowerCase().includes(state.query) ||
-      entry.value.toLowerCase().includes(state.query);
+  /* A query is matched loosely: hex with or without 0x, the same number written
+     in decimal, and . or :: between the class and the field. A near miss that
+     looks like missing data is worse than a search that takes a moment longer. */
+  const queryForms = (raw) => {
+    const q = raw.trim().toLowerCase();
+    if (!q) return [];
+    const forms = new Set();
+    const bare = q.replace(/^0x/, '');
+    forms.add(q.replace(/::/g, '.'));
+    forms.add(bare.replace(/::/g, '.'));
+    if (/^[0-9a-f]+$/.test(bare)) forms.add('0x' + bare);
+    if (/^\d+$/.test(bare)) forms.add('0x' + Number(bare).toString(16));
+    return [...forms];
   };
+
+  const hasQuery = (text) => {
+    if (!state.forms.length) return true;
+    const hay = text.toLowerCase().replace(/::/g, '.');
+    return state.forms.some((form) => hay.includes(form));
+  };
+
+  /* the whole Cat::Name is checked first, so typing the dotted path works */
+  const matches = (category, entry) => hasQuery(category.name + '::' + entry.name)
+    || hasQuery(entry.value);
 
   const rowNode = (entry) => {
     const row = el('div', 'row');
@@ -164,7 +182,7 @@
 
     if (kind === 'text') {
       for (const line of state.lines) {
-        if (state.query && !line.text.toLowerCase().includes(state.query)) continue;
+        if (!hasQuery(line.text)) continue;
         items.push({ kind: 'line', line });
       }
       return items;
@@ -309,7 +327,7 @@
       /* a big dump filters slowly: wait for a pause, not every key */
       clearTimeout(typing);
       typing = setTimeout(() => {
-        state.query = search.value.trim().toLowerCase();
+        state.forms = queryForms(search.value);
         render();
       }, 120);
     });
@@ -321,7 +339,7 @@
       }
       if (event.key === 'Escape' && document.activeElement === search) {
         search.value = '';
-        state.query = '';
+        state.forms = [];
         clearTimeout(typing);
         render();
         search.blur();

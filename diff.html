@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>diff · heliynn</title>
+  <meta name="description" content="Diff two dumper outputs in the browser: offsets, flags, types and structs, in any format the dumper writes. Nothing is uploaded." />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="offsets.css" />
+</head>
+<body data-kind="diff" data-title="diff">
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="top">
+      <a class="back" href="index.html">← servyy</a>
+      <nav class="top__links" aria-label="Dumper outputs">
+        <a href="dumps.html">dumps</a>
+        <a href="diff.html" aria-current="page">diff</a>
+        <a href="offsets.html">offsets</a>
+        <a href="fflags.html">fflags</a>
+        <a href="types.html">types</a>
+      </nav>
+      <span class="top__meta" id="meta">nothing uploaded</span>
+    </div>
+  </header>
+
+  <main class="page hub diff">
+    <section class="head">
+      <h1>diff</h1>
+      <p class="lede">Two dumps in, what changed out. Drop a file on either side or load one of the builds below; all of it runs in this tab.</p>
+    </section>
+
+    <section class="diff__sides" aria-label="The two dumps">
+      <div class="diff__side" id="sideA">
+        <div class="diff__side-head">
+          <span class="diff__tag">a</span>
+          <span class="diff__file" id="fileA">nothing loaded</span>
+        </div>
+        <div class="diff__actions">
+          <label class="diff__pick">
+            choose a file
+            <input class="diff__input" type="file" id="pickA" accept=".json,.txt,.hpp,.cs,.h,.lua,application/json,text/plain" />
+          </label>
+          <select class="diff__from" id="fromA" aria-label="Load a dump from this site">
+            <option value="">load from this site…</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="diff__side" id="sideB">
+        <div class="diff__side-head">
+          <span class="diff__tag">b</span>
+          <span class="diff__file" id="fileB">nothing loaded</span>
+        </div>
+        <div class="diff__actions">
+          <label class="diff__pick">
+            choose a file
+            <input class="diff__input" type="file" id="pickB" accept=".json,.txt,.hpp,.cs,.h,.lua,application/json,text/plain" />
+          </label>
+          <select class="diff__from" id="fromB" aria-label="Load a dump from this site">
+            <option value="">load from this site…</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="diff__out" id="out" aria-label="Differences" hidden>
+      <p class="diff__summary" id="summary" role="status" aria-live="polite"></p>
+      <input class="diff__filter" id="filter" type="search" placeholder="filter the changes…" autocomplete="off" spellcheck="false" aria-label="Filter the changes" />
+      <div id="changes"></div>
+      <p class="diff__empty" id="empty" hidden></p>
+    </section>
+
+    <noscript>
+      <p class="diff__empty">This page needs JavaScript, since the diff happens in the browser.</p>
+    </noscript>
+  </main>
+
+  <script src="backdrop.js?v=9"></script>
+  <script src="diff.js?v=1"></script>
+</body>
+</html>

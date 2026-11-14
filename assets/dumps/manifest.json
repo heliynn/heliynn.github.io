@@ -1,0 +1,34 @@
+{
+  "live": {
+    "version": "version-4ea8e85481e34f46",
+    "dumper": "2.2.6",
+    "dumped": "23:01 13/11/2026",
+    "path": "./",
+    "files": {
+      "offsets": "Offsets.json",
+      "offsets.hpp": "offsets.hpp",
+      "offsets.cs": "Offsets.cs",
+      "offsets.txt": "Offsets.txt",
+      "fflags": "FFlags.json",
+      "fflags.hpp": "FFlags.hpp",
+      "fflags.cs": "FFlags.cs",
+      "fflags.txt": "FFlags.txt",
+      "types": "Types.json",
+      "struct": "Struct.hpp"
+    }
+  },
+  "builds": [
+    {
+      "version": "version-4ea8e85481e34f46",
+      "dumper": "2.2.6",
+      "dumped": "23:01 13/11/2026",
+      "path": "assets/dumps/version-4ea8e85481e34f46/",
+      "files": {
+        "offsets": "Offsets.json",
+        "fflags": "FFlags.json",
+        "types": "Types.json",
+        "struct": "Struct.hpp"
+      }
+    }
+  ]
+}
