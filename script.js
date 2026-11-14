@@ -424,10 +424,18 @@
 
   let dragging = false;
 
-  /* .15 is the level that actually lets you read the page while it plays */
-  const VOLUME = .15;
+  /* background, not a track you sit and listen to: a mastered file is loud
+     even at a few percent, so the slider is squared and the bottom of it is
+     a long way quieter than the middle */
+  const VOLUME = .05;
+  const CURVE = 2;
+  const levelFor = (value) => Math.pow(Number(value) / 100, CURVE);
+  const sliderFor = (level) => Math.round(Math.pow(Math.max(0, level), 1 / CURVE) * 100);
   const MUTE_KEY = 'pill-muted';
-  const VOLUME_KEY = 'pill-volume';
+  /* a new key, because the old saved level was chosen against a louder
+     default and a linear slider, and everyone deserves one fresh start
+     at background level */
+  const VOLUME_KEY = 'pill-volume-2';
 
   const storedMute = () => {
     try {
@@ -474,7 +482,7 @@
 
   const paintVolume = () => {
     if (!volume) return;
-    const value = Math.round(audio.volume * 100);
+    const value = sliderFor(audio.volume);
     volume.value = String(value);
     volume.style.setProperty('--vol', value + '%');
   };
@@ -482,7 +490,7 @@
   if (volume) {
     paintVolume();
     volume.addEventListener('input', () => {
-      audio.volume = Number(volume.value) / 100;
+      audio.volume = levelFor(volume.value);
       /* reaching for the slider means you want to hear it */
       if (audio.volume > 0 && audio.muted) {
         audio.muted = false;
@@ -786,12 +794,12 @@
     if (button.disabled) return;
 
     if (audio.paused) {
-      /* the pill remembers a mute and a volume from last time, so a track
-         can start silently and look broken: pressing play is a request for
-         sound, and it overrides both */
-      if (audio.muted || audio.volume < .02) {
+      /* the pill remembers a mute from last time, and a muted track looks
+         broken: pressing play clears the mute. A volume you dragged down is
+         left exactly where you put it, only a true zero is moved off silence */
+      if (audio.muted || audio.volume === 0) {
         audio.muted = false;
-        if (audio.volume < .02) audio.volume = VOLUME;
+        if (audio.volume === 0) audio.volume = VOLUME;
         try {
           localStorage.setItem(MUTE_KEY, '0');
         } catch (error) { /* storage may be blocked */ }
