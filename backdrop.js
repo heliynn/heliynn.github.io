@@ -64,7 +64,7 @@
         vnoise(p * 0.0014 + 4.1 + t * 0.04)
       ) - 0.5;
 
-      vec2 q = (p + warp * 430.0) * (1.0 / 560.0);
+      vec2 q = (p + warp * 300.0) * (1.0 / 360.0);
 
       float n = vnoise(q + t * 0.035);
       n += 0.45 * (vnoise(q * 2.4 + 5.2 + t * 0.05) - 0.5);
@@ -73,13 +73,15 @@
       /* two lights drifting out of phase: the left side gets its own glow
          instead of only ever catching the spill from the right */
       vec2 uv = p / uRes;
-      vec2 left = vec2(0.17 + 0.10 * sin(t * 0.029), 0.48 + 0.20 * cos(t * 0.021));
-      vec2 right = vec2(0.76 + 0.18 * cos(t * 0.037), 0.52 + 0.24 * sin(t * 0.031));
+      vec2 left = vec2(0.30 + 0.11 * sin(t * 0.029), 0.46 + 0.15 * cos(t * 0.021));
+      vec2 right = vec2(0.70 + 0.11 * cos(t * 0.037), 0.54 + 0.17 * sin(t * 0.031));
       vec2 dl = (uv - left) * vec2(1.15, 1.0);
       vec2 dr = (uv - right) * vec2(1.15, 1.0);
-      float light = exp(-dot(dl, dl) * 4.0) * 0.34 + exp(-dot(dr, dr) * 4.2) * 0.34;
+      /* max, not sum: when the two lights drift together their overlap must not
+         double the brightness or the frame floods */
+      float light = max(exp(-dot(dl, dl) * 2.6) * 0.42, exp(-dot(dr, dr) * 2.8) * 0.42);
 
-      return clamp(0.12 + (n - 0.5) * 1.3 + light - 0.08, 0.0, 1.0);
+      return clamp(0.10 + (n - 0.5) * 0.95 + light - 0.08, 0.0, 1.0);
     }
 
     void main() {
@@ -95,12 +97,12 @@
       vec2 centre = vec2(ca * cell.x + sa * cell.y, -sa * cell.x + ca * cell.y) * uStep;
 
       /* stretch the mid tones so bright regions actually saturate */
-      float v = smoothstep(0.13, 0.90, field(centre, uTime));
+      float v = smoothstep(0.13, 1.12, field(centre, uTime));
 
       /* a late, steep curve on purpose: dots stay small across most of the
          ramp and only meet right at the top, so the run from black through
          dots to solid red takes up space instead of snapping */
-      float radius = 0.055 + pow(v, 1.9) * 0.94;
+      float radius = 0.055 + pow(v, 2.0) * 0.80;
 
       float dist = length(fract(g) - 0.5) - radius;
       float aa = 0.9 / uStep;
