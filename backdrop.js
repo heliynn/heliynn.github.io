@@ -79,9 +79,14 @@
       vec2 dr = (uv - right) * vec2(1.15, 1.0);
       /* max, not sum: when the two lights drift together their overlap must not
          double the brightness or the frame floods */
-      float light = max(exp(-dot(dl, dl) * 2.6) * 0.42, exp(-dot(dr, dr) * 2.8) * 0.42);
+      float light = max(exp(-dot(dl, dl) * 1.9) * 0.38, exp(-dot(dr, dr) * 2.1) * 0.36);
 
-      return clamp(0.10 + (n - 0.5) * 0.95 + light - 0.08, 0.0, 1.0);
+      /* an anchor glow that does not travel, so the screen never goes fully
+         dark while the two lights are both out at the edges */
+      vec2 anchor = (uv - vec2(0.80, 0.56)) * vec2(1.1, 1.0);
+      light = max(light, exp(-dot(anchor, anchor) * 1.5) * 0.30);
+
+      return clamp(0.40 + (n - 0.5) * 0.55 + light - 0.08, 0.0, 1.0);
     }
 
     void main() {
@@ -97,12 +102,12 @@
       vec2 centre = vec2(ca * cell.x + sa * cell.y, -sa * cell.x + ca * cell.y) * uStep;
 
       /* stretch the mid tones so bright regions actually saturate */
-      float v = smoothstep(0.13, 1.12, field(centre, uTime));
+      float v = smoothstep(0.13, 0.98, field(centre, uTime));
 
       /* a late, steep curve on purpose: dots stay small across most of the
          ramp and only meet right at the top, so the run from black through
          dots to solid red takes up space instead of snapping */
-      float radius = 0.055 + pow(v, 2.0) * 0.80;
+      float radius = 0.055 + pow(v, 2.0) * 0.82;
 
       float dist = length(fract(g) - 0.5) - radius;
       float aa = 0.9 / uStep;
