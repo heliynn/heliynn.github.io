@@ -13,6 +13,7 @@ window.SITE = {
   notes: [
     { label: "discord", value: "@servfur", href: "https://discord.com/users/744890716878012508" },
     { label: "github", value: "@heliynn", href: "https://github.com/heliynn" },
+    { label: "dumps", value: "every page", href: "dumps.html" },
     { label: "offsets", value: "dashboard", href: "offsets.html" }
   ],
 

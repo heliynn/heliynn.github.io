@@ -373,6 +373,35 @@
         if (!img.style.left) return;
         place(parseFloat(img.style.left), parseFloat(img.style.top));
       });
+
+      /* a few pixels of lean toward the pointer: it looks alive without
+         turning into a cursor follower. Skipped for touch and reduced motion. */
+      const LEAN_X = 6;
+      const LEAN_Y = 4;
+      const calm = matchMedia('(prefers-reduced-motion: reduce)');
+      let leanX = 0;
+      let leanY = 0;
+      let leanFrame = 0;
+
+      const applyLean = () => {
+        leanFrame = 0;
+        img.style.transform = dragging || calm.matches
+          ? ''
+          : 'translate(' + leanX.toFixed(1) + 'px, ' + leanY.toFixed(1) + 'px)';
+      };
+
+      addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch' || dragging) return;
+        const rect = img.getBoundingClientRect();
+        if (!rect.width) return;
+        const clamp = (value) => Math.max(-1, Math.min(1, value));
+        /* subtract the lean already applied so the target does not chase itself */
+        const cx = rect.left + rect.width / 2 - leanX;
+        const cy = rect.top + rect.height / 2 - leanY;
+        leanX = clamp((event.clientX - cx) / 280) * LEAN_X;
+        leanY = clamp((event.clientY - cy) / 280) * LEAN_Y;
+        if (!leanFrame) leanFrame = requestAnimationFrame(applyLean);
+      }, { passive: true });
     };
 
     mountMascot();
@@ -569,7 +598,8 @@
   });
   audio.addEventListener('ended', setTime);
 
-  button.addEventListener('click', async () => {
+  const togglePlay = async () => {
+    if (button.disabled) return;
     ensureGraph();
     if (ctx && ctx.state === 'suspended') await ctx.resume();
 
@@ -589,6 +619,32 @@
       button.textContent = '▶';
       button.setAttribute('aria-label', 'Play');
       button.setAttribute('aria-pressed', 'false');
+    }
+  };
+
+  button.addEventListener('click', togglePlay);
+
+  /* space plays and m mutes, unless a control or a text field already owns the key */
+  addEventListener('keydown', (event) => {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const target = event.target;
+    const tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+    const ownsKey = tag === 'input'
+      || tag === 'textarea'
+      || tag === 'select'
+      || (target && target.isContentEditable)
+      || (target && typeof target.closest === 'function'
+        && target.closest('button, a, [role="button"], [role="slider"]'));
+    if (ownsKey) return;
+
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+      togglePlay();
+    } else if (event.key === 'm' || event.key === 'M') {
+      if (!muteButton) return;
+      event.preventDefault();
+      muteButton.click();
     }
   });
 

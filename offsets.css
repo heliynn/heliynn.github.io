@@ -411,3 +411,132 @@ button.btn {
   text-align: center;
   font-size: .78rem;
 }
+
+/* ---- dumps hub -------------------------------------------------------
+   An index, not a gallery: one column read top to bottom, so ten entries
+   stay scannable instead of turning into ten identical cards. */
+
+/* one panel holds the whole index, same treatment as .cat: the halftone
+   stays a backdrop instead of eating the text on top of it */
+.hub {
+  margin-top: 1.4rem;
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(1.1rem, 3vw, 2rem) clamp(1.4rem, 3vw, 2.2rem);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: rgba(9, 9, 11, .8);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.hub .head { margin-bottom: 2.2rem; }
+
+.hub__groups { display: grid; gap: 2.4rem; }
+
+.hub__group {
+  padding-top: .9rem;
+  border-top: 1px solid var(--line);
+}
+
+.hub__title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  letter-spacing: -.02em;
+}
+
+.hub__note {
+  max-width: 52ch;
+  margin: .35rem 0 1rem;
+  color: var(--ink-soft);
+  font-size: .85rem;
+  text-wrap: pretty;
+}
+
+.hub__list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hub__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: .2rem 1.1rem;
+  padding: .68rem .8rem .68rem .9rem;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .16s ease;
+}
+
+/* one accent for the page, and it only shows on the row you are on */
+.hub__row::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .72rem;
+  bottom: .72rem;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity .16s ease;
+}
+
+.hub__row:hover { background: rgba(255, 255, 255, .045); }
+.hub__row:hover::before,
+.hub__row:focus-visible::before { opacity: 1; }
+
+.hub__name {
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--ink);
+}
+
+.hub__what {
+  color: var(--ink-soft);
+  font-size: .82rem;
+  text-wrap: pretty;
+}
+
+.hub__tag {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hub__raw {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .4rem 1.1rem;
+  margin: 2.6rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .72rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.hub__raw a { color: var(--ink-soft); text-decoration: none; }
+.hub__raw a:hover { color: #fff; }
+
+@media (max-width: 640px) {
+  .hub__row { grid-template-columns: minmax(0, 1fr) auto; }
+  .hub__name { grid-column: 1; grid-row: 1; }
+  .hub__tag { grid-column: 2; grid-row: 1; justify-self: end; }
+  .hub__what { grid-column: 1 / -1; grid-row: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub__row,
+  .hub__row::before { transition: none; }
+}
