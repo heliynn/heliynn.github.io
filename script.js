@@ -515,7 +515,14 @@
   /* the clock follows currentTime, not the event that happens to wake it:
      whatever pauses or resumes the element, the time shown is the real one */
   const setTime = (stalled) => {
-    if (!subEl) return;
+    /* the pause that ends a failed play fires this too, and the clock
+       would wipe the message saying why it failed */
+    if (!subEl || gaveUp) return;
+    if (debug) {
+      subEl.textContent = (audio.paused ? 'paused' : 'playing')
+        + ' ' + audio.currentTime.toFixed(1) + 's · ' + diagnose();
+      return;
+    }
     const total = audio.duration;
     const text = stalled
       ? 'buffering…'
@@ -529,7 +536,7 @@
      playing one ticks, and a clock standing still under a pause glyph is
      stuck, which is worth saying and worth one attempt at fixing */
   let lastTime = -1;
-  let stillFrames = 0;
+  let lastMove = 0;
   let fixTries = 0;
   /* once the pill has given up it must stop repainting over its own message */
   let gaveUp = false;
@@ -578,19 +585,23 @@
   const state = () => {
     if (audio.paused) {
       lastTime = -1;
-      stillFrames = 0;
       return 'paused';
     }
+    const now = performance.now();
     if (audio.currentTime !== lastTime) {
       lastTime = audio.currentTime;
-      stillFrames = 0;
+      lastMove = now;
       fixTries = 0;
       return 'playing';
     }
-    /* ninety frames is about a second and a half of standing still */
-    stillFrames += 1;
-    return stillFrames > 90 ? 'stuck' : 'playing';
+    /* a second and a half of standing still, timed rather than counted: a
+       throttled tab fires far fewer frames than the second and a half needs */
+    return now - lastMove > 1500 ? 'stuck' : 'playing';
   };
+
+  /* ?debug puts the element's own numbers under the title, so a track that
+     will not play can be reported without opening a console */
+  const debug = /(^|[?&#])debug/.test(location.search + location.hash);
 
   let painting = false;
 
@@ -628,7 +639,7 @@
           try { console.warn('[pill] stalled', diagnose(), audio); } catch (error) { /* no console */ }
           return;
         }
-        stillFrames = 0;
+        lastMove = performance.now();
       }
 
       setTime(now === 'stuck');
@@ -657,7 +668,13 @@
     raf = requestAnimationFrame(loop);
   };
 
+  let watch = 0;
+
   const start = () => {
+    /* rAF stops in a tab you are not looking at, and a stalled track is
+       exactly the thing that needs watching for, so a timer keeps the check
+       alive even when no frame is drawn */
+    if (!watch) watch = setInterval(paint, 1000);
     if (raf) return;
     raf = requestAnimationFrame(loop);
   };
@@ -840,7 +857,7 @@
   audio.addEventListener('play', () => {
     gaveUp = false;
     fixTries = 0;
-    stillFrames = 0;
+    lastMove = performance.now();
     start();
     syncPlay();
   });
