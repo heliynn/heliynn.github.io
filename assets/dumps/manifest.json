@@ -17,18 +17,5 @@
       "struct": "Struct.hpp"
     }
   },
-  "builds": [
-    {
-      "version": "version-4ea8e85481e34f46",
-      "dumper": "2.2.6",
-      "dumped": "23:01 13/11/2026",
-      "path": "assets/dumps/version-4ea8e85481e34f46/",
-      "files": {
-        "offsets": "Offsets.json",
-        "fflags": "FFlags.json",
-        "types": "Types.json",
-        "struct": "Struct.hpp"
-      }
-    }
-  ]
+  "builds": []
 }

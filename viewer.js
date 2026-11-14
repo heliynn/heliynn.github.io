@@ -181,7 +181,10 @@
     return row;
   };
 
-  /* flag dumps run to tens of thousands of rows, so they go in CHUNK at a time */
+  /* flag dumps run to tens of thousands of rows: they go in CHUNK at a time,
+     and the page stops at MAX_ROWS rather than turning 32,000 entries into
+     32,000 nodes, which is what makes the browser stop responding */
+  const MAX_ROWS = 4000;
   const CHUNK = 120;
   let queue = [];      /* what is left to put on the page */
   let cursor = 0;
@@ -264,14 +267,34 @@
     if (cursor < queue.length) watch();
   };
 
+  /* what the search found, announced politely rather than drawn. The count is
+     the search's own line, so it clears itself as soon as the box is empty */
+  const sayMatches = (count) => {
+    if (!status) return;
+    if (!state.forms.length) {
+      if (status.dataset.matches) {
+        status.textContent = '';
+        delete status.dataset.matches;
+      }
+      return;
+    }
+    status.dataset.matches = '1';
+    status.textContent = count.toLocaleString() + (count === 1 ? ' match' : ' matches');
+  };
+
   const render = () => {
     if (kind === 'text' && !code) return;
 
     stopWatching();
     container().replaceChildren();
     openCard = null;
-    queue = wanted();
+    const everything = wanted();
+    const rows = everything.filter((entry) => entry.kind !== 'head').length;
+    const trimmed = rows > MAX_ROWS;
+    queue = trimmed ? everything.slice(0, MAX_ROWS) : everything;
     cursor = 0;
+
+    if (rows || state.forms.length) sayMatches(rows);
 
     if (!queue.length) {
       container().append(el('p', 'empty', 'Nothing matches that search.'));
@@ -280,6 +303,12 @@
 
     /* small dumps in whole, big ones by the screenful */
     flush(queue.length <= 1500 ? Infinity : CHUNK * 2);
+
+    if (trimmed) {
+      container().append(el('p', 'more',
+        'Showing the first ' + MAX_ROWS.toLocaleString() + ' of ' + rows.toLocaleString()
+        + '. Search to narrow it down.'));
+    }
   };
 
   const load = async () => {

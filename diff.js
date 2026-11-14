@@ -92,8 +92,22 @@
   };
 
   const sides = {
-    a: { map: null, name: '' },
-    b: { map: null, name: '' }
+    a: { map: null, name: '', url: '' },
+    b: { map: null, name: '', url: '' }
+  };
+
+  /* a comparison is worth passing on, so the two builds live in the hash and a
+     link to it reopens the same diff. Dropped files cannot be shared this way,
+     which is also why nothing is uploaded anywhere. */
+  const remember = () => {
+    const parts = [];
+    for (const side of ['a', 'b']) {
+      if (sides[side].url) parts.push(side + '=' + encodeURIComponent(sides[side].url));
+    }
+    const hash = parts.length ? '#' + parts.join('&') : '';
+    if (location.hash !== hash) {
+      history.replaceState(null, '', hash || location.pathname + location.search);
+    }
   };
 
   const out = $('#out');
@@ -217,6 +231,8 @@
       return;
     }
 
+    remember();
+
     const added = [];
     const removed = [];
     const moved = [];
@@ -248,11 +264,12 @@
     render();
   };
 
-  const setSide = (side, name, text) => {
+  const setSide = (side, name, text, url) => {
     const slot = sides[side];
     try {
       slot.map = parse(text);
       slot.name = name;
+      slot.url = url || '';
       label(side).textContent = name + ' · ' + slot.map.size.toLocaleString() + ' entries';
       label(side).classList.remove('is-bad');
     } catch (error) {
@@ -270,7 +287,8 @@
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error(response.status);
-      setSide(side, name, await response.text());
+      setSide(side, name, await response.text(), url);
+      remember();
     } catch (error) {
       label(side).textContent = name + ' did not load';
       label(side).classList.add('is-bad');
@@ -351,5 +369,81 @@
     }
   };
 
-  fillBuilds();
+  /* the changes as text, for a bug report or a paste into a chat */
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch (error) { /* fall through to the old way */ }
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.append(field);
+    field.select();
+    try { document.execCommand('copy'); } finally { field.remove(); }
+  };
+
+  const copyButton = $('#copyDiff');
+  if (copyButton) {
+    copyButton.addEventListener('click', async () => {
+      const lines = [
+        'diff: ' + (sides.a.name || 'a') + ' -> ' + (sides.b.name || 'b'),
+        word(state.moved.length, 'moved', 'moved') + ' · '
+          + word(state.added.length, 'new', 'new') + ' · '
+          + word(state.removed.length, 'gone', 'gone') + ' · '
+          + word(state.same, 'unchanged', 'unchanged')
+      ];
+
+      const section = (label, rows) => {
+        if (!rows.length) return;
+        lines.push('', label + ' (' + rows.length + ')');
+        for (const row of rows) {
+          lines.push(row.from != null
+            ? '  ' + row.key + ': ' + row.from + ' -> ' + row.to
+            : '  ' + row.key + ': ' + row.value);
+        }
+      };
+
+      section('new', state.added);
+      section('gone', state.removed);
+      section('moved', state.moved);
+
+      /* two unrelated files can differ by tens of thousands of rows, and a
+         paste that size is not useful anywhere, so it stops and says so */
+      let text = lines.join('\n');
+      const changes = state.added.length + state.removed.length + state.moved.length;
+      if (text.length > 100000) {
+        text = text.slice(0, 100000).trimEnd()
+          + '\n\ncut short: ' + changes.toLocaleString() + ' changes in all';
+      }
+
+      await copyText(text);
+      const previous = copyButton.textContent;
+      copyButton.textContent = 'copied';
+      copyButton.classList.add('is-copied');
+      setTimeout(() => {
+        copyButton.textContent = previous;
+        copyButton.classList.remove('is-copied');
+      }, 900);
+    });
+  }
+
+  /* a shared link puts both builds back and compares them again */
+  const restore = () => {
+    if (!location.hash) return;
+    const wanted = new URLSearchParams(location.hash.slice(1));
+    for (const side of ['a', 'b']) {
+      const url = wanted.get(side);
+      if (!url) continue;
+      const select = $(side === 'a' ? '#fromA' : '#fromB');
+      const option = [...select.options].find((entry) => entry.value === url);
+      if (!option) continue;
+      select.value = url;
+      loadUrl(side, url);
+    }
+  };
+
+  fillBuilds().then(restore);
 })();

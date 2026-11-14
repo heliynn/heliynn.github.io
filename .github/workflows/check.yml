@@ -1,0 +1,21 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Repository checks
+        run: node tools/check.mjs
+      - name: Deployed site matches the repo
+        if: github.event_name == 'workflow_dispatch'
+        run: node tools/check.mjs --base https://heliynn.github.io

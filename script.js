@@ -419,6 +419,17 @@
   const audio = document.getElementById('pillAudio');
   const button = document.getElementById('pillPlay');
   const muteButton = document.getElementById('pillMute');
+  const glyphSpan = button ? button.querySelector('.pill__glyph') : null;
+  const say = document.getElementById('pillSay');
+
+  /* the ▶/❚❚ characters are decoration: they live in an aria-hidden span so a
+     screen reader says "Play, button" rather than "▶, Play, button" */
+  const setGlyph = (value) => {
+    if (glyphSpan) glyphSpan.textContent = value;
+    else if (button) button.textContent = value;
+  };
+
+  const trackName = () => audio.dataset.title || 'the track';
   const viz = document.querySelector('.pill__viz');
   if (!audio || !button || !viz) return;
 
@@ -463,6 +474,7 @@
     if (!muteButton) return;
     muteButton.setAttribute('aria-pressed', String(audio.muted));
     muteButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
+    muteButton.title = audio.muted ? 'Unmute (m)' : 'Mute (m)';
   };
 
   syncMute();
@@ -549,11 +561,19 @@
   const bars = Array.from(viz.querySelectorAll('span'));
   const levels = bars.map(() => 0);
   let lastPaint = 0;
+  let lengthChecked = false;
 
   /* easing in seconds, not in frames: a hit arrives in about 60 ms and the
      tail takes three times as long to fall, which is most of what separates a
      meter that reacts from one that twitches */
   const ATTACK = .06;
+
+  /* the bars are 29px tall in CSS and only their scale changes, so a frame
+     does not force the row to be laid out again */
+  const BAR_MAX = 29;
+  const setBar = (bar, level) => {
+    bar.style.transform = 'scaleY(' + ((3 + level * 26) / BAR_MAX).toFixed(3) + ')';
+  };
   const RELEASE = .18;
 
   /* the last few seconds behind the bars: bass at the bottom, treble at the
@@ -768,6 +788,15 @@
       const step = lastPaint ? Math.min(.25, Math.max(.001, (stamp - lastPaint) / 1000)) : .016;
       lastPaint = stamp;
 
+      /* the measured spectrum belongs to one file: if the song was swapped and
+         the data was not rebuilt, drawing from it would describe another track
+         with total confidence */
+      if (song && !lengthChecked && Number.isFinite(audio.duration) && audio.duration > 1) {
+        lengthChecked = true;
+        const measured = Math.floor(song.data.length / song.bands) / song.fps;
+        if (Math.abs(measured - audio.duration) > 1.5) song = null;
+      }
+
       const spectrum = song ? spectrumAt(audio.currentTime) : null;
       bars.forEach((bar, i) => {
         if (spectrum) {
@@ -777,7 +806,7 @@
           const target = Math.min(1, level * (.9 + (i / bars.length) * .45));
           const ease = 1 - Math.exp(-step / (target > levels[i] ? ATTACK : RELEASE));
           levels[i] = Math.min(1, Math.max(0, levels[i] + (target - levels[i]) * ease));
-          bar.style.height = (3 + levels[i] * 26).toFixed(2) + 'px';
+          setBar(bar, levels[i]);
           return;
         }
         /* no spectrum yet: the clock still gives a shape to ride */
@@ -786,7 +815,7 @@
         const shape = Math.max(0, 1 - Math.abs(i / bars.length - .3) * 1.1);
         const target = Math.max(0, Math.min(1, (.42 + sway * .26) * shape));
         levels[i] = Math.min(1, Math.max(0, levels[i] + (target - levels[i]) * (1 - Math.exp(-step / RELEASE))));
-        bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
+        setBar(bar, levels[i]);
       });
     } finally {
       painting = false;
@@ -866,7 +895,7 @@
 
   const fail = () => {
     button.disabled = true;
-    button.textContent = '▶';
+    setGlyph('▶');
     button.setAttribute('aria-label', 'No track loaded');
     if (titleEl) titleEl.textContent = 'no track loaded';
     if (subEl) subEl.textContent = 'drop a song at assets/music.mp3';
@@ -900,9 +929,12 @@
   const syncPlay = () => {
     if (button.disabled) return;
     const playing = !audio.paused;
-    button.textContent = playing ? '❚❚' : '▶';
+    setGlyph(playing ? '❚❚' : '▶');
     button.setAttribute('aria-label', playing ? 'Pause' : 'Play');
     button.setAttribute('aria-pressed', String(playing));
+    button.title = playing ? 'Pause (space)' : 'Play (space)';
+    /* announced once per change, not once per second like the clock */
+    if (say) say.textContent = playing ? trackName() + ' playing' : trackName() + ' paused';
   };
 
   const togglePlay = async () => {

@@ -7,10 +7,7 @@
   <meta name="description" content="Compare two dumps in the browser and see which offsets, flags and types actually changed. Nothing gets uploaded." />
   <meta name="theme-color" content="#0a0a0c" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="offsets.css" />
+  <link rel="stylesheet" href="offsets.css?v=3" />
 </head>
 <body data-kind="diff" data-title="diff">
   <div class="backdrop" aria-hidden="true"></div>
@@ -77,6 +74,7 @@
     <section class="diff__out" id="out" aria-label="Differences" hidden>
       <p class="diff__summary" id="summary" role="status" aria-live="polite"></p>
       <input class="diff__filter" id="filter" type="search" placeholder="filter the changes…" autocomplete="off" spellcheck="false" aria-label="Filter the changes" />
+      <button class="btn diff__copy" id="copyDiff" type="button">copy the changes</button>
       <div id="changes"></div>
       <p class="diff__empty" id="empty" hidden></p>
     </section>
@@ -87,6 +85,6 @@
   </main>
 
   <script src="backdrop.js?v=9"></script>
-  <script src="diff.js?v=2"></script>
+  <script src="diff.js?v=4"></script>
 </body>
 </html>
