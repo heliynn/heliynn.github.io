@@ -323,6 +323,14 @@
     } catch (error) { /* no manifest: file inputs still work */ }
     if (!manifest) return;
 
+    /* the same three slots as the dump pages, with the privacy note in the
+       middle since a diff has no fixed size */
+    if (manifest.live) {
+      const meta = document.querySelector('#meta');
+      meta.textContent = [manifest.live.version, 'nothing uploaded', 'dumped ' + manifest.live.dumped].join(' · ');
+      meta.title = meta.textContent;
+    }
+
     const entries = [];
     if (manifest.live) entries.push({ build: manifest.live, group: 'this build' });
     for (const build of manifest.builds || []) entries.push({ build, group: build.version });

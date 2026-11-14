@@ -27,13 +27,19 @@
   <header class="header">
     <div class="top">
       <a class="back" href="index.html">← servyy</a>
-      <nav class="top__links" aria-label="Dumper outputs">
-        <a href="offsets.html">offsets</a>
-        <a href="fflags.html" aria-current="page">fflags</a>
-        <a href="types.html">types</a>
-        <a href="struct.html">struct</a>
+      <nav class="top__tools" aria-label="Tools">
+        <a href="dumps.html">dumps</a>
+        <a href="diff.html">diff</a>
       </nav>
-      <span class="top__meta" id="meta">loading…</span>
+      <div class="top__right">
+        <nav class="top__links" aria-label="Dumps">
+          <a href="offsets.html">offsets</a>
+          <a href="fflags.html" aria-current="page">fflags</a>
+          <a href="types.html">types</a>
+          <a href="struct.html">struct</a>
+        </nav>
+        <span class="top__meta" id="meta">loading…</span>
+      </div>
     </div>
     <div class="toolbar">
       <input class="search__field" id="search" type="search" placeholder="search lines…" autocomplete="off" spellcheck="false" aria-label="Search FFlags.hpp" />
@@ -63,6 +69,6 @@
   </main>
 
   <script src="backdrop.js?v=9"></script>
-  <script src="viewer.js?v=8"></script>
+  <script src="viewer.js?v=9"></script>
 </body>
 </html>

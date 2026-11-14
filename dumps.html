@@ -27,14 +27,19 @@
   <header class="header">
     <div class="top">
       <a class="back" href="index.html">← servyy</a>
-      <nav class="top__links" aria-label="Dumper outputs">
+      <nav class="top__tools" aria-label="Tools">
         <a href="dumps.html" aria-current="page">dumps</a>
         <a href="diff.html">diff</a>
-        <a href="offsets.html">offsets</a>
-        <a href="fflags.html">fflags</a>
-        <a href="types.html">types</a>
       </nav>
-      <span class="top__meta" id="meta"></span>
+      <div class="top__right">
+        <nav class="top__links" aria-label="Dumps">
+          <a href="offsets.html">offsets</a>
+          <a href="fflags.html">fflags</a>
+          <a href="types.html">types</a>
+          <a href="struct.html">struct</a>
+        </nav>
+        <span class="top__meta" id="meta">loading…</span>
+      </div>
     </div>
   </header>
 
@@ -162,12 +167,23 @@
   <script>
     /* the count is read off the page itself, so it cannot drift from the list */
     const meta = document.getElementById('meta');
-    meta.textContent = document.querySelectorAll('a.hub__row').length + ' pages';
+    const pages = document.querySelectorAll('a.hub__row').length;
+
+    /* build, how many pages, and when it was taken: the same three slots the
+       dump pages fill */
+    const stamp = (build) => {
+      meta.textContent = build
+        ? [build.version, pages + ' pages', 'dumped ' + build.dumped].join(' · ')
+        : pages + ' pages';
+      meta.title = meta.textContent;
+    };
+    stamp(null);
 
     /* builds come from the manifest, so a dumped build is added in one place */
     fetch('assets/dumps/manifest.json')
       .then((response) => (response.ok ? response.json() : null))
       .then((manifest) => {
+        if (manifest && manifest.live) stamp(manifest.live);
         const builds = (manifest && manifest.builds) || [];
         if (!builds.length) return;
         const list = document.getElementById('buildList');

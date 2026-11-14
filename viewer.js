@@ -32,14 +32,27 @@
     return String(value);
   };
 
-  const describe = (data) => {
+  /* build, how much of it, and when it was taken: every page fills the same
+     three slots in the top bar, in that order */
+  const describe = (data, entries) => {
     const parts = [];
     const version = data['Roblox Version'] || data.version || data.Version;
     if (version) parts.push(version);
     if (data['Total Offsets']) parts.push(data['Total Offsets'] + ' offsets');
-    if (data['Dumper Version']) parts.push('dumper ' + data['Dumper Version']);
+    else if (entries) parts.push(entries.toLocaleString() + ' entries');
     if (data['Dumped At']) parts.push('dumped ' + data['Dumped At']);
     return { version, parts };
+  };
+
+  /* text dumps carry no header, so the stamp comes from the build manifest */
+  let liveBuild = null;
+  const readManifest = async () => {
+    if (liveBuild !== null) return liveBuild;
+    try {
+      const response = await fetch('assets/dumps/manifest.json');
+      if (response.ok) liveBuild = (await response.json()).live || null;
+    } catch (error) { /* no manifest: fall back to the filename */ }
+    return liveBuild;
   };
 
   const pick = (data) => {
@@ -294,14 +307,20 @@
       const raw = await response.text();
       state.lines = raw.split(/\r?\n/).map((text, i) => ({ number: i + 1, text }));
       state.total = state.lines.length;
-      if (meta) meta.textContent = used + ' · ' + state.lines.length + ' lines';
+      if (meta) {
+        const build = await readManifest();
+        meta.textContent = build
+          ? [build.version, state.lines.length.toLocaleString() + ' lines', 'dumped ' + build.dumped].join(' · ')
+          : used + ' · ' + state.lines.length + ' lines';
+        meta.title = meta.textContent;
+      }
       render();
       return;
     }
 
     const data = await response.json();
     const parsed = normalize(data);
-    const info = describe(data);
+    const info = describe(data, parsed.total);
 
     state.categories = parsed.categories;
     state.total = parsed.total;
