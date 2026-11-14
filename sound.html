@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sound test</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    gap: 18px;
+    padding: 24px;
+    background: #0b0b0d;
+    color: #d8d8dc;
+    font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, sans-serif;
+    text-align: center;
+  }
+  h1 { margin: 0; font-size: 17px; font-weight: 600; color: #f2f2f4; }
+  p { margin: 0; max-width: 40ch; color: #8b8b93; font-size: 13px; }
+  audio { width: 100%; max-width: 360px; margin: 0 auto; }
+  a { color: #e04a4a; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #d8d8dc; }
+</style>
+</head>
+<body>
+  <h1>sound test</h1>
+  <p>One native player, no site scripts. If this plays, the file and the browser are fine and the problem is in the pill.</p>
+  <audio controls preload="metadata" src="assets/music.mp3"></audio>
+  <p>If the player above does nothing, open the file on its own: <a href="assets/music.mp3">assets/music.mp3</a></p>
+  <p><code>assets/music.mp3</code> · 5.2 MB · 3:47</p>
+</body>
+</html>
