@@ -565,7 +565,7 @@
       ? 'buffering…'
       : Number.isFinite(total)
         ? fmt(audio.currentTime) + ' / ' + fmt(total)
-        : 'background music';
+        : 'Longview';
     if (subEl.textContent !== text) subEl.textContent = text;
   };
 
