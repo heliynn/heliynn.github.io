@@ -650,6 +650,28 @@
     }
   });
 
+  /* A browser will not start audio without a gesture, so the first click on
+     the page starts the track. Only the first: a click later must not undo a
+     pause. A muted pill stays muted, and a click that lands on the pill
+     belongs to the pill's own controls. */
+  let firstClickUsed = false;
+
+  addEventListener('click', (event) => {
+    if (firstClickUsed) return;
+    if (event.target && event.target.closest && event.target.closest('.pill')) {
+      firstClickUsed = true;
+      return;
+    }
+    if (audio.muted) {
+      firstClickUsed = true;
+      return;
+    }
+    /* the track has not loaded yet: try again on the next click */
+    if (button.disabled || !audio.paused) return;
+    firstClickUsed = true;
+    togglePlay();
+  });
+
   audio.addEventListener('play', start);
   audio.addEventListener('pause', paint);
 })();
