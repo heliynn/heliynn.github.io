@@ -424,8 +424,10 @@
 
   let dragging = false;
 
-  const VOLUME = .3;
+  /* .15 is the level that actually lets you read the page while it plays */
+  const VOLUME = .15;
   const MUTE_KEY = 'pill-muted';
+  const VOLUME_KEY = 'pill-volume';
 
   const storedMute = () => {
     try {
@@ -435,15 +437,30 @@
     }
   };
 
-  audio.volume = VOLUME;
+  const storedVolume = () => {
+    try {
+      const saved = localStorage.getItem(VOLUME_KEY);
+      /* no saved value is not the same as saved silence */
+      if (saved === null) return VOLUME;
+      const level = Number(saved);
+      return Number.isFinite(level) && level >= 0 && level <= 1 ? level : VOLUME;
+    } catch (error) {
+      return VOLUME;
+    }
+  };
+
+  audio.volume = storedVolume();
   audio.muted = storedMute();
 
+  const syncMute = () => {
+    if (!muteButton) return;
+    muteButton.setAttribute('aria-pressed', String(audio.muted));
+    muteButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
+  };
+
+  syncMute();
+
   if (muteButton) {
-    const syncMute = () => {
-      muteButton.setAttribute('aria-pressed', String(audio.muted));
-      muteButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
-    };
-    syncMute();
     muteButton.addEventListener('click', () => {
       audio.muted = !audio.muted;
       try {
@@ -453,7 +470,36 @@
     });
   }
 
+  const volume = document.getElementById('pillVol');
+
+  const paintVolume = () => {
+    if (!volume) return;
+    const value = Math.round(audio.volume * 100);
+    volume.value = String(value);
+    volume.style.setProperty('--vol', value + '%');
+  };
+
+  if (volume) {
+    paintVolume();
+    volume.addEventListener('input', () => {
+      audio.volume = Number(volume.value) / 100;
+      /* reaching for the slider means you want to hear it */
+      if (audio.volume > 0 && audio.muted) {
+        audio.muted = false;
+        try {
+          localStorage.setItem(MUTE_KEY, '0');
+        } catch (error) { /* storage may be blocked */ }
+        syncMute();
+      }
+      try {
+        localStorage.setItem(VOLUME_KEY, String(audio.volume));
+      } catch (error) { /* storage may be blocked */ }
+      paintVolume();
+    });
+  }
+
   const bars = Array.from(viz.querySelectorAll('span'));
+  const levels = bars.map(() => 0);
   const titleEl = document.getElementById('pillTitle');
   const subEl = document.getElementById('pillSub');
 
@@ -491,7 +537,12 @@
       analyser.getByteFrequencyData(data);
       bars.forEach((bar, i) => {
         const band = data[Math.floor(Math.pow(i / bars.length, 1.4) * data.length)] / 255;
-        bar.style.height = (4 + Math.pow(band, .72) * 30).toFixed(1) + 'px';
+        /* quiet bands stay quiet and loud ones are capped: before this, every
+           kick knocked the whole row to full height for a frame */
+        const target = Math.pow(band, 1.35) * .8;
+        const level = levels[i];
+        levels[i] = target > level ? level + (target - level) * .22 : level * .9;
+        bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
       });
     }
   };
@@ -565,7 +616,7 @@
       const source = ctx.createMediaElementSource(audio);
       analyser = ctx.createAnalyser();
       analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = .82;
+      analyser.smoothingTimeConstant = .86;
       source.connect(analyser);
       analyser.connect(ctx.destination);
       data = new Uint8Array(analyser.frequencyBinCount);
