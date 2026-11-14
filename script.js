@@ -503,9 +503,6 @@
   const titleEl = document.getElementById('pillTitle');
   const subEl = document.getElementById('pillSub');
 
-  let ctx = null;
-  let analyser = null;
-  let data = null;
   let raf = 0;
 
   const fmt = (seconds) => {
@@ -517,13 +514,34 @@
 
   /* the clock follows currentTime, not the event that happens to wake it:
      whatever pauses or resumes the element, the time shown is the real one */
-  const setTime = () => {
+  const setTime = (stalled) => {
     if (!subEl) return;
     const total = audio.duration;
-    const text = Number.isFinite(total)
-      ? fmt(audio.currentTime) + ' / ' + fmt(total)
-      : 'background music';
+    const text = stalled
+      ? 'buffering…'
+      : Number.isFinite(total)
+        ? fmt(audio.currentTime) + ' / ' + fmt(total)
+        : 'background music';
     if (subEl.textContent !== text) subEl.textContent = text;
+  };
+
+  /* a track that claims to play while its clock stands still is stuck on
+     buffers, and saying so beats a pause glyph over a frozen second */
+  let lastTime = -1;
+  let stillFrames = 0;
+  const moving = () => {
+    if (audio.paused) {
+      lastTime = -1;
+      stillFrames = 0;
+      return false;
+    }
+    if (audio.currentTime === lastTime) {
+      stillFrames += 1;
+    } else {
+      lastTime = audio.currentTime;
+      stillFrames = 0;
+    }
+    return stillFrames < 120;
   };
 
   const paint = () => {
@@ -536,17 +554,20 @@
       viz.setAttribute('aria-valuenow', String(Math.round(audio.currentTime)));
     }
 
-    setTime();
+    const running = moving();
+    setTime(!running);
 
-    if (analyser && data && !audio.paused) {
-      analyser.getByteFrequencyData(data);
+    if (running) {
+      const time = audio.currentTime;
       bars.forEach((bar, i) => {
-        const band = data[Math.floor(Math.pow(i / bars.length, 1.4) * data.length)] / 255;
-        /* quiet bands stay quiet and loud ones are capped: before this, every
-           kick knocked the whole row to full height for a frame */
-        const target = Math.pow(band, 1.35) * .8;
-        const level = levels[i];
-        levels[i] = target > level ? level + (target - level) * .22 : level * .9;
+        /* the bars ride the audio clock instead of an analyser. Feeding the
+           element through WebAudio is what left the track stalled on one
+           second with no sound, and a visualiser is not worth that. */
+        const sway = Math.sin(time * (1.9 + (i % 9) * .17) + i * .8)
+          + Math.sin(time * .7 + i * 2.3) * .5;
+        const shape = Math.max(0, 1 - Math.abs(i / bars.length - .3) * 1.1);
+        const target = Math.max(0, Math.min(1, (.42 + sway * .26) * shape));
+        levels[i] += (target - levels[i]) * .16;
         bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
       });
     }
@@ -612,25 +633,6 @@
     paint();
   });
 
-  const ensureGraph = () => {
-    if (ctx) return;
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    try {
-      ctx = new AC();
-      const source = ctx.createMediaElementSource(audio);
-      analyser = ctx.createAnalyser();
-      analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = .86;
-      source.connect(analyser);
-      analyser.connect(ctx.destination);
-      data = new Uint8Array(analyser.frequencyBinCount);
-    } catch (error) {
-      ctx = null;
-      analyser = null;
-    }
-  };
-
   const fail = () => {
     button.disabled = true;
     button.textContent = '▶';
@@ -674,14 +676,13 @@
 
   const togglePlay = async () => {
     if (button.disabled) return;
-    ensureGraph();
-    if (ctx && ctx.state === 'suspended') await ctx.resume();
 
     if (audio.paused) {
       try {
         await audio.play();
       } catch (error) {
-        fail();
+        /* blocked by the browser, not a missing file: keep the button usable */
+        if (subEl) subEl.textContent = 'press play again';
         return;
       }
       syncPlay();
