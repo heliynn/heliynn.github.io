@@ -545,18 +545,6 @@
   const titleEl = document.getElementById('pillTitle');
   const subEl = document.getElementById('pillSub');
 
-  /* ?debug prints what the element reports about itself below the pill, and
-     adds a native player beside it: a track that will not play can then be
-     reported without opening a console */
-  const debug = /(^|[?&#])debug/.test(location.search + location.hash);
-  let debugEl = null;
-  if (debug) {
-    debugEl = document.createElement('p');
-    debugEl.className = 'pill__debug';
-    debugEl.style.cssText = 'max-width:320px;margin:10px auto 0;font-size:12px;'
-      + 'line-height:1.6;text-align:center;opacity:.65';
-  }
-
   let raf = 0;
 
   const fmt = (seconds) => {
@@ -571,10 +559,6 @@
   const setTime = (stalled) => {
     /* the pause that ends a failed play fires this too, and the clock
        would wipe the message saying why it failed */
-    if (debugEl) {
-      debugEl.textContent = (audio.paused ? 'paused' : 'playing')
-        + ' ' + audio.currentTime.toFixed(1) + 's · ' + diagnose();
-    }
     if (!subEl || gaveUp) return;
     const total = audio.duration;
     const text = stalled
@@ -628,7 +612,6 @@
   /* what the element believes about itself, for when it will not play */
   const diagnose = () => {
     const bits = [audio.muted ? 'muted' : 'vol ' + Math.round(audio.volume * 100) + '%'];
-    bits.push(graph ? 'analyser' : 'direct');
     bits.push('ready ' + audio.readyState + ', net ' + audio.networkState);
     if (audio.error) bits.push('error ' + audio.error.code);
     const span = audio.buffered;
@@ -957,15 +940,4 @@
   });
   audio.addEventListener('ended', syncPlay);
 
-  if (debug) {
-    /* a native player with none of this script in its way: if this one cannot
-       be heard either, the file is not what is stopping the sound */
-    const plain = document.createElement('audio');
-    plain.controls = true;
-    plain.preload = 'metadata';
-    plain.src = audio.getAttribute('src');
-    plain.style.cssText = 'display:block;width:100%;max-width:320px;margin:12px auto 0';
-    document.body.appendChild(debugEl);
-    document.body.appendChild(plain);
-  }
 })();
