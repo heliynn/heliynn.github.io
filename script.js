@@ -583,7 +583,7 @@
     if (subEl) subEl.textContent = 'drop a song at assets/music.mp3';
   };
 
-  audio.addEventListener('loadedmetadata', () => {
+  const describeTrack = () => {
     button.disabled = false;
     if (titleEl) {
       titleEl.textContent = audio.dataset.title
@@ -591,7 +591,12 @@
         || 'untitled';
     }
     setTime();
-  });
+  };
+
+  audio.addEventListener('loadedmetadata', describeTrack);
+  /* a cached track can be ready before this script runs, in which case the
+     event has already gone by and the pill would sit on its placeholder */
+  if (audio.readyState >= 1) describeTrack();
 
   audio.addEventListener('error', fail);
   audio.addEventListener('timeupdate', () => {
