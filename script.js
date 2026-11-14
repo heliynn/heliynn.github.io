@@ -341,6 +341,9 @@
         downX = event.clientX;
         downY = event.clientY;
         img.classList.add('is-dragging');
+        img.style.transform = '';
+        leanX = 0;
+        leanY = 0;
         place(rect.left, rect.top);
         try {
           img.setPointerCapture(event.pointerId);
@@ -374,23 +377,17 @@
         place(parseFloat(img.style.left), parseFloat(img.style.top));
       });
 
-      /* a few pixels of lean toward the pointer: it looks alive without
-         turning into a cursor follower. Skipped for touch and reduced motion. */
-      const LEAN_X = 6;
-      const LEAN_Y = 4;
-      const calm = matchMedia('(prefers-reduced-motion: reduce)');
+      /* the mascot leans toward the pointer: a short translate plus a slight
+         tilt, so the corner reacts to you without becoming a cursor follower.
+         Skipped on touch. Runs under reduced motion too, like the backdrop. */
+      const LEAN_X = 16;
+      const LEAN_Y = 10;
+      const LEAN_TILT = 2.4;
+      const LEAN_REACH = 360;
       let leanX = 0;
       let leanY = 0;
-      let leanFrame = 0;
 
-      const applyLean = () => {
-        leanFrame = 0;
-        img.style.transform = dragging || calm.matches
-          ? ''
-          : 'translate(' + leanX.toFixed(1) + 'px, ' + leanY.toFixed(1) + 'px)';
-      };
-
-      addEventListener('pointermove', (event) => {
+      const lean = (event) => {
         if (event.pointerType === 'touch' || dragging) return;
         const rect = img.getBoundingClientRect();
         if (!rect.width) return;
@@ -398,10 +395,15 @@
         /* subtract the lean already applied so the target does not chase itself */
         const cx = rect.left + rect.width / 2 - leanX;
         const cy = rect.top + rect.height / 2 - leanY;
-        leanX = clamp((event.clientX - cx) / 280) * LEAN_X;
-        leanY = clamp((event.clientY - cy) / 280) * LEAN_Y;
-        if (!leanFrame) leanFrame = requestAnimationFrame(applyLean);
-      }, { passive: true });
+        const dx = clamp((event.clientX - cx) / LEAN_REACH);
+        const dy = clamp((event.clientY - cy) / LEAN_REACH);
+        leanX = dx * LEAN_X;
+        leanY = dy * LEAN_Y;
+        img.style.transform = 'translate(' + leanX.toFixed(1) + 'px, ' + leanY.toFixed(1) + 'px)'
+          + ' rotate(' + (dx * LEAN_TILT).toFixed(2) + 'deg)';
+      };
+
+      addEventListener('pointermove', lean, { passive: true });
     };
 
     mountMascot();

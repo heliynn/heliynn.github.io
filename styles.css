@@ -601,6 +601,9 @@ button.panel__row:focus-visible .panel__label {
   user-select: none;
   -webkit-user-drag: none;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45));
+  /* the lean is written to transform every pointermove; the transition is what
+     makes it glide instead of stepping */
+  transition: transform .28s var(--ease);
   /* opacity only: a transform keyframe would fight the drag scale */
   animation: mascot-in .9s var(--ease) .4s both;
 }
