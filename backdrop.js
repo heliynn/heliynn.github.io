@@ -248,4 +248,6 @@
     else start();
   });
   addEventListener('pagehide', stop);
+  /* back/forward cache restores a page without a visibility change */
+  addEventListener('pageshow', start);
 })();
