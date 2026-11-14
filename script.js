@@ -565,6 +565,16 @@
     } catch (error) { /* nothing left to try */ }
   };
 
+  /* what the element believes about itself, for when it will not play */
+  const diagnose = () => {
+    const bits = [audio.muted ? 'muted' : 'vol ' + Math.round(audio.volume * 100) + '%'];
+    bits.push('ready ' + audio.readyState + ', net ' + audio.networkState);
+    if (audio.error) bits.push('error ' + audio.error.code);
+    const span = audio.buffered;
+    bits.push(span.length ? 'held ' + fmt(span.end(span.length - 1) - span.start(0)) : 'nothing buffered');
+    return bits.join(' · ');
+  };
+
   const state = () => {
     if (audio.paused) {
       lastTime = -1;
@@ -614,7 +624,8 @@
           gaveUp = true;
           audio.pause();
           syncPlay();
-          if (subEl) subEl.textContent = 'sound stalled · press play again';
+          if (subEl) subEl.textContent = 'sound stalled · ' + diagnose();
+          try { console.warn('[pill] stalled', diagnose(), audio); } catch (error) { /* no console */ }
           return;
         }
         stillFrames = 0;
@@ -671,8 +682,13 @@
   });
 
   viz.addEventListener('pointermove', (event) => {
+    /* no button held means the pointerup was missed, and a latched drag
+       would seek on every move: the clock ticks, jumps back, and the track
+       restarts forever without ever playing */
+    if (event.buttons === 0) dragging = false;
     if (dragging) seek(event.clientX);
   });
+  viz.addEventListener('lostpointercapture', () => { dragging = false; });
 
   const endDrag = (event) => {
     if (!dragging) return;
@@ -746,6 +762,18 @@
     if (button.disabled) return;
 
     if (audio.paused) {
+      /* the pill remembers a mute and a volume from last time, so a track
+         can start silently and look broken: pressing play is a request for
+         sound, and it overrides both */
+      if (audio.muted || audio.volume < .02) {
+        audio.muted = false;
+        if (audio.volume < .02) audio.volume = VOLUME;
+        try {
+          localStorage.setItem(MUTE_KEY, '0');
+        } catch (error) { /* storage may be blocked */ }
+        syncMute();
+        paintVolume();
+      }
       try {
         await audio.play();
       } catch (error) {
