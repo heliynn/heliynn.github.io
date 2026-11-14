@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dumps · heliynn</title>
-  <meta name="description" content="Every dump from the client in one place: offsets, fast flags, types and structs, each as a searchable page, a C++ header, a C# class or plain text." />
+  <meta name="description" content="Offsets, engine flags, types and struct layouts from the client. Each one as a page you can search, or as a file you can take away." />
   <meta name="theme-color" content="#0a0a0c" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="dumps · heliynn" />
-  <meta property="og:description" content="Every dump from the client in one place: offsets, fast flags, types and structs, as a page you can search or a file you can grab." />
+  <meta property="og:description" content="Offsets, engine flags, types and struct layouts from the client, as pages to search or files to grab." />
   <meta property="og:image" content="https://heliynn.github.io/assets/og/dumps.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -46,7 +46,7 @@
   <main class="page hub">
     <section class="head">
       <h1>dumps</h1>
-      <p class="lede" id="lede">Every dump from the client, cut for whatever you need it for: something to search, something to paste, something to grep.</p>
+      <p class="lede" id="lede">Everything the dumper pulled out of the client. Search it on a page here, or take the file and grep it yourself.</p>
       <p class="hub__stamp">
         <span class="hub__stamp-key">build</span>
         <span class="hub__stamp-val">version-4ea8e85481e34f46</span>
@@ -59,19 +59,19 @@
 
     <section class="hub__group" aria-labelledby="hub-offsets">
       <h2 class="hub__title" id="hub-offsets">offsets</h2>
-      <p class="hub__note">Values read out of the client, grouped by the class they belong to.</p>
+      <p class="hub__note">Every value the dumper read, filed under the class it came from.</p>
       <p class="hub__sample"><span class="hub__sample-name">AnimationTrack::Animation</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0xa0</span></p>
       <ul class="hub__list">
         <li>
           <a class="hub__row" href="offsets.html">
             <span class="hub__name">offsets</span>
-            <span class="hub__what">the whole table, searchable in the browser</span>
+            <span class="hub__what">the whole table, filtered as you type</span>
           </a>
         </li>
         <li>
           <a class="hub__row" href="offsets-hpp.html">
             <span class="hub__name">offsets.hpp</span>
-            <span class="hub__what">the same values as a C++ header, namespaces and all</span>
+            <span class="hub__what">the same values as a C++ header, namespaces included</span>
           </a>
         </li>
         <li>
@@ -83,7 +83,7 @@
         <li>
           <a class="hub__row" href="offsets-txt.html">
             <span class="hub__name">offsets.txt</span>
-            <span class="hub__what">one name and hex value per line, for diffing two dumps</span>
+            <span class="hub__what">one name and one hex value per line, easy to diff</span>
           </a>
         </li>
       </ul>
@@ -91,13 +91,13 @@
 
     <section class="hub__group" aria-labelledby="hub-fflags">
       <h2 class="hub__title" id="hub-fflags">fast flags</h2>
-      <p class="hub__note">Engine flags with their values, searchable by name or category.</p>
+      <p class="hub__note">Engine flags and what they are set to. Search by name, or by category if you only remember roughly where it lives.</p>
       <p class="hub__sample"><span class="hub__sample-name">AudioFocusService</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0x8295588</span></p>
       <ul class="hub__list">
         <li>
           <a class="hub__row" href="fflags.html">
             <span class="hub__name">fflags</span>
-            <span class="hub__what">every flag with its value, grouped by category</span>
+            <span class="hub__what">every flag and its value, sorted by category</span>
           </a>
         </li>
         <li>
@@ -123,19 +123,19 @@
 
     <section class="hub__group" aria-labelledby="hub-types">
       <h2 class="hub__title" id="hub-types">types and structs</h2>
-      <p class="hub__note">What the dumper found in the binary, laid out the way it sits in memory.</p>
+      <p class="hub__note">The types the dumper found in the binary, with their fields in the order they sit in memory.</p>
       <p class="hub__sample"><span class="hub__sample-name">AnimationTrack.Looped</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0xcc</span></p>
       <ul class="hub__list">
         <li>
           <a class="hub__row" href="types.html">
             <span class="hub__name">types</span>
-            <span class="hub__what">types with the fields each one holds</span>
+            <span class="hub__what">each type and the fields it holds</span>
           </a>
         </li>
         <li>
           <a class="hub__row" href="struct.html">
             <span class="hub__name">Struct.hpp</span>
-            <span class="hub__what">struct layouts straight from the dumper</span>
+            <span class="hub__what">the layouts as the dumper wrote them</span>
           </a>
         </li>
       </ul>
@@ -143,12 +143,12 @@
 
     <section class="hub__group" aria-labelledby="hub-tools">
       <h2 class="hub__title" id="hub-tools">tools</h2>
-      <p class="hub__note">What you do with a dump after you have two of them.</p>
+      <p class="hub__note">For when you have two dumps and want to know what moved between them.</p>
       <ul class="hub__list">
         <li>
           <a class="hub__row" href="diff.html">
             <span class="hub__name">diff</span>
-            <span class="hub__what">two dumps in, the values that moved out, without leaving the tab</span>
+            <span class="hub__what">two dumps in, the values that moved between them, without leaving the tab</span>
           </a>
         </li>
       </ul>
@@ -156,11 +156,11 @@
 
     <section class="hub__group" id="builds" aria-labelledby="hub-builds" hidden>
       <h2 class="hub__title" id="hub-builds">builds</h2>
-      <p class="hub__note">Every dump that was kept, so a value that moved can still be looked up in the build it moved from.</p>
+      <p class="hub__note">Older dumps, kept so you can look up what a value used to be in the build you were on.</p>
       <ul class="hub__list" id="buildList"></ul>
     </section>
 
-    <p class="hub__raw">the raw files are here too: <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>, <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>, <a href="Types.json" target="_blank" rel="noopener">Types.json</a></p>
+    <p class="hub__raw">the raw json is here too, if you would rather parse it yourself: <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>, <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>, <a href="Types.json" target="_blank" rel="noopener">Types.json</a></p>
   </main>
 
   <script src="backdrop.js?v=9"></script>
