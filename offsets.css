@@ -413,27 +413,37 @@ button.btn {
 }
 
 /* ---- dumps hub -------------------------------------------------------
-   An index, not a gallery: one column read top to bottom, so ten entries
-   stay scannable instead of turning into ten identical cards. */
+   An index of the dumps: one column, hairlines, mono names, and one real
+   line of data under each group so the page shows what it is an index of. */
 
-/* one panel holds the whole index, same treatment as .cat: the halftone
-   stays a backdrop instead of eating the text on top of it */
+/* a solid surface, not glass: the halftone stays outside it */
 .hub {
-  margin-top: 1.4rem;
-  padding: clamp(1.2rem, 3vw, 2rem) clamp(1.1rem, 3vw, 2rem) clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: 16px;
+  padding: 32px clamp(20px, 3vw, 32px) 36px;
   border: 1px solid var(--line);
-  border-radius: 5px;
-  background: rgba(9, 9, 11, .8);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  background: rgba(11, 11, 13, .88);
 }
 
-.hub .head { margin-bottom: 2.2rem; }
+/* what the whole set is pinned to, which is what you check before using any of it */
+.hub__stamp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin: 20px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+}
 
-.hub__groups { display: grid; gap: 2.4rem; }
+.hub__stamp-key { color: var(--muted); }
+.hub__stamp-val { color: var(--ink-soft); }
+.hub__stamp-key + .hub__stamp-val { margin-right: 12px; }
 
 .hub__group {
-  padding-top: .9rem;
+  margin-top: 48px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 
@@ -441,102 +451,88 @@ button.btn {
   margin: 0;
   font-family: var(--display);
   font-weight: 500;
-  font-size: 1.35rem;
-  letter-spacing: -.02em;
+  font-size: 1.1rem;
+  letter-spacing: -.01em;
 }
 
 .hub__note {
   max-width: 52ch;
-  margin: .35rem 0 1rem;
+  margin: 8px 0 0;
   color: var(--ink-soft);
-  font-size: .85rem;
+  font-size: .88rem;
   text-wrap: pretty;
 }
 
+/* the shape of the data, before you click: the only colour on the page */
+.hub__sample {
+  margin: 16px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.hub__sample-name { color: var(--ink-soft); }
+.hub__sample-eq { color: var(--muted); }
+.hub__sample-hex { color: var(--accent); }
+
 .hub__list {
-  display: grid;
-  gap: 2px;
-  margin: 0;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
+  border-top: 1px solid var(--line);
 }
+
+.hub__list li { border-bottom: 1px solid var(--line); }
 
 .hub__row {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr) auto;
+  grid-template-columns: 176px minmax(0, 1fr);
   align-items: baseline;
-  gap: .2rem 1.1rem;
-  padding: .68rem .8rem .68rem .9rem;
-  border-radius: 8px;
+  gap: 16px;
+  padding: 12px 12px 12px 0;
   color: inherit;
   text-decoration: none;
-  transition: background .16s ease;
+  transition: background-color .12s ease, color .12s ease;
 }
 
-/* one accent for the page, and it only shows on the row you are on */
-.hub__row::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: .72rem;
-  bottom: .72rem;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--red);
-  opacity: 0;
-  transition: opacity .16s ease;
-}
-
-.hub__row:hover { background: rgba(255, 255, 255, .045); }
-.hub__row:hover::before,
-.hub__row:focus-visible::before { opacity: 1; }
+.hub__row:hover { background-color: rgba(255, 255, 255, .035); }
+.hub__row:hover .hub__name { color: #fff; }
+.hub__row:hover .hub__what { color: var(--ink); }
 
 .hub__name {
   font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--ink);
+  font-size: 12.5px;
+  color: var(--ink-soft);
 }
 
 .hub__what {
   color: var(--ink-soft);
-  font-size: .82rem;
+  font-size: .88rem;
   text-wrap: pretty;
 }
 
-.hub__tag {
-  font-family: var(--mono);
-  font-size: .62rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 .hub__raw {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: .4rem 1.1rem;
-  margin: 2.6rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
+  margin: 40px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
   color: var(--muted);
-  font-size: .72rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
 }
 
 .hub__raw a { color: var(--ink-soft); text-decoration: none; }
-.hub__raw a:hover { color: #fff; }
+.hub__raw a:hover { color: #fff; text-decoration: underline; }
 
 @media (max-width: 640px) {
-  .hub__row { grid-template-columns: minmax(0, 1fr) auto; }
-  .hub__name { grid-column: 1; grid-row: 1; }
-  .hub__tag { grid-column: 2; grid-row: 1; justify-self: end; }
-  .hub__what { grid-column: 1 / -1; grid-row: 2; }
+  .hub { padding: 24px 16px 28px; }
+  .hub__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    padding: 12px 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hub__row,
-  .hub__row::before { transition: none; }
+  .hub__row { transition: none; }
 }

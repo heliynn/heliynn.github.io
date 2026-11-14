@@ -33,117 +33,116 @@
         <a href="fflags.html">fflags</a>
         <a href="types.html">types</a>
       </nav>
-      <span class="top__meta" id="meta">index</span>
+      <span class="top__meta" id="meta"></span>
     </div>
   </header>
 
   <main class="page hub">
     <section class="head">
       <h1>dumps</h1>
-      <p class="lede" id="lede">Everything the dumper prints, in one place. Each set is a page you can search, plus the same data as a header to paste or a file to grep.</p>
+      <p class="lede" id="lede">Every dump from the client, cut for whatever you need it for: something to search, something to paste, something to grep.</p>
+      <p class="hub__stamp">
+        <span class="hub__stamp-key">build</span>
+        <span class="hub__stamp-val">version-4ea8e85481e34f46</span>
+        <span class="hub__stamp-key">dumper</span>
+        <span class="hub__stamp-val">2.2.6</span>
+        <span class="hub__stamp-key">dumped</span>
+        <span class="hub__stamp-val">23:01 13/11/2026</span>
+      </p>
     </section>
 
-    <div class="hub__groups">
-      <section class="hub__group" aria-labelledby="hub-offsets">
-        <h2 class="hub__title" id="hub-offsets">offsets</h2>
-        <p class="hub__note">Values read out of the client, grouped by the class they belong to.</p>
-        <ul class="hub__list">
-          <li>
-            <a class="hub__row" href="offsets.html">
-              <span class="hub__name">offsets.html</span>
-              <span class="hub__what">the whole table, searchable in the browser</span>
-              <span class="hub__tag">page</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="offsets-hpp.html">
-              <span class="hub__name">Offsets.hpp</span>
-              <span class="hub__what">the same values as a C++ header, namespaces and all</span>
-              <span class="hub__tag">hpp</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="offsets-cs.html">
-              <span class="hub__name">Offsets.cs</span>
-              <span class="hub__what">the same values as a C# class</span>
-              <span class="hub__tag">cs</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="offsets-txt.html">
-              <span class="hub__name">Offsets.txt</span>
-              <span class="hub__what">one name and hex value per line, for grep and diff</span>
-              <span class="hub__tag">txt</span>
-            </a>
-          </li>
-        </ul>
-      </section>
+    <section class="hub__group" aria-labelledby="hub-offsets">
+      <h2 class="hub__title" id="hub-offsets">offsets</h2>
+      <p class="hub__note">Values read out of the client, grouped by the class they belong to.</p>
+      <p class="hub__sample"><span class="hub__sample-name">AnimationTrack::Animation</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0xa0</span></p>
+      <ul class="hub__list">
+        <li>
+          <a class="hub__row" href="offsets.html">
+            <span class="hub__name">offsets</span>
+            <span class="hub__what">the whole table, searchable in the browser</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="offsets-hpp.html">
+            <span class="hub__name">offsets.hpp</span>
+            <span class="hub__what">the same values as a C++ header, namespaces and all</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="offsets-cs.html">
+            <span class="hub__name">offsets.cs</span>
+            <span class="hub__what">the same values as a C# class</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="offsets-txt.html">
+            <span class="hub__name">offsets.txt</span>
+            <span class="hub__what">one name and hex value per line, for diffing two dumps</span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
-      <section class="hub__group" aria-labelledby="hub-fflags">
-        <h2 class="hub__title" id="hub-fflags">fast flags</h2>
-        <p class="hub__note">Engine flags with their values, searchable by name or category.</p>
-        <ul class="hub__list">
-          <li>
-            <a class="hub__row" href="fflags.html">
-              <span class="hub__name">fflags.html</span>
-              <span class="hub__what">every flag with its value, grouped by category</span>
-              <span class="hub__tag">page</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="fflags-hpp.html">
-              <span class="hub__name">FFlags.hpp</span>
-              <span class="hub__what">the flags as a C++ header</span>
-              <span class="hub__tag">hpp</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="fflags-cs.html">
-              <span class="hub__name">FFlags.cs</span>
-              <span class="hub__what">the flags as a C# class</span>
-              <span class="hub__tag">cs</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="fflags-txt.html">
-              <span class="hub__name">FFlags.txt</span>
-              <span class="hub__what">the flags as plain text</span>
-              <span class="hub__tag">txt</span>
-            </a>
-          </li>
-        </ul>
-      </section>
+    <section class="hub__group" aria-labelledby="hub-fflags">
+      <h2 class="hub__title" id="hub-fflags">fast flags</h2>
+      <p class="hub__note">Engine flags with their values, searchable by name or category.</p>
+      <p class="hub__sample"><span class="hub__sample-name">AudioFocusService</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0x8295588</span></p>
+      <ul class="hub__list">
+        <li>
+          <a class="hub__row" href="fflags.html">
+            <span class="hub__name">fflags</span>
+            <span class="hub__what">every flag with its value, grouped by category</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="fflags-hpp.html">
+            <span class="hub__name">FFlags.hpp</span>
+            <span class="hub__what">the flags as a C++ header</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="fflags-cs.html">
+            <span class="hub__name">FFlags.cs</span>
+            <span class="hub__what">the flags as a C# class</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="fflags-txt.html">
+            <span class="hub__name">FFlags.txt</span>
+            <span class="hub__what">the flags as plain text</span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
-      <section class="hub__group" aria-labelledby="hub-types">
-        <h2 class="hub__title" id="hub-types">types and structs</h2>
-        <p class="hub__note">What the dumper found in the binary, laid out the way it is laid out in memory.</p>
-        <ul class="hub__list">
-          <li>
-            <a class="hub__row" href="types.html">
-              <span class="hub__name">types.html</span>
-              <span class="hub__what">types with the fields they hold</span>
-              <span class="hub__tag">page</span>
-            </a>
-          </li>
-          <li>
-            <a class="hub__row" href="struct.html">
-              <span class="hub__name">Struct.hpp</span>
-              <span class="hub__what">struct layouts straight from the dumper</span>
-              <span class="hub__tag">hpp</span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </div>
+    <section class="hub__group" aria-labelledby="hub-types">
+      <h2 class="hub__title" id="hub-types">types and structs</h2>
+      <p class="hub__note">What the dumper found in the binary, laid out the way it sits in memory.</p>
+      <p class="hub__sample"><span class="hub__sample-name">AnimationTrack.Looped</span> <span class="hub__sample-eq">=</span> <span class="hub__sample-hex">0xcc</span></p>
+      <ul class="hub__list">
+        <li>
+          <a class="hub__row" href="types.html">
+            <span class="hub__name">types</span>
+            <span class="hub__what">types with the fields each one holds</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub__row" href="struct.html">
+            <span class="hub__name">Struct.hpp</span>
+            <span class="hub__what">struct layouts straight from the dumper</span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
-    <p class="hub__raw">
-      <span>raw files</span>
-      <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>
-      <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>
-      <a href="Types.json" target="_blank" rel="noopener">Types.json</a>
-    </p>
+    <p class="hub__raw">the raw files are here too: <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>, <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>, <a href="Types.json" target="_blank" rel="noopener">Types.json</a></p>
   </main>
 
   <script src="backdrop.js?v=9"></script>
+  <script>
+    /* the count is read off the page itself, so it cannot drift from the list */
+    const rows = document.querySelectorAll('.hub__row').length;
+    document.getElementById('meta').textContent = rows + ' pages';
+  </script>
 </body>
 </html>
