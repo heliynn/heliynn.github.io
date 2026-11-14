@@ -523,21 +523,38 @@
     .catch(() => { /* no data: the clock still gives the bars a shape */ });
 
   /* the frame of the song at this second, spread across however many bars
-     are on screen */
+     are on screen. Neighbouring frames are blended: the data is measured ten
+     times a second, and handing the bars a step function is what made them
+     jump */
   const spectrumAt = (time) => {
     const frames = Math.floor(song.data.length / song.bands);
-    const at = Math.min(frames - 1, Math.max(0, Math.floor(time * song.fps)));
-    const base = at * song.bands;
-    return bars.map((bar, index) => {
-      const pos = bars.length > 1 ? index / (bars.length - 1) * (song.bands - 1) : 0;
+    const exact = Math.min(frames - 1, Math.max(0, time * song.fps));
+    const index = Math.floor(exact);
+    const next = Math.min(frames - 1, index + 1);
+    const blend = exact - index;
+    const bands = song.bands;
+    const here = index * bands;
+    const there = next * bands;
+
+    return bars.map((bar, i) => {
+      const pos = bars.length > 1 ? i / (bars.length - 1) * (bands - 1) : 0;
       const lower = Math.floor(pos);
-      const upper = Math.min(song.bands - 1, lower + 1);
-      const value = song.data[base + lower];
-      return (value + (song.data[base + upper] - value) * (pos - lower)) / 255;
+      const upper = Math.min(bands - 1, lower + 1);
+      const frac = pos - lower;
+      const now = song.data[here + lower] + (song.data[here + upper] - song.data[here + lower]) * frac;
+      const later = song.data[there + lower] + (song.data[there + upper] - song.data[there + lower]) * frac;
+      return (now + (later - now) * blend) / 255;
     });
   };
   const bars = Array.from(viz.querySelectorAll('span'));
   const levels = bars.map(() => 0);
+  let lastPaint = 0;
+
+  /* easing in seconds, not in frames: a hit arrives in about 60 ms and the
+     tail takes three times as long to fall, which is most of what separates a
+     meter that reacts from one that twitches */
+  const ATTACK = .06;
+  const RELEASE = .18;
 
   /* the last few seconds behind the bars: bass at the bottom, treble at the
      top, a scrolling field of faint dots small enough to read as texture
@@ -745,6 +762,12 @@
 
       const time = audio.currentTime;
 
+      const stamp = performance.now();
+      /* a clock that stands still or goes backwards, which happens on some
+         restores, would make the step negative and the easing explode */
+      const step = lastPaint ? Math.min(.25, Math.max(.001, (stamp - lastPaint) / 1000)) : .016;
+      lastPaint = stamp;
+
       const spectrum = song ? spectrumAt(audio.currentTime) : null;
       bars.forEach((bar, i) => {
         if (spectrum) {
@@ -752,8 +775,9 @@
              of being stretched to full height like a relative meter would */
           const level = Math.pow(spectrum[i], 1.5);
           const target = Math.min(1, level * (.9 + (i / bars.length) * .45));
-          levels[i] += (target - levels[i]) * .35;
-          bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
+          const ease = 1 - Math.exp(-step / (target > levels[i] ? ATTACK : RELEASE));
+          levels[i] = Math.min(1, Math.max(0, levels[i] + (target - levels[i]) * ease));
+          bar.style.height = (3 + levels[i] * 26).toFixed(2) + 'px';
           return;
         }
         /* no spectrum yet: the clock still gives a shape to ride */
@@ -761,7 +785,7 @@
           + Math.sin(time * .7 + i * 2.3) * .5;
         const shape = Math.max(0, 1 - Math.abs(i / bars.length - .3) * 1.1);
         const target = Math.max(0, Math.min(1, (.42 + sway * .26) * shape));
-        levels[i] += (target - levels[i]) * .16;
+        levels[i] = Math.min(1, Math.max(0, levels[i] + (target - levels[i]) * (1 - Math.exp(-step / RELEASE))));
         bar.style.height = (3 + levels[i] * 26).toFixed(1) + 'px';
       });
     } finally {
