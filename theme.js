@@ -15,12 +15,15 @@
      asleep in a wizard hat with its head small and low in the corner, so one
      set of numbers cannot fit both. The tilt goes with the head, not the hat */
   const HAT_SPOTS = {
-    'chomusuke-1': { left: .36, top: .06, width: .34, tilt: -10 },
-    /* measured off the picture: that head spans x .245-.46 with its crown at
-       y .445 and the shut eyes at y .645, so the trim has to land near .47 */
+    /* measured off the picture. The upright cat: ears at x .17 and .68, crown
+       running .27-.60 at y .16-.19, eyes at y .30-.34, so its trim lands at
+       .24 over a head centred on .43 */
+    'chomusuke-1': { left: .28, top: -.11, width: .45, tilt: -9 },
+    /* The sleeping cat: head spans x .245-.46 with its crown at y .445 and the
+       shut eyes at y .645, so its trim lands at .47, centred on .35 */
     'chomusuke-2': { left: .25, top: .22, width: .25, tilt: -8 }
   };
-  const HAT_FALLBACK = { left: .36, top: .06, width: .34, tilt: -10 };
+  const HAT_FALLBACK = { left: .28, top: -.11, width: .45, tilt: -9 };
 
   const HAT = '<svg viewBox="0 0 72 56" aria-hidden="true" focusable="false">'
     + '<path d="M9 45C16 26 32 9 49 5c-2 12-5 26 3 35z" fill="#bf1f27" />'
