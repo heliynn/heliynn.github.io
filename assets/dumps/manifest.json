@@ -17,5 +17,34 @@
       "struct": "Struct.hpp"
     }
   },
-  "builds": []
+  "builds": [
+    {
+      "version": "version-4ea8e85481e34f46",
+      "dumper": "2.2.6",
+      "dumped": "23:01 13/11/2026",
+      "path": "version-4ea8e85481e34f46/",
+      "files": {
+        "offsets": "offsets.json",
+        "offsets.txt": "offsets.txt",
+        "offsets.cs": "offsets.cs",
+        "offsets.hpp": "offsets.hpp",
+        "fflags": "fflags.json",
+        "fflags.txt": "fflags.txt",
+        "fflags.cs": "fflags.cs",
+        "fflags.hpp": "fflags.hpp"
+      },
+      "pages": {
+        "offsets": "offsets.html",
+        "offsets.json": "offsets-json.html",
+        "offsets.txt": "offsets-txt.html",
+        "offsets.cs": "offsets-cs.html",
+        "offsets.hpp": "offsets-hpp.html",
+        "fflags": "fflags.html",
+        "fflags.json": "fflags-json.html",
+        "fflags.txt": "fflags-txt.html",
+        "fflags.cs": "fflags-cs.html",
+        "fflags.hpp": "fflags-hpp.html"
+      }
+    }
+  ]
 }

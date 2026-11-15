@@ -26,7 +26,12 @@ const problems = [];
 const fail = (message) => problems.push(message);
 
 const files = readdirSync('.').filter((name) => !name.startsWith('.'));
-const pages = files.filter((name) => name.endsWith('.html'));
+/* archived builds keep their own pages under version-<id>/, and they are part
+   of the site: one pointing at a renamed asset is just as broken as a root page */
+const archived = files.filter((name) => /^version-[A-Za-z0-9_-]+$/.test(name) && statSync(name).isDirectory());
+const pages = files.filter((name) => name.endsWith('.html'))
+  .concat(archived
+    .flatMap((dir) => readdirSync(dir).filter((name) => name.endsWith('.html')).map((name) => dir + '/' + name)));
 const scripts = files.filter((name) => name.endsWith('.js'));
 const sheets = files.filter((name) => name.endsWith('.css'));
 
@@ -55,11 +60,18 @@ for (const name of sheets) {
 }
 
 /* ---------- every local link and asset exists ---------- */
-const localPath = (ref) => {
+const localPath = (page, ref) => {
   const clean = ref.split('#')[0].split('?')[0];
   if (!clean || clean.startsWith('http') || clean.startsWith('//') || clean.startsWith('mailto:')) return null;
-  if (clean.startsWith('/')) return clean.slice(1) || 'index.html';
-  return clean;
+  /* ../ resolved the way the browser does it, so a page inside version-<id>/
+     can reach the shared files and the check still knows where that lands */
+  const folder = page.includes('/') ? page.slice(0, page.indexOf('/')) + '/' : '';
+  const parts = [];
+  for (const piece of (clean.startsWith('/') ? clean.slice(1) : folder + clean).split('/')) {
+    if (piece === '..') parts.pop();
+    else if (piece && piece !== '.') parts.push(piece);
+  }
+  return parts.join('/') || 'index.html';
 };
 
 const referenced = new Map(); /* path -> the page that wants it */
@@ -67,7 +79,7 @@ const referenced = new Map(); /* path -> the page that wants it */
 for (const page of pages) {
   const html = readFileSync(page, 'utf8');
   for (const match of html.matchAll(/(?<![-\w])(?:href|src)="([^"]+)"/g)) {
-    const path = localPath(match[1]);
+    const path = localPath(page, match[1]);
     if (!path || path === '404.html') continue;
     if (!referenced.has(path)) referenced.set(path, page);
     const onDisk = path || 'index.html';
@@ -92,7 +104,7 @@ if (base) {
     }
     const html = await response.text();
     for (const match of html.matchAll(/(?<![-\w])(?:href|src)="([^"]+)"/g)) {
-      const path = localPath(match[1]);
+      const path = localPath(page, match[1]);
       if (!path) continue;
       const assetUrl = `${base}/${path}`;
       const asset = await get(assetUrl).catch(() => null);

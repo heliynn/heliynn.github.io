@@ -191,22 +191,47 @@
           const row = document.createElement('div');
           row.className = 'hub__row hub__row--plain';
 
-          const name = document.createElement('span');
+          const base = build.path || './';
+          const pages = build.pages || {};
+
+          const name = document.createElement('a');
           name.className = 'hub__name';
+          name.href = base + (pages.offsets || 'offsets.html');
           name.textContent = build.version;
 
           const what = document.createElement('span');
           what.className = 'hub__what';
-          what.append('dumper ' + build.dumper + ' · dumped ' + build.dumped + ' · ');
+          what.append('dumper ' + build.dumper + ' · dumped ' + build.dumped);
 
-          Object.entries(build.files || {}).forEach(([kind, file], index) => {
-            if (index) what.append(' · ');
-            const link = document.createElement('a');
-            link.href = (build.path || './') + file;
-            link.download = file;
-            link.textContent = kind;
-            what.append(link);
-          });
+          /* each build opens in every format it was dumped in. The links go to
+             the pages, which carry the copy and download buttons, not at the
+             files: a .cs or a .hpp downloads instead of opening */
+          for (const family of ['offsets', 'fflags']) {
+            if (!pages[family]) continue;
+            what.append(' · ' + family + ' ');
+            const formats = [['html', pages[family]]].concat(['json', 'txt', 'cs', 'hpp']
+              .filter((ext) => pages[family + '.' + ext])
+              .map((ext) => [ext, pages[family + '.' + ext]]));
+            formats.forEach(([label, file], index) => {
+              if (index) what.append(' ');
+              const link = document.createElement('a');
+              link.href = base + file;
+              link.textContent = label;
+              what.append(link);
+            });
+          }
+
+          /* a build with no pages of its own is still reachable by its files */
+          if (!pages.offsets) {
+            for (const [kind, file] of Object.entries(build.files || {})) {
+              what.append(' · ');
+              const link = document.createElement('a');
+              link.href = base + file;
+              link.download = file;
+              link.textContent = kind;
+              what.append(link);
+            }
+          }
 
           row.append(name, what);
           const cell = document.createElement('li');

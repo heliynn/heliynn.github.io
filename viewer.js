@@ -337,7 +337,11 @@
       state.lines = raw.split(/\r?\n/).map((text, i) => ({ number: i + 1, text }));
       state.total = state.lines.length;
       if (meta) {
-        const build = await readManifest();
+        /* an archived page states the build it was dumped from; a live page has
+           to ask the manifest, which is the only thing that knows */
+        const build = body.dataset.build
+          ? { version: body.dataset.build, dumped: body.dataset.dumped || '?' }
+          : await readManifest();
         meta.textContent = build
           ? [build.version, state.lines.length.toLocaleString() + ' lines', 'dumped ' + build.dumped].join(' · ')
           : used + ' · ' + state.lines.length + ' lines';
