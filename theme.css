@@ -113,13 +113,13 @@ html[data-theme="xmas"] .pill__play:hover:not(:disabled) {
   right: clamp(8px, 2.4vw, 28px);
   bottom: 0;
   z-index: 0;
-  height: clamp(132px, 26vh, 240px);
+  height: clamp(330px, 65vh, 600px);
   pointer-events: none;
   opacity: 0;
   transition: opacity .5s var(--ease, ease);
 }
 
-html[data-theme="xmas"] .xmas-tree { opacity: .8; }
+html[data-theme="xmas"] .xmas-tree { opacity: .5; }
 
 body:has(.pill) .xmas-tree { bottom: 96px; }
 
@@ -137,7 +137,7 @@ body:has(.pill) .xmas-tree { bottom: 96px; }
   width: 0;
   pointer-events: none;
   opacity: 0;
-  transform: rotate(-12deg);
+  transform: rotate(var(--hat-tilt, -12deg));
   transform-origin: 50% 90%;
   transition: opacity .35s var(--ease, ease);
 }

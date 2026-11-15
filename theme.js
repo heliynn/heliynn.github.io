@@ -11,13 +11,14 @@
   const root = document.documentElement;
 
   /* where a hat sits on each mascot, as fractions of the picture as drawn:
-     the first cat is sitting upright, the second is asleep in a wizard hat
-     with its head down in the corner, so one set of numbers cannot fit both */
+     the first cat sits upright and fills most of its frame, the second is
+     asleep in a wizard hat with its head small and low in the corner, so one
+     set of numbers cannot fit both. The tilt goes with the head, not the hat */
   const HAT_SPOTS = {
-    'chomusuke-1': { left: .18, top: .04, width: .42 },
-    'chomusuke-2': { left: .23, top: .14, width: .25 }
+    'chomusuke-1': { left: .36, top: .06, width: .34, tilt: -10 },
+    'chomusuke-2': { left: .14, top: .52, width: .30, tilt: -8 }
   };
-  const HAT_FALLBACK = { left: .18, top: .04, width: .42 };
+  const HAT_FALLBACK = { left: .36, top: .06, width: .34, tilt: -10 };
 
   const HAT = '<svg viewBox="0 0 72 56" aria-hidden="true" focusable="false">'
     + '<path d="M9 45C16 26 32 9 49 5c-2 12-5 26 3 35z" fill="#bf1f27" />'
@@ -106,8 +107,11 @@
     const originX = box.left + (box.width - drawnW) / 2;
     const originY = box.top + (box.height - drawnH) / 2;
 
-    const spot = spotFor(mascot.currentSrc || mascot.src);
+    /* the src attribute, not currentSrc: currentSrc still reports the old
+       picture for a moment after a swap, which put the wrong hat on the cat */
+    const spot = spotFor(mascot.getAttribute('src') || mascot.src);
     hat.style.width = Math.round(drawnW * spot.width) + 'px';
+    hat.style.setProperty('--hat-tilt', spot.tilt + 'deg');
     hat.style.left = Math.round(originX + drawnW * spot.left) + 'px';
     hat.style.top = Math.round(originY + drawnH * spot.top) + 'px';
   };
@@ -126,6 +130,13 @@
     if (!chasing) chasing = requestAnimationFrame(chase);
   };
 
+  /* place the hat at once, then chase the transition the drag starts: the
+     immediate pass is what makes it right on the first frame */
+  const kick = () => {
+    sync();
+    follow();
+  };
+
   /* script.js mounts the mascot after this runs, so wait for it to appear
      instead of assuming it is on every page */
   const watch = () => {
@@ -133,12 +144,12 @@
     mascot = document.querySelector('.mascot');
     if (!mascot) return;
     if (watcher) watcher.disconnect();
-    watcher = new MutationObserver(follow);
+    watcher = new MutationObserver(kick);
     watcher.observe(mascot, { attributes: true, attributeFilter: ['style', 'class', 'src'] });
     /* the picture can still be decoding when the element appears, and then
        there is no box to measure: place the hat again once it has a size */
-    mascot.addEventListener('load', follow);
-    follow();
+    mascot.addEventListener('load', kick);
+    kick();
   };
 
   new MutationObserver(watch).observe(document.body, { childList: true });
@@ -149,7 +160,7 @@
     button.setAttribute('aria-pressed', String(on));
     if (remember) save(on ? 'xmas' : '');
     watch();
-    follow();
+    kick();
     document.dispatchEvent(new CustomEvent('themechange', { detail: { on } }));
   };
 
@@ -160,7 +171,7 @@
   if (asked) save(on ? 'xmas' : '');
 
   button.addEventListener('click', () => apply(!root.dataset.theme, true));
-  addEventListener('resize', follow);
+  addEventListener('resize', kick);
 
   addEventListener('keydown', (event) => {
     if (event.key !== 't' && event.key !== 'T') return;
