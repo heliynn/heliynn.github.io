@@ -111,7 +111,7 @@ const stamps = {
 const tableTemplate = read('tools/version/table.html');
 const textTemplate = read('tools/version/text.html');
 
-const fill = (template, tokens) => template.replace(/%%[A-Z_]+%%/g, (name) => (name in tokens ? tokens[name] : name));
+const fill = (template, tokens) => template.replace(/%%[A-Z0-9_]+%%/g, (name) => (name in tokens ? tokens[name] : name));
 
 const LEDE = {
   json: 'The whole dump as json, every field as the dumper wrote it.',
@@ -147,7 +147,7 @@ const chips = (family, format, hasPage) => {
 const stampLine = (family) => '    <p class="status">'
   + '<strong>' + esc(versionLabel) + '</strong> · dumped ' + esc(dumped)
   + ' · <a href="../' + family + '.html">newest build</a>'
-  + ' · <a href="../dumps.html#builds">all builds</a></p>';
+  + ' · <a href="../versions.html">all builds</a></p>';
 
 const tablePage = (family) => fill(tableTemplate, {
   ...stamps,

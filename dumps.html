@@ -153,12 +153,6 @@
       </ul>
     </section>
 
-    <section class="hub__group" id="builds" aria-labelledby="hub-builds" hidden>
-      <h2 class="hub__title" id="hub-builds">builds</h2>
-      <p class="hub__note">Older dumps, kept so you can look up what a value used to be in the build you were on.</p>
-      <ul class="hub__list" id="buildList"></ul>
-    </section>
-
     <p class="hub__raw">the raw json is here too, if you would rather parse it yourself: <a href="offsets.json" target="_blank" rel="noopener">offsets.json</a>, <a href="FFlags.json" target="_blank" rel="noopener">FFlags.json</a>, <a href="Types.json" target="_blank" rel="noopener">Types.json</a></p>
   </main>
 
@@ -179,70 +173,14 @@
     };
     stamp(null);
 
-    /* builds come from the manifest, so a dumped build is added in one place */
+    /* the stamp comes from the manifest, which is the one place a build is
+       described. Older builds have their own page now, so nothing is listed here */
     fetch('assets/dumps/manifest.json')
       .then((response) => (response.ok ? response.json() : null))
       .then((manifest) => {
         if (manifest && manifest.live) stamp(manifest.live);
-        const builds = (manifest && manifest.builds) || [];
-        if (!builds.length) return;
-        const list = document.getElementById('buildList');
-
-        for (const build of builds) {
-          const row = document.createElement('div');
-          row.className = 'hub__row hub__row--plain';
-
-          const base = build.path || './';
-          const pages = build.pages || {};
-
-          const name = document.createElement('a');
-          name.className = 'hub__name';
-          name.href = base + (pages.offsets || 'offsets.html');
-          name.textContent = build.version;
-
-          const what = document.createElement('span');
-          what.className = 'hub__what';
-          what.append('dumper ' + build.dumper + ' · dumped ' + build.dumped);
-
-          /* each build opens in every format it was dumped in. The links go to
-             the pages, which carry the copy and download buttons, not at the
-             files: a .cs or a .hpp downloads instead of opening */
-          for (const family of ['offsets', 'fflags']) {
-            if (!pages[family]) continue;
-            what.append(' · ' + family + ' ');
-            const formats = [['html', pages[family]]].concat(['json', 'txt', 'cs', 'hpp']
-              .filter((ext) => pages[family + '.' + ext])
-              .map((ext) => [ext, pages[family + '.' + ext]]));
-            formats.forEach(([label, file], index) => {
-              if (index) what.append(' ');
-              const link = document.createElement('a');
-              link.href = base + file;
-              link.textContent = label;
-              what.append(link);
-            });
-          }
-
-          /* a build with no pages of its own is still reachable by its files */
-          if (!pages.offsets) {
-            for (const [kind, file] of Object.entries(build.files || {})) {
-              what.append(' · ');
-              const link = document.createElement('a');
-              link.href = base + file;
-              link.download = file;
-              link.textContent = kind;
-              what.append(link);
-            }
-          }
-
-          row.append(name, what);
-          const cell = document.createElement('li');
-          cell.append(row);
-          list.append(cell);
-        }
-
-        document.getElementById('builds').hidden = false;
       })
-      .catch(() => { /* the manifest is a nicety, the list above still works */ });
+      .catch(() => { /* the pages above still work without it */ });
   </script>
 </body>
 </html>
