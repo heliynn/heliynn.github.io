@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>versions · heliynn</title>
+  <meta name="description" content="Every dump this site still holds, newest first, in each format it was dumped in." />
+  <meta name="theme-color" content="#0a0a0c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="versions · heliynn" />
+  <meta property="og:description" content="Every dump this site still holds, newest first, in each format it was dumped in." />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="offsets.css?v=5" />
+  <link rel="stylesheet" href="theme.css?v=9" />
+</head>
+<body data-kind="index" data-title="versions">
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="top">
+      <a class="back" href="index.html">← servyy</a>
+      <nav class="top__tools" aria-label="Tools">
+        <a href="dumps.html">dumps</a>
+        <a href="diff.html">diff</a>
+        <a href="versions.html" aria-current="page">versions</a>
+      </nav>
+      <div class="top__right">
+        <nav class="top__links" aria-label="Dumps">
+          <a href="offsets.html">offsets</a>
+          <a href="fflags.html">fflags</a>
+          <a href="types.html">types</a>
+          <a href="struct.html">struct</a>
+        </nav>
+        <span class="top__meta" id="meta">loading…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page hub">
+    <section class="head">
+      <h1>versions</h1>
+      <p class="lede">Every dump the site still holds, newest first. Each one keeps all the formats it was dumped in, so a value you wrote down months ago is still somewhere you can look it up.</p>
+    </section>
+
+    <p class="status" id="status" role="status" aria-live="polite">reading the build list…</p>
+
+    <ol class="versions" id="builds"></ol>
+
+    <noscript>
+      <p class="status">This list needs JavaScript. The newest files are on <a href="dumps.html">dumps</a>.</p>
+    </noscript>
+  </main>
+
+  <script src="theme.js?v=11"></script>
+  <script src="backdrop.js?v=10"></script>
+  <script>
+    (() => {
+      const status = document.getElementById('status');
+      const list = document.getElementById('builds');
+      const meta = document.getElementById('meta');
+
+      const FAMILIES = ['offsets', 'fflags'];
+      const EXTS = ['json', 'txt', 'cs', 'hpp'];
+
+      /* the newest build lives at the top level rather than in a folder, so its
+         pages are written out here instead of being read off the manifest */
+      const livePages = (build) => {
+        const files = build.files || {};
+        const pages = {};
+        for (const family of FAMILIES) {
+          if (!files[family]) continue;
+          pages[family] = family + '.html';
+          for (const ext of EXTS) pages[family + '.' + ext] = family + '-' + ext + '.html';
+        }
+        return pages;
+      };
+
+      const formats = (host, base, pages, family) => {
+        const kind = document.createElement('span');
+        kind.className = 'versions__kind';
+        kind.textContent = family;
+        host.append(kind, ' ');
+
+        const rows = [['table', pages[family]]].concat(EXTS
+          .filter((ext) => pages[family + '.' + ext])
+          .map((ext) => [ext, pages[family + '.' + ext]]));
+
+        rows.forEach(([label, file], index) => {
+          if (index) host.append(' ');
+          const link = document.createElement('a');
+          link.href = base + file;
+          link.textContent = label;
+          host.append(link);
+        });
+      };
+
+      /* the live build's pages sit at the top level, so they get no prefix at
+         all rather than a ./ that reads like a folder */
+      const baseOf = (build) => {
+        const path = build.path || './';
+        return path === './' ? '' : path;
+      };
+
+      const row = (build, isNewest) => {
+        const base = baseOf(build);
+        const pages = isNewest ? livePages(build) : (build.pages || {});
+
+        const cell = document.createElement('li');
+        const line = document.createElement('div');
+        line.className = 'versions__row';
+
+        const id = document.createElement('a');
+        id.className = 'versions__id';
+        id.href = base + (pages.offsets || 'offsets.html');
+        id.textContent = build.version;
+
+        const what = document.createElement('span');
+
+        /* the order already says which is newest, so this word is a state, not
+           decoration: it warns you before diffing a build against itself */
+        const when = document.createElement('span');
+        when.className = 'versions__when';
+        if (isNewest) {
+          const mark = document.createElement('span');
+          mark.className = 'versions__mark';
+          mark.textContent = 'newest';
+          when.append(mark, ' · ');
+        }
+        when.append('dumper ' + build.dumper + ' · dumped ' + build.dumped);
+
+        const links = document.createElement('span');
+        links.className = 'versions__formats';
+        FAMILIES.forEach((family, index) => {
+          if (!pages[family]) return;
+          if (index && links.childNodes.length) links.append(' · ');
+          formats(links, base, pages, family);
+        });
+
+        what.append(when, links);
+        line.append(id, what);
+        cell.append(line);
+        return cell;
+      };
+
+      const show = (rows) => {
+        list.replaceChildren(...rows);
+        const count = rows.length + (rows.length === 1 ? ' build' : ' builds');
+        meta.textContent = count;
+        meta.title = count;
+        status.textContent = '';
+      };
+
+      fetch('assets/dumps/manifest.json')
+        .then((response) => (response.ok ? response.json() : null))
+        .then((manifest) => {
+          if (!manifest) throw new Error('no manifest');
+
+          const live = manifest.live;
+          /* the live build is also archived, so drop it from the older list
+             rather than printing the same version twice */
+          const older = (manifest.builds || []).filter((build) => !live || build.version !== live.version);
+
+          const rows = [];
+          if (live) rows.push(row({ ...live, pages: livePages(live) }, true));
+          for (const build of older) rows.push(row(build, false));
+
+          if (!rows.length) {
+            status.textContent = 'Nothing is archived yet. The files at the top level are the only build.';
+            meta.textContent = 'no builds';
+            return;
+          }
+          show(rows);
+        })
+        .catch(() => {
+          status.textContent = 'The build list did not load. The newest files are still on dumps.';
+          status.append(' ');
+          const fallback = document.createElement('a');
+          fallback.href = 'dumps.html';
+          fallback.textContent = 'open dumps';
+          status.append(fallback);
+        });
+    })();
+  </script>
+</body>
+</html>

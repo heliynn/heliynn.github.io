@@ -586,6 +586,65 @@ button.btn {
 .hub__raw a { color: var(--ink-soft); text-decoration: none; }
 .hub__raw a:hover { color: #fff; text-decoration: underline; }
 
+/* the history: one row per build, newest first. The order is the information,
+   so there is no "latest" panel and no cards: the eye reads down the versions
+   until it finds the one it wants */
+.versions {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.versions li { border-bottom: 1px solid var(--line); }
+
+.versions__row {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 2px 20px;
+  padding: 14px 0;
+  align-items: baseline;
+}
+
+/* the id is a hex string people paste into a diff or a URL, so it is set in
+   the same mono the values themselves use */
+.versions__id {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.versions__id:hover,
+.versions__id:focus-visible { color: #fff; text-decoration: underline; }
+
+.versions__when,
+.versions__formats {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.versions__when { color: var(--ink-soft); }
+.versions__formats { color: var(--ink-soft); text-wrap: pretty; }
+
+/* the build you are actually on: worth saying before anyone diffs it against itself */
+.versions__mark { color: var(--accent); }
+
+.versions__kind { color: var(--muted); }
+
+.versions__formats a { color: var(--ink-soft); text-decoration: none; }
+.versions__formats a:hover,
+.versions__formats a:focus-visible { color: #fff; text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .versions__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
 @media (max-width: 640px) {
   .hub { padding: 24px 16px 28px; }
   .hub__row {
