@@ -119,7 +119,10 @@ html[data-theme="xmas"] .pill__play:hover:not(:disabled) {
   transition: opacity .5s var(--ease, ease);
 }
 
-html[data-theme="xmas"] .xmas-tree { opacity: .5; }
+html[data-theme="xmas"] .xmas-tree {
+  opacity: .45;
+  filter: brightness(.6) saturate(.85);
+}
 
 body:has(.pill) .xmas-tree { bottom: 96px; }
 

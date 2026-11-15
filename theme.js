@@ -16,7 +16,9 @@
      set of numbers cannot fit both. The tilt goes with the head, not the hat */
   const HAT_SPOTS = {
     'chomusuke-1': { left: .36, top: .06, width: .34, tilt: -10 },
-    'chomusuke-2': { left: .14, top: .52, width: .30, tilt: -8 }
+    /* measured off the picture: that head spans x .245-.46 with its crown at
+       y .445 and the shut eyes at y .645, so the trim has to land near .47 */
+    'chomusuke-2': { left: .25, top: .22, width: .25, tilt: -8 }
   };
   const HAT_FALLBACK = { left: .36, top: .06, width: .34, tilt: -10 };
 
