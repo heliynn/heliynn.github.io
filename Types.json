@@ -1,9 +1,7 @@
 {
-    "Roblox Version": "version-4ea8e85481e34f46",
+    "Roblox Version": "version-2c6fd5e09aaf4cfa",
     "Dumper Version": "2.2.6",
-    "Dumped At": "23:01 13/11/2026",
-    "Source Code": "https://servfur.github.io",
-    "Discord": "https://servfur.github.io",
+    "Dumped At": "18:52 17/11/2026",
     "Types": {
         "TaskScheduler": {
             "Pointer": "unsigned __int64",
@@ -32,7 +30,6 @@
         "ModuleScript": {
             "IsCoreScript": "bool",
             "GUID": "string",
-            "Hash": "string",
             "ByteCode": "unsigned __int64"
         },
         "Instance": {
@@ -45,6 +42,7 @@
             "ClassDescriptor": "unsigned __int64",
             "ClassName": "string",
             "ClassBase": "unsigned __int64",
+            "GetAttribute": "unsigned __int64",
             "SetParent": "unsigned __int64"
         },
         "Misc": {
@@ -194,12 +192,12 @@
             "ModelInstance": "unsigned __int64",
             "Team": "unsigned __int64",
             "TeamColor": "int",
+            "LocaleId": "string",
             "AccountAge": "int",
             "MinZoomDistance": "float",
             "MaxZoomDistance": "float",
             "CameraMode": "int",
-            "Mouse": "unsigned __int64",
-            "LocaleId": "unknown"
+            "Mouse": "unsigned __int64"
         },
         "Team": {
             "BrickColor": "int"
@@ -235,9 +233,9 @@
             "IsWalking": "bool",
             "MoveToPoint": "Vector3",
             "MoveToPart": "unsigned __int64",
-            "WalkTimer": "double",
             "HumanoidState": "unsigned __int64",
             "HumanoidStateID": "int",
+            "FloorMaterial": "int",
             "TargetPoint": "Vector3",
             "HipHeight": "unknown",
             "RigType": "unknown",
@@ -258,8 +256,8 @@
             "Tooltip": "string",
             "TextureId": "string",
             "Grip": "Vector3",
-            "Enabled": "bool",
             "CanBeDropped": "bool",
+            "Enabled": "bool",
             "ManualActivationOnly": "bool",
             "RequiresHandle": "bool",
             "Activate": "unsigned __int64",
@@ -347,7 +345,8 @@
         "MouseService": {
             "InputObject": "unsigned __int64",
             "InputObject2": "unsigned __int64",
-            "MousePosition": "Vector2"
+            "MousePosition": "Vector2",
+            "Sensitivity": "float"
         },
         "PlayerMouse": {
             "Workspace": "unsigned __int64",
@@ -356,7 +355,6 @@
         "GuiObject": {
             "Position": "UDim2",
             "Size": "UDim2",
-            "Visible": "bool",
             "Image": "string",
             "Text": "string",
             "RichText": "string",
@@ -369,7 +367,18 @@
             "Rotation": "float",
             "BorderSizePixel": "int",
             "SelectionOrder": "int",
-            "ImageRectOffset": "unknown"
+            "Active": "bool",
+            "Selectable": "bool",
+            "ClipsDescendants": "bool",
+            "Interactable": "bool",
+            "AnchorPoint": "Vector2",
+            "AutomaticSize": "int",
+            "BorderMode": "int",
+            "Visible": "bool",
+            "ScreenGui_Enabled": "bool",
+            "ImageRectOffset": "unknown",
+            "GuiState": "unknown",
+            "SizeConstraint": "unknown"
         },
         "GuiBase2D": {
             "AbsoluteSize": "float",
@@ -392,25 +401,56 @@
             "TextStrokeColor3": "Color3",
             "TextStrokeTransparency": "float",
             "TextTransparency": "float",
+            "RichText": "bool",
+            "TextScaled": "bool",
+            "TextDirection": "int",
+            "LineHeight": "float",
+            "MaxVisibleGraphemes": "unknown",
             "TextXAlignment": "unknown",
-            "TextTruncate": "unknown"
+            "TextTruncate": "unknown",
+            "ContentText": "unknown",
+            "LocalizedText": "unknown",
+            "TextSize": "unknown",
+            "Text": "unknown",
+            "TextWrapped": "unknown"
         },
         "TextButton": {
             "TextColor3": "Color3",
             "TextStrokeColor3": "Color3",
             "TextStrokeTransparency": "float",
             "TextTransparency": "float",
-            "Selected": "unknown"
+            "AutoButtonColor": "bool",
+            "Modal": "bool",
+            "LineHeight": "float",
+            "MaxVisibleGraphemes": "int",
+            "RichText": "unknown",
+            "TextScaled": "unknown",
+            "TextDirection": "unknown",
+            "Selected": "unknown",
+            "ContentText": "unknown",
+            "LocalizedText": "unknown",
+            "TextSize": "unknown",
+            "Text": "unknown",
+            "TextTruncate": "unknown",
+            "TextWrapped": "unknown",
+            "TextXAlignment": "unknown",
+            "TextYAlignment": "unknown"
         },
         "Highlight": {
             "FillColor": "Color3",
-            "Adornee": "unsigned __int64"
+            "Adornee": "unsigned __int64",
+            "FillTransparency": "float",
+            "OutlineTransparency": "float",
+            "OutlineColor": "Color3",
+            "DepthMode": "unknown",
+            "Enabled": "unknown"
         },
         "Weld": {
             "Part0": "unsigned __int64",
             "Part1": "unsigned __int64"
         },
         "Lighting": {
+            "ShadowSoftness": "float",
             "ClockTime": "float",
             "Brightness": "float",
             "EnvironmentDiffuseScale": "float",
@@ -431,8 +471,7 @@
             "GlobalShadows": "bool",
             "MoonPosition": "Vector3",
             "SunPosition": "Vector3",
-            "Source": "int",
-            "Sky": "unsigned __int64"
+            "Source": "int"
         },
         "Sky": {
             "SkyboxBk": "string",
@@ -447,8 +486,7 @@
             "MoonTextureId": "string",
             "SkyboxOrientation": "Vector3",
             "StarCount": "int",
-            "DrawAdv": "unsigned __int64",
-            "DrawCubeCallB": "unsigned __int64"
+            "DrawAdv": "unsigned __int64"
         },
         "Atmosphere": {
             "Density": "float",
@@ -498,7 +536,9 @@
             "KeyCode": "int",
             "GamepadKeyCode": "int",
             "Enabled": "bool",
-            "RequiresLineOfSight": "bool"
+            "RequiresLineOfSight": "bool",
+            "InputHoldBegin": "unsigned __int64",
+            "InputHoldEnd": "unsigned __int64"
         },
         "ClickDetector": {
             "MaxActivationDistance": "float",
@@ -551,12 +591,6 @@
             "SharedRowsRva": "unsigned __int64"
         },
         "Luau": {
-            "ClosureIsC": "bool",
-            "StateTop": "unsigned __int64",
-            "StateBase": "unsigned __int64",
-            "TValueSize": "unsigned __int64",
-            "StateGlobal": "unsigned __int64",
-            "StateCI": "unsigned __int64",
             "luaB_assert": "unsigned __int64",
             "luaB_error": "unsigned __int64",
             "luaB_gcinfo": "unsigned __int64",
@@ -575,43 +609,7 @@
             "luaB_tonumber": "unsigned __int64",
             "luaB_tostring": "unsigned __int64",
             "luaB_type": "unsigned __int64",
-            "luaB_typeof": "unsigned __int64",
-            "TValue_Value": "unsigned __int64",
-            "TValue_Tag": "unsigned __int64",
-            "TValue_Size": "unsigned __int64",
-            "TValue_TagNumber": "int",
-            "TValue_TagString": "int",
-            "TValue_TagTable": "int",
-            "TString_Tag": "unsigned __int64",
-            "TString_Length": "unsigned __int64",
-            "TString_Data": "unsigned __int64",
-            "TString_Hash": "unsigned __int64",
-            "Table_Tag": "unsigned __int64",
-            "Table_SizeArray": "unsigned __int64",
-            "Table_Array": "unsigned __int64",
-            "Table_NodeArray": "unsigned __int64",
-            "Table_lsizenode": "unsigned __int64"
-        },
-        "Closure": {
-            "isC": "bool"
-        },
-        "LuaState": {
-            "Global": "unsigned __int64",
-            "Ci": "unsigned __int64",
-            "Base": "unsigned __int64",
-            "Top": "unsigned __int64",
-            "Tt": "unsigned char",
-            "Stack": "unsigned __int64",
-            "StackLast": "unsigned __int64"
-        },
-        "lua_State": {
-            "Global": "unsigned __int64",
-            "Ci": "unsigned __int64",
-            "Base": "unsigned __int64",
-            "Top": "unsigned __int64",
-            "Tt": "unsigned char",
-            "Stack": "unsigned __int64",
-            "StackLast": "unsigned __int64"
+            "luaB_typeof": "unsigned __int64"
         },
         "LuaB": {
             "LuaBAssert": "unsigned __int64",
@@ -672,9 +670,6 @@
             "GlobalCollectGarbage": "unsigned __int64",
             "GlobalGetFenv": "unsigned __int64",
             "GlobalSetFenv": "unsigned __int64"
-        },
-        "ScriptContext": {
-            "VTable": "unsigned __int64"
         },
         "SmoothClusterGeometry": {
             "GridOld": "unsigned __int64",
@@ -817,7 +812,11 @@
             "AlphaByte": "unsigned __int64"
         },
         "Signals": {
-            "IsLegalSendEvent": "unsigned __int64"
+            "IsLegalSendEvent": "unsigned __int64",
+            "FireMouseClick": "unsigned __int64",
+            "FireRightMouseClick": "unsigned __int64",
+            "FireMouseHoverEnter": "unsigned __int64",
+            "FireMouseHoverLeave": "unsigned __int64"
         },
         "MeshData": {
             "VertexStart": "unsigned __int64",
@@ -836,6 +835,10 @@
             "BeginOffset": "unsigned __int64",
             "EndOffset": "unsigned __int64",
             "EntryStride": "unsigned __int64"
+        },
+        "Descriptor": {
+            "Name": "unknown",
+            "Invoke": "unknown"
         },
         "ByteCode": {
             "Pointer": "unsigned __int64",
@@ -861,6 +864,9 @@
         "RemoteFunction": {
             "InvokeServer": "unsigned __int64",
             "OnClientInvoke": "unsigned __int64"
+        },
+        "PlayerConfigurer": {
+            "Pointer": "unsigned __int64"
         },
         "RemoteSpy": {
             "RemoteEventVTableRva": "unsigned int"

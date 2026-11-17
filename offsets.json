@@ -1,20 +1,25 @@
 {
-    "Roblox Version": "version-4ea8e85481e34f46",
+    "Roblox Version": "version-2c6fd5e09aaf4cfa",
     "Dumper Version": "2.2.6",
-    "Dumped At": "23:01 13/11/2026",
-    "Source Code": "https://servfur.github.io",
-    "Discord": "https://servfur.github.io",
-    "Total Offsets": 702,
+    "Dumped At": "18:52 17/11/2026",
+    "Total Offsets": 658,
+    "Proved Zeros": [
+        "CachedItem.FileMeshData",
+        "FileMeshData.Vertices",
+        "MeshContentProvider.MeshData",
+        "MeshContentProvider.ToMeshData",
+        "MeshData.VertexStart"
+    ],
     "Offsets": {
         "TaskScheduler": {
-            "Pointer": 150070280,
+            "Pointer": 148528536,
             "JobStart": 200,
             "JobEnd": 208,
             "JobName": 24,
             "MaxFPS": 176
         },
         "VisualEngine": {
-            "Pointer": 144775176,
+            "Pointer": 143223704,
             "Dimensions": 2832,
             "ViewMatrix": 432,
             "RenderView": 3152,
@@ -27,13 +32,12 @@
             "EntityManager": 1984
         },
         "FakeDataModel": {
-            "Pointer": 150530408,
+            "Pointer": 148988776,
             "RealDataModel": 504
         },
         "ModuleScript": {
             "IsCoreScript": 147,
             "GUID": 184,
-            "Hash": 840,
             "ByteCode": 288
         },
         "Instance": {
@@ -45,9 +49,9 @@
             "Parent": 96,
             "ClassDescriptor": 24,
             "ClassName": 8,
-            "ClassBase": 432,
-            "SetParent": 30572128,
-            "GetAttribute": 30603872
+            "ClassBase": 440,
+            "GetAttribute": 29649584,
+            "SetParent": 29617216
         },
         "Misc": {
             "StringLength": 16,
@@ -129,13 +133,13 @@
         },
         "Sound": {
             "SoundId": 176,
-            "RollOffMaxDistance": 272,
-            "RollOffMinDistance": 276,
-            "PlaybackSpeed": 268,
-            "Volume": 288,
+            "RollOffMaxDistance": 256,
+            "RollOffMinDistance": 260,
+            "PlaybackSpeed": 252,
+            "Volume": 272,
             "SoundGroup": 208,
-            "IsPlaying": 304,
-            "Looped": 301
+            "IsPlaying": 280,
+            "Looped": 277
         },
         "SpawnLocation": {
             "Enabled": 473,
@@ -196,12 +200,12 @@
             "ModelInstance": 672,
             "Team": 736,
             "TeamColor": 952,
+            "LocaleId": 1856,
             "AccountAge": 868,
             "MinZoomDistance": 884,
             "MaxZoomDistance": 880,
             "CameraMode": 888,
-            "Mouse": 4592,
-            "LocaleId": 1856
+            "Mouse": 4728
         },
         "Team": {
             "BrickColor": 160
@@ -210,12 +214,12 @@
             "Health": 388,
             "MaxHealth": 416,
             "Walkspeed": 456,
-            "WalkspeedCheck": 932,
+            "WalkspeedCheck": 924,
             "JumpPower": 412,
             "JumpHeight": 408,
             "MaxSlopeAngle": 420,
             "SeatPart": 240,
-            "HumanoidRootPart": 1128,
+            "HumanoidRootPart": 1120,
             "CameraOffset": 272,
             "HealthDisplayDistance": 380,
             "NameDisplayDistance": 424,
@@ -225,27 +229,26 @@
             "DisplayName": 160,
             "MoveDirection": 308,
             "Jump": 468,
-            "Sit": 472,
-            "PlatformStand": 470,
-            "UseJumpPower": 474,
+            "Sit": 471,
+            "PlatformStand": 469,
+            "UseJumpPower": 473,
             "AutomaticScalingEnabled": 462,
             "BreakJointsOnDeath": 464,
             "EvaluateStateMachine": 465,
-            "RequiresNeck": 471,
+            "RequiresNeck": 470,
             "AutoJumpEnabled": 460,
             "AutoRotate": 461,
-            "IsWalking": 2630,
+            "IsWalking": 2622,
             "MoveToPoint": 344,
             "MoveToPart": 256,
-            "WalkTimer": 1008,
-            "HumanoidState": 2224,
+            "HumanoidState": 2216,
             "HumanoidStateID": 32,
-            "TargetPoint": 320,
+            "FloorMaterial": 376,
+            "TargetPoint": 11,
             "HipHeight": 392,
             "RigType": 440,
             "WalkToPoint": 344,
-            "PlatformStatePointer": 2224,
-            "FloorMaterial": 376
+            "PlatformStatePointer": 2216
         },
         "Seat": {
             "Occupant": 512
@@ -261,12 +264,12 @@
             "Tooltip": 1104,
             "TextureId": 840,
             "Grip": 1172,
-            "Enabled": 1185,
             "CanBeDropped": 1184,
+            "Enabled": 1185,
             "ManualActivationOnly": 1186,
             "RequiresHandle": 1187,
-            "Activate": 51062864,
-            "Deactivate": 51063040
+            "Activate": 49583520,
+            "Deactivate": 49583696
         },
         "Clothing": {
             "Template": 232,
@@ -303,15 +306,15 @@
         "Primitive": {
             "Position": 212,
             "Validate": 6,
-            "Owner": 536,
+            "Owner": 544,
             "Size": 452,
             "Rotation": 176,
             "Flags": 446,
-            "Material": 590,
+            "Material": 598,
             "AssemblyLinearVelocity": 224,
             "AssemblyAngularVelocity": 236,
             "Geometry": 528,
-            "MaterialType": 590
+            "MaterialType": 598
         },
         "PrimitiveFlags": {
             "Anchored": 2,
@@ -350,7 +353,8 @@
         "MouseService": {
             "InputObject": 232,
             "InputObject2": 248,
-            "MousePosition": 188
+            "MousePosition": 188,
+            "Sensitivity": 532
         },
         "PlayerMouse": {
             "Workspace": 312,
@@ -359,7 +363,6 @@
         "GuiObject": {
             "Position": 680,
             "Size": 712,
-            "Visible": 1824,
             "Image": 1648,
             "Text": 2608,
             "RichText": 1992,
@@ -372,17 +375,18 @@
             "Rotation": 208,
             "BorderSizePixel": 772,
             "SelectionOrder": 816,
-            "ImageRectOffset": 1988,
+            "Active": 832,
+            "Selectable": 836,
+            "ClipsDescendants": 833,
+            "Interactable": 835,
+            "AnchorPoint": 752,
+            "AutomaticSize": 760,
+            "BorderMode": 768,
+            "Visible": 837,
             "ScreenGui_Enabled": 608,
-            "Active": 1392,
-            "AnchorPoint": 1312,
-            "AutomaticSize": 1320,
-            "BorderMode": 1328,
-            "ClipsDescendants": 1393,
-            "GuiState": 1344,
-            "Interactable": 1395,
-            "Selectable": 1396,
-            "SizeConstraint": 1384
+            "ImageRectOffset": 1988,
+            "GuiState": 784,
+            "SizeConstraint": 824
         },
         "GuiBase2D": {
             "AbsoluteSize": 252,
@@ -405,44 +409,47 @@
             "TextStrokeColor3": 2796,
             "TextStrokeTransparency": 2824,
             "TextTransparency": 2828,
+            "RichText": 2845,
+            "TextScaled": 2847,
+            "TextDirection": 2816,
+            "LineHeight": 2808,
+            "MaxVisibleGraphemes": 2812,
             "TextXAlignment": 2836,
             "TextTruncate": 2832,
-            "ContentText": 3592,
-            "LineHeight": 3256,
-            "LocalizedText": 3688,
-            "RichText": 3829,
-            "TextDirection": 3416,
-            "TextScaled": 3831,
-            "TextSize": 3804,
-            "TextWrapped": 3832,
-            "TextYAlignment": 3824
+            "ContentText": 2608,
+            "LocalizedText": 2704,
+            "TextSize": 2820,
+            "Text": 2736,
+            "TextWrapped": 2848
         },
         "TextButton": {
             "TextColor3": 3424,
             "TextStrokeColor3": 3436,
             "TextStrokeTransparency": 3464,
             "TextTransparency": 3468,
+            "AutoButtonColor": 1708,
+            "Modal": 1709,
+            "LineHeight": 3448,
+            "MaxVisibleGraphemes": 3452,
+            "RichText": 3485,
+            "TextScaled": 3487,
+            "TextDirection": 3456,
             "Selected": 1710,
-            "AutoButtonColor": 2532,
-            "ContentText": 4232,
-            "LineHeight": 4432,
-            "LocalizedText": 4328,
-            "Modal": 2533,
-            "RichText": 4469,
-            "TextDirection": 4440,
-            "TextScaled": 4471,
-            "TextSize": 4444,
-            "TextTruncate": 4456,
-            "TextWrapped": 4472,
-            "TextXAlignment": 4460,
-            "TextYAlignment": 4464
+            "ContentText": 3248,
+            "LocalizedText": 3344,
+            "TextSize": 3460,
+            "Text": 3376,
+            "TextTruncate": 3472,
+            "TextWrapped": 3488,
+            "TextXAlignment": 3476,
+            "TextYAlignment": 3480
         },
         "Highlight": {
             "FillColor": 176,
             "Adornee": 160,
-            "OutlineColor": 188,
             "FillTransparency": 204,
             "OutlineTransparency": 212,
+            "OutlineColor": 188,
             "DepthMode": 200,
             "Enabled": 220
         },
@@ -451,6 +458,7 @@
             "Part1": 272
         },
         "Lighting": {
+            "ShadowSoftness": 296,
             "ClockTime": 176,
             "Brightness": 256,
             "EnvironmentDiffuseScale": 260,
@@ -464,16 +472,14 @@
             "ColorShift_Top": 208,
             "ExposureCompensation": 268,
             "GeographicLatitude": 284,
-            "LightColor": 324,
-            "GradientTop": 312,
-            "LightDirection": 336,
-            "GradientBottom": 376,
-            "GlobalShadows": 300,
-            "MoonPosition": 364,
-            "SunPosition": 352,
-            "Source": 348,
-            "Sky": 432,
-            "ShadowSoftness": 292
+            "LightColor": 332,
+            "GradientTop": 320,
+            "LightDirection": 344,
+            "GradientBottom": 384,
+            "GlobalShadows": 306,
+            "MoonPosition": 372,
+            "SunPosition": 360,
+            "Source": 356
         },
         "Sky": {
             "SkyboxBk": 224,
@@ -488,8 +494,7 @@
             "MoonTextureId": 176,
             "SkyboxOrientation": 544,
             "StarCount": 560,
-            "DrawAdv": 59951044,
-            "DrawCubeCallB": 58683071
+            "DrawAdv": 58584244
         },
         "Atmosphere": {
             "Density": 184,
@@ -518,9 +523,9 @@
             "Enabled": 152
         },
         "ColorCorrectionEffect": {
-            "Brightness": 172,
-            "Contrast": 176,
-            "TintColor": 160,
+            "Brightness": 220,
+            "Contrast": 228,
+            "TintColor": 208,
             "Enabled": 152
         },
         "ColorGradingEffect": {
@@ -539,7 +544,9 @@
             "KeyCode": 268,
             "GamepadKeyCode": 260,
             "Enabled": 286,
-            "RequiresLineOfSight": 287
+            "RequiresLineOfSight": 287,
+            "InputHoldBegin": 50086592,
+            "InputHoldEnd": 50086816
         },
         "ClickDetector": {
             "MaxActivationDistance": 208,
@@ -564,7 +571,7 @@
             "Speed": 188,
             "TimePosition": 192,
             "Looped": 204,
-            "IsPlaying": 2576
+            "IsPlaying": 2624
         },
         "Animator": {
             "ActiveAnimations": 2336
@@ -589,138 +596,88 @@
             "NodeRows": 40,
             "NodeStride": 48,
             "NodeOctMask": 140,
-            "SharedRowsRva": 145637232
+            "SharedRowsRva": 144086560
         },
         "Luau": {
-            "ClosureIsC": 6,
-            "StateTop": 112,
-            "StateBase": 104,
-            "TValueSize": 16,
-            "StateGlobal": 96,
-            "StateCI": 120,
-            "luaB_assert": 95086848,
-            "luaB_error": 95064912,
-            "luaB_gcinfo": 95078272,
-            "luaB_getfenv": 95071744,
-            "luaB_getmetatable": 95068816,
-            "luaB_next": 95084128,
-            "luaB_newproxy": 95089904,
-            "luaB_print": 95063808,
-            "luaB_rawequal": 95072496,
-            "luaB_rawget": 95072768,
-            "luaB_rawset": 95075184,
-            "luaB_rawlen": 95078112,
-            "luaB_select": 95087024,
-            "luaB_setfenv": 95071936,
-            "luaB_setmetatable": 95069216,
-            "luaB_tonumber": 95064000,
-            "luaB_tostring": 95089808,
-            "luaB_type": 95078304,
-            "luaB_typeof": 95081216,
-            "TValue_Value": 0,
-            "TValue_Tag": 12,
-            "TValue_Size": 16,
-            "TValue_TagNumber": 3,
-            "TValue_TagString": 5,
-            "TValue_TagTable": 6,
-            "TString_Tag": 0,
-            "TString_Length": 20,
-            "TString_Data": 24,
-            "TString_Hash": 16,
-            "Table_Tag": 0,
-            "Table_SizeArray": 8,
-            "Table_Array": 32,
-            "Table_NodeArray": 40,
-            "Table_lsizenode": 12,
-            "GlobalMainThread": 96,
-            "Node_Size": 32,
-            "Node_Key": 16,
-            "Node_KeyTag": 28
-        },
-        "Closure": {
-            "isC": 6
-        },
-        "LuaState": {
-            "Global": 96,
-            "Ci": 120,
-            "Base": 104,
-            "Top": 112,
-            "Tt": 0,
-            "Stack": 88,
-            "StackLast": 72
-        },
-        "lua_State": {
-            "Global": 96,
-            "Ci": 120,
-            "Base": 104,
-            "Top": 112,
-            "Tt": 0,
-            "Stack": 88,
-            "StackLast": 72
+            "luaB_assert": 93093504,
+            "luaB_error": 93073232,
+            "luaB_gcinfo": 93084816,
+            "luaB_getfenv": 93080192,
+            "luaB_getmetatable": 93077152,
+            "luaB_next": 93090688,
+            "luaB_newproxy": 93096656,
+            "luaB_print": 93072112,
+            "luaB_rawequal": 93080976,
+            "luaB_rawget": 93081264,
+            "luaB_rawset": 93082688,
+            "luaB_rawlen": 93084656,
+            "luaB_select": 93093680,
+            "luaB_setfenv": 93080400,
+            "luaB_setmetatable": 93077568,
+            "luaB_tonumber": 93072304,
+            "luaB_tostring": 93096560,
+            "luaB_type": 93084848,
+            "luaB_typeof": 93087776
         },
         "LuaB": {
-            "LuaBAssert": 95086848,
-            "LuaBError": 95064912,
-            "LuaBGcinfo": 95078272,
-            "LuaBGetFenv": 95071744,
-            "LuaBGetMetatable": 95068816,
-            "LuaBNext": 95084128,
-            "LuaBNewProxy": 95089904,
-            "LuaBPrint": 95063808,
-            "LuaBRawEqual": 95072496,
-            "LuaBRawGet": 95072768,
-            "LuaBRawSet": 95075184,
-            "LuaBRawLen": 95078112,
-            "LuaBSelect": 95087024,
-            "LuaBSetFenv": 95071936,
-            "LuaBSetMetatable": 95069216,
-            "LuaBTonumber": 95064000,
-            "LuaBTostring": 95089808,
-            "LuaBType": 95078304,
-            "LuaBTypeof": 95081216
+            "LuaBAssert": 93093504,
+            "LuaBError": 93073232,
+            "LuaBGcinfo": 93084816,
+            "LuaBGetFenv": 93080192,
+            "LuaBGetMetatable": 93077152,
+            "LuaBNext": 93090688,
+            "LuaBNewProxy": 93096656,
+            "LuaBPrint": 93072112,
+            "LuaBRawEqual": 93080976,
+            "LuaBRawGet": 93081264,
+            "LuaBRawSet": 93082688,
+            "LuaBRawLen": 93084656,
+            "LuaBSelect": 93093680,
+            "LuaBSetFenv": 93080400,
+            "LuaBSetMetatable": 93077568,
+            "LuaBTonumber": 93072304,
+            "LuaBTostring": 93096560,
+            "LuaBType": 93084848,
+            "LuaBTypeof": 93087776
         },
         "Coroutine": {
-            "Create": 95281008,
-            "Running": 95283248,
-            "Status": 95271584,
-            "Wrap": 95282448,
-            "Yield": 95283152,
-            "IsYieldable": 95283360,
-            "Finally": 95293616
+            "Create": 93289920,
+            "Running": 93292208,
+            "Status": 93280352,
+            "Wrap": 93291392,
+            "Yield": 93292112,
+            "IsYieldable": 93292336,
+            "Finally": 93302880
         },
         "LuaCoroutine": {
-            "Create": 95281008,
-            "Running": 95283248,
-            "Status": 95271584,
-            "Wrap": 95282448,
-            "Yield": 95283152,
-            "IsYieldable": 95283360,
-            "Finally": 95293616
+            "Create": 93289920,
+            "Running": 93292208,
+            "Status": 93280352,
+            "Wrap": 93291392,
+            "Yield": 93292112,
+            "IsYieldable": 93292336,
+            "Finally": 93302880
         },
         "Functions": {
-            "GlobalPrint": 70782896,
-            "GlobalTick": 70789104,
-            "GlobalTime": 70789232,
-            "GlobalElapsedTime": 70779792,
-            "GlobalWait": 70791056,
-            "GlobalDelay": 70777872,
-            "GlobalSpawn": 70785856,
-            "GlobalPrintIdentity": 70782928,
-            "GlobalLoadstring": 70779920,
-            "GlobalSettings": 70784672,
-            "GlobalUserSettings": 70789760,
-            "GlobalPluginManager": 70781648,
-            "GlobalWarn": 70791568,
-            "GlobalRequire": 70783184,
-            "GlobalStats": 70787776,
-            "GlobalVersion": 70790816,
-            "GlobalCollectGarbage": 70775680,
-            "GlobalGetFenv": 70793616,
-            "GlobalSetFenv": 70793936
-        },
-        "ScriptContext": {
-            "VTable": 119971736,
-            "VmWrapper": 664
+            "GlobalPrint": 69050384,
+            "GlobalTick": 69056864,
+            "GlobalTime": 69056992,
+            "GlobalElapsedTime": 69047120,
+            "GlobalWait": 69058928,
+            "GlobalDelay": 69045168,
+            "GlobalSpawn": 69053472,
+            "GlobalPrintIdentity": 69050416,
+            "GlobalLoadstring": 69047264,
+            "GlobalSettings": 69052176,
+            "GlobalUserSettings": 69057520,
+            "GlobalPluginManager": 69049008,
+            "GlobalWarn": 69059424,
+            "GlobalRequire": 69050672,
+            "GlobalStats": 69055392,
+            "GlobalVersion": 69058688,
+            "GlobalCollectGarbage": 69042848,
+            "GlobalGetFenv": 69061536,
+            "GlobalSetFenv": 69061872
         },
         "SmoothClusterGeometry": {
             "GridOld": 72,
@@ -790,8 +747,8 @@
             "LRUCache": 32,
             "Cache": 192,
             "AssetID": 16,
-            "MeshData": 64,
-            "ToMeshData": 64
+            "MeshData": 0,
+            "ToMeshData": 0
         },
         "LRUHolder": {
             "MemEnforcedLRUCache": 32
@@ -805,7 +762,7 @@
             "CachedItem": 64
         },
         "CachedItem": {
-            "FileMeshData": 64
+            "FileMeshData": 0
         },
         "FileMeshData": {
             "AABBMin": 384,
@@ -816,35 +773,35 @@
             "FacesEnd": 56
         },
         "DeviceD3D11": {
-            "VTableRva": 119143128,
-            "SwapChainPtr": 144,
-            "DevicePtr": 392,
-            "ContextPtr": 400,
-            "Context": 400,
-            "ContextObj": 448
+            "VTableRva": 117760072,
+            "SwapChainPtr": 136,
+            "DevicePtr": 384,
+            "ContextPtr": 392,
+            "Context": 392,
+            "ContextObj": 440
         },
         "GeometryD3D11": {
-            "VTableRva": 119144456
+            "VTableRva": 117762048
         },
         "RakNet": {
-            "VTableRva": 119146040,
-            "Startup": 42507936,
-            "Connect": 42517168,
-            "Shutdown": 42519168,
-            "Send": 42523648,
-            "Receive": 42525424,
-            "DeallocatePacket": 42527216
+            "VTableRva": 117763680,
+            "Startup": 41269584,
+            "Connect": 41278800,
+            "Shutdown": 41280800,
+            "Send": 41285280,
+            "Receive": 41287056,
+            "DeallocatePacket": 41288848
         },
         "FastCluster": {
-            "VTableRva": 119555728,
-            "VTableRvaSub": 119555416,
+            "VTableRva": 118173080,
+            "VTableRvaSub": 118172768,
             "BindingSubobject": 144,
             "EntityBegin": 72,
             "EntityEnd": 80
         },
         "FastClusterEntity": {
-            "VTableRva": 119560176,
-            "MeshVTableRva": 119560248,
+            "VTableRva": 118178528,
+            "MeshVTableRva": 118178600,
             "ContextPtr": 8,
             "PrimitivePtr": 8,
             "MaterialPtr": 32,
@@ -860,12 +817,14 @@
             "BBoxMaxY": 168,
             "BBoxMaxZ": 172,
             "RenderQueueId": 16,
-            "AlphaByte": 20,
-            "NextEntity": 40,
-            "Stride": 40
+            "AlphaByte": 20
         },
         "Signals": {
-            "IsLegalSendEvent": 63742352
+            "IsLegalSendEvent": 62121344,
+            "FireMouseClick": 62114496,
+            "FireRightMouseClick": 62114912,
+            "FireMouseHoverEnter": 62119984,
+            "FireMouseHoverLeave": 62120400
         },
         "MeshData": {
             "VertexStart": 0,
@@ -878,12 +837,16 @@
             "DeviceD3D11": 16
         },
         "FastClusterMeshGenerator": {
-            "VTableRva": 119560248
+            "VTableRva": 118178600
         },
         "TechniqueArray": {
             "BeginOffset": 0,
             "EndOffset": 8,
             "EntryStride": 136
+        },
+        "Descriptor": {
+            "Name": 8,
+            "Invoke": 176
         },
         "ByteCode": {
             "Pointer": 24,
@@ -894,122 +857,35 @@
             "HeartbeatFPS": 200
         },
         "Raycast": {
-            "RaycastBoundDesc": 141602880,
+            "RaycastBoundDesc": 140049376,
             "RaycastBoundFn": 176,
-            "RaycastBoundFnRva": 13845536,
-            "RaycastDescriptorRva": 141602880
+            "RaycastBoundFnRva": 13242096,
+            "RaycastDescriptorRva": 140049376
         },
         "RemoteEvent": {
-            "OnClientEvent": 55439728,
-            "OnServerEvent": 55439648,
-            "FireServer": 55443584,
-            "InstanceArgumentMeta0": 149957952,
-            "InstanceArgumentMeta1": 149126976
+            "OnClientEvent": 53887328,
+            "OnServerEvent": 53887248,
+            "FireServer": 53891184,
+            "InstanceArgumentMeta0": 148416048,
+            "InstanceArgumentMeta1": 147579136
         },
         "RemoteFunction": {
-            "InvokeServer": 56334720,
-            "OnClientInvoke": 56336592
+            "InvokeServer": 54764496,
+            "OnClientInvoke": 54766400
+        },
+        "PlayerConfigurer": {
+            "Pointer": 147712728
         },
         "RemoteSpy": {
-            "RemoteEventVTableRva": 119523568
+            "RemoteEventVTableRva": 118141656
         },
         "FFlagList": {
-            "Pointer": 140896360,
+            "Pointer": 139340792,
             "Head": 8,
             "NodeNext": 0,
             "NodeName": 16,
             "NodeValue": 48,
             "ValueOffset": 32
-        },
-        "LuauGlobal": {
-            "mainthread": 96
-        },
-        "global_State": {
-            "mainthread": 96
-        },
-        "VmWrapper": {
-            "LuaState": 40
-        },
-        "Descriptor": {
-            "Invoke": 16,
-            "Name": 8
-        },
-        "FFlags": {
-            "DataSenderRate": 136791752,
-            "NextGenReplicatorEnabledWrite4": 136529472,
-            "PhysicsSenderMaxBandwidthBps": 136791208,
-            "PhysicsSenderMaxBandwidthBpsScaling": 136791184,
-            "SecondsBetweenDynamicVariableReloading": 136478280
-        },
-        "StatsItem": {
-            "Value": 5641
         }
-    },
-    "Inherited": {
-        "Weld.Part1": [
-            "GuiObject.ScreenGui_Enabled",
-            "Highlight.FillTransparency",
-            "Highlight.OutlineColor",
-            "Highlight.OutlineTransparency",
-            "Humanoid.FloorMaterial",
-            "Instance.GetAttribute",
-            "Lighting.ShadowSoftness",
-            "Luau.GlobalMainThread",
-            "Luau.Node_Key",
-            "Luau.Node_KeyTag",
-            "Luau.Node_Size",
-            "LuauGlobal.mainthread",
-            "ScriptContext.VmWrapper",
-            "VmWrapper.LuaState",
-            "global_State.mainthread"
-        ]
-    },
-    "Carried": {
-        "Source": "OriginExternal/util/offsets.h",
-        "Rows": [
-            "Descriptor.Invoke",
-            "Descriptor.Name",
-            "FFlags.DataSenderRate",
-            "FFlags.NextGenReplicatorEnabledWrite4",
-            "FFlags.PhysicsSenderMaxBandwidthBps",
-            "FFlags.PhysicsSenderMaxBandwidthBpsScaling",
-            "FFlags.SecondsBetweenDynamicVariableReloading",
-            "FastClusterEntity.NextEntity",
-            "FastClusterEntity.Stride",
-            "GuiObject.Active",
-            "GuiObject.AnchorPoint",
-            "GuiObject.AutomaticSize",
-            "GuiObject.BorderMode",
-            "GuiObject.ClipsDescendants",
-            "GuiObject.GuiState",
-            "GuiObject.Interactable",
-            "GuiObject.Selectable",
-            "GuiObject.SizeConstraint",
-            "Highlight.DepthMode",
-            "Highlight.Enabled",
-            "StatsItem.Value",
-            "TextButton.AutoButtonColor",
-            "TextButton.ContentText",
-            "TextButton.LineHeight",
-            "TextButton.LocalizedText",
-            "TextButton.Modal",
-            "TextButton.RichText",
-            "TextButton.TextDirection",
-            "TextButton.TextScaled",
-            "TextButton.TextSize",
-            "TextButton.TextTruncate",
-            "TextButton.TextWrapped",
-            "TextButton.TextXAlignment",
-            "TextButton.TextYAlignment",
-            "TextLabel.ContentText",
-            "TextLabel.LineHeight",
-            "TextLabel.LocalizedText",
-            "TextLabel.RichText",
-            "TextLabel.TextDirection",
-            "TextLabel.TextScaled",
-            "TextLabel.TextSize",
-            "TextLabel.TextWrapped",
-            "TextLabel.TextYAlignment"
-        ]
     }
 }
