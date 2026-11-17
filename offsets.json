@@ -1,11 +1,13 @@
 {
     "Roblox Version": "version-2c6fd5e09aaf4cfa",
     "Dumper Version": "2.2.6",
-    "Dumped At": "19:28 17/11/2026",
-    "Total Offsets": 659,
+    "Dumped At": "21:26 17/11/2026",
+    "Total Offsets": 673,
     "Proved Zeros": [
         "CachedItem.FileMeshData",
         "FileMeshData.Vertices",
+        "Luau.TValue_Value",
+        "Luau.Table_Tag",
         "MeshContentProvider.MeshData",
         "MeshContentProvider.ToMeshData",
         "MeshData.VertexStart"
@@ -244,7 +246,7 @@
             "HumanoidState": 2216,
             "HumanoidStateID": 32,
             "FloorMaterial": 376,
-            "TargetPoint": 11,
+            "TargetPoint": 320,
             "HipHeight": 392,
             "RigType": 440,
             "WalkToPoint": 344,
@@ -377,13 +379,13 @@
             "BorderSizePixel": 772,
             "SelectionOrder": 816,
             "Active": 832,
+            "Visible": 837,
             "Selectable": 836,
             "ClipsDescendants": 833,
             "Interactable": 835,
             "AnchorPoint": 752,
             "AutomaticSize": 760,
             "BorderMode": 768,
-            "Visible": 837,
             "ImageRectOffset": 1988,
             "GuiState": 784,
             "SizeConstraint": 824
@@ -409,7 +411,6 @@
             "TextStrokeColor3": 2796,
             "TextStrokeTransparency": 2824,
             "TextTransparency": 2828,
-            "RichText": 2845,
             "TextScaled": 2847,
             "TextDirection": 2816,
             "LineHeight": 2808,
@@ -418,6 +419,7 @@
             "TextTruncate": 2832,
             "ContentText": 2608,
             "LocalizedText": 2704,
+            "RichText": 2845,
             "TextSize": 2820,
             "Text": 2736,
             "TextWrapped": 2848
@@ -431,12 +433,12 @@
             "Modal": 1709,
             "LineHeight": 3448,
             "MaxVisibleGraphemes": 3452,
-            "RichText": 3485,
             "TextScaled": 3487,
             "TextDirection": 3456,
             "Selected": 1710,
             "ContentText": 3248,
             "LocalizedText": 3344,
+            "RichText": 3485,
             "TextSize": 3460,
             "Text": 3376,
             "TextTruncate": 3472,
@@ -600,6 +602,9 @@
             "SharedRowsRva": 144086560
         },
         "Luau": {
+            "StateTop": 120,
+            "StateBase": 104,
+            "TValueSize": 16,
             "luaB_assert": 93093504,
             "luaB_error": 93073232,
             "luaB_gcinfo": 93084816,
@@ -618,7 +623,17 @@
             "luaB_tonumber": 93072304,
             "luaB_tostring": 93096560,
             "luaB_type": 93084848,
-            "luaB_typeof": 93087776
+            "luaB_typeof": 93087776,
+            "TValue_Value": 0,
+            "TValue_Tag": 12,
+            "TValue_Size": 16,
+            "TValue_TagNumber": 3,
+            "TValue_TagString": 5,
+            "TValue_TagTable": 6,
+            "Table_Tag": 0,
+            "Table_SizeArray": 8,
+            "Table_Array": 32,
+            "Table_NodeArray": 40
         },
         "LuaB": {
             "LuaBAssert": 93093504,
@@ -679,6 +694,9 @@
             "GlobalCollectGarbage": 69042848,
             "GlobalGetFenv": 69061536,
             "GlobalSetFenv": 69061872
+        },
+        "ScriptContext": {
+            "VTable": 118591040
         },
         "SmoothClusterGeometry": {
             "GridOld": 72,

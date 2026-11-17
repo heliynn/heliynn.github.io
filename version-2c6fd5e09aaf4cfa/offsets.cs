@@ -4,8 +4,8 @@
 /*  Dumped by       : servyy <3                                 
 /*  Roblox Version  : version-2c6fd5e09aaf4cfa
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 19:28 17/11/2026 (GMT)
-/*  Total Offsets   : 659
+/*  Dumped At       : 21:26 17/11/2026 (GMT)
+/*  Total Offsets   : 673
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
 /* =============================================================
@@ -398,7 +398,7 @@ namespace Offsets {
          public const long RigType = 0x1b8;
          public const long SeatPart = 0xf0;
          public const long Sit = 0x1d7;
-         public const long TargetPoint = 0xb;
+         public const long TargetPoint = 0x140;
          public const long UseJumpPower = 0x1d9;
          public const long WalkToPoint = 0x158;
          public const long Walkspeed = 0x1c8;
@@ -499,6 +499,19 @@ namespace Offsets {
     }
 
     public static class Luau {
+         public const long StateBase = 0x68;
+         public const long StateTop = 0x78;
+         public const long TValueSize = 0x10;
+         public const long TValue_Size = 0x10;
+         public const long TValue_Tag = 0xc;
+         public const long TValue_TagNumber = 0x3;
+         public const long TValue_TagString = 0x5;
+         public const long TValue_TagTable = 0x6;
+         public const long TValue_Value = 0x0;
+         public const long Table_Array = 0x20;
+         public const long Table_NodeArray = 0x28;
+         public const long Table_SizeArray = 0x8;
+         public const long Table_Tag = 0x0;
          public const long luaB_assert = 0x58c7e80;
          public const long luaB_error = 0x58c2f50;
          public const long luaB_gcinfo = 0x58c5c90;
@@ -747,6 +760,10 @@ namespace Offsets {
          public const long ByteCode = 0x178;
          public const long GUID = 0xb8;
          public const long Hash = 0x188;
+    }
+
+    public static class ScriptContext {
+         public const long VTable = 0x7118e40;
     }
 
     public static class Seat {

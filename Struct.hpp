@@ -5,8 +5,8 @@
 /*  Dumped by       : servyy <3                                 
 /*  Roblox Version  : version-2c6fd5e09aaf4cfa
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 19:28 17/11/2026 (GMT)
-/*  Total Offsets   : 659
+/*  Dumped At       : 21:26 17/11/2026 (GMT)
+/*  Total Offsets   : 673
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
 /* =============================================================
@@ -528,62 +528,61 @@ namespace Structs {
     }; // sizeof = dc
 
     struct Humanoid {
-        char pad_0[0xb];
-        Vector3 TargetPoint; // 0xb
-        char pad_1[0x9];
+        char pad_0[0x20];
         int HumanoidStateID; // 0x20
-        char pad_2[0x7c];
+        char pad_1[0x7c];
         string DisplayName; // 0xa0
-        char pad_3[0x50];
+        char pad_2[0x50];
         uintptr_t SeatPart; // 0xf0
-        char pad_4[0x8];
+        char pad_3[0x8];
         uintptr_t MoveToPart; // 0x100
-        char pad_5[0x8];
+        char pad_4[0x8];
         Vector3 CameraOffset; // 0x110
-        char pad_6[0x18];
+        char pad_5[0x18];
         Vector3 MoveDirection; // 0x134
-        char pad_7[0x18];
+        Vector3 TargetPoint; // 0x140
+        char pad_6[0xc];
         Vector3 MoveToPoint; // 0x158
         unknown WalkToPoint; // 0x158
-        char pad_8[0x10];
+        char pad_7[0x10];
         int DisplayDistanceType; // 0x174
         int FloorMaterial; // 0x178
         float HealthDisplayDistance; // 0x17c
         int HealthDisplayType; // 0x180
         float Health; // 0x184
         unknown HipHeight; // 0x188
-        char pad_9[0x10];
+        char pad_8[0x10];
         float JumpHeight; // 0x198
         float JumpPower; // 0x19c
         float MaxHealth; // 0x1a0
         float MaxSlopeAngle; // 0x1a4
         float NameDisplayDistance; // 0x1a8
         int NameOcclusion; // 0x1ac
-        char pad_10[0x8];
+        char pad_9[0x8];
         unknown RigType; // 0x1b8
-        char pad_11[0x10];
+        char pad_10[0x10];
         float Walkspeed; // 0x1c8
         bool AutoJumpEnabled; // 0x1cc
         bool AutoRotate; // 0x1cd
         bool AutomaticScalingEnabled; // 0x1ce
-        char pad_12[0x1];
+        char pad_11[0x1];
         bool BreakJointsOnDeath; // 0x1d0
         bool EvaluateStateMachine; // 0x1d1
-        char pad_13[0x2];
+        char pad_12[0x2];
         bool Jump; // 0x1d4
         bool PlatformStand; // 0x1d5
         bool RequiresNeck; // 0x1d6
         bool Sit; // 0x1d7
-        char pad_14[0x1];
+        char pad_13[0x1];
         bool UseJumpPower; // 0x1d9
-        char pad_15[0x1c2];
+        char pad_14[0x1c2];
         float WalkspeedCheck; // 0x39c
-        char pad_16[0xc0];
+        char pad_15[0xc0];
         uintptr_t HumanoidRootPart; // 0x460
-        char pad_17[0x440];
+        char pad_16[0x440];
         uintptr_t HumanoidState; // 0x8a8
         uintptr_t PlatformStatePointer; // 0x8a8
-        char pad_18[0x186];
+        char pad_17[0x186];
         bool IsWalking; // 0xa3e
     }; // sizeof = a3f
 
@@ -733,43 +732,58 @@ namespace Structs {
     }; // sizeof = 58fb068
 
     struct Luau {
-        char pad_0[0x58c2af0];
+        uintptr_t TValue_Value; // 0x0
+        uintptr_t Table_Tag; // 0x0
+        int TValue_TagNumber; // 0x3
+        int TValue_TagString; // 0x5
+        int TValue_TagTable; // 0x6
+        uintptr_t Table_SizeArray; // 0x8
+        uintptr_t TValue_Tag; // 0xc
+        uintptr_t TValueSize; // 0x10
+        uintptr_t TValue_Size; // 0x10
+        uintptr_t Table_Array; // 0x20
+        uintptr_t Table_NodeArray; // 0x28
+        char pad_0[0x1c];
+        uintptr_t StateBase; // 0x68
+        char pad_1[0x8];
+        uintptr_t StateTop; // 0x78
+        char pad_2[0x58c2a70];
         uintptr_t luaB_print; // 0x58c2af0
-        char pad_1[0xb8];
+        char pad_3[0xb8];
         uintptr_t luaB_tonumber; // 0x58c2bb0
-        char pad_2[0x398];
+        char pad_4[0x398];
         uintptr_t luaB_error; // 0x58c2f50
-        char pad_3[0xf48];
+        char pad_5[0xf48];
         uintptr_t luaB_getmetatable; // 0x58c3ea0
-        char pad_4[0x198];
+        char pad_6[0x198];
         uintptr_t luaB_setmetatable; // 0x58c4040
-        char pad_5[0xa38];
+        char pad_7[0xa38];
         uintptr_t luaB_getfenv; // 0x58c4a80
-        char pad_6[0xc8];
+        char pad_8[0xc8];
         uintptr_t luaB_setfenv; // 0x58c4b50
-        char pad_7[0x238];
+        char pad_9[0x238];
         uintptr_t luaB_rawequal; // 0x58c4d90
-        char pad_8[0x118];
+        char pad_10[0x118];
         uintptr_t luaB_rawget; // 0x58c4eb0
-        char pad_9[0x588];
+        char pad_11[0x588];
         uintptr_t luaB_rawset; // 0x58c5440
-        char pad_10[0x7a8];
+        char pad_12[0x7a8];
         uintptr_t luaB_rawlen; // 0x58c5bf0
-        char pad_11[0x98];
+        char pad_13[0x98];
         uintptr_t luaB_gcinfo; // 0x58c5c90
-        char pad_12[0x18];
+        char pad_14[0x18];
         uintptr_t luaB_type; // 0x58c5cb0
-        char pad_13[0xb68];
+        char pad_15[0xb68];
         uintptr_t luaB_typeof; // 0x58c6820
-        char pad_14[0xb58];
+        char pad_16[0xb58];
         uintptr_t luaB_next; // 0x58c7380
-        char pad_15[0xaf8];
+        char pad_17[0xaf8];
         uintptr_t luaB_assert; // 0x58c7e80
-        char pad_16[0xa8];
+        char pad_18[0xa8];
         uintptr_t luaB_select; // 0x58c7f30
-        char pad_17[0xb38];
+        char pad_19[0xb38];
         uintptr_t luaB_tostring; // 0x58c8a70
-        char pad_18[0x58];
+        char pad_20[0x58];
         uintptr_t luaB_newproxy; // 0x58c8ad0
     }; // sizeof = 58c8ad8
 
@@ -1117,6 +1131,11 @@ namespace Structs {
         string Hash; // 0x188
     }; // sizeof = 188
 
+    struct ScriptContext {
+        char pad_0[0x7118e40];
+        uintptr_t VTable; // 0x7118e40
+    }; // sizeof = 7118e48
+
     struct Seat {
         char pad_0[0x200];
         uintptr_t Occupant; // 0x200
@@ -1349,8 +1368,8 @@ namespace Structs {
         char pad_8[0x4];
         unknown TextXAlignment; // 0xb14
         char pad_9[0x9];
-        bool RichText; // 0xb1d
-        char pad_10[0x1];
+        unknown RichText; // 0xb1d
+        char pad_10[0x2];
         bool TextScaled; // 0xb1f
         unknown TextWrapped; // 0xb20
     }; // sizeof = b20

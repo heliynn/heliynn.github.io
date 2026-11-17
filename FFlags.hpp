@@ -16741,7 +16741,6 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t AdditionalFontChecks = 0x1;
          inline constexpr uintptr_t AdditionalPrePauseStats = 0x1;
          inline constexpr uintptr_t AdditionalUserFieldsSafeAccessStateUserId = 0x1;
-         inline constexpr uintptr_t AdjustHorizontalUserListSizeForMobile = 0x1;
          inline constexpr uintptr_t AdjustInferredHangBehavior = 0x1;
          inline constexpr uintptr_t AdjustOnScreenKeyboardPositionForDeviceInset = 0x1;
          inline constexpr uintptr_t AdjustPathLabelWidth = 0x1;
@@ -21695,6 +21694,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t ExpChatMEUpdatedSystemMessage = 0x1;
          inline constexpr uintptr_t ExpChatMainInputBarClickAnalytics = 0x1;
          inline constexpr uintptr_t ExpChatMemoizeSystemMessage = 0x1;
+         inline constexpr uintptr_t ExpChatMessageComposerDictation = 0x1;
          inline constexpr uintptr_t ExpChatMessageEffectChatWindowEnlargeLineHeight = 0x1;
          inline constexpr uintptr_t ExpChatMessageEffectChatWindowEnlargePadding = 0x1;
          inline constexpr uintptr_t ExpChatMessageHistoryExperiment = 0x1;
@@ -23157,6 +23157,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t FoundationNumberInputOnTextChanged = 0x1;
          inline constexpr uintptr_t FoundationNumberInputRefAndCallbacks = 0x1;
          inline constexpr uintptr_t FoundationNumberInputScrubCallbackProps2 = 0x1;
+         inline constexpr uintptr_t FoundationNumberInputScrubEndedAlone = 0x1;
          inline constexpr uintptr_t FoundationNumberInputScrubbingUsesOffset = 0x1;
          inline constexpr uintptr_t FoundationNumberInputSpinboxRespectSnap = 0x1;
          inline constexpr uintptr_t FoundationNumberInputTextFix = 0x1;
@@ -24471,6 +24472,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t LogErrorMessageLRSend = 0x1;
          inline constexpr uintptr_t LogExposureForExperienceUpsell = 0x1;
          inline constexpr uintptr_t LogFailureMessages = 0x1;
+         inline constexpr uintptr_t LogFocusNavExitTriggerKey = 0x1;
          inline constexpr uintptr_t LogFragmentAutocompleteAtALowerLevel = 0x1;
          inline constexpr uintptr_t LogGenerationTypePromptCreate = 0x0;
          inline constexpr uintptr_t LogGenerationTypePromptCreate2 = 0x1;
@@ -24960,6 +24962,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t LuaAppHapticTriggeredTelemetry = 0x1;
          inline constexpr uintptr_t LuaAppHasVideoThumbnailFix = 0x1;
          inline constexpr uintptr_t LuaAppHeroUnitParallaxUpdates = 0x1;
+         inline constexpr uintptr_t LuaAppHeroUnitSecondaryLabelText = 0x1;
          inline constexpr uintptr_t LuaAppHideBadgesRowFix = 0x1;
          inline constexpr uintptr_t LuaAppHideCarouselSubtitleChevron = 0x1;
          inline constexpr uintptr_t LuaAppHideDeviceInsetBackgroundOnAvatarWrapperPages = 0x1;
@@ -25648,6 +25651,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t LuauDeprecatedAttributeOnAnonymousFunctions = 0x1;
          inline constexpr uintptr_t LuauDirectFieldGet3 = 0x1;
          inline constexpr uintptr_t LuauDisallowExternClassInTypeDefinitions = 0x1;
+         inline constexpr uintptr_t LuauDisallowRedefiningBuiltinTypes = 0x1;
          inline constexpr uintptr_t LuauDoNotEmplaceAnnotatedType = 0x1;
          inline constexpr uintptr_t LuauDoNotExportBrokenTypeFunction = 0x0;
          inline constexpr uintptr_t LuauDoNotIceForBindingGeneric = 0x1;
@@ -26728,7 +26732,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t OutOfMemoryCrashOrbis = 0x1;
          inline constexpr uintptr_t OutputLinksComponent2 = 0x1;
          inline constexpr uintptr_t OverflowMenuRemoveCloseMenuChecks = 0x1;
-         inline constexpr uintptr_t OverlappedAddToFilter = 0x0;
+         inline constexpr uintptr_t OverlappedAddToFilter = 0x1;
          inline constexpr uintptr_t OverridableActions2ndBatch = 0x1;
          inline constexpr uintptr_t OverrideAvatarLoadFlowThrottling = 0x1;
          inline constexpr uintptr_t OverrideDebugAttributeWithAds = 0x0;
@@ -30479,6 +30483,7 @@ namespace FFlagOffsets {
          inline constexpr uintptr_t StudioQWidgetObserverSafeRelease = 0x1;
          inline constexpr uintptr_t StudioRaiseAssistantVisibility = 0x0;
          inline constexpr uintptr_t StudioReapplyDockWindowGeometryWithDelayedExecution = 0x1;
+         inline constexpr uintptr_t StudioReleaseRefreshLockBeforeDroppingAuthTokenManager = 0x1;
          inline constexpr uintptr_t StudioRemoteDebuggingEnabled = 0x1;
          inline constexpr uintptr_t StudioRemoveActionInfo = 0x1;
          inline constexpr uintptr_t StudioRemoveDeadRibbonRecentFileList = 0x1;

@@ -4,8 +4,8 @@
 /*  Dumped by       : servyy <3                                 
 /*  Roblox Version  : version-2c6fd5e09aaf4cfa
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 19:28 17/11/2026 (GMT)
-/*  Total Offsets   : 32909
+/*  Dumped At       : 21:26 17/11/2026 (GMT)
+/*  Total Offsets   : 32914
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
 /* =============================================================
@@ -16749,7 +16749,6 @@ namespace FFlagOffsets {
          public const long AdditionalFontChecks = 0x1;
          public const long AdditionalPrePauseStats = 0x1;
          public const long AdditionalUserFieldsSafeAccessStateUserId = 0x1;
-         public const long AdjustHorizontalUserListSizeForMobile = 0x1;
          public const long AdjustInferredHangBehavior = 0x1;
          public const long AdjustOnScreenKeyboardPositionForDeviceInset = 0x1;
          public const long AdjustPathLabelWidth = 0x1;
@@ -21703,6 +21702,7 @@ namespace FFlagOffsets {
          public const long ExpChatMEUpdatedSystemMessage = 0x1;
          public const long ExpChatMainInputBarClickAnalytics = 0x1;
          public const long ExpChatMemoizeSystemMessage = 0x1;
+         public const long ExpChatMessageComposerDictation = 0x1;
          public const long ExpChatMessageEffectChatWindowEnlargeLineHeight = 0x1;
          public const long ExpChatMessageEffectChatWindowEnlargePadding = 0x1;
          public const long ExpChatMessageHistoryExperiment = 0x1;
@@ -23165,6 +23165,7 @@ namespace FFlagOffsets {
          public const long FoundationNumberInputOnTextChanged = 0x1;
          public const long FoundationNumberInputRefAndCallbacks = 0x1;
          public const long FoundationNumberInputScrubCallbackProps2 = 0x1;
+         public const long FoundationNumberInputScrubEndedAlone = 0x1;
          public const long FoundationNumberInputScrubbingUsesOffset = 0x1;
          public const long FoundationNumberInputSpinboxRespectSnap = 0x1;
          public const long FoundationNumberInputTextFix = 0x1;
@@ -24479,6 +24480,7 @@ namespace FFlagOffsets {
          public const long LogErrorMessageLRSend = 0x1;
          public const long LogExposureForExperienceUpsell = 0x1;
          public const long LogFailureMessages = 0x1;
+         public const long LogFocusNavExitTriggerKey = 0x1;
          public const long LogFragmentAutocompleteAtALowerLevel = 0x1;
          public const long LogGenerationTypePromptCreate = 0x0;
          public const long LogGenerationTypePromptCreate2 = 0x1;
@@ -24968,6 +24970,7 @@ namespace FFlagOffsets {
          public const long LuaAppHapticTriggeredTelemetry = 0x1;
          public const long LuaAppHasVideoThumbnailFix = 0x1;
          public const long LuaAppHeroUnitParallaxUpdates = 0x1;
+         public const long LuaAppHeroUnitSecondaryLabelText = 0x1;
          public const long LuaAppHideBadgesRowFix = 0x1;
          public const long LuaAppHideCarouselSubtitleChevron = 0x1;
          public const long LuaAppHideDeviceInsetBackgroundOnAvatarWrapperPages = 0x1;
@@ -25656,6 +25659,7 @@ namespace FFlagOffsets {
          public const long LuauDeprecatedAttributeOnAnonymousFunctions = 0x1;
          public const long LuauDirectFieldGet3 = 0x1;
          public const long LuauDisallowExternClassInTypeDefinitions = 0x1;
+         public const long LuauDisallowRedefiningBuiltinTypes = 0x1;
          public const long LuauDoNotEmplaceAnnotatedType = 0x1;
          public const long LuauDoNotExportBrokenTypeFunction = 0x0;
          public const long LuauDoNotIceForBindingGeneric = 0x1;
@@ -26736,7 +26740,7 @@ namespace FFlagOffsets {
          public const long OutOfMemoryCrashOrbis = 0x1;
          public const long OutputLinksComponent2 = 0x1;
          public const long OverflowMenuRemoveCloseMenuChecks = 0x1;
-         public const long OverlappedAddToFilter = 0x0;
+         public const long OverlappedAddToFilter = 0x1;
          public const long OverridableActions2ndBatch = 0x1;
          public const long OverrideAvatarLoadFlowThrottling = 0x1;
          public const long OverrideDebugAttributeWithAds = 0x0;
@@ -30487,6 +30491,7 @@ namespace FFlagOffsets {
          public const long StudioQWidgetObserverSafeRelease = 0x1;
          public const long StudioRaiseAssistantVisibility = 0x0;
          public const long StudioReapplyDockWindowGeometryWithDelayedExecution = 0x1;
+         public const long StudioReleaseRefreshLockBeforeDroppingAuthTokenManager = 0x1;
          public const long StudioRemoteDebuggingEnabled = 0x1;
          public const long StudioRemoveActionInfo = 0x1;
          public const long StudioRemoveDeadRibbonRecentFileList = 0x1;

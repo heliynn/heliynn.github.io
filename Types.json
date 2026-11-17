@@ -1,7 +1,7 @@
 {
     "Roblox Version": "version-2c6fd5e09aaf4cfa",
     "Dumper Version": "2.2.6",
-    "Dumped At": "19:28 17/11/2026",
+    "Dumped At": "21:26 17/11/2026",
     "Types": {
         "TaskScheduler": {
             "Pointer": "unsigned __int64",
@@ -369,13 +369,13 @@
             "BorderSizePixel": "int",
             "SelectionOrder": "int",
             "Active": "bool",
+            "Visible": "bool",
             "Selectable": "bool",
             "ClipsDescendants": "bool",
             "Interactable": "bool",
             "AnchorPoint": "Vector2",
             "AutomaticSize": "int",
             "BorderMode": "int",
-            "Visible": "bool",
             "ImageRectOffset": "unknown",
             "GuiState": "unknown",
             "SizeConstraint": "unknown"
@@ -401,7 +401,6 @@
             "TextStrokeColor3": "Color3",
             "TextStrokeTransparency": "float",
             "TextTransparency": "float",
-            "RichText": "bool",
             "TextScaled": "bool",
             "TextDirection": "int",
             "LineHeight": "float",
@@ -410,6 +409,7 @@
             "TextTruncate": "unknown",
             "ContentText": "unknown",
             "LocalizedText": "unknown",
+            "RichText": "unknown",
             "TextSize": "unknown",
             "Text": "unknown",
             "TextWrapped": "unknown"
@@ -423,12 +423,12 @@
             "Modal": "bool",
             "LineHeight": "float",
             "MaxVisibleGraphemes": "int",
-            "RichText": "unknown",
             "TextScaled": "unknown",
             "TextDirection": "unknown",
             "Selected": "unknown",
             "ContentText": "unknown",
             "LocalizedText": "unknown",
+            "RichText": "unknown",
             "TextSize": "unknown",
             "Text": "unknown",
             "TextTruncate": "unknown",
@@ -592,6 +592,9 @@
             "SharedRowsRva": "unsigned __int64"
         },
         "Luau": {
+            "StateTop": "unsigned __int64",
+            "StateBase": "unsigned __int64",
+            "TValueSize": "unsigned __int64",
             "luaB_assert": "unsigned __int64",
             "luaB_error": "unsigned __int64",
             "luaB_gcinfo": "unsigned __int64",
@@ -610,7 +613,17 @@
             "luaB_tonumber": "unsigned __int64",
             "luaB_tostring": "unsigned __int64",
             "luaB_type": "unsigned __int64",
-            "luaB_typeof": "unsigned __int64"
+            "luaB_typeof": "unsigned __int64",
+            "TValue_Value": "unsigned __int64",
+            "TValue_Tag": "unsigned __int64",
+            "TValue_Size": "unsigned __int64",
+            "TValue_TagNumber": "int",
+            "TValue_TagString": "int",
+            "TValue_TagTable": "int",
+            "Table_Tag": "unsigned __int64",
+            "Table_SizeArray": "unsigned __int64",
+            "Table_Array": "unsigned __int64",
+            "Table_NodeArray": "unsigned __int64"
         },
         "LuaB": {
             "LuaBAssert": "unsigned __int64",
@@ -671,6 +684,9 @@
             "GlobalCollectGarbage": "unsigned __int64",
             "GlobalGetFenv": "unsigned __int64",
             "GlobalSetFenv": "unsigned __int64"
+        },
+        "ScriptContext": {
+            "VTable": "unsigned __int64"
         },
         "SmoothClusterGeometry": {
             "GridOld": "unsigned __int64",

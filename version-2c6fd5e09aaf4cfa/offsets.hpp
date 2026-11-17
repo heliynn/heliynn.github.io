@@ -390,7 +390,7 @@ namespace Offsets {
          inline constexpr uintptr_t RigType = 0x1b8;
          inline constexpr uintptr_t SeatPart = 0xf0;
          inline constexpr uintptr_t Sit = 0x1d7;
-         inline constexpr uintptr_t TargetPoint = 0xb;
+         inline constexpr uintptr_t TargetPoint = 0x140;
          inline constexpr uintptr_t UseJumpPower = 0x1d9;
          inline constexpr uintptr_t WalkToPoint = 0x158;
          inline constexpr uintptr_t Walkspeed = 0x1c8;
@@ -491,6 +491,19 @@ namespace Offsets {
     }
 
     namespace Luau {
+         inline constexpr uintptr_t StateBase = 0x68;
+         inline constexpr uintptr_t StateTop = 0x78;
+         inline constexpr uintptr_t TValueSize = 0x10;
+         inline constexpr uintptr_t TValue_Size = 0x10;
+         inline constexpr uintptr_t TValue_Tag = 0xc;
+         inline constexpr uintptr_t TValue_TagNumber = 0x3;
+         inline constexpr uintptr_t TValue_TagString = 0x5;
+         inline constexpr uintptr_t TValue_TagTable = 0x6;
+         inline constexpr uintptr_t TValue_Value = 0x0;
+         inline constexpr uintptr_t Table_Array = 0x20;
+         inline constexpr uintptr_t Table_NodeArray = 0x28;
+         inline constexpr uintptr_t Table_SizeArray = 0x8;
+         inline constexpr uintptr_t Table_Tag = 0x0;
          inline constexpr uintptr_t luaB_assert = 0x58c7e80;
          inline constexpr uintptr_t luaB_error = 0x58c2f50;
          inline constexpr uintptr_t luaB_gcinfo = 0x58c5c90;
@@ -739,6 +752,10 @@ namespace Offsets {
          inline constexpr uintptr_t ByteCode = 0x178;
          inline constexpr uintptr_t GUID = 0xb8;
          inline constexpr uintptr_t Hash = 0x188;
+    }
+
+    namespace ScriptContext {
+         inline constexpr uintptr_t VTable = 0x7118e40;
     }
 
     namespace Seat {
