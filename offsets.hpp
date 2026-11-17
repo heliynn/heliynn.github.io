@@ -447,6 +447,7 @@ namespace Offsets {
          inline constexpr uintptr_t MoonPosition = 0x174;
          inline constexpr uintptr_t OutdoorAmbient = 0xe8;
          inline constexpr uintptr_t ShadowSoftness = 0x128;
+         inline constexpr uintptr_t Sky = 0x1b8;
          inline constexpr uintptr_t Source = 0x164;
          inline constexpr uintptr_t SunPosition = 0x168;
     }

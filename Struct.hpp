@@ -5,8 +5,8 @@
 /*  Dumped by       : servyy <3                                 
 /*  Roblox Version  : version-2c6fd5e09aaf4cfa
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 18:52 17/11/2026 (GMT)
-/*  Total Offsets   : 658
+/*  Dumped At       : 19:28 17/11/2026 (GMT)
+/*  Total Offsets   : 659
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
 /* =============================================================
@@ -661,7 +661,9 @@ namespace Structs {
         Vector3 SunPosition; // 0x168
         Vector3 MoonPosition; // 0x174
         Color3 GradientBottom; // 0x180
-    }; // sizeof = 180
+        char pad_13[0x38];
+        uintptr_t Sky; // 0x1b8
+    }; // sizeof = 1c0
 
     struct LocalScript {
         char pad_0[0xb8];

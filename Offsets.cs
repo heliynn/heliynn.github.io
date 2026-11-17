@@ -4,8 +4,8 @@
 /*  Dumped by       : servyy <3                                 
 /*  Roblox Version  : version-2c6fd5e09aaf4cfa
 /*  Dumper Version  : 2.2.6
-/*  Dumped At       : 18:52 17/11/2026 (GMT)
-/*  Total Offsets   : 658
+/*  Dumped At       : 19:28 17/11/2026 (GMT)
+/*  Total Offsets   : 659
 /* -------------------------------------------------------------
 /*  by servyy <3                                                
 /* =============================================================
@@ -455,6 +455,7 @@ namespace Offsets {
          public const long MoonPosition = 0x174;
          public const long OutdoorAmbient = 0xe8;
          public const long ShadowSoftness = 0x128;
+         public const long Sky = 0x1b8;
          public const long Source = 0x164;
          public const long SunPosition = 0x168;
     }
