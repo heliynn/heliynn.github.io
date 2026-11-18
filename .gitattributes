@@ -1,0 +1,11 @@
+# GitHub Pages serves the stored bytes, so every file keeps one line ending
+# no matter which machine it was edited on. Without this, Windows checks files
+# out as CRLF and git prints a warning on every single commit.
+* text=auto eol=lf
+
+# things git must treat as bytes, never as text
+*.png binary
+*.webp binary
+*.jpg binary
+*.mp3 binary
+*.woff2 binary
