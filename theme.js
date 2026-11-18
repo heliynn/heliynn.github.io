@@ -46,18 +46,11 @@
   /* the winter pictures that take over the two edge corners in the season. They
      are only ever pointed at from inside the season, so a visit in July never
      asks for one */
-  const WINTER_ART = [1, 2, 3, 4, 5, 6, 7, 8]
+  /* 4 and 6 are left out: they are cropped tight on the face, so at the size a
+     corner picture is drawn they read as a zoom rather than a portrait next to
+     the other six. The files stay in assets for whenever they are wanted */
+  const WINTER_ART = [1, 2, 3, 5, 7, 8]
     .map((n) => asset('christmas-megumin-' + n + '.webp'));
-
-  /* two of them are framed close on the face rather than at head and shoulders.
-     At the height the others are drawn, a close-up reads as twice the size and
-     hangs over the page, so those two come in at 60% and sit level with the rest */
-  const WINTER_CLOSE = [4, 6];
-
-  const scaleOf = (src) => {
-    const match = /christmas-megumin-(\d+)\.webp$/.exec(src || '');
-    return match && WINTER_CLOSE.includes(Number(match[1])) ? .6 : 1;
-  };
 
   const read = () => {
     try {
@@ -176,7 +169,6 @@
 
       if (!root.dataset.theme) {
         winterPick.delete(image);
-        image.style.removeProperty('--art-scale');
         const original = image.dataset.seasonSrc;
         if (original && image.getAttribute('src') !== original) image.setAttribute('src', original);
         continue;
@@ -192,7 +184,6 @@
 
       const next = winterPick.get(image);
       taken.add(next);
-      image.style.setProperty('--art-scale', String(scaleOf(next)));
       if (next && image.getAttribute('src') !== next) image.setAttribute('src', next);
     }
   };
