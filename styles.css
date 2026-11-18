@@ -607,7 +607,9 @@ button.panel__row:focus-visible .panel__label {
   /* on bottom, not transform: the entrance animation owns transform */
   bottom: calc(-2vh + 140px);
   z-index: 0;
-  height: min(58vh, 460px);
+  /* a close-framed picture asks for a smaller drawing rather than a different
+     rule, so the season can set --art-scale on the element it swaps */
+  height: calc(min(58vh, 460px) * var(--art-scale, 1));
   width: auto;
   max-width: 28vw;
   object-fit: contain;

@@ -49,6 +49,16 @@
   const WINTER_ART = [1, 2, 3, 4, 5, 6, 7, 8]
     .map((n) => asset('christmas-megumin-' + n + '.webp'));
 
+  /* two of them are framed close on the face rather than at head and shoulders.
+     At the height the others are drawn, a close-up reads as twice the size and
+     hangs over the page, so those two come in at 60% and sit level with the rest */
+  const WINTER_CLOSE = [4, 6];
+
+  const scaleOf = (src) => {
+    const match = /christmas-megumin-(\d+)\.webp$/.exec(src || '');
+    return match && WINTER_CLOSE.includes(Number(match[1])) ? .6 : 1;
+  };
+
   const read = () => {
     try {
       return localStorage.getItem(KEY) || '';
@@ -166,6 +176,7 @@
 
       if (!root.dataset.theme) {
         winterPick.delete(image);
+        image.style.removeProperty('--art-scale');
         const original = image.dataset.seasonSrc;
         if (original && image.getAttribute('src') !== original) image.setAttribute('src', original);
         continue;
@@ -181,6 +192,7 @@
 
       const next = winterPick.get(image);
       taken.add(next);
+      image.style.setProperty('--art-scale', String(scaleOf(next)));
       if (next && image.getAttribute('src') !== next) image.setAttribute('src', next);
     }
   };
