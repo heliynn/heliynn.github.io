@@ -46,18 +46,18 @@ window.SITE = {
     pool: [
       "assets/art-left.png?v=16",
       "assets/art-right.png?v=16",
-      "assets/megumin-4.png?v=1",
-      "assets/megumin-5.png?v=1",
-      "assets/megumin-6.png?v=1",
-      "assets/megumin-7.png?v=1"
+      "assets/megumin-4.webp?v=1",
+      "assets/megumin-5.webp?v=1",
+      "assets/megumin-6.webp?v=1",
+      "assets/megumin-7.webp?v=1"
     ]
   },
 
   /* One is picked per visit and can be dragged anywhere. Add a path for more moods. */
   mascot: {
     pool: [
-      "assets/chomusuke-1.png?v=1",
-      "assets/chomusuke-2.png?v=1"
+      "assets/chomusuke-1.webp?v=1",
+      "assets/chomusuke-2.webp?v=1"
     ]
   }
 };

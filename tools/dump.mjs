@@ -216,10 +216,18 @@ try {
   manifest = JSON.parse(read(manifestPath));
 } catch (error) { /* first run: there is nothing to keep */ }
 
+/* newest first. The list is only as good as its order, and re-archiving an old
+   build (to pick up a new page template) must not push it to the top */
+const when = (build) => {
+  const match = String(build.dumped || '').match(/^(\d{1,2}):(\d{2}) (\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return 0;
+  return new Date(+match[5], +match[4] - 1, +match[3], +match[1], +match[2]).getTime();
+};
+
 const builds = [
   { version: versionLabel, dumper, dumped, path: folder + '/', files, pages },
   ...(manifest.builds || []).filter((build) => build.version !== versionLabel)
-];
+].sort((a, b) => when(b) - when(a));
 
 let live = manifest.live;
 if (flags.has('--latest') || !live) {

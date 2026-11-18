@@ -40,14 +40,14 @@
   const TREE = '<img src="' + asset('tree.png') + '" alt="" width="221" height="320"'
     + ' decoding="async" />';
 
-  const SNOWFLAKE = '<img src="' + asset('snowflake.png') + '" alt="" width="126" height="128"'
+  const SNOWFLAKE = '<img src="' + asset('snowflake.webp') + '" alt="" width="63" height="64"'
     + ' decoding="async" />';
 
   /* the winter pictures that take over the two edge corners in the season. They
      are only ever pointed at from inside the season, so a visit in July never
      asks for one */
   const WINTER_ART = [1, 2, 3, 4, 5, 6, 7, 8]
-    .map((n) => asset('christmas-megumin-' + n + '.png'));
+    .map((n) => asset('christmas-megumin-' + n + '.webp'));
 
   const read = () => {
     try {
@@ -148,25 +148,41 @@
     follow();
   };
 
-  /* script.js picks the two edge pictures before this file knows whether it is
-     the season, so the season swaps them here instead of asking that pick to
-     happen twice. The picture the visit started with is kept on the element, so
-     turning the season off puts it back rather than leaving a Megumin behind. */
-  const art = () => {
+  /* The winter picture each corner was given, kept for the whole visit. The
+     observer below fires on every change to the body, and choosing again on
+     each of those made the corners shuffle while the page was still building
+     itself. A toggle is the only thing that re-picks. */
+  const winterPick = new WeakMap();
+
+  const art = (repick) => {
     const edges = [...document.querySelectorAll('.art')];
     if (!edges.length) return;
 
-    const bag = WINTER_ART.slice();
-    for (let i = bag.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [bag[i], bag[j]] = [bag[j], bag[i]];
-    }
+    const taken = new Set();
 
-    edges.forEach((image, index) => {
+    for (const image of edges) {
+      /* the picture the visit started with, remembered once per element */
       if (!image.dataset.seasonSrc) image.dataset.seasonSrc = image.getAttribute('src') || '';
-      const next = root.dataset.theme ? bag[index % bag.length] : image.dataset.seasonSrc;
+
+      if (!root.dataset.theme) {
+        winterPick.delete(image);
+        const original = image.dataset.seasonSrc;
+        if (original && image.getAttribute('src') !== original) image.setAttribute('src', original);
+        continue;
+      }
+
+      if (repick) winterPick.delete(image);
+      if (!winterPick.has(image)) {
+        /* the two corners never wear the same picture */
+        const free = WINTER_ART.filter((src) => !taken.has(src));
+        const pool = free.length ? free : WINTER_ART;
+        winterPick.set(image, pool[Math.floor(Math.random() * pool.length)]);
+      }
+
+      const next = winterPick.get(image);
+      taken.add(next);
       if (next && image.getAttribute('src') !== next) image.setAttribute('src', next);
-    });
+    }
   };
 
   /* script.js mounts the mascot after this runs, so wait for it to appear
@@ -186,7 +202,7 @@
 
   new MutationObserver(() => {
     watch();
-    art();
+    art(false);
   }).observe(document.body, { childList: true });
 
   const apply = (on, remember) => {
@@ -196,7 +212,8 @@
     if (remember) save(on ? 'xmas' : '');
     watch();
     kick();
-    art();
+    /* turning it on is the moment to choose the corners again */
+    art(on);
     document.dispatchEvent(new CustomEvent('themechange', { detail: { on } }));
   };
 
