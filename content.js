@@ -48,7 +48,8 @@ window.SITE = {
       "assets/art-right.png?v=16",
       "assets/megumin-4.png?v=1",
       "assets/megumin-5.png?v=1",
-      "assets/megumin-6.png?v=1"
+      "assets/megumin-6.png?v=1",
+      "assets/megumin-7.png?v=1"
     ]
   },
 

@@ -43,6 +43,12 @@
   const SNOWFLAKE = '<img src="' + asset('snowflake.png') + '" alt="" width="126" height="128"'
     + ' decoding="async" />';
 
+  /* the winter pictures that take over the two edge corners in the season. They
+     are only ever pointed at from inside the season, so a visit in July never
+     asks for one */
+  const WINTER_ART = [1, 2, 3, 4, 5, 6, 7, 8]
+    .map((n) => asset('christmas-megumin-' + n + '.png'));
+
   const read = () => {
     try {
       return localStorage.getItem(KEY) || '';
@@ -142,6 +148,27 @@
     follow();
   };
 
+  /* script.js picks the two edge pictures before this file knows whether it is
+     the season, so the season swaps them here instead of asking that pick to
+     happen twice. The picture the visit started with is kept on the element, so
+     turning the season off puts it back rather than leaving a Megumin behind. */
+  const art = () => {
+    const edges = [...document.querySelectorAll('.art')];
+    if (!edges.length) return;
+
+    const bag = WINTER_ART.slice();
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bag[i], bag[j]] = [bag[j], bag[i]];
+    }
+
+    edges.forEach((image, index) => {
+      if (!image.dataset.seasonSrc) image.dataset.seasonSrc = image.getAttribute('src') || '';
+      const next = root.dataset.theme ? bag[index % bag.length] : image.dataset.seasonSrc;
+      if (next && image.getAttribute('src') !== next) image.setAttribute('src', next);
+    });
+  };
+
   /* script.js mounts the mascot after this runs, so wait for it to appear
      instead of assuming it is on every page */
   const watch = () => {
@@ -157,7 +184,10 @@
     kick();
   };
 
-  new MutationObserver(watch).observe(document.body, { childList: true });
+  new MutationObserver(() => {
+    watch();
+    art();
+  }).observe(document.body, { childList: true });
 
   const apply = (on, remember) => {
     if (on) root.dataset.theme = 'xmas';
@@ -166,6 +196,7 @@
     if (remember) save(on ? 'xmas' : '');
     watch();
     kick();
+    art();
     document.dispatchEvent(new CustomEvent('themechange', { detail: { on } }));
   };
 
